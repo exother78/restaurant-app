@@ -1,0 +1,78 @@
+.order__right-section-content {
+  width: 100%;
+  line-height: 1.7;
+  padding: 30px;
+}
+
+.orderTotal__title {
+  letter-spacing: 0.5px;
+}
+
+.order__total-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order__total-list > * {
+  margin: 0;
+}
+
+.order__total-title {
+  font-size: medium;
+  font-weight: 600;
+  letter-spacing: 0.9px;
+}
+
+.order__total-price {
+  font-size: medium;
+  letter-spacing: 0.7px;
+}
+
+.order__total {
+  margin-top: 10px;
+  font-size: x-large;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid lightgrey;
+}
+
+.order__total span {
+  letter-spacing: 0.7px;
+}
+
+.order__total-checkout-button {
+  padding: 10px 20px;
+  background: #d70f64;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: larger;
+  width: 45%;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.2s linear;
+}
+
+.order__total-checkout-button a {
+  color: white;
+}
+
+.order__total-empty-button {
+  padding: 10px 20px;
+  background: black;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: larger;
+  width: 45%;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.2s linear;
+  margin-bottom: 130px;
+}
+
+.order__total-empty-button:hover,
+.order__total-checkout-button:hover {
+  background: dodgerblue;
+}

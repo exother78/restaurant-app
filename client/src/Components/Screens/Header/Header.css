@@ -1,0 +1,303 @@
+.Header {
+  height: 70px;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+@keyframes topbottom {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: 100%;
+  }
+}
+
+.Header.white .header__logo {
+  color: black;
+}
+
+.Header.white::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: white;
+  z-index: -1;
+  animation: topbottom 0.2s;
+}
+
+.header__container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.bars {
+  flex: 0.1;
+  z-index: 30;
+  user-select: none;
+}
+
+.header__bars {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background: black;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.header__bars.bars-opened > .header__bar {
+  transform: translateX(-40px);
+  background: transparent;
+}
+
+.header__bars.bars-opened > .header__bar::before {
+  transform: translate(40px) rotate(45deg);
+  opacity: 1;
+}
+
+.header__bars.bars-opened > .header__bar::after {
+  opacity: 1;
+  transform: translate(40px) rotate(-45deg);
+}
+
+.header__bar {
+  width: 30px;
+  height: 5px;
+  background: white;
+  transition: all 0.3s linear;
+}
+
+.header__bar::before {
+  content: "";
+  position: absolute;
+  transform: translateY(-10px);
+  transition: all 0.3s linear;
+  width: 30px;
+  height: 5px;
+  background: white;
+}
+
+.header__bar::after {
+  content: "";
+  transition: all 0.3s linear;
+
+  position: absolute;
+  transform: translateY(10px);
+  width: 30px;
+  height: 5px;
+  background: white;
+}
+
+.header__logo {
+  font-family: "Hammersmith One", sans-serif;
+  font-weight: 700;
+  flex: 0.3;
+  color: white;
+  z-index: 21;
+  padding: 0 20px;
+}
+
+nav {
+  flex: 0.6;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header__user-nav {
+  /* margin: 0 15px; */
+  /* width: 50px;
+  height: 50px; */
+  height: 50px;
+  /* background: purple; */
+  /* padding: 0 20px; */
+  cursor: pointer;
+
+  margin-right: 20px;
+  border-radius: 40px;
+  padding: 0 5px 0 0;
+  font-family: "Montserrat";
+}
+
+.header__user-nav-img {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header__user-nav-img .avatar__img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.header__user-nav-img .text {
+  margin-left: 10px;
+  font-weight: 800;
+  font-size: 13px;
+  letter-spacing: 1.4px;
+}
+
+.header__user-nav .avatar__arrow {
+  width: 15px;
+  margin-left: 10px;
+}
+
+.avatar__list {
+  background-color: #fff;
+  list-style: none;
+  margin-top: 20px;
+  position: relative;
+  /* transition: all 0.2s ease; */
+}
+.avatar__list::before {
+  content: "";
+  width: 30px;
+  position: absolute;
+  height: 30px;
+  right: 10px;
+  top: -10px;
+  background: #fff;
+  transform: rotate(45deg);
+  border-radius: 2px;
+  z-index: -1;
+}
+
+.avatar__list li {
+  padding: 15px 20px;
+  border-bottom: 1px solid #eee;
+  font-weight: 500;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  letter-spacing: 1px;
+}
+
+.avatar__list li:hover {
+  background: dodgerblue;
+}
+
+.header__loginText {
+  margin: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.header__cart {
+  display: flex;
+  padding: 8px 10px;
+  margin: 0 20px;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: black;
+  color: white;
+}
+
+.header__cart-subText {
+  font-size: 0.9rem;
+  margin-left: 2px;
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+}
+
+/* Header Side Navigation bar */
+
+.header__side-nav {
+  z-index: 11;
+  position: fixed;
+  width: 300px;
+  top: 0;
+  left: -100%;
+  height: 100vh;
+  background: rgb(224, 224, 224);
+  transition: 0.4s ease;
+}
+
+.header__side-nav__container {
+  margin: 80px 0;
+}
+
+.header__side-nav-upper-section {
+  position: relative;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.header__side-nav-upper-section-btns {
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding: 10px 0;
+  border-bottom: 1px solid lightgray;
+}
+
+.header__side-nav-button {
+  cursor: pointer;
+  width: 45%;
+  padding: 10px 30px;
+  font-size: medium;
+  margin: 0 5px;
+  outline: none;
+  border: none;
+  min-width: 130px;
+  background: black;
+  letter-spacing: 0.4px;
+  color: white;
+  transition: background 0.2s linear;
+}
+
+.header__side-nav-button:hover {
+  background: dodgerblue;
+  color: black;
+}
+
+.header__side-nav-main-section {
+  width: 100%;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  line-height: 2;
+}
+
+.header__side-nav-text {
+  position: relative;
+  margin: 0;
+  padding: 10px 15px;
+  border-bottom: 1px solid lightgray;
+  font-size: larger;
+  font-weight: 600;
+  letter-spacing: 0.6px;
+  cursor: pointer;
+  color: black;
+  transition: background 0.2s linear;
+}
+
+.header__side-nav-text-order {
+  font-size: larger;
+  font-weight: 700;
+  color: rgb(243, 93, 93);
+}
+
+.header__side-nav-text:hover {
+  background: dodgerblue;
+  color: white;
+}

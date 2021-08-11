@@ -1,0 +1,125 @@
+.reserve-seat {
+  width: 100%;
+  position: relative;
+  height: 60vh;
+}
+
+.reserve-seat__title {
+  text-align: center;
+  color: white;
+  padding-top: 30px;
+}
+
+.reserve-seat__image {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(3px);
+  z-index: -1;
+}
+
+.reserve-seat__select {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.reserve-seat__select form {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* line-height: 9; */
+}
+
+.people-form {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.reserve-seat__select select,
+.date-picker {
+  position: relative;
+  min-width: 200px;
+  background: white;
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+  font-weight: 900;
+  letter-spacing: 1.2px;
+  font-size: larger;
+  color: black;
+  outline: none;
+  border-width: none;
+  border: none;
+}
+
+.reserve-seat__select select {
+  padding: 10px 30px;
+}
+
+.date-picker {
+  padding: 8px 30px;
+}
+
+.reserve-seat__select select:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.reserve-seat__select select:last-of-type {
+  border-radius: 0 6px 6px 0;
+}
+
+.reserve-seat__select select option {
+  font-weight: 600;
+  background: white;
+  color: black;
+}
+
+.details-of-client {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
+}
+
+.details-of-client input {
+  padding: 10px 30px;
+  margin: 20px 20px;
+  min-width: 200px;
+  font-size: medium;
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+  border: 1px solid grey;
+  outline: none;
+  border-radius: 6px;
+  transition: transform 0.1s linear;
+}
+
+.details-of-client input:focus {
+  transform: scale(1.04);
+}
+
+.reserve-seat__submit-btn {
+  width: 100%;
+  text-align: center;
+  padding-top: 30px;
+}
+
+.reserve-seat__submit-btn button {
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+
+  min-width: 150px;
+  font-weight: 600;
+  font-size: 1.3rem;
+  border: none;
+  outline: none;
+}
+
+@media only screen and (max-width: 700px) {
+  .reserve-seat {
+    height: 100vh;
+  }
+}

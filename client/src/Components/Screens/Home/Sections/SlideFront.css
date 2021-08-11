@@ -1,0 +1,101 @@
+.home__slider-front {
+  width: 100%;
+  height: 100vh;
+  min-height: 100vh;
+  max-height: 100vh;
+  position: relative;
+  transform: translateY(-70px);
+}
+
+.home__slider {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: -1;
+}
+
+.home__slider img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.slider__title {
+  margin-top: -75px;
+}
+
+.home__address-field {
+  margin: 0 auto;
+  width: 90%;
+  height: calc(95vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.home__location {
+  background: white;
+  padding: 10px 20px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 3px 3px 7px lightgrey;
+}
+.location__field {
+  outline: none;
+  border: none;
+  width: calc(100% - 60px);
+  /* width: 350px; */
+  padding: 10px 30px;
+  height: 30px;
+  border: 0.5px solid lightgray;
+  font-family: "Spartan";
+  transition: transform 0.2s linear;
+  min-width: 300px;
+  font-size: medium;
+}
+
+.location__field:focus {
+  transform: scale(1.07);
+}
+
+input.location__field::placeholder {
+  font-family: "Spartan";
+}
+
+.location__field-btn {
+  font-size: 1.4rem;
+  padding: 12px 30px;
+  min-height: 30px;
+  margin: 10px 20px;
+}
+
+@media only screen and (max-width: 700px) {
+  .home__address-field {
+    width: 90%;
+    margin: -65px auto;
+  }
+
+  .home__location {
+    flex-direction: column;
+    width: 90%;
+  }
+
+  .location__field:focus {
+    transform: scale(1);
+  }
+
+  .location__field-btn {
+    width: 100%;
+    margin: 10px 0;
+  }
+
+  .location__field-btn:hover {
+    transform: scale(1.02);
+  }
+}

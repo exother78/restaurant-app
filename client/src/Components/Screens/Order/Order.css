@@ -1,0 +1,204 @@
+.order {
+  margin: 0;
+}
+
+.order__banner {
+  height: 40vh;
+  z-index: -1;
+  width: 70%;
+}
+
+.order__banner img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.order__header {
+  /* position: sticky; */
+  z-index: 1;
+  height: 60px;
+  top: 70px;
+  left: 0;
+  width: 70%;
+  background: #eee;
+  margin: 0;
+}
+
+.order__categories {
+  position: relative;
+  display: flex;
+  overflow-x: auto;
+  overflow-y: visible;
+  height: 100%;
+}
+
+.order__categories::-webkit-scrollbar {
+  height: 0;
+  width: 0;
+}
+
+.order__category {
+  min-width: 100px;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  margin: 0 2px;
+  letter-spacing: 0.9px;
+  font-size: medium;
+  position: relative;
+  font-weight: 600;
+  cursor: pointer;
+  text-transform: capitalize;
+}
+
+.order__category:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 21;
+  height: 2px;
+  width: 100%;
+  background: purple;
+  animation-name: category-border;
+  animation-duration: 0.2s;
+}
+
+@keyframes category-border {
+  from {
+    width: 30%;
+    left: 50%;
+  }
+  to {
+    width: 100%;
+    left: 0;
+  }
+}
+
+.order__container {
+  position: relative;
+  top: 0;
+  display: flex;
+  flex-wrap: wrap;
+  width: 70%;
+  background: #fff;
+  justify-content: center;
+}
+
+.order__container > * {
+  min-width: 230px;
+  margin: 10px 20px;
+  flex: 1 1 40%;
+}
+
+.restaurantMenuIcon {
+  color: #d70f64;
+}
+
+.order__right-section {
+  position: fixed;
+  right: 0;
+  top: 70px;
+  width: calc(30% - 60px);
+  box-shadow: -5px 0px 10px 1px #ddd;
+  padding: 30px;
+  text-align: right;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/* .order__right-section::-webkit-scrollbar {
+  width: 0;
+} */
+
+/* 
+.order__right-section-content {
+  width: 100%;
+  line-height: 1.7;
+  padding: 30px;
+}
+
+.order__total-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.order__total-list > * {
+  margin: 0;
+}
+
+.order__total-title {
+  font-size: medium;
+  font-weight: 600;
+  letter-spacing: 0.9px;
+}
+
+.order__total-price {
+  font-size: medium;
+  letter-spacing: 0.7px;
+}
+
+.order__total {
+  font-size: x-large;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid lightgrey;
+}
+
+.order__total-checkout-button {
+  padding: 10px 20px;
+  background: #d70f64;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: larger;
+  width: 45%;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.2s linear;
+}
+
+.order__total-checkout-button a {
+  color: white;
+}
+
+.order__total-empty-button {
+  padding: 10px 20px;
+  background: black;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: larger;
+  width: 45%;
+  margin: 5px;
+  cursor: pointer;
+  transition: background 0.2s linear;
+  margin-bottom: 130px;
+}
+
+.order__total-empty-button:hover,
+.order__total-checkout-button:hover {
+  background: dodgerblue;
+} */
+
+@media only screen and (max-width: 960px) {
+  .order__container {
+    width: 100%;
+  }
+
+  .order__right-section {
+    display: none;
+  }
+
+  .order__header {
+    width: 100%;
+  }
+
+  .order__banner {
+    width: 100%;
+  }
+}

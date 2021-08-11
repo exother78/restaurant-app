@@ -1,0 +1,29 @@
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+SC&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Encode+Sans+SC&family=Ubuntu&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overpass&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Hammersmith+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Spartan&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Josefin+Slab&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+  background: #eee;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  font-family: "Spartan", sans-serif;
+  font-family: "Hammersmith One", sans-serif;
+  font-family: "Overpass", sans-serif;
+  font-family: "Ubuntu", sans-serif;
+  font-family: "Encode Sans SC", sans-serif;
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

@@ -1,0 +1,10 @@
+Notes 
+
+
+gtfpu					get token for private user
+updatetfpu 				Tokenforprivateuser
+at					Accesstoken
+rtfat					refreshtokenforaccesstoken
+
+ttgrt					tokentogetrefreshtoken
+ttgat                   tokentogetaccesstoken

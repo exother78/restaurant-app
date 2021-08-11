@@ -1,0 +1,35 @@
+.btn {
+  padding: 7px 15px;
+}
+
+a {
+  text-decoration: none;
+}
+
+.btn-dark {
+  color: #ffffff;
+  background: rgb(0, 0, 0);
+}
+
+.btn-main {
+  font-size: xx-large;
+  font-weight: 700;
+}
+
+.btn-primary {
+  color: white;
+  background: dodgerblue;
+  outline: none;
+  border: none;
+}
+
+.btn-anim {
+  cursor: pointer;
+  transition: all 0.15s linear;
+}
+
+.btn-anim:hover {
+  background: rgb(45, 147, 250);
+  color: white;
+  transform: scale(1.1);
+}

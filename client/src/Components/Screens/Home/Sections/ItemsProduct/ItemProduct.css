@@ -1,0 +1,89 @@
+.item__main {
+  text-decoration: none;
+  color: black;
+}
+
+.item {
+  height: 300px;
+  /* width: calc(270px / 1.08); */
+  /* min-width: calc(270px / 1.08); */
+  width: 270px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  margin: 0 20px;
+  box-shadow: 1px 5px 10px lightgray;
+}
+
+.item__image {
+  flex: 0.6;
+  object-fit: cover;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.item__image:hover {
+  transform: scale(1.04);
+}
+
+.item__text {
+  flex: 0.4;
+  z-index: 1;
+  padding: 10px;
+  line-height: 1.2;
+}
+
+.item__title {
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.item__description {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.3px;
+  font-family: "Montserrat";
+  color: grey;
+}
+
+.item__price-rating {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  right: 30px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.item__price {
+  font-size: x-large;
+  font-weight: 700;
+}
+
+.item__button {
+  border-radius: 50%;
+  background-color: lightgray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.item__button button {
+  font-size: 13px;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  outline: none;
+  transition: all 0.2s linear;
+  cursor: pointer;
+  letter-spacing: 0.8px;
+}
+
+.item__button button:hover {
+  background: dodgerblue;
+  border: 1px solid dodgerblue;
+  color: white;
+}

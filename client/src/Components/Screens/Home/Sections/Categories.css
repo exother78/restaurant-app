@@ -1,0 +1,49 @@
+.Categories {
+  height: fit-content;
+}
+
+.category__title {
+  font-size: 2.3rem;
+  padding: 0 15px;
+  font-weight: 900;
+  user-select: none;
+}
+
+.categories {
+  display: flex;
+
+  margin: 15px;
+}
+/* 
+.categories .category {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border-radius: 50%;
+  margin: 10px 30px;
+  cursor: pointer;
+}
+
+.categories .category img {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  transition: all 0.15s linear;
+}
+
+.categories .category img:hover {
+  background: grey;
+  opacity: 0.9;
+  transform: scale(1.03);
+}
+
+.categories__category-name {
+  margin-top: 15px;
+}
+
+.categories::-webkit-scrollbar {
+  width: 0;
+} */
+
+@import url("./CategoriesCategory/Category.css");

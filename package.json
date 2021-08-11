@@ -12,7 +12,7 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "cd client && npm install && npm run build"
   },
-  "author": "Asim Imam",
+  "author": "Asim Imam Abdullah",
   "license": "ISC",
   "dependencies": {
     "bcryptjs": "^2.4.3",

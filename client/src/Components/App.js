@@ -17,6 +17,7 @@ import Checkout from "./Screens/Checkout/Checkout";
 import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import NotFound from "./Screens/Global/NotFound";
+import Loading from "./Screens/Global/Loading";
 // import { loadStripe } from "@stripe/stripe-js";
 // import { Elements } from "@stripe/react-stripe-js";
 // import { useStateValue } from "../StateProvider";
@@ -27,8 +28,11 @@ import { useStateValue } from "../StateProvider";
 // import axios from "axios";
 
 function App() {
-  const { userAPI } = useStateValue();
+  const { userAPI, productsAPI } = useStateValue();
+  const [products] = productsAPI.products;
   const [isAdmin] = userAPI.isAdmin;
+  const [isLoggedIn] = userAPI.isLoggedIn;
+  const name = userAPI.name;
   // const [isLoggedIn, setIsLoggedIn] = userAPI.isLoggedIn;
   // const [{ ttgat }, dispatch] = useStateValue();
   // const promise = loadStripe(
@@ -161,8 +165,14 @@ function App() {
           </Route>
 
           <Route path="/">
-            <Header />
-            <Home />
+            {products ? (
+              <>
+                <Header />
+                <Home />
+              </>
+            ) : (
+              <Loading />
+            )}
           </Route>
         </Switch>
       </div>

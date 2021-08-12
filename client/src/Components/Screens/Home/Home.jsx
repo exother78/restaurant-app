@@ -8,6 +8,7 @@ import Items from "./Sections/Items";
 import Menu from "./Sections/Menu";
 import ReserveSeat from "./Sections/ReserveSeat";
 import Footer from "./Sections/Footer";
+import Loading from "../Global/Loading";
 
 const Home = () => {
   return (

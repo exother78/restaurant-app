@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import GoogleMapReact from "google-map-react";
 import "./Location.css";
 
@@ -13,13 +13,13 @@ const SimpleMap = () => {
     zoom: 11,
   };
 
-  const findLocation = (position) => {
-    console.log(position.coords);
-  };
+  // const findLocation = (position) => {
+  //   console.log(position.coords);
+  // };
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(findLocation);
-  });
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(findLocation);
+  // });
 
   return (
     // Important! Always set the container height explicitly

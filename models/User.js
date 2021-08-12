@@ -37,7 +37,7 @@ const userSchema = mongoose.Schema({
   address: {
     type: String,
   },
-  address_line_2: {
+  addressLine2: {
     type: String,
   },
 

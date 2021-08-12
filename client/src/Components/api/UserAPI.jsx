@@ -28,7 +28,9 @@ const UserAPI = (token) => {
   }, [token]);
 
   return {
-    data: user,
+    // data: [user, setUser],
+    image: user?.images?.url,
+    name: user?.firstName,
     isAdmin: [isAdmin, setIsAdmin],
     isLoggedIn: [isLoggedIn, setIsLoggedIn],
   };

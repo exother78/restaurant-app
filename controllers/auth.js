@@ -4,17 +4,33 @@ const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
 
 exports.register = async (req, res, next) => {
-  const { firstName, lastName, email, password } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    password,
+    address,
+    addressLine2,
+    city,
+    images,
+  } = req.body;
 
+  console.log(
+    `f ${firstName} l ${lastName} e ${email} p ${password} a ${address} a ${addressLine2} c ${city} im ${images}`
+  );
   try {
+    // console.log("address", address);
     // if(password)
     const user = await User.create({
       firstName,
       lastName,
       email,
       password,
+      address,
+      addressLine2,
+      city,
+      images,
     });
-
     sendToken(user, 201, res);
   } catch (error) {
     // if (error.code === 11000) {
@@ -25,6 +41,7 @@ exports.register = async (req, res, next) => {
     // }
     // res.json({ error });
 
+    // console.log("error: ", error);
     next(error);
   }
 };
@@ -123,7 +140,9 @@ exports.refreshToken = async (req, res, next) => {
   const rtfat = req.cookies.rtfat;
 
   try {
-    if (!rtfat) next(new ErrorResponse("Please login or register"));
+    // if (!rtfat) next(new ErrorResponse("Please login or register"));
+    if (!rtfat)
+      res.status(400).json({ success: true, error: "Not Found Token" });
 
     const decode = jwt.verify(rtfat, process.env.refresh_token_secret);
 

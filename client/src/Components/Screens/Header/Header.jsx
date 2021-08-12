@@ -18,6 +18,8 @@ const Header = () => {
 
   const [isLoggedIn] = state.userAPI.isLoggedIn;
   const [isAdmin] = state.userAPI.isAdmin;
+  const userImage = state.userAPI.image;
+  const name = state.userAPI.name;
   // const [isAdmin] = state.userAPI.isAdmin;
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [basket] = state.basket;
@@ -99,16 +101,27 @@ const Header = () => {
               className="header__user-nav"
               onClick={() => setAvatarOpen(!avatarOpen)}>
               <div className="header__user-nav-img">
-                <img src={image} alt="" className="avatar__img" />
-                <span className="text">Hi, Asim</span>
+                <img
+                  src={userImage ? userImage : image}
+                  alt=""
+                  className="avatar__img"
+                />
+                <span className="text">Hi, {name}</span>
                 <img src={arrow} alt="" className="avatar__arrow" />
               </div>
               <ul
                 className="avatar__list"
                 style={{ display: !avatarOpen ? "none" : "block" }}>
-                <li>Pending Orders</li>
-                <li>Order History</li>
-                <li>Settings</li>
+                <Link to="/orders">
+                  <li>Pending Orders</li>
+                </Link>
+                <Link to="/orders">
+                  <li>Order History</li>
+                </Link>
+                <Link to="/settings">
+                  <li>Settings</li>
+                </Link>
+                <li onClick={logoutUser}>Logout</li>
               </ul>
             </div>
           )}

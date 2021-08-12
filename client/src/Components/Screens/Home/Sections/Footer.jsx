@@ -40,8 +40,8 @@ const Footer = () => {
             <span className="footer__column-subText">Pizza</span>
             <span className="footer__column-subText">Chicken Karahi</span>
             <div className="menu-page" style={{ padding: "0 5px" }}>
-              <h4>Click Here to See full menu</h4>
-              <Link to="/menu">
+              <h4>Order Food Now!</h4>
+              <Link to="/order">
                 <span className="menu-to-menuscreen-arrow">
                   <ArrowForwardIcon />
                 </span>

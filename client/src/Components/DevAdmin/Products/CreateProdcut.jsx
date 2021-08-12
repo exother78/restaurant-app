@@ -27,7 +27,7 @@ const CreateProdcut = () => {
     setImageUpload(formData);
     const reader = new FileReader();
 
-    reader.onloadend = (e) => {
+    reader.onloadend = () => {
       setImageShow(reader.result);
     };
 

@@ -15,20 +15,20 @@ export const StateProvider = ({ children }) => {
   useEffect(() => {
     const firstLogin = localStorage.getItem("login");
     if (firstLogin) {
-      try {
-        const refreshToken = async () => {
+      const refreshToken = async () => {
+        try {
           const res = await axios.get("/api/user/rtfat");
           setToken(res.data.accessToken);
 
           setTimeout(() => {
             refreshToken();
           }, 10 * 60 * 1000);
-        };
-        refreshToken();
-      } catch (err) {
-        alert("Please Login or regitser");
-        localStorage.removeItem("login");
-      }
+        } catch (err) {
+          alert("Please Login or regitser");
+          localStorage.removeItem("login");
+        }
+      };
+      refreshToken();
     }
   }, []);
 

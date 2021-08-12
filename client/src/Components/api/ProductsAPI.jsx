@@ -17,7 +17,7 @@ const ProductsAPI = () => {
         setProducts(res.data.products);
       } catch (err) {
         // console.log(err.response.data.error);
-        // alert(err.response.data.msg);
+        alert(err.response.data.error);
       }
     };
 

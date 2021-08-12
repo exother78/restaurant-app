@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import "./Register.css";
 
-// import { Link } from "react-router-dom";
-// import avatar from "../../Images/avatar.png";
 import axios from "axios";
-// import { useStateValue } from "../../../StateProvider";
 
 const Register = () => {
   const [registerForm, setRegisterForm] = useState({
@@ -22,11 +19,6 @@ const Register = () => {
   const [fileImage, setFileImage] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);
 
-  // const [image, setImage] = useState(false);
-  // const state = useStateValue();
-  // const [isLoggedIn, setIsLoggedIn] = state.userAPI.isLoggedIn;
-  // const [images, setImages] = useState(null);
-
   const handleFileChange = (e) => {
     const getFile = e.target.files[0];
     if (!getFile) return alert("File Doesn't exist");
@@ -34,19 +26,11 @@ const Register = () => {
     let formData = new FormData();
     formData.append("file", getFile);
     setImageUpload(formData);
-    // setRegisterForm((prevValues) => ({
-    //   ...prevValues,
-    //   image: formData,
-    // }));
 
     const reader = new FileReader();
 
     reader.readAsDataURL(getFile);
     reader.onloadend = () => {
-      // setRegisterForm((prevValues) => ({
-      //   ...prevValues,
-      //   image: reader.result,
-      // }));
       setFileImage(reader.result);
     };
   };
@@ -57,46 +41,6 @@ const Register = () => {
       alert("Passwords doesn't match");
       return;
     }
-
-    // const fileUpload = async () => {
-    //   try {
-    //     const res = await axios.post("/api/upload", imageUpload, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     });
-
-    //     Promise.resolve(res).then((data) => {
-    //       console.log("reached here in fileUpload");
-    //       setRegisterForm((prevValues) => ({
-    //         ...prevValues,
-    //         images: {
-    //           public_id: data.public_id,
-    //           url: data.url,
-    //         },
-    //       }));
-    //     });
-    //   } catch (err) {
-    //     console.log("fileUpload function error: ", err);
-    //   }
-    // };
-
-    // const res = await axios.post("/api/upload", imageUpload, {
-    //   headers: {
-    //     "Content-Type": "multipart/form-data",
-    //   },
-    // });
-
-    // Promise.resolve(res).then((data) => {
-    //   console.log("reached here in fileUpload");
-    //   setRegisterForm((prevValues) => ({
-    //     ...prevValues,
-    //     images: {
-    //       public_id: data.public_id,
-    //       url: data.url,
-    //     },
-    //   }));
-    // });
 
     const upload = async () => {
       const res = await axios.post("/api/upload", imageUpload, {
@@ -131,24 +75,12 @@ const Register = () => {
     };
 
     try {
-      // if (fileImage) {
-      //   Promise.resolve(res).then(register);
-      // }
-      // if (!fileImage) {
-      //   register();
-      // }
-
       if (fileImage) {
-        // Promise.resolve(upload).then(register);
         upload().then(register);
       }
       if (!fileImage) {
         register();
       }
-      // await axios.post("/api/user/register", { ...registerForm });
-      // localStorage.setItem("login", true);
-      // setIsLoggedIn(true);
-      // window.location.href = "/";
     } catch (err) {
       alert(err.response.data.error);
     }
@@ -163,11 +95,6 @@ const Register = () => {
   };
 
   const clearImage = () => {
-    // setRegisterForm((prevValues) => ({
-    //   ...prevValues,
-    //   image: "",
-    // }));
-
     setImageUpload(null);
     setFileImage(null);
   };
@@ -293,15 +220,6 @@ const Register = () => {
             </div>
 
             <div className="register__input-group">
-              {/* <input
-                type="text"
-                name="city"
-                placeholder="City"
-                className="register__input"
-                value={registerForm.city}
-                onChange={handleInputChange}
-              /> */}
-
               <select
                 defaultValue="City"
                 name="city"
@@ -328,73 +246,6 @@ const Register = () => {
         </div>
         <button className="register__submit-button">Submit</button>
       </form>
-
-      {/* <form className="register__form" onSubmit={handleSubmit}>
-        <div className="register__input-group">
-          <input
-            type="text"
-            name="firstName"
-            placeholder="First Name"
-            required
-            className="register__input"
-            value={registerForm.firstName}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="register__input-group">
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            required
-            className="register__input"
-            value={registerForm.lastName}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="register__input-group">
-          <input
-            type="email"
-            name="email"
-            placeholder="Email"
-            required
-            className="register__input"
-            value={registerForm.email}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="register__input-group">
-          <input
-            type="password"
-            name="password"
-            placeholder="Password"
-            required
-            className="register__input"
-            value={registerForm.password}
-            onChange={handleInputChange}
-          />
-        </div>
-        <div className="register__input-group">
-          <input
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm Password"
-            required
-            className="register__input"
-            value={registerForm.confirmPassword}
-            onChange={handleInputChange}
-          />
-        </div>
-        <button
-          type="submit"
-          className="register__submit-button register__input">
-          Submit
-        </button>
-
-        <span className="register-login">
-          Already have an account? <Link to="/login">login</Link>
-        </span>
-      </form> */}
     </div>
   );
 };

@@ -12,10 +12,6 @@ const OrderTotal = () => {
   const [basket, setBasket] = state.basket;
 
   const emptyBasket = () => {
-    // dispatch({
-    //   type: "EMPTY_BASKET",
-    // });
-
     setBasket([]);
   };
 

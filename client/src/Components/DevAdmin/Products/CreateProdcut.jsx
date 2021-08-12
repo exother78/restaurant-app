@@ -2,14 +2,20 @@ import React, { useState } from "react";
 import axios from "axios";
 import { useStateValue } from "../../../StateProvider";
 import "./CreateProduct.css";
+import Loading from "../../Screens/Global/Loading";
+
+import { useHistory } from "react-router";
 
 const CreateProdcut = () => {
-  const { categoriesAPI, productsAPI } = useStateValue();
+  const history = useHistory();
+  const { categoriesAPI, productsAPI, userAPI } = useStateValue();
+  const [isAdmin] = userAPI.isAdmin;
   const [categories] = categoriesAPI.categories;
   const [callback, setCallback] = productsAPI.callback;
 
   const [imageUpload, setImageUpload] = useState(false);
   const [imageShow, setImageShow] = useState();
+  const [loading, setLoading] = useState(false);
 
   const [data, setData] = useState({
     product_id: "",
@@ -52,6 +58,7 @@ const CreateProdcut = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const res = await axios.post("/api/upload", imageUpload, {
@@ -71,24 +78,28 @@ const CreateProdcut = () => {
         }
       };
 
-      Promise.resolve(res).then(productFunc);
+      Promise.resolve(res)
+        .then(productFunc)
+        .then(() => setLoading(false));
 
       setCallback(!callback);
-
-      // setData({
-      //   product_id: "",
-      //   title: "",
-      //   description: "",
-      //   price: "",
-      //   category: "",
-      //   images: "",
-      // });
-
-      // window.location.href = "/create_product";
+      history.push("/");
     } catch (err) {
       console.log("err: ", err);
     }
   };
+
+  if (!isAdmin) {
+    return (
+      <h1 style={{ margin: "15px", color: "red", letterSpacing: "2px" }}>
+        You don't have permission to visit this route
+      </h1>
+    );
+  }
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="create__product">

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./Header.css";
-// import ShoppingCartIcon from "@material-ui/icons/ShoppingCart";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
 import { Link } from "react-router-dom";
@@ -12,21 +11,14 @@ import image from "../../Images/my.jpeg";
 import arrow from "../../Images/chevron-down-solid.svg";
 
 const Header = () => {
-  // console.log("header: ", state[0].userAPI);
-
   const state = useStateValue();
 
   const [isLoggedIn] = state.userAPI.isLoggedIn;
   const [isAdmin] = state.userAPI.isAdmin;
   const userImage = state.userAPI.image;
   const name = state.userAPI.name;
-  // const [isAdmin] = state.userAPI.isAdmin;
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [basket] = state.basket;
-
-  // const [isLoggedIn] = UserAPI.isLoggedIn;
-  // const { user } = userAPI;
-
   document.addEventListener("scroll", (e) => {
     const header = document.querySelector(".Header");
 

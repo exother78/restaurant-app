@@ -2,11 +2,9 @@ import React, { useState } from "react";
 import "./Checkout.css";
 import { useStateValue } from "../../../StateProvider";
 import CartProduct from "../Cart/Sections/CartProduct";
-// import { CardElement } from "@stripe/react-stripe-js";
 import { getBasketTotal } from "../../../reducer";
 
 const Checkout = () => {
-  // const [{ basket }] = useStateValue();
   const state = useStateValue();
   const [basket] = state.basket;
   const [address, setAddress] = useState("Gujranwala");
@@ -66,7 +64,6 @@ const Checkout = () => {
 
           <div className="checkout__category-details">
             <div className="checkout__payment-section" style={{ width: "60%" }}>
-              {/* <CardElement style={{ width: "60%" }} /> */}
               <h2 style={{ marginTop: "20px" }}>
                 Total <span style={{ marginLeft: "20px" }}></span>{" "}
                 {getBasketTotal(basket)} €

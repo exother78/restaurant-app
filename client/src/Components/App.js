@@ -16,75 +16,15 @@ import Cart from "./Screens/Cart/Cart";
 import Checkout from "./Screens/Checkout/Checkout";
 import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
-import NotFound from "./Screens/Global/NotFound";
 import Loading from "./Screens/Global/Loading";
-// import { loadStripe } from "@stripe/stripe-js";
-// import { Elements } from "@stripe/react-stripe-js";
-// import { useStateValue } from "../StateProvider";
+
 import CreateProdcut from "./DevAdmin/Products/CreateProdcut";
 import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
 
-// import axios from "axios";
-
 function App() {
-  const { userAPI, productsAPI } = useStateValue();
+  const { productsAPI } = useStateValue();
   const [products] = productsAPI.products;
-  const [isAdmin] = userAPI.isAdmin;
-  // const [isLoggedIn] = userAPI.isLoggedIn;
-  // const name = userAPI.name;
-  // const [isLoggedIn, setIsLoggedIn] = userAPI.isLoggedIn;
-  // const [{ ttgat }, dispatch] = useStateValue();
-  // const promise = loadStripe(
-  //   "pk_test_51J6Q5PHxn87IRRbE3Ymuv1lBstLRFjXZgAdC56ClExGrn2spfchYnXsmclXkeJuvHIoPuqEycODE1HFf73mSVNY10005LySMuc"
-  // );
-
-  // const { userAPI } = useStateValue();
-
-  // const { data } = userAPI;
-
-  // const getUser = async (token) => {
-  //   const firstLogin = localStorage.getItem("login");
-  //   if (firstLogin) {
-  //     const auth = {
-  //       headers: { Authorization: `Bearer ${token.data.accessToken}` },
-  //     };
-  //     await axios.get("/api/private", auth).then((data) => {
-  // console.log("app.js data : ", data.data);
-  // dispatch({
-  //   type: "SET_USER",
-  //   user: data.data.user,
-  // });
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   console.log("appjs: toekn: ", ttgat);
-  // }, [ttgat]);
-
-  // useEffect(() => {
-  //   if (!user || !isLoggedIn) {
-  //     try {
-  //       const handler = async () => {
-  //         const res = await axios.get("/api/user/rtfat");
-
-  //         // setTimeout(() => {
-  //         //   handler();
-  //         // }, 30 * 1000);
-  //       };
-
-  //       handler();
-  //     } catch (err) {
-  //       console.log("app.js caught error: ", err);
-  //     }
-  //   } else {
-  //     localStorage.removeItem("login");
-  //   }
-  // }, [user, isLoggedIn]);
-
-  // console.log("app.js: User: ", user);
-
   return (
     <Router>
       <div className="App">
@@ -94,7 +34,7 @@ function App() {
           </Route>
 
           <Route path="/create_product">
-            {isAdmin ? (
+            {/* {isAdmin ? (
               <>
                 <Header />
                 <CreateProdcut />
@@ -104,7 +44,10 @@ function App() {
                 <Header />
                 <NotFound />
               </>
-            )}
+            )} */}
+
+            <Header />
+            <CreateProdcut />
           </Route>
 
           <Route path="/create_category">
@@ -114,9 +57,7 @@ function App() {
 
           <Route path="/checkout">
             <Header />
-            {/* <Elements stripe={promise}> */}
             <Checkout />
-            {/* </Elements> */}
           </Route>
 
           <Route path="/cart">

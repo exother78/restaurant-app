@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import "./Login.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
-// import { useStateValue } from "../../../StateProvider";
 
 const Login = () => {
-  // const [{ isLoggedIn }, dispatch] = useStateValue();
-  // const state = useStateValue();
-  // const [isLoggedIn, setIsLoggedIn] = state.userAPI.isLoggedIn;
-
-  // const [isLoggedIn, setIsLoggedIn] = userAPI;
   const [user, setUser] = useState({
     email: "",
     password: "",
@@ -25,13 +19,6 @@ const Login = () => {
       });
 
       localStorage.setItem("login", true);
-
-      // setIsLoggedIn(true);
-      // dispatch({
-      //   type: "LOGGED_IN",
-      // });
-
-      // setIsLoggedIn(true);
 
       window.location.href = "/";
     } catch (err) {

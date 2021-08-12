@@ -64,39 +64,6 @@ const Menu = () => {
           </ul>
         </div>
 
-        {/* <div className="menu__category">
-          <h2 className="menu__category-title">Russian</h2>
-
-          <ul className="menu__category-list">
-            <li>Else</li>
-            <li>Something</li>
-            <li>Some Food</li>
-            <li>Fried Rice</li>
-          </ul>
-        </div>
-
-        <div className="menu__category">
-          <h2 className="menu__category-title">Russian</h2>
-
-          <ul className="menu__category-list">
-            <li>Else</li>
-            <li>Something</li>
-            <li>Some Food</li>
-            <li>Fried Rice</li>
-          </ul>
-        </div>
-
-        <div className="menu__category">
-          <h2 className="menu__category-title">Russian</h2>
-
-          <ul className="menu__category-list">
-            <li>Else</li>
-            <li>Something</li>
-            <li>Some Food</li>
-            <li>Fried Rice</li>
-          </ul>
-        </div> */}
-
         <div className="menu-page">
           <h4>Click Here to See full menu</h4>
           <Link to="/menu">

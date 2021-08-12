@@ -19,7 +19,6 @@ const UserAPI = (token) => {
           setIsLoggedIn(true);
           data.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
         } catch (err) {
-          // alert(err);
           console.log(err.response.data.error);
         }
       };
@@ -28,7 +27,6 @@ const UserAPI = (token) => {
   }, [token]);
 
   return {
-    // data: [user, setUser],
     image: user?.images?.url,
     name: user?.firstName,
     isAdmin: [isAdmin, setIsAdmin],

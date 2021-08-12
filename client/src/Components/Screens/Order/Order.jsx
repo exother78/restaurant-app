@@ -55,6 +55,11 @@ const Order = () => {
   //     history.push("/checkout");
   //   }
   // };
+
+  if (!products) {
+    return <Loading />;
+  }
+
   return (
     <>
       <div className="order">

@@ -31,8 +31,8 @@ function App() {
   const { userAPI, productsAPI } = useStateValue();
   const [products] = productsAPI.products;
   const [isAdmin] = userAPI.isAdmin;
-  const [isLoggedIn] = userAPI.isLoggedIn;
-  const name = userAPI.name;
+  // const [isLoggedIn] = userAPI.isLoggedIn;
+  // const name = userAPI.name;
   // const [isLoggedIn, setIsLoggedIn] = userAPI.isLoggedIn;
   // const [{ ttgat }, dispatch] = useStateValue();
   // const promise = loadStripe(
@@ -165,13 +165,13 @@ function App() {
           </Route>
 
           <Route path="/">
-            {products ? (
+            {!products ? (
+              <Loading />
+            ) : (
               <>
                 <Header />
                 <Home />
               </>
-            ) : (
-              <Loading />
             )}
           </Route>
         </Switch>

@@ -9,6 +9,7 @@ import Product from "./Sections/Product";
 import OrderTotal from "../Global/OrderTotal";
 // import { axios } from "axios";
 import { useStateValue } from "../../../StateProvider";
+import Loading from "../Global/Loading";
 
 const Order = () => {
   const { productsAPI, categoriesAPI } = useStateValue();
@@ -55,45 +56,51 @@ const Order = () => {
   //   }
   // };
   return (
-    <div className="order">
-      <div className="order__banner">
-        <img
-          src="https://images.pexels.com/photos/3758133/pexels-photo-3758133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-          alt=""
-        />
-      </div>
-      <div className="order__header">
-        <div className="order__categories">
-          {categories.map((category, i) => (
-            <p className="order__category" key={i}>
-              {category.name}
-            </p>
-          ))}
-          {/* <p className="order__category">Sushi</p>
+    <>
+      <div className="order">
+        <div className="order__banner">
+          <img
+            src="https://images.pexels.com/photos/3758133/pexels-photo-3758133.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+            alt=""
+          />
+        </div>
+        <div className="order__header">
+          <div className="order__categories">
+            {categories.map((category, i) => (
+              <p className="order__category" key={i}>
+                {category.name}
+              </p>
+            ))}
+            {/* {(!categories || categories.length === 0) && <Loading />} */}
+
+            {/* <p className="order__category">Sushi</p>
           <p className="order__category">Cake</p>
           <p className="order__category">Pizza</p>
           <p className="order__category">American</p>
           <p className="order__category">Asian</p>
           <p className="order__category">Burger</p> */}
+          </div>
         </div>
-      </div>
-      <div className="order__container">
-        {/* <h2>
+        <div className="order__container">
+          {/* <h2>
         <RestaurantMenuIcon className="restaurantMenuIcon" /> this is Order page
       </h2> */}
-        {products.map((p, i) => {
-          return (
-            <Product
-              key={i}
-              id={p.product_id}
-              title={p.title}
-              description={p.description}
-              price={p.price}
-              image={p.images.url}
-            />
-          );
-        })}
-        {/* <Product
+          {products.map((p, i) => {
+            return (
+              <Product
+                key={i}
+                id={p.product_id}
+                title={p.title}
+                description={p.description}
+                price={p.price}
+                image={p.images.url}
+              />
+            );
+          })}
+
+          {/* {(!products || products.length === 0) && <Loading />} */}
+
+          {/* <Product
           id="2234"
           title="Egg"
           description="Cucumber, tofu, sesame wasabi, chilli mayonnaise"
@@ -206,13 +213,13 @@ const Order = () => {
           description="Cucumber, tofu, sesame wasabi, chilli mayonnaise"
           price={32}
           image="https://images.pexels.com/photos/60616/fried-chicken-chicken-fried-crunchy-60616.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" */}
-        {/* /> */}
-      </div>
-      <div className="order__right-section">
-        <OrderTotal />
-      </div>
+          {/* /> */}
+        </div>
+        <div className="order__right-section">
+          <OrderTotal />
+        </div>
 
-      {/* <div className="order__right-section">
+        {/* <div className="order__right-section">
         <div className="order__right-section-content">
           <h2
             style={{
@@ -246,7 +253,9 @@ const Order = () => {
           Checkout
         </button>
       </div> */}
-    </div>
+      </div>
+      {(!products || products.length === 0) && <Loading />}
+    </>
   );
 };
 

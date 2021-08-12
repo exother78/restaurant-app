@@ -45,11 +45,12 @@ const products = {
     try {
       const products = await Product.find();
 
-      if (!products) return res.status(500).json({ msg: "No Products found" });
+      if (!products)
+        return res.status(500).json({ error: "No Products found" });
 
       res.status(200).json({ success: true, products });
     } catch (err) {
-      res.status(500).json({ msg: err.message });
+      res.status(500).json({ error: err.message });
     }
   },
 

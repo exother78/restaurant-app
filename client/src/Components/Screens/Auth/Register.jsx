@@ -110,7 +110,6 @@ const Register = () => {
 
     const register = async (d) => {
       try {
-        console.log("d: ", d);
         if (d) {
           await axios.post("/api/user/register", {
             ...registerForm,
@@ -162,8 +161,6 @@ const Register = () => {
       [name]: value,
     }));
   };
-
-  console.log("registerform: ", registerForm);
 
   const clearImage = () => {
     // setRegisterForm((prevValues) => ({

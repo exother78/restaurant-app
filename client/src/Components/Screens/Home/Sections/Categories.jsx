@@ -2,20 +2,22 @@ import React from "react";
 import "./Categories.css";
 import { useStateValue } from "../../../../StateProvider";
 import Category from "./CategoriesCategory/Category";
+import Loading from "../../Global/Loading";
 
 const Categories = () => {
   const { categoriesAPI } = useStateValue();
   const [categories] = categoriesAPI.categories;
 
   return (
-    <div className="Categories">
-      <h1 className="category__title">Categories</h1>
-      <div className="categories">
-        {categories.map((cat, i) => (
-          <Category {...cat} key={i} />
-        ))}
+    <>
+      <div className="Categories">
+        <h1 className="category__title">Categories</h1>
+        <div className="categories">
+          {categories.map((cat, i) => (
+            <Category {...cat} key={i} />
+          ))}
 
-        {/* <div className="category">
+          {/* <div className="category">
           <img
             src="https://images.pexels.com/photos/286283/pexels-photo-286283.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
             alt=""
@@ -46,8 +48,10 @@ const Categories = () => {
           />
           <h3 className="categories__category-name">Breakfast</h3>
         </div> */}
+        </div>
       </div>
-    </div>
+      {(!categories || categories.length === 0) && <Loading />}
+    </>
   );
 };
 

@@ -3,6 +3,7 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
+const path = require("path");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 
@@ -29,14 +30,10 @@ app.use("/api", require("./routes/Reservoir"));
 
 app.use(errorHandler);
 
-// app.get("/", (req, res) => {
-//   res.send(__dirname + "/client/build/");
-// });
-
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client/build/index.html"));
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
   });
 }
 

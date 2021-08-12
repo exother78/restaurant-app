@@ -15,9 +15,6 @@ exports.register = async (req, res, next) => {
     images,
   } = req.body;
 
-  console.log(
-    `f ${firstName} l ${lastName} e ${email} p ${password} a ${address} a ${addressLine2} c ${city} im ${images}`
-  );
   try {
     // console.log("address", address);
     // if(password)

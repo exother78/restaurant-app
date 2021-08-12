@@ -1,25 +1,18 @@
 const Product = require("../models/ProductModel");
 
 const products = {
-  createProduct: async (req, res) => {
+  createProduct: async (req, res, next) => {
     try {
       const { title, description, product_id, category, price, images } =
         req.body;
 
-      if (
-        !title ||
-        !description ||
-        !product_id ||
-        !category ||
-        !price ||
-        !images
-      )
+      if (!title || !description || !product_id || !price || !images)
         return res.status(400).json({
           success: false,
           error: "Please Provide complete information",
         });
 
-      console.log("body: ", req.body);
+      // console.log("body: ", req.body);
 
       const product = await Product.create({
         title,
@@ -36,8 +29,10 @@ const products = {
         .status(200)
         .json({ success: true, msg: "Successfully created Product", product });
     } catch (err) {
-      console.log(err);
-      res.status(400).json({ msg: err.message });
+      // console.log(err);
+      // console.log("error here: ", err);
+      // res.status(400).json({ msg: err.message });
+      next(err);
     }
   },
 

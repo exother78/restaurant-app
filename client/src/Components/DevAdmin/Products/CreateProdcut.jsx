@@ -4,8 +4,10 @@ import { useStateValue } from "../../../StateProvider";
 import "./CreateProduct.css";
 
 const CreateProdcut = () => {
-  const { categoriesAPI } = useStateValue();
+  const { categoriesAPI, productsAPI } = useStateValue();
   const [categories] = categoriesAPI.categories;
+  const [callback, setCallback] = productsAPI.callback;
+
   const [imageUpload, setImageUpload] = useState(false);
   const [imageShow, setImageShow] = useState();
 
@@ -59,23 +61,30 @@ const CreateProdcut = () => {
       });
 
       const productFunc = async (d) => {
-        console.log("image data", d);
-        console.log(d.data.url);
-        const product = await axios.post("/api/products", {
-          ...data,
-          images: { public_id: d.data.public_id, url: d.data.url },
-        });
-
-        console.log("all data", product);
+        try {
+          await axios.post("/api/products", {
+            ...data,
+            images: { public_id: d.data.public_id, url: d.data.url },
+          });
+        } catch (error) {
+          alert(error.response.data.error);
+        }
       };
 
-      Promise.resolve(res)
-        .then(productFunc)
-        .then(() => {
-          console.log("product's here");
-        });
+      Promise.resolve(res).then(productFunc);
 
-      window.location.href = "/create_product";
+      setCallback(!callback);
+
+      // setData({
+      //   product_id: "",
+      //   title: "",
+      //   description: "",
+      //   price: "",
+      //   category: "",
+      //   images: "",
+      // });
+
+      // window.location.href = "/create_product";
     } catch (err) {
       console.log("err: ", err);
     }
@@ -162,7 +171,14 @@ const CreateProdcut = () => {
             />
           </div>
           <div className="create__product-input">
-            <select name="category" onChange={handleChange} required>
+            <select
+              name="category"
+              onChange={handleChange}
+              defaultValue="Category"
+              required>
+              <option value="Category" disabled>
+                Select Category
+              </option>
               {categories.map((category, i) => (
                 <option key={i} value={category.name}>
                   {category.name}

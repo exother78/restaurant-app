@@ -22,7 +22,7 @@ const ProductsAPI = () => {
     };
 
     getProducts();
-  }, []);
+  }, [callback]);
 
   return {
     products: [products, setProducts],

@@ -66,11 +66,13 @@ const Menu = () => {
 
         <div className="menu-page">
           <h4>Click Here to See full menu</h4>
-          <Link to="/menu">
-            <span className="menu-to-menuscreen-arrow">
-              <ArrowForwardIcon />
-            </span>
-          </Link>
+          {/* <Link to="/menu"> */}
+          <span
+            className="menu-to-menuscreen-arrow"
+            onClick={() => (window.location.href = "/menu")}>
+            <ArrowForwardIcon />
+          </span>
+          {/* </Link> */}
         </div>
       </div>
     </div>

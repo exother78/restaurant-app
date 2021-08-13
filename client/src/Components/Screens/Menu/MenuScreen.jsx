@@ -64,13 +64,14 @@ const MenuScreen = () => {
           </div>
           <div className="menu-page">
             <h4>Get Your Favorite Food Now!</h4>
-            <Link to="/order">
-              <span
-                className="menu-to-menuscreen-arrow"
-                style={{ background: "darkgrey" }}>
-                <ArrowForwardIcon />
-              </span>
-            </Link>
+            {/* <Link to="/order"> */}
+            <span
+              onClick={() => (window.location.href = "/order")}
+              className="menu-to-menuscreen-arrow"
+              style={{ background: "darkgrey" }}>
+              <ArrowForwardIcon />
+            </span>
+            {/* </Link> */}
           </div>
         </div>
       </div>

@@ -6,8 +6,8 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../../../StateProvider";
 import axios from "axios";
 
-import image from "../../Images/my.jpeg";
-// import avatar from "../../Images/avatar.png";
+// import image from "../../Images/my.jpeg";
+import avatar from "../../Images/avatar.png";
 import arrow from "../../Images/chevron-down-solid.svg";
 
 const Header = () => {
@@ -94,7 +94,7 @@ const Header = () => {
               onClick={() => setAvatarOpen(!avatarOpen)}>
               <div className="header__user-nav-img">
                 <img
-                  src={userImage ? userImage : image}
+                  src={userImage ? userImage : avatar}
                   alt=""
                   className="avatar__img"
                 />

@@ -41,11 +41,13 @@ const Footer = () => {
             <span className="footer__column-subText">Chicken Karahi</span>
             <div className="menu-page" style={{ padding: "0 5px" }}>
               <h4>Order Food Now!</h4>
-              <Link to="/order">
-                <span className="menu-to-menuscreen-arrow">
-                  <ArrowForwardIcon />
-                </span>
-              </Link>
+              {/* <Link to="/order" onClick={}> */}
+              <span
+                className="menu-to-menuscreen-arrow"
+                onClick={() => (window.location.href = "/order")}>
+                <ArrowForwardIcon />
+              </span>
+              {/* </Link> */}
             </div>
           </div>
         </div>

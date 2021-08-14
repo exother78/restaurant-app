@@ -1,7 +1,6 @@
 import React from "react";
 import "./Menu.css";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
-import { Link } from "react-router-dom";
 
 const Menu = () => {
   return (

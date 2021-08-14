@@ -2,7 +2,6 @@ import React from "react";
 import "./MenuScreen.css";
 
 import image from "../../Images/white-wood-textures.jpg";
-import { Link } from "react-router-dom";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
 import Footer from "../Home/Sections/Footer";
 
@@ -64,14 +63,12 @@ const MenuScreen = () => {
           </div>
           <div className="menu-page">
             <h4>Get Your Favorite Food Now!</h4>
-            {/* <Link to="/order"> */}
             <span
               onClick={() => (window.location.href = "/order")}
               className="menu-to-menuscreen-arrow"
               style={{ background: "darkgrey" }}>
               <ArrowForwardIcon />
             </span>
-            {/* </Link> */}
           </div>
         </div>
       </div>

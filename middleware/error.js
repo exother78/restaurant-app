@@ -7,7 +7,7 @@ const errorHandler = (err, req, res, next) => {
 
   if (err.code === 11000) {
     const message = "Duplicate Field Value Entered";
-    error = new ErrorResponse(message);
+    error = new ErrorResponse(message, 400);
   }
 
   if (err.name === "ValidationError") {

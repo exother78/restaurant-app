@@ -1,7 +1,7 @@
 const Category = require("../models/CategoryModel");
 
 const category = {
-  getCategories: async (req, res) => {
+  getCategories: async (req, res, next) => {
     try {
       const categories = await Category.find();
 
@@ -10,23 +10,25 @@ const category = {
 
       res.status(200).json({ categories });
     } catch (err) {
-      res.status(400).json({ msg: err.message });
+      // res.status(400).json({ msg: err.message });
+      next(err);
     }
   },
 
-  createCategory: async (req, res) => {
+  createCategory: async (req, res, next) => {
     const { name, images } = req.body;
     try {
       const category = await Category.create({ name, images });
 
       res.status(200).json({ success: true, category });
     } catch (err) {
-      console.log(err);
-      res.status(400).json({ msg: err.message });
+      next(err);
+      // console.log(err);
+      // res.status(400).json({ msg: err.message });
     }
   },
 
-  updateCategory: async (req, res) => {
+  updateCategory: async (req, res, next) => {
     const { name } = req.body;
     const id = req.params.id;
 
@@ -38,11 +40,12 @@ const category = {
 
       res.status(200).json({ success: true, msg: "Updated successfully" });
     } catch (err) {
-      res.status(400).json({ msg: err.message });
+      // res.status(400).json({ msg: err.message });
+      next(err);
     }
   },
 
-  deleteCategory: async (req, res) => {
+  deleteCategory: async (req, res, next) => {
     const id = req.params.id;
 
     try {
@@ -52,7 +55,8 @@ const category = {
         .status(200)
         .json({ success: true, msg: "Successfully deleted a category" });
     } catch (err) {
-      res.status(400).json({ msg: err.message });
+      // res.status(400).json({ error: err.message });
+      next(err);
     }
   },
 };

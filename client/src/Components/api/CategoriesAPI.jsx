@@ -12,8 +12,8 @@ const CategoriesAPI = () => {
 
         setCategories(categories.data.categories);
       } catch (err) {
-        console.log(err.response.data.msg);
-        // alert(err.response.data.msg);
+        console.log("categoriesAPI: ", err.response.data.msg);
+        // alert(err.response.data.error);
       }
     };
 

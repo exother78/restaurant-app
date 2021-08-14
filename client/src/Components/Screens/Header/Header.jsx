@@ -103,7 +103,9 @@ const Header = () => {
               </div>
               <ul
                 className="avatar__list"
-                style={{ display: !avatarOpen ? "none" : "block" }}>
+                style={{
+                  opacity: !avatarOpen ? "0" : "1",
+                }}>
                 <Link to="/orders">
                   <li>Pending Orders</li>
                 </Link>
@@ -121,7 +123,9 @@ const Header = () => {
           {!isLoggedIn ? (
             <div className="header__login">
               <Link to="/login">
-                <span className="header__loginText btn-anim btn btn-dark btn-main">
+                <span
+                  className="header__loginText btn-anim btn btn-dark btn-main"
+                  style={{ letterSpacing: "2px" }}>
                   Login
                 </span>
               </Link>
@@ -129,7 +133,9 @@ const Header = () => {
           ) : (
             <div className="header__login">
               <Link to="/" onClick={logoutUser}>
-                <span className="header__loginText btn-anim btn btn-dark btn-main">
+                <span
+                  className="header__loginText btn-anim btn btn-dark btn-main"
+                  style={{ letterSpacing: "2px" }}>
                   Logout
                 </span>
               </Link>

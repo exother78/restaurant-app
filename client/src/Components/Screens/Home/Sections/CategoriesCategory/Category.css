@@ -23,6 +23,8 @@
 
 .categories__category-name {
   margin-top: 20px;
+  text-transform: capitalize;
+  letter-spacing: 1px;
 }
 
 .categories::-webkit-scrollbar {

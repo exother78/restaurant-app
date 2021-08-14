@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./Register.css";
 
 import axios from "axios";
+import Loading from "../Global/Loading";
 
 const Register = () => {
   const [registerForm, setRegisterForm] = useState({
@@ -18,6 +19,7 @@ const Register = () => {
 
   const [fileImage, setFileImage] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleFileChange = (e) => {
     const getFile = e.target.files[0];
@@ -37,19 +39,26 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
     if (registerForm.password !== registerForm.confirmPassword) {
       alert("Passwords doesn't match");
+      setLoading(false);
       return;
     }
 
     const upload = async () => {
-      const res = await axios.post("/api/upload", imageUpload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+      try {
+        const res = await axios.post("/api/upload", imageUpload, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        });
 
-      return res;
+        return res;
+      } catch (error) {
+        setLoading(false);
+        console.log("error occured", error.response.data.error);
+      }
     };
 
     const register = async (d) => {
@@ -59,17 +68,20 @@ const Register = () => {
             ...registerForm,
             images: { public_id: d.data.public_id, url: d.data.url },
           });
+          setLoading(false);
         }
 
         if (!d) {
           await axios.post("/api/user/register", {
             ...registerForm,
           });
+          setLoading(false);
         }
 
         localStorage.setItem("login", true);
         window.location.href = "/";
       } catch (err) {
+        setLoading(false);
         console.log("register function error: ", err);
       }
     };
@@ -82,6 +94,7 @@ const Register = () => {
         register();
       }
     } catch (err) {
+      setLoading(false);
       alert(err.response.data.error);
     }
   };
@@ -98,6 +111,8 @@ const Register = () => {
     setImageUpload(null);
     setFileImage(null);
   };
+
+  if (loading) return <Loading />;
 
   return (
     <div className="register">

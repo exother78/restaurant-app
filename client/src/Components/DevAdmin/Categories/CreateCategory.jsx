@@ -5,9 +5,10 @@ import { useStateValue } from "../../../StateProvider";
 import Loading from "../../Screens/Global/Loading";
 
 const CreateCategory = () => {
-  const { categoriesAPI } = useStateValue();
+  const { categoriesAPI, userAPI, token } = useStateValue();
   const [categories] = categoriesAPI.categories;
   const [callback, setCallback] = categoriesAPI.callback;
+  const [isAdmin] = userAPI.isAdmin;
 
   const [categoryForm, setCategoryForm] = useState({
     name: "",
@@ -18,6 +19,8 @@ const CreateCategory = () => {
   const [imageUpload, setImageUpload] = useState(null);
   const [loading, setLoading] = useState(false);
   const [createCategoryLoading, setCreateCategoryLoading] = useState(false);
+  const [onEdit, setOnEdit] = useState(false);
+  const [catid, setCatid] = useState("");
 
   const handleFileChange = (e) => {
     const getFile = e.target.files[0];
@@ -35,27 +38,56 @@ const CreateCategory = () => {
     };
   };
 
+  const upload = async () => {
+    try {
+      if (isAdmin) {
+        const res = await axios.post("/api/upload", imageUpload, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            Authorization: `Bearer ${token[0]}`,
+          },
+        });
+
+        return res;
+      }
+    } catch (error) {
+      console.log(error.response.data.error);
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCreateCategoryLoading(true);
 
-    const upload = async () => {
-      const res = await axios.post("/api/upload", imageUpload, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      });
+    // const upload = async () => {
+    //   try {
+    //     const res = await axios.post("/api/upload", imageUpload, {
+    //       headers: {
+    //         "Content-Type": "multipart/form-data",
+    //       },
+    //     });
 
-      return res;
-    };
+    //     return res;
+    //   } catch (error) {
+    //     console.log(error.response.data.error);
+    //   }
+    // };
 
     const categoryUpload = async (d) => {
       try {
         if (d) {
-          const res = await axios.post("/api/category", {
-            ...categoryForm,
-            images: { public_id: d.data.public_id, url: d.data.url },
-          });
+          const res = await axios.post(
+            "/api/category",
+            {
+              ...categoryForm,
+              images: { public_id: d.data.public_id, url: d.data.url },
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token[0]}`,
+              },
+            }
+          );
 
           Promise.resolve(res).then(() => {
             setCallback(!callback);
@@ -70,9 +102,17 @@ const CreateCategory = () => {
         }
 
         if (!d) {
-          const res = await axios.post("/api/category", {
-            ...categoryForm,
-          });
+          const res = await axios.post(
+            "/api/category",
+            {
+              ...categoryForm,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token[0]}`,
+              },
+            }
+          );
 
           Promise.resolve(res).then(() => {
             setCallback(!callback);
@@ -114,27 +154,144 @@ const CreateCategory = () => {
     setFileImage(null);
   };
 
-  const handleEdit = () => {};
-
-  const handleDelete = async (id, e) => {
-    setLoading(true);
+  const deleteCategoryImage = async (pub_id) => {
     try {
-      const res = await axios.delete(`/api/category/${id}`);
+      if (pub_id) {
+        await axios.post(
+          "/api/destroy",
+          {
+            public_id: pub_id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token[0]}`,
+            },
+          }
+        );
+      }
 
-      Promise.resolve(res).then(() => {
-        setCallback(!callback);
-        setLoading(false);
+      if (!pub_id) {
+        await axios.post(
+          "/api/destroy",
+          {
+            public_id: categoryForm.images.public_id,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token[0]}`,
+            },
+          }
+        );
+      }
+      // console.log("delete Image ran: and data ", res);
+    } catch (err) {
+      console.log("delete category image error: ", err.response.data);
+    }
+  };
 
+  const clearAll = () => {
+    setOnEdit(false);
+    setCreateCategoryLoading(false);
+    setCallback(!callback);
+    setFileImage(null);
+    setImageUpload(null);
+    setCategoryForm({ images: "", name: "" });
+  };
+
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    setCreateCategoryLoading(true);
+
+    const categoryUpdate = async (y) => {
+      try {
+        if (y) {
+          await axios.patch(
+            `/api/category/${catid}`,
+            {
+              name: categoryForm.name,
+              images: { public_id: y.data.public_id, url: y.data.url },
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token[0]}`,
+              },
+            }
+          );
+          clearAll();
+          return;
+        }
+        if (!y) {
+          await axios.patch(
+            `/api/category/${catid}`,
+            {
+              name: categoryForm.name,
+              images: categoryForm.images,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${token[0]}`,
+              },
+            }
+          );
+          clearAll();
+          return;
+        }
+      } catch (err) {
+        console.log("categoryUpdate error: ");
         return;
+      }
+    };
+
+    if (imageUpload) {
+      deleteCategoryImage().then(upload).then(categoryUpdate);
+    }
+    if (!imageUpload) {
+      categoryUpdate();
+    }
+  };
+
+  const handleEdit = (category) => {
+    setOnEdit(true);
+    setCategoryForm({
+      ...categoryForm,
+      images: category.images,
+      name: category.name,
+    });
+    setFileImage(category.images.url);
+    setCatid(category._id);
+  };
+
+  const handleDelete = async (category, e) => {
+    setLoading(true);
+
+    const deleteCategory = async () => {
+      return await axios.delete(`/api/category/${category._id}`, {
+        headers: {
+          Authorization: `Bearer ${token[0]}`,
+        },
       });
+    };
+    try {
+      // const res = await axios.delete(`/api/category/${id}`);
+      // Promise.resolve(res).then(() => {
+      //   setCallback(!callback);
+      //   setLoading(false);
+      //   return;
+      // });
+
+      deleteCategoryImage(category.images.public_id)
+        .then(deleteCategory)
+        .then(() => {
+          setCallback(!callback);
+          setLoading(false);
+          return;
+        });
     } catch (error) {
       alert(error.response.data.error);
     }
   };
 
-  console.log("categories: ", categories);
-
-  if (categories.length === 0) return <Loading />;
+  if (!categories) return <Loading />;
   if (categories) {
     return (
       <div className="categories__screen">
@@ -142,7 +299,7 @@ const CreateCategory = () => {
           <Loading />
         ) : (
           <div className="create__category">
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={onEdit ? handleEditSubmit : handleSubmit}>
               <div className="category__img">
                 <h3
                   style={{
@@ -183,9 +340,15 @@ const CreateCategory = () => {
                 />
               </div>
 
-              <button className="category__submit-button" type="submit">
-                Submit
-              </button>
+              {onEdit ? (
+                <button className="category__submit-button" type="submit">
+                  Update
+                </button>
+              ) : (
+                <button className="category__submit-button" type="submit">
+                  Submit
+                </button>
+              )}
             </form>
           </div>
         )}
@@ -216,8 +379,8 @@ const CreateCategory = () => {
                   </div>
 
                   <div className="categories__screen-category-btns">
-                    <button onClick={handleEdit}>Edit</button>
-                    <button onClick={(e) => handleDelete(category._id)}>
+                    <button onClick={(e) => handleEdit(category)}>Edit</button>
+                    <button onClick={(e) => handleDelete(category)}>
                       Delete
                     </button>
                   </div>

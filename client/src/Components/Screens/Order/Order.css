@@ -62,7 +62,7 @@
   z-index: 21;
   height: 2px;
   width: 100%;
-  background: purple;
+  background: #d70f64;
   animation-name: category-border;
   animation-duration: 0.2s;
 }

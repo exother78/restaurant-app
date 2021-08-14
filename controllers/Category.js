@@ -29,16 +29,29 @@ const category = {
   },
 
   updateCategory: async (req, res, next) => {
-    const { name } = req.body;
+    const { name, images } = req.body;
     const id = req.params.id;
 
     try {
-      const category = await Category.findByIdAndUpdate(id, { name });
-
+      // if (images) {
+      const category = await Category.findByIdAndUpdate(id, { name, images });
       if (!category)
-        return res.status(400).json({ msg: "No Category found with this id" });
-
+        return res
+          .status(400)
+          .json({ error: "No Category found with this id" });
       res.status(200).json({ success: true, msg: "Updated successfully" });
+      // console.log("image: ", images, " name: ", name);
+      // }
+
+      // if (!images) {
+      //   const category = await Category.findByIdAndUpdate(id, { name });
+      //   if (!category)
+      //     return res
+      //       .status(400)
+      //       .json({ error: "No Category found with this id" });
+
+      //   res.status(200).json({ success: true, msg: "Updated successfully" });
+      // }
     } catch (err) {
       // res.status(400).json({ msg: err.message });
       next(err);

@@ -54,7 +54,7 @@
   padding: 10px 30px;
   height: 30px;
   border: 0.5px solid lightgray;
-  font-family: "Spartan";
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
   transition: transform 0.2s linear;
   min-width: 300px;
   font-size: medium;
@@ -65,10 +65,15 @@
 }
 
 input.location__field::placeholder {
-  font-family: "Spartan";
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+  font-weight: 600;
+  letter-spacing: 1px;
 }
 
 .location__field-btn {
+  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+  font-weight: 600;
+  letter-spacing: 1.1px;
   font-size: 1.4rem;
   padding: 12px 30px;
   min-height: 30px;

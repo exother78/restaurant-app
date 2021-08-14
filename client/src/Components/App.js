@@ -21,10 +21,12 @@ import Loading from "./Screens/Global/Loading";
 import CreateProdcut from "./DevAdmin/Products/CreateProdcut";
 import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
+import NotFound from "./Screens/Global/NotFound";
 
 function App() {
-  const { productsAPI } = useStateValue();
+  const { productsAPI, userAPI } = useStateValue();
   const [products] = productsAPI.products;
+  const [isAdmin] = userAPI.isAdmin;
   return (
     <Router>
       <div className="App">
@@ -34,7 +36,7 @@ function App() {
           </Route>
 
           <Route path="/create_product">
-            {/* {isAdmin ? (
+            {isAdmin ? (
               <>
                 <Header />
                 <CreateProdcut />
@@ -44,15 +46,23 @@ function App() {
                 <Header />
                 <NotFound />
               </>
-            )} */}
-
-            <Header />
-            <CreateProdcut />
+            )}
           </Route>
 
           <Route path="/create_category">
-            <Header />
-            <CreateCategory />
+            {isAdmin ? (
+              <>
+                <Header />
+                <CreateCategory />
+              </>
+            ) : (
+              <>
+                <Header />
+                <NotFound />
+              </>
+            )}
+            {/* <Header />
+            <CreateCategory /> */}
           </Route>
 
           <Route path="/checkout">

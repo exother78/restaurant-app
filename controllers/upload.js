@@ -10,6 +10,7 @@ cloudinary.config({
 
 const upload = {
   uploadImage: async (req, res) => {
+    // try {
     const file = req.files.file;
 
     if (!req.files || Object.keys(req.files).length === 0)
@@ -22,7 +23,7 @@ const upload = {
 
     if (file.size > 1024 * 1024) {
       removeTmp(file.tempFilePath);
-      return res.status(400).json({ msg: "Size too large" });
+      return res.status(400).json({ error: "Size too large" });
     }
 
     await cloudinary.v2.uploader.upload(
@@ -41,10 +42,25 @@ const upload = {
       }
     );
 
-    // res.status(200).json({ success: true, msg: "File Recieved" });
+    // } catch (err) {
+    //   next(err);
+    // }
+  },
 
-    // console.log(file);
-    console.log("Success");
+  destroyImage: async (req, res) => {
+    try {
+      const { public_id } = req.body;
+      if (!public_id)
+        return res.status(400).json({ msg: "No images Selected" });
+
+      cloudinary.v2.uploader.destroy(public_id, async (err, result) => {
+        if (err) throw err;
+
+        res.json({ msg: "Deleted image" });
+      });
+    } catch (err) {
+      return res.status(500).json({ msg: err.message });
+    }
   },
 };
 

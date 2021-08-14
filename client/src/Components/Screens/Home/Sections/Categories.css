@@ -7,11 +7,11 @@
   padding: 0 15px;
   font-weight: 900;
   user-select: none;
+  text-transform: capitalize;
 }
 
 .categories {
   display: flex;
-
   margin: 15px;
 }
 /* 

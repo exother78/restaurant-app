@@ -21,6 +21,8 @@ const CreateCategory = () => {
   const [createCategoryLoading, setCreateCategoryLoading] = useState(false);
   const [onEdit, setOnEdit] = useState(false);
   const [catid, setCatid] = useState("");
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(null);
 
   const handleFileChange = (e) => {
     const getFile = e.target.files[0];
@@ -55,41 +57,55 @@ const CreateCategory = () => {
     }
   };
 
+  const categoryUpload = async (d) => {
+    try {
+      if (d) {
+        const res = await axios.post(
+          "/api/category",
+          {
+            ...categoryForm,
+            images: { public_id: d.data.public_id, url: d.data.url },
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token[0]}`,
+            },
+          }
+        );
+
+        return res;
+      }
+
+      if (!d) {
+        const res = await axios.post(
+          "/api/category",
+          {
+            ...categoryForm,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token[0]}`,
+            },
+          }
+        );
+
+        return res;
+      }
+    } catch (err) {
+      setError(err.response.data.error);
+      return;
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setCreateCategoryLoading(true);
 
-    // const upload = async () => {
-    //   try {
-    //     const res = await axios.post("/api/upload", imageUpload, {
-    //       headers: {
-    //         "Content-Type": "multipart/form-data",
-    //       },
-    //     });
-
-    //     return res;
-    //   } catch (error) {
-    //     console.log(error.response.data.error);
-    //   }
-    // };
-
-    const categoryUpload = async (d) => {
-      try {
-        if (d) {
-          const res = await axios.post(
-            "/api/category",
-            {
-              ...categoryForm,
-              images: { public_id: d.data.public_id, url: d.data.url },
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token[0]}`,
-              },
-            }
-          );
-
-          Promise.resolve(res).then(() => {
+    try {
+      if (fileImage) {
+        upload()
+          .then(categoryUpload)
+          .then((response) => {
             setCallback(!callback);
             setCreateCategoryLoading(false);
             setCategoryForm({
@@ -98,48 +114,33 @@ const CreateCategory = () => {
             });
             setFileImage(null);
             setImageUpload(null);
+            setSuccess(response.data.message);
           });
-        }
-
-        if (!d) {
-          const res = await axios.post(
-            "/api/category",
-            {
-              ...categoryForm,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token[0]}`,
-              },
-            }
-          );
-
-          Promise.resolve(res).then(() => {
-            setCallback(!callback);
-            setCreateCategoryLoading(false);
-            setCategoryForm({
-              name: "",
-              images: "",
-            });
-          });
-        }
-      } catch (err) {
-        alert(err.response.data.error);
-        return;
-      }
-    };
-
-    try {
-      if (fileImage) {
-        upload().then(categoryUpload);
       }
       if (!fileImage) {
-        categoryUpload();
+        categoryUpload().then((response) => {
+          setCallback(!callback);
+          setCreateCategoryLoading(false);
+          setCategoryForm({
+            name: "",
+            images: "",
+          });
+          setFileImage(null);
+          setImageUpload(null);
+          setSuccess(response.data.message);
+        });
       }
     } catch (err) {
-      alert(err.response.data.error);
+      setError(err.response.data.error);
     }
   };
+
+  if (success || error) {
+    setTimeout(() => {
+      setSuccess(null);
+      setError(null);
+    }, 4000);
+  }
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -261,40 +262,36 @@ const CreateCategory = () => {
     setCatid(category._id);
   };
 
-  const handleDelete = async (category, e) => {
+  const handleDelete = async (category) => {
     setLoading(true);
 
     const deleteCategory = async () => {
-      return await axios.delete(`/api/category/${category._id}`, {
+      const res = await axios.delete(`/api/category/${category._id}`, {
         headers: {
           Authorization: `Bearer ${token[0]}`,
         },
       });
-    };
-    try {
-      // const res = await axios.delete(`/api/category/${id}`);
-      // Promise.resolve(res).then(() => {
-      //   setCallback(!callback);
-      //   setLoading(false);
-      //   return;
-      // });
 
-      deleteCategoryImage(category.images.public_id)
-        .then(deleteCategory)
-        .then(() => {
-          setCallback(!callback);
-          setLoading(false);
-          return;
-        });
-    } catch (error) {
-      alert(error.response.data.error);
-    }
+      return res;
+    };
+
+    deleteCategoryImage(category.images.public_id)
+      .then(deleteCategory)
+      .then((response) => {
+        setCallback(!callback);
+        setLoading(false);
+        setSuccess(response.data.message);
+        return;
+      });
   };
 
   if (!categories) return <Loading />;
   if (categories) {
     return (
       <div className="categories__screen">
+        {error && <div className="error__box">{error}</div>}
+        {success && <div className="success__box">{success}</div>}
+
         {createCategoryLoading ? (
           <Loading />
         ) : (

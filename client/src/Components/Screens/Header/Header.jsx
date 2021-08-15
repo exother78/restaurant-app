@@ -10,7 +10,7 @@ import axios from "axios";
 import avatar from "../../Images/avatar.png";
 import arrow from "../../Images/chevron-down-solid.svg";
 
-const Header = () => {
+const Header = ({ dashboard }) => {
   const state = useStateValue();
 
   const [isLoggedIn] = state.userAPI.isLoggedIn;
@@ -36,7 +36,17 @@ const Header = () => {
 
   const handleBarsClick = () => {
     const bars = document.querySelector(".header__bars");
-    const sideNav = document.querySelector(".header__side-nav");
+    // const sideNav = document.querySelector(".header__side-nav");
+
+    let sideNav;
+
+    if (dashboard) {
+      sideNav = document.querySelector(".dashboard");
+    }
+
+    if (!dashboard) {
+      sideNav = document.querySelector(".header__side-nav");
+    }
 
     if (!bars.classList.value.includes("bars-opened") && sideNav) {
       bars.classList.add("bars-opened");
@@ -52,7 +62,17 @@ const Header = () => {
 
   const removeSideNav = () => {
     const bars = document.querySelector(".header__bars");
-    const sideNav = document.querySelector(".header__side-nav");
+
+    let sideNav;
+
+    if (dashboard) {
+      sideNav = document.querySelector(".dashboard");
+    }
+    if (dashboard) {
+      sideNav = document.querySelector(".header__side-nav");
+    }
+
+    // const sideNav = document.querySelector(".header__side-nav");
     if (sideNav && bars.classList.value.includes("bars-opened") && bars) {
       bars.classList.remove("bars-opened");
 

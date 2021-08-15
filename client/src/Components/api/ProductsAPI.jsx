@@ -24,6 +24,12 @@ const ProductsAPI = () => {
     getProducts();
   }, [callback]);
 
+  // if (products) {
+  //   products.forEach((product) => {
+  //     product.checked = false;
+  //     // console.log("product: ", product);
+  //   });
+  // }
   return {
     products: [products, setProducts],
     callback: [callback, setCallback],

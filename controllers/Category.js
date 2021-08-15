@@ -20,7 +20,9 @@ const category = {
     try {
       const category = await Category.create({ name, images });
 
-      res.status(200).json({ success: true, category });
+      res
+        .status(200)
+        .json({ success: true, message: "Category Created", category });
     } catch (err) {
       next(err);
       // console.log(err);
@@ -66,7 +68,7 @@ const category = {
 
       res
         .status(200)
-        .json({ success: true, msg: "Successfully deleted a category" });
+        .json({ success: true, message: "Successfully deleted a category" });
     } catch (err) {
       // res.status(400).json({ error: err.message });
       next(err);

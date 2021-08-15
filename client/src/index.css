@@ -27,3 +27,63 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+.success__box {
+  padding: 15px 25px;
+  background: #5cf352;
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 99;
+  color: white;
+  transition: all 0.4s linear;
+  font-size: x-large;
+  min-width: 200px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 2px;
+  animation: successbox 1s linear;
+}
+
+.error__box {
+  padding: 15px 25px;
+  background: rgb(247, 10, 10);
+  position: fixed;
+  top: 30px;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 99;
+  color: white;
+  transition: all 0.4s linear;
+  font-size: x-large;
+  min-width: 200px;
+  text-align: center;
+  text-transform: capitalize;
+  font-weight: 600;
+  letter-spacing: 2px;
+  animation: successbox 1s linear;
+}
+
+@keyframes successbox {
+  0% {
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 0.25;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}

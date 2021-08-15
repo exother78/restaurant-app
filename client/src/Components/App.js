@@ -18,10 +18,13 @@ import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
 
-import CreateProdcut from "./DevAdmin/Products/CreateProdcut";
+import CreateProduct from "./DevAdmin/Products/CreateProduct";
 import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
+import Dashboard from "./DevAdmin/Dashboard/Dashboard";
+import AllProducts from "./DevAdmin/Products/Products/AllProducts";
+import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
 
 function App() {
   const { productsAPI, userAPI } = useStateValue();
@@ -35,11 +38,12 @@ function App() {
             <Logout />
           </Route>
 
-          <Route path="/create_product">
+          <Route path="/dashboard/products/create_product">
             {isAdmin ? (
               <>
-                <Header />
-                <CreateProdcut />
+                <Dashboard />
+                <AllProductsHeader />
+                <CreateProduct />
               </>
             ) : (
               <>
@@ -49,20 +53,33 @@ function App() {
             )}
           </Route>
 
-          <Route path="/create_category">
+          <Route path="/dashboard/products">
+            <Header />
+            <AllProductsHeader />
+            <AllProducts />
+          </Route>
+
+          <Route path="/dashboard/create_category">
             {isAdmin ? (
               <>
-                <Header />
+                <Dashboard />
                 <CreateCategory />
               </>
             ) : (
               <>
-                <Header />
-                <NotFound />
+                <Dashboard /> <NotFound />
               </>
             )}
-            {/* <Header />
-            <CreateCategory /> */}
+          </Route>
+
+          <Route path="/dashboard">
+            {isAdmin ? (
+              <Dashboard />
+            ) : (
+              <>
+                <Header /> <NotFound />
+              </>
+            )}
           </Route>
 
           <Route path="/checkout">

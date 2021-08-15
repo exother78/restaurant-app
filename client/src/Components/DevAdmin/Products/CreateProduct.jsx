@@ -6,7 +6,7 @@ import Loading from "../../Screens/Global/Loading";
 
 import { useHistory } from "react-router";
 
-const CreateProdcut = () => {
+const CreateProduct = () => {
   const history = useHistory();
   const { categoriesAPI, productsAPI, userAPI } = useStateValue();
   const [isAdmin] = userAPI.isAdmin;
@@ -56,10 +56,7 @@ const CreateProdcut = () => {
     setImageUpload(false);
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-
+  const uploadImage = async () => {
     try {
       const res = await axios.post("/api/upload", imageUpload, {
         headers: {
@@ -67,26 +64,39 @@ const CreateProdcut = () => {
         },
       });
 
-      const productFunc = async (d) => {
-        try {
-          await axios.post("/api/products", {
-            ...data,
-            images: { public_id: d.data.public_id, url: d.data.url },
-          });
-        } catch (error) {
-          alert(error.response.data.error);
-        }
-      };
-
-      Promise.resolve(res)
-        .then(productFunc)
-        .then(() => setLoading(false));
-
-      setCallback(!callback);
-      history.push("/");
-    } catch (err) {
-      console.log("err: ", err);
+      return res;
+    } catch (error) {
+      console.log("createProduct uploadimage: error: ", error.response);
     }
+  };
+
+  const productFunc = async (d) => {
+    try {
+      const res = await axios.post("/api/products", {
+        ...data,
+        images: { public_id: d.data.public_id, url: d.data.url },
+      });
+
+      return res;
+    } catch (error) {
+      alert(error.response.data.error);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    uploadImage()
+      .then(productFunc)
+      .then(() => {
+        setCallback(!callback);
+        setLoading(false);
+        history.push("/");
+      });
+    // try {
+    // } catch (err) {
+    //   console.log("err: ", err);
+    // }
   };
 
   if (!isAdmin) {
@@ -205,4 +215,4 @@ const CreateProdcut = () => {
   );
 };
 
-export default CreateProdcut;
+export default CreateProduct;

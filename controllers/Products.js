@@ -36,7 +36,7 @@ const products = {
     }
   },
 
-  getProducts: async (req, res) => {
+  getProducts: async (req, res, next) => {
     try {
       const products = await Product.find();
 
@@ -45,18 +45,20 @@ const products = {
 
       res.status(200).json({ success: true, products });
     } catch (err) {
-      res.status(500).json({ error: err.message });
+      // res.status(500).json({ error: err.message });
+      next(err);
     }
   },
 
-  deleteProduct: async (req, res) => {
+  deleteProduct: async (req, res, next) => {
     const id = req.params.id;
     try {
       await Product.findByIdAndDelete(id);
 
-      res.status(200).json({ success: true, msg: "deleted" });
+      res.status(200).json({ success: true, message: "deleted" });
     } catch (err) {
-      res.status(400).json({ msg: "no products found" });
+      // res.status(400).json({ error: "no products found" });
+      next(err);
     }
   },
 

@@ -39,7 +39,7 @@ function App() {
   useEffect(() => {
     ReactGa.initialize("G-Z64MGQCGJF");
 
-    ReactGa.pageview("/");
+    ReactGa.pageview(window.location.pathname);
   });
   return (
     <Router>

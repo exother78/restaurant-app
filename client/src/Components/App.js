@@ -1,4 +1,5 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
+import ReactGa from "react-ga";
 import "./App.css";
 import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
@@ -34,6 +35,12 @@ function App() {
   const { productsAPI, userAPI } = useStateValue();
   const [products] = productsAPI.products;
   const [isAdmin] = userAPI.isAdmin;
+
+  useEffect(() => {
+    ReactGa.initialize("G-Z64MGQCGJF");
+
+    ReactGa.pageview("/");
+  });
   return (
     <Router>
       <div className="App">

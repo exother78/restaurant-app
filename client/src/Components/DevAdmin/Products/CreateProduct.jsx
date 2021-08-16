@@ -91,7 +91,7 @@ const CreateProduct = () => {
       .then(() => {
         setCallback(!callback);
         setLoading(false);
-        history.push("/");
+        history.push("/dashboard/products");
       });
     // try {
     // } catch (err) {

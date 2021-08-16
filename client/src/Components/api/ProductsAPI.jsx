@@ -10,7 +10,7 @@ const ProductsAPI = () => {
       try {
         const res = await axios.get("/api/products");
         if (!res) {
-          console.log("not found something");
+          console.log("No Products Found");
           return;
         }
 
@@ -20,16 +20,9 @@ const ProductsAPI = () => {
         // alert(err.response.data.error);
       }
     };
-
     getProducts();
   }, [callback]);
 
-  // if (products) {
-  //   products.forEach((product) => {
-  //     product.checked = false;
-  //     // console.log("product: ", product);
-  //   });
-  // }
   return {
     products: [products, setProducts],
     callback: [callback, setCallback],

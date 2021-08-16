@@ -68,7 +68,7 @@ const Header = ({ dashboard }) => {
     if (dashboard) {
       sideNav = document.querySelector(".dashboard");
     }
-    if (dashboard) {
+    if (!dashboard) {
       sideNav = document.querySelector(".header__side-nav");
     }
 
@@ -124,7 +124,7 @@ const Header = ({ dashboard }) => {
               <ul
                 className="avatar__list"
                 style={{
-                  opacity: !avatarOpen ? "0" : "1",
+                  display: !avatarOpen ? "none" : "block",
                 }}>
                 <Link to="/orders">
                   <li>Pending Orders</li>

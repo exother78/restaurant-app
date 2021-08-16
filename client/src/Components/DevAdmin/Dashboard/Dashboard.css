@@ -14,6 +14,7 @@
   height: 100vh;
   background: rgb(224, 224, 224);
   transition: 0.4s ease;
+  z-index: 2;
 }
 
 .headers__side-nav__container {

@@ -38,11 +38,15 @@
   outline: none;
   border: 1px solid lightgray;
   border-radius: 5px;
+  font-size: large;
+  font-weight: 500;
+  letter-spacing: 0.7px;
 }
 
 .login__input::placeholder {
   font-weight: 600;
-  font-family: "Montserrat";
+  /* font-family: "Montserrat"; */
+  font-size: larger;
   letter-spacing: 1px;
 }
 

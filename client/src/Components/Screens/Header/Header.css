@@ -164,7 +164,22 @@ nav {
   list-style: none;
   margin-top: 20px;
   position: relative;
-  transition: all 0.3s ease;
+  /* transition: all 0.3s ease; */
+  animation: avatarlist 0.2s linear;
+}
+
+@keyframes avatarlist {
+  0% {
+    transform: translateY(-30px);
+  }
+
+  50% {
+    transform: translateY(-15px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
 }
 
 .avatar__list::before {

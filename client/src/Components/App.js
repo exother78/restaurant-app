@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import "./App.css";
 import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
@@ -18,13 +18,17 @@ import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
 
-import CreateProduct from "./DevAdmin/Products/CreateProduct";
+// import CreateProduct from "./DevAdmin/Products/CreateProduct";
 import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
 import Dashboard from "./DevAdmin/Dashboard/Dashboard";
-import AllProducts from "./DevAdmin/Products/Products/AllProducts";
+// import AllProducts from "./DevAdmin/Products/Products/AllProducts";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
+const CreateProduct = lazy(() => import("./DevAdmin/Products/CreateProduct"));
+const AllProducts = lazy(() =>
+  import("./DevAdmin/Products/Products/AllProducts")
+);
 
 function App() {
   const { productsAPI, userAPI } = useStateValue();
@@ -43,7 +47,9 @@ function App() {
               <>
                 <Dashboard />
                 <AllProductsHeader />
-                <CreateProduct />
+                <Suspense fallback={<Loading />}>
+                  <CreateProduct />
+                </Suspense>
               </>
             ) : (
               <>
@@ -54,15 +60,18 @@ function App() {
           </Route>
 
           <Route path="/dashboard/products">
-            <Header />
+            <Dashboard />
             <AllProductsHeader />
-            <AllProducts />
+            <Suspense fallback={<Loading />}>
+              <AllProducts />
+            </Suspense>
           </Route>
 
           <Route path="/dashboard/create_category">
             {isAdmin ? (
               <>
                 <Dashboard />
+
                 <CreateCategory />
               </>
             ) : (

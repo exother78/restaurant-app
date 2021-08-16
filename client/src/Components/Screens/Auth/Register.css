@@ -99,12 +99,13 @@
   outline: none;
   border: 1px solid lightgray;
   border-radius: 5px;
+  font-size: medium;
+  font-weight: 500;
+  letter-spacing: 1px;
 }
 
 .register__input::placeholder {
   font-weight: 600;
-  font-family: "Montserrat";
-  letter-spacing: 1px;
 }
 
 /* ----------------------- Right Addess Section ---------------------- */
@@ -133,4 +134,10 @@
 
 .register__submit-button:hover {
   background-color: rgb(20, 129, 238);
+}
+
+option {
+  letter-spacing: 3px;
+  font-size: 17px;
+  font-weight: 500;
 }

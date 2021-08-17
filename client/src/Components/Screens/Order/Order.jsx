@@ -1,5 +1,4 @@
 import React from "react";
-import "./Order.css";
 import Product from "./Sections/Product";
 
 import OrderTotal from "../Global/OrderTotal";

@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import "./CreateCategory.css";
 import { useStateValue } from "../../../StateProvider";
 import Loading from "../../Screens/Global/Loading";
+const GetCategories = lazy(() => import("./GetCategories/GetCategories"));
 
 const CreateCategory = () => {
   const { categoriesAPI, userAPI, token } = useStateValue();
@@ -286,109 +287,82 @@ const CreateCategory = () => {
   };
 
   if (!categories) return <Loading />;
-  if (categories) {
-    return (
-      <div className="categories__screen">
-        {error && <div className="error__box">{error}</div>}
-        {success && <div className="success__box">{success}</div>}
+  // if (categories) {
+  return (
+    <div className="categories__screen">
+      {error && <div className="error__box">{error}</div>}
+      {success && <div className="success__box">{success}</div>}
 
-        {createCategoryLoading ? (
-          <Loading />
-        ) : (
-          <div className="create__category">
-            <form onSubmit={onEdit ? handleEditSubmit : handleSubmit}>
-              <div className="category__img">
-                <h3
-                  style={{
-                    letterSpacing: "1.3px",
-                    padding: "10px 20px",
-                    userSelect: "none",
-                  }}>
-                  Add a Category
-                </h3>
-                {!fileImage && (
-                  <input
-                    type="file"
-                    className="category__img-input"
-                    onChange={handleFileChange}
-                  />
-                )}
-                {fileImage && (
-                  <img style={{ userSelect: "none" }} src={fileImage} alt="" />
-                )}
-                {fileImage && (
-                  <span
-                    className="category__form-clear-img"
-                    onClick={clearImage}>
-                    Clear Image
-                  </span>
-                )}
-              </div>
-
-              <div className="category__input-group">
+      {createCategoryLoading ? (
+        <Loading />
+      ) : (
+        <div className="create__category">
+          <form onSubmit={onEdit ? handleEditSubmit : handleSubmit}>
+            <div className="category__img">
+              <h3
+                style={{
+                  letterSpacing: "1.3px",
+                  padding: "10px 20px",
+                  userSelect: "none",
+                }}>
+                Add a Category
+              </h3>
+              {!fileImage && (
                 <input
-                  type="text"
-                  name="name"
-                  placeholder="Name *"
-                  required
-                  className="category__input"
-                  value={categoryForm.name}
-                  onChange={handleInputChange}
+                  type="file"
+                  className="category__img-input"
+                  onChange={handleFileChange}
                 />
-              </div>
-
-              {onEdit ? (
-                <button className="category__submit-button" type="submit">
-                  Update
-                </button>
-              ) : (
-                <button className="category__submit-button" type="submit">
-                  Submit
-                </button>
               )}
-            </form>
-          </div>
-        )}
-
-        {loading ? (
-          <Loading />
-        ) : (
-          <div className="get__categories">
-            <h3
-              style={{
-                letterSpacing: "1.3px",
-                padding: "10px 0",
-                userSelect: "none",
-              }}>
-              All Categories
-            </h3>
-            <div className="get__categories-container">
-              {categories?.map((category, i) => (
-                <div key={category._id} className="categories__screen-category">
-                  <div className="get__categories-txt-img">
-                    <div className="categories__screen-category-img">
-                      <img src={category.images.url} alt="Category" />
-                    </div>
-
-                    <div className="categories__screen-category-text">
-                      {category.name}
-                    </div>
-                  </div>
-
-                  <div className="categories__screen-category-btns">
-                    <button onClick={(e) => handleEdit(category)}>Edit</button>
-                    <button onClick={(e) => handleDelete(category)}>
-                      Delete
-                    </button>
-                  </div>
-                </div>
-              ))}
+              {fileImage && (
+                <img style={{ userSelect: "none" }} src={fileImage} alt="" />
+              )}
+              {fileImage && (
+                <span className="category__form-clear-img" onClick={clearImage}>
+                  Clear Image
+                </span>
+              )}
             </div>
-          </div>
-        )}
-      </div>
-    );
-  }
+
+            <div className="category__input-group">
+              <input
+                type="text"
+                name="name"
+                placeholder="Name *"
+                required
+                className="category__input"
+                value={categoryForm.name}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            {onEdit ? (
+              <button className="category__submit-button" type="submit">
+                Update
+              </button>
+            ) : (
+              <button className="category__submit-button" type="submit">
+                Submit
+              </button>
+            )}
+          </form>
+        </div>
+      )}
+
+      {loading ? (
+        <Loading />
+      ) : (
+        <Suspense fallback={<Loading />}>
+          <GetCategories
+            categories={categories}
+            handleDelete={handleDelete}
+            handleEdit={handleEdit}
+          />
+        </Suspense>
+      )}
+    </div>
+  );
+  // }
 };
 
 export default CreateCategory;

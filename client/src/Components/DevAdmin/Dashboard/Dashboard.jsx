@@ -29,17 +29,24 @@ const Dashboard = () => {
             </Link>
 
             <Link
-              to="/all_users"
+              to="/dashboard/all_orders"
               className="headers__side-nav-text"
               onClick={removeSideNav}>
-              <span>All Users</span>
+              <span>All Orders</span>
             </Link>
 
             <Link
-              to="/all_reservoirs"
+              to="/dashboard/all_reservoirs"
               className="headers__side-nav-text"
               onClick={removeSideNav}>
               <span>All Reservoirs</span>
+            </Link>
+
+            <Link
+              to="/dashboard/all_users"
+              className="headers__side-nav-text"
+              onClick={removeSideNav}>
+              <span>Registered Users</span>
             </Link>
 
             <Link

@@ -1,46 +1,65 @@
-import React, { lazy, Suspense, useEffect } from "react";
-import ReactGa from "react-ga";
+import React, { lazy, Suspense } from "react";
+// import ReactGa from "react-ga";
 import "./App.css";
 import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
 import Login from "./Screens/Auth/Login";
-import Register from "./Screens/Auth/Register";
-import MenuScreen from "./Screens/Menu/MenuScreen";
-import Order from "./Screens/Order/Order";
+// import Register from "./Screens/Auth/Register";
+// import MenuScreen from "./Screens/Menu/MenuScreen";
+// import Order from "./Screens/Order/Order";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Orders from "./Screens/OrderHistory/Orders";
 import Settings from "./Screens/Settings/Settings";
 import About from "./Screens/About/About";
-import Location from "./Screens/Location/Location";
-import Cart from "./Screens/Cart/Cart";
-import Checkout from "./Screens/Checkout/Checkout";
+// import Location from "./Screens/Location/Location";
+// import Cart from "./Screens/Cart/Cart";
+// import Checkout from "./Screens/Checkout/Checkout";
 import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
 
-// import CreateProduct from "./DevAdmin/Products/CreateProduct";
-import CreateCategory from "./DevAdmin/Categories/CreateCategory";
+// import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
-import Dashboard from "./DevAdmin/Dashboard/Dashboard";
-// import AllProducts from "./DevAdmin/Products/Products/AllProducts";
+// import Dashboard from "./DevAdmin/Dashboard/Dashboard";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
+// import ManageOrders from "./DevAdmin/Orders/Orders/ManageOrders";
+// import RegisteredUsers from "./DevAdmin/users/RegisteredUsers";
+// import CreateProduct from "./DevAdmin/Products/CreateProduct";
+// import AllProducts from "./DevAdmin/Products/Products/AllProducts";
+// import RegisteredUsers from "./DevAdmin/users/RegisteredUsers";
+// import Orders from "./DevAdmin/Orders/Orders/Orders";
+const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
+const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
+const Location = lazy(() => import("./Screens/Location/Location"));
+const Order = lazy(() => import("./Screens/Order/Order"));
+const Cart = lazy(() => import("./Screens/Cart/Cart"));
+const Checkout = lazy(() => import("./DevAdmin/Categories/CreateCategory"));
+const CreateCategory = lazy(() =>
+  import("./DevAdmin/Categories/CreateCategory")
+);
+const MenuScreen = lazy(() => import("./Screens/Menu/MenuScreen"));
 const CreateProduct = lazy(() => import("./DevAdmin/Products/CreateProduct"));
+const Register = lazy(() => import("./Screens/Auth/Register"));
 const AllProducts = lazy(() =>
   import("./DevAdmin/Products/Products/AllProducts")
 );
+const ManageOrders = lazy(() =>
+  import("./DevAdmin/Orders/Orders/ManageOrders")
+);
 
 function App() {
-  const { productsAPI, userAPI } = useStateValue();
-  const [products] = productsAPI.products;
+  const { userAPI } = useStateValue();
+  // const [products] = productsAPI.products;
+  // const [isLoggedIn] = userAPI.isLoggedIn;
   const [isAdmin] = userAPI.isAdmin;
 
-  useEffect(() => {
-    ReactGa.initialize("G-Z64MGQCGJF");
+  // useEffect(() => {
+  //   ReactGa.initialize("G-Z64MGQCGJF");
 
-    ReactGa.pageview(window.location.pathname);
-  });
+  //   ReactGa.pageview(window.location.pathname);
+  // });
   return (
     <Router>
       <div className="App">
@@ -49,10 +68,30 @@ function App() {
             <Logout />
           </Route>
 
+          <Route path="/dashboard/all_orders">
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <ManageOrders />
+            </Suspense>
+          </Route>
+
+          <Route path="/dashboard/all_users">
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <RegisteredUsers />
+            </Suspense>
+          </Route>
+
           <Route path="/dashboard/products/create_product">
             {isAdmin ? (
               <>
-                <Dashboard />
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
                 <AllProductsHeader />
                 <Suspense fallback={<Loading />}>
                   <CreateProduct />
@@ -67,7 +106,9 @@ function App() {
           </Route>
 
           <Route path="/dashboard/products">
-            <Dashboard />
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
             <AllProductsHeader />
             <Suspense fallback={<Loading />}>
               <AllProducts />
@@ -77,20 +118,29 @@ function App() {
           <Route path="/dashboard/create_category">
             {isAdmin ? (
               <>
-                <Dashboard />
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
 
-                <CreateCategory />
+                <Suspense fallback={<Loading />}>
+                  <CreateCategory />
+                </Suspense>
               </>
             ) : (
               <>
-                <Dashboard /> <NotFound />
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
+                <NotFound />
               </>
             )}
           </Route>
 
           <Route path="/dashboard">
             {isAdmin ? (
-              <Dashboard />
+              <Suspense fallback={<Loading />}>
+                <Dashboard />
+              </Suspense>
             ) : (
               <>
                 <Header /> <NotFound />
@@ -100,21 +150,29 @@ function App() {
 
           <Route path="/checkout">
             <Header />
-            <Checkout />
+
+            <Suspense fallback={<Loading />}>
+              <Checkout />
+            </Suspense>
           </Route>
 
           <Route path="/cart">
             <Header />
-            <Cart />
+            <Suspense fallback={<Loading />}>
+              <Cart />
+            </Suspense>
           </Route>
           <Route path="/about">
             <Header />
+
             <About />
           </Route>
 
           <Route path="/order">
             <Header />
-            <Order />
+            <Suspense fallback={<Loading />}>
+              <Order />
+            </Suspense>
           </Route>
 
           <Route path="/settings">
@@ -129,12 +187,18 @@ function App() {
 
           <Route path="/menu">
             <Header />
-            <MenuScreen />
+
+            <Suspense fallback={<Loading />}>
+              <MenuScreen />
+            </Suspense>
           </Route>
 
           <Route path="/register">
             <Header />
-            <Register />
+
+            <Suspense fallback={<Loading />}>
+              <Register />
+            </Suspense>
           </Route>
 
           <Route path="/login">
@@ -144,19 +208,21 @@ function App() {
 
           <Route path="/find-us">
             <Header />
-            <Location />
+            <Suspense fallback={<Loading />}>
+              <Location />
+            </Suspense>
             <Footer />
           </Route>
 
           <Route path="/">
-            {!products ? (
+            {/* {!products ? (
               <Loading />
-            ) : (
-              <>
-                <Header />
-                <Home />
-              </>
-            )}
+            ) : ( */}
+            <>
+              <Header />
+              <Home />
+            </>
+            {/* )} */}
           </Route>
         </Switch>
       </div>

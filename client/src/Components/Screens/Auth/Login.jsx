@@ -8,6 +8,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [error, setError] = useState(null);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,7 +23,8 @@ const Login = () => {
 
       window.location.href = "/";
     } catch (err) {
-      alert(err.response.data.error);
+      // alert(err.response.data.error);
+      setError(err.response.data);
     }
   };
 
@@ -34,6 +36,8 @@ const Login = () => {
 
   return (
     <div className="login" onSubmit={handleSubmit}>
+      {error && <div className="error__box">{error}</div>}
+
       <form className="login__form">
         <div className="login__input-group">
           <input

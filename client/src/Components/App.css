@@ -33,3 +33,23 @@ a {
   color: white;
   transform: scale(1.1);
 }
+
+/* -------------------------------- Create Product ------------------- */
+
+@import url("./DevAdmin/Products/CreateProduct.css");
+
+/* ---------------------------- All Products ---------------------------------- */
+
+@import url("./DevAdmin/Products/Products/AllProducts.css");
+
+/* ---------------------------- All Products Product --------------------------- */
+
+@import url("./DevAdmin/Products/Products/AllProducts-Product/AllProductsProduct.css");
+
+/* -------------------------------- All Products Header ------------------------------/ */
+
+@import url("./DevAdmin/Products/AllProductsHeader/AllProductsHeader.css");
+
+/* ------------------------ Order Page ----------------------------------- */
+
+@import url("./Screens/Order/Order.css");

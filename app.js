@@ -27,6 +27,7 @@ app.use("/api", require("./routes/upload"));
 app.use("/api", require("./routes/ProductRoute"));
 app.use("/api", require("./routes/CategoryRoute"));
 app.use("/api", require("./routes/Reservoir"));
+app.use("/api", require("./routes/users"));
 
 app.use(errorHandler);
 

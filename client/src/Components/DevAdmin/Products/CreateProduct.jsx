@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useStateValue } from "../../../StateProvider";
-import "./CreateProduct.css";
 import Loading from "../../Screens/Global/Loading";
 
 import { useHistory } from "react-router";

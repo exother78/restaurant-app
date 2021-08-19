@@ -1,0 +1,26 @@
+.manage__postalCodes {
+  width: 100%;
+}
+
+.postalCode__box {
+  background: purple;
+  padding: 10px 20px;
+  margin: 10px 20px;
+}
+
+.postalCode__box table {
+  background-color: grey;
+  width: 100%;
+}
+
+.postalCode__box table thead {
+  background: brown;
+}
+
+.postalCode__box table tbody {
+  width: 100%;
+}
+
+td {
+  text-align: center;
+}

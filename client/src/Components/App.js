@@ -45,6 +45,9 @@ const Register = lazy(() => import("./Screens/Auth/Register"));
 const AllProducts = lazy(() =>
   import("./DevAdmin/Products/Products/AllProducts")
 );
+const PostalCodes = lazy(() =>
+  import("./DevAdmin/ManagePostalCodes/PostalCodes")
+);
 const ManageOrders = lazy(() =>
   import("./DevAdmin/Orders/Orders/ManageOrders")
 );
@@ -66,6 +69,15 @@ function App() {
         <Switch>
           <Route path="/logout">
             <Logout />
+          </Route>
+
+          <Route path="/dashboard/postalcodes">
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <PostalCodes />
+            </Suspense>
           </Route>
 
           <Route path="/dashboard/all_orders">

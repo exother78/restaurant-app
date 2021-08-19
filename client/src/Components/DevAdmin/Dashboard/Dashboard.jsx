@@ -29,6 +29,13 @@ const Dashboard = () => {
             </Link>
 
             <Link
+              to="/dashboard/postalcodes"
+              className="headers__side-nav-text"
+              onClick={removeSideNav}>
+              <span>Locations</span>
+            </Link>
+
+            <Link
               to="/dashboard/all_orders"
               className="headers__side-nav-text"
               onClick={removeSideNav}>

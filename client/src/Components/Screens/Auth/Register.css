@@ -119,7 +119,7 @@
 
 .register__submit-button {
   font-size: larger;
-  letter-spacing: 0.5px;
+  letter-spacing: 1.4px;
   background: dodgerblue;
   cursor: pointer;
   color: white;
@@ -127,7 +127,7 @@
   outline: none;
   border: none;
   font-weight: 600;
-  font-family: "Montserrat";
+  font-family: "Josefin Slab";
   width: 40%;
   margin: 30px auto;
 }

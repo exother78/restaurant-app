@@ -90,3 +90,7 @@
 /* ---------------------- Registered Users -------------------------- */
 
 @import url("../users/RegisteredUsers.css");
+
+/* -------------------- Postal Codes ------------------------- */
+
+@import url("../ManagePostalCodes/PostalCodes.css");

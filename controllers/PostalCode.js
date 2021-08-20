@@ -16,7 +16,10 @@ const Location = {
 
   createPostalCode: async (req, res, next) => {
     try {
-      const { postalCode, minOrder, deliveryPrice, estimatedTime } = req.body;
+      const { postalCode, minOrder, deliveryPrice, estimatedTime, active } =
+        req.body;
+
+      console.log("bool: ", active);
 
       if (!postalCode || !minOrder || !deliveryPrice || !estimatedTime)
         return next(
@@ -30,6 +33,7 @@ const Location = {
         minOrder,
         deliveryPrice,
         estimatedTime,
+        active,
       });
 
       return res
@@ -42,7 +46,8 @@ const Location = {
 
   updatePostalCode: async (req, res, next) => {
     try {
-      const { postalCode, minOrder, deliveryPrice, estimatedTime } = req.body;
+      const { postalCode, minOrder, deliveryPrice, estimatedTime, active } =
+        req.body;
 
       const { id } = req.params;
 
@@ -51,6 +56,7 @@ const Location = {
         minOrder,
         deliveryPrice,
         estimatedTime,
+        active,
       });
 
       if (!code)

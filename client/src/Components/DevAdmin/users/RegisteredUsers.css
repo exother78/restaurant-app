@@ -24,12 +24,6 @@
   flex-direction: column;
 }
 
-.registeredUser__orders {
-}
-
-.registeredUser__pendingOrder {
-}
-
 .registeredUser__subText {
   color: rgb(6, 150, 247);
   letter-spacing: 1px;

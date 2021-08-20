@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Loading from "./../../Screens/Global/Loading";
 import PostalCodeBox from "./PostalCodeBox/PostalCodeBox";
+import CreatePostalCode from "./CreatePostalCode/CreatePostalCode";
+import PostalHeader from "./PostalHeader/PostalHeader";
 
 const PostalCodes = () => {
   const [createModalActive, setCreateModalActive] = useState(true);
@@ -22,6 +24,8 @@ const PostalCodes = () => {
     deliveryPrice: "",
     estimatedTime: "",
   });
+
+  const [activePostalCodes, setActivePostalCodes] = useState(0);
 
   const postalDataInit = () => {
     setPostalData({
@@ -63,16 +67,19 @@ const PostalCodes = () => {
           closeModal();
           setCallback(!callback);
           setLoading(false);
+          setActivePostalCodes(0);
         });
     } catch (error) {
       setLoading(false);
+      closeModal();
+      postalDataInit();
       setError(error.response.data.error);
     }
   };
 
   const handlePostalCodeUpdate = async (e) => {
     e.preventDefault();
-
+    setLoading(true);
     try {
       await axios
         .patch(`/api/dashboard/postalcodes/${updateId}`, {
@@ -83,13 +90,18 @@ const PostalCodes = () => {
           postalDataInit();
           closeModal();
           setCallback(!callback);
+          setActivePostalCodes(0);
         });
     } catch (error) {
+      setLoading(false);
+      closeModal();
+      postalDataInit();
       setError(error.response.data.error);
     }
   };
 
   useEffect(() => {
+    setActivePostalCodes(0);
     const getCodes = async () => {
       try {
         return await axios.get("/api/dashboard/postalcodes");
@@ -100,6 +112,11 @@ const PostalCodes = () => {
 
     getCodes().then((response) => {
       setCodes(response.data.codes);
+      response.data.codes.forEach((c) => {
+        if (c.active === true) {
+          setActivePostalCodes((prevValue) => prevValue + 1);
+        }
+      });
     });
   }, [callback]);
 
@@ -117,33 +134,23 @@ const PostalCodes = () => {
     }
   }, [modalActive]);
 
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 4000);
+  }
+
   if (loading) return <Loading />;
 
   return (
     <div className="manage__postalCodes">
-      {error}
+      {error && <div className="error__box">{error}</div>}
 
-      <div className="manage__postalCodes-headers">
-        <div className="postalCode__box-sec">
-          <span className="postalCode__box-title">total postal codes</span>
-          <span className="postalCode__box-value">20</span>
-        </div>
-        <div className="postalCode__box-sec">
-          <span className="postalCode__box-title">active postal codes</span>
-          <span className="postalCode__box-value">8/20</span>
-        </div>
-        <div className="postalCode__box-status-sec">
-          <span className="postalCode__box-status-text">Status</span>
-          <span
-            className="postalCode__box-status"
-            style={{
-              background: allOffline ? "rgb(245, 41, 41)" : "#47a851",
-              boxShadow: allOffline
-                ? "0 0 15px 3px rgb(233, 32, 32)"
-                : "0 0 15px 3px rgb(6, 167, 6)",
-            }}></span>
-        </div>
-      </div>
+      <PostalHeader
+        codes={codes}
+        allOffline={allOffline}
+        activePostalCodes={activePostalCodes}
+      />
 
       <div className="create__postalCode">
         <button
@@ -158,99 +165,17 @@ const PostalCodes = () => {
         </button>
       </div>
 
-      <div
-        className="postalCode__modalMain"
-        style={{ display: modalActive ? "block" : "none" }}>
-        <div className="create__postalCode-modal">
-          <div className="postalCode__closeBtn" onClick={closeModal}>
-            X
-          </div>
-          <form
-            className="create__postalCode-modal-container"
-            onSubmit={
-              editModal ? handlePostalCodeUpdate : handlePostalCodeSubmit
-            }>
-            <label htmlFor="postalCode">Postal Code</label>
-            <input
-              name="postalCode"
-              value={postalData.postalCode}
-              onChange={handleInputChange}
-              type="number"
-              placeholder="Enter Postal Code"
-              className="create_postalCode-modal-input"
-            />
-
-            <label htmlFor="minOrder">Minimum Order</label>
-            <input
-              name="minOrder"
-              value={postalData.minOrder}
-              onChange={handleInputChange}
-              type="number"
-              placeholder="Minimum Order"
-              className="create_postalCode-modal-input"
-            />
-
-            <label htmlFor="deliveryPrice">Delivery Price</label>
-            <input
-              name="deliveryPrice"
-              value={postalData.deliveryPrice}
-              onChange={handleInputChange}
-              type="number"
-              placeholder="Delivery Price"
-              className="create_postalCode-modal-input"
-            />
-
-            <label htmlFor="estimatedTime">Estimated Time</label>
-            <input
-              name="estimatedTime"
-              value={postalData.estimatedTime}
-              onChange={handleInputChange}
-              type="number"
-              placeholder="Estimated Time"
-              className="create_postalCode-modal-input"
-            />
-            <div className="postalCode__box-btn-sec">
-              <button
-                type="button"
-                onClick={() => setCreateModalActive(true)}
-                style={{
-                  background: createModalActive ? "green" : "#ddd",
-                  color: createModalActive ? "white" : "black",
-                }}>
-                active
-              </button>
-              <button
-                type="button"
-                onClick={() => setCreateModalActive(false)}
-                style={{
-                  background: !createModalActive ? "red" : "#ddd",
-                  color: !createModalActive ? "white" : "black",
-                }}>
-                offline
-              </button>
-            </div>
-            {editModal ? (
-              <div className="create__modal-submit">
-                <button
-                  type="submit"
-                  className="create__modal-submit-button 
-              create__postalCode-button">
-                  Update
-                </button>
-              </div>
-            ) : (
-              <div className="create__modal-submit">
-                <button
-                  type="submit"
-                  className="create__modal-submit-button 
-                create__postalCode-button">
-                  Submit
-                </button>
-              </div>
-            )}
-          </form>
-        </div>
-      </div>
+      <CreatePostalCode
+        modalActive={modalActive}
+        closeModal={closeModal}
+        editModal={editModal}
+        handlePostalCodeUpdate={handlePostalCodeUpdate}
+        handlePostalCodeSubmit={handlePostalCodeSubmit}
+        postalData={postalData}
+        handleInputChange={handleInputChange}
+        setCreateModalActive={setCreateModalActive}
+        createModalActive={createModalActive}
+      />
 
       {codes ? (
         codes?.map((postalCode) => (
@@ -265,6 +190,7 @@ const PostalCodes = () => {
             setCreateModalActive={setCreateModalActive}
             setEditModal={setEditModal}
             setUpdateId={setUpdateId}
+            setError={setError}
           />
         ))
       ) : (

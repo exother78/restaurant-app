@@ -19,6 +19,7 @@ const PostalCodeBox = ({
   setCreateModalActive,
   setEditModal,
   setUpdateId,
+  setError,
 }) => {
   const [loading, setLoading] = useState(false);
   const [activeBox, setActiveBox] = useState(active);
@@ -39,20 +40,21 @@ const PostalCodeBox = ({
   const updateActive = async (val) => {
     setLoading(true);
     try {
-      const res = await axios.patch(`/api/dashboard/postalcodes/${_id}`, {
-        postalCode,
-        minOrder,
-        deliveryPrice,
-        estimatedTime,
-        active: val,
-      });
-
-      setLoading(false);
-      setActiveBox(val);
-
-      console.log(res.data);
+      await axios
+        .patch(`/api/dashboard/postalcodes/${_id}`, {
+          postalCode,
+          minOrder,
+          deliveryPrice,
+          estimatedTime,
+          active: val,
+        })
+        .then(() => {
+          setLoading(false);
+          setActiveBox(val);
+          setCallback(!callback);
+        });
     } catch (error) {
-      console.log(error);
+      setError(error.response.data.error);
       setLoading(false);
     }
   };
@@ -67,9 +69,8 @@ const PostalCodeBox = ({
           setCallback(!callback);
           setLoading(false);
         });
-      //   setCallback(!callback);
     } catch (error) {
-      console.log(error.response.data.error);
+      setError(error.response.data.error);
     }
   };
 

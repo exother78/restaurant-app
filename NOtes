@@ -8,3 +8,5 @@ rtfat					refreshtokenforaccesstoken
 
 ttgrt					tokentogetrefreshtoken
 ttgat                   tokentogetaccesstoken
+
+mongo_uri=mongodb://localhost:27017/restaurant-app

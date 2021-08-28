@@ -20,6 +20,9 @@ const PostalCodeBox = ({
   setEditModal,
   setUpdateId,
   setError,
+  handleDel,
+  index,
+  // runUseEffect,
 }) => {
   const [loading, setLoading] = useState(false);
   const [activeBox, setActiveBox] = useState(active);
@@ -52,6 +55,7 @@ const PostalCodeBox = ({
           setLoading(false);
           setActiveBox(val);
           setCallback(!callback);
+          // runUseEffect();
         });
     } catch (error) {
       setError(error.response.data.error);
@@ -62,13 +66,12 @@ const PostalCodeBox = ({
   const deletePostalCode = async () => {
     setLoading(true);
     try {
-      await axios
-        .delete(`/api/dashboard/postalcodes/${_id}`)
-        .then((response) => {
-          console.log(response.data);
-          setCallback(!callback);
-          setLoading(false);
-        });
+      await axios.delete(`/api/dashboard/postalcodes/${_id}`).then(() => {
+        setLoading(false);
+      });
+      setCallback(!callback);
+      // runUseEffect();
+      handleDel(index);
     } catch (error) {
       setError(error.response.data.error);
     }

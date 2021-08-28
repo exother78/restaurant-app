@@ -35,7 +35,7 @@ const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
 const Location = lazy(() => import("./Screens/Location/Location"));
 const Order = lazy(() => import("./Screens/Order/Order"));
 const Cart = lazy(() => import("./Screens/Cart/Cart"));
-const Checkout = lazy(() => import("./DevAdmin/Categories/CreateCategory"));
+const Checkout = lazy(() => import("./Screens/Checkout/Checkout"));
 const CreateCategory = lazy(() =>
   import("./DevAdmin/Categories/CreateCategory")
 );
@@ -51,6 +51,7 @@ const PostalCodes = lazy(() =>
 const ManageOrders = lazy(() =>
   import("./DevAdmin/Orders/Orders/ManageOrders")
 );
+const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
 
 function App() {
   const { userAPI } = useStateValue();
@@ -150,8 +151,10 @@ function App() {
 
           <Route path="/dashboard">
             {isAdmin ? (
+
               <Suspense fallback={<Loading />}>
                 <Dashboard />
+                <DashboardHome />
               </Suspense>
             ) : (
               <>

@@ -70,5 +70,27 @@
 .checkout__category-details > * {
   margin: 5px 0;
   width: 100%;
-  /* background: purple; */
+}
+
+.checkout__payment-section {
+  /* display: flex; */
+}
+
+.paythebill__btn {
+  padding: 10px 20px;
+  background: dodgerblue;
+  border: none;
+  font-size: 1.2rem;
+  letter-spacing: 1.2px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s linear;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.paythebill__btn:hover {
+  background: rgb(48, 143, 238);
+  transform: scale(1.04);
+  color: white;
 }

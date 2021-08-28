@@ -23,8 +23,10 @@ const Login = () => {
 
       window.location.href = "/";
     } catch (err) {
-      // alert(err.response.data.error);
-      setError(err.response.data);
+      setError(err.response.data.error);
+      setTimeout(() => {
+        setError(null);
+      }, 3000);
     }
   };
 

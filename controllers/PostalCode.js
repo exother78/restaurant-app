@@ -1,13 +1,17 @@
 const PostalCode = require("../models/PostalCode");
+const User = require("../models/User");
 const ErrorResponse = require("../utils/errorResponse");
 
 const Location = {
   getPostalCode: async (req, res, next) => {
     try {
+      // const u = await User.find(
+      //   {},
+      //   { firstName: 1, lastName: 1, _id: 1, orders: 1 }
+      // );
+      // return res.status(200).json({ success: true, u });
       const codes = await PostalCode.find();
-
       if (!codes) return next(new ErrorResponse("No Postal Code Found", 401));
-
       return res.status(200).json({ success: true, codes });
     } catch (error) {
       next(error);
@@ -18,8 +22,6 @@ const Location = {
     try {
       const { postalCode, minOrder, deliveryPrice, estimatedTime, active } =
         req.body;
-
-      console.log("bool: ", active);
 
       if (!postalCode || !minOrder || !deliveryPrice || !estimatedTime)
         return next(

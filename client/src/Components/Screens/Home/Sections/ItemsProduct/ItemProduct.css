@@ -5,8 +5,6 @@
 
 .item {
   height: 300px;
-  /* width: calc(270px / 1.08); */
-  /* min-width: calc(270px / 1.08); */
   width: 270px;
   border-radius: 10px;
   display: flex;

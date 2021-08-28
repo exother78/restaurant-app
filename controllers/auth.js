@@ -61,6 +61,8 @@ exports.login = async (req, res, next) => {
 
     if (!isMatch) return next(new ErrorResponse("Wrong Password", 401));
 
+    console.log(user);
+
     sendToken(user, 200, res);
   } catch (error) {
     res.status(500).json({ error: error });
@@ -154,12 +156,73 @@ exports.refreshToken = async (req, res, next) => {
   }
 };
 
-exports.logout = async (req, res) => {
+exports.logout = async (req, res, next) => {
   try {
     res.clearCookie("rtfat", { path: "/api/user/rtfat" });
     return res.json({ msg: "Logged out" });
   } catch (err) {
-    return res.status(500).json({ msg: err.message });
+    next(err);
+  }
+};
+
+exports.updateOrders = async (req, res, next) => {
+  try {
+    // const u = await User.findOne({ firstName: "asim" }).then((response) => {
+    //   console.log("something", response);
+
+    //   const orders = response.orders;
+
+    //   console.log("orders: ", orders);
+
+    //   response.orders = [...orders, ...req.body.orders];
+    //   console.log('after orders: ' , response.orders)
+
+    //   await User.save()
+
+    //   // response.forEach((doc) => {
+    //   //   doc.firstName = "bhai-" + doc.firstName;
+    //   //   User.save(doc);
+    //   // });
+    // });
+
+    // return res.status(200).json({success:true, u})
+
+    const something = await User.findOneAndUpdate(
+      { _id: req.params.id },
+      {},
+      async function (err, user) {
+        if (err) {
+          console.log(err);
+          return;
+        }
+        if (!err) {
+          const userOrders = user.orders;
+          const reqOrders = req.body.orders;
+          const concat = userOrders.concat(reqOrders);
+          user.orders = await concat;
+          await user.save();
+          return user;
+        }
+      }
+    ).then(() => {
+      return res
+        .status(200)
+        .json({ success: true, message: "Order Successful" });
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.getOrders = async (req, res, next) => {
+  try {
+    // const u = await User.find({ _id: req.params.id }, { orders: 1, _id: 0 });
+    const orders = await User.find({ _id: req.params.id }, "orders");
+
+    // console.log("this is u: ", u);
+    res.status(200).json({ success: true, orders });
+  } catch (error) {
+    next(error);
   }
 };
 

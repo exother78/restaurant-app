@@ -25,6 +25,12 @@ const PostalCodes = () => {
     estimatedTime: "",
   });
 
+  const handleDel = (id) => {
+    const arr = codes;
+    arr.splice(id, 1);
+    setCodes(arr);
+  };
+
   const [activePostalCodes, setActivePostalCodes] = useState(0);
 
   const postalDataInit = () => {
@@ -100,24 +106,29 @@ const PostalCodes = () => {
     }
   };
 
+  // const runUseEffect = () => {
+  //   setCallback(!callback);
+  // };
+
+  const getCodes = async () => {
+    try {
+      return await axios.get("/api/dashboard/postalcodes").then((response) => {
+        setCodes(response.data.codes);
+        response.data.codes.forEach((c) => {
+          if (c.active === true) {
+            setActivePostalCodes((prevValue) => prevValue + 1);
+          }
+        });
+      });
+    } catch (error) {
+      setError(error.response.data.error);
+    }
+  };
+
   useEffect(() => {
     setActivePostalCodes(0);
-    const getCodes = async () => {
-      try {
-        return await axios.get("/api/dashboard/postalcodes");
-      } catch (error) {
-        setError(error.response.data.error);
-      }
-    };
 
-    getCodes().then((response) => {
-      setCodes(response.data.codes);
-      response.data.codes.forEach((c) => {
-        if (c.active === true) {
-          setActivePostalCodes((prevValue) => prevValue + 1);
-        }
-      });
-    });
+    getCodes();
   }, [callback]);
 
   useEffect(() => {
@@ -178,7 +189,7 @@ const PostalCodes = () => {
       />
 
       {codes ? (
-        codes?.map((postalCode) => (
+        codes.map((postalCode, i) => (
           <PostalCodeBox
             key={postalCode._id}
             {...postalCode}
@@ -191,6 +202,10 @@ const PostalCodes = () => {
             setEditModal={setEditModal}
             setUpdateId={setUpdateId}
             setError={setError}
+            handleDel={handleDel}
+            index={i}
+            // runUseEffect={runUseEffect}
+            callback={callback}
           />
         ))
       ) : (

@@ -1,22 +1,45 @@
 import React from "react";
 import "./CartProduct.css";
-import DeleteIcon from "@material-ui/icons/Delete";
 import { useStateValue } from "../../../../StateProvider";
 
-const CartProduct = ({ id, title, description, price, image, removeID }) => {
-  // const [, dispatch] = useStateValue();
+const CartProduct = ({
+  id,
+  title,
+  description,
+  price,
+  image,
+  removeID,
+  quantity,
+}) => {
   const state = useStateValue();
   const [basket, setBasket] = state.basket;
 
-  const removeItem = () => {
-    // dispatch({
-    //   type: "REMOVE_FROM_BASKET",
-    //   removeIndex: removeID,
-    // });
+  const handleAdd = () => {
+    const s = basket.findIndex((item) => item.id === id);
 
-    basket.splice(removeID, 1);
+    if (s !== -1) {
+      let newArray = [...basket];
+      newArray[s] = { ...newArray[s], quantity: newArray[s].quantity + 1 };
+      setBasket(newArray);
+    }
+    if (s === -1) return;
+  };
 
-    setBasket([...basket]);
+  const handleSubtract = () => {
+    const s = basket.findIndex((item) => item.id === id);
+
+    if (s !== -1) {
+      if (basket[s].quantity > 1) {
+        let newArray = [...basket];
+        newArray[s] = { ...newArray[s], quantity: newArray[s].quantity - 1 };
+        setBasket(newArray);
+      }
+      if (basket[s].quantity === 1) {
+        let newArray = [...basket];
+        newArray.splice(s, 1);
+        setBasket(newArray);
+      }
+    }
   };
 
   return (
@@ -27,12 +50,25 @@ const CartProduct = ({ id, title, description, price, image, removeID }) => {
         </div>
         <div className="cart__product-text-section">
           <h3 className="cart__product-title">{title}</h3>
-          <div className="cart__product-price-incre">
-            <p className="cart__product-price">€ {price}</p>
-            <button className="cart__product-incre" onClick={removeItem}>
-              <DeleteIcon />
-            </button>
-          </div>
+          <p className="cartProduct__description">
+            {description.substring(0, 60)}
+          </p>
+          <p className="cart__product-price">€ {price}</p>
+        </div>
+        <div className="cart__product-price-incre">
+          <button
+            className="cartProduct__minus cartProduct__same"
+            onClick={handleSubtract}>
+            -
+          </button>
+          <span className="cartProduct__quantity cartProduct__same">
+            {quantity}
+          </span>
+          <button
+            className="cartProduct__plus cartProduct__same"
+            onClick={handleAdd}>
+            +
+          </button>
         </div>
       </div>
     </div>

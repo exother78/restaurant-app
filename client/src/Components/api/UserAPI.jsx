@@ -31,6 +31,7 @@ const UserAPI = (token) => {
     name: user?.firstName,
     isAdmin: [isAdmin, setIsAdmin],
     isLoggedIn: [isLoggedIn, setIsLoggedIn],
+    userID: user?._id,
   };
 };
 

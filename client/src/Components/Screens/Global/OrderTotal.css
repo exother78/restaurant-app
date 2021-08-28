@@ -51,6 +51,7 @@
   width: 45%;
   margin: 5px;
   cursor: pointer;
+  font-family: "Montserrat";
   transition: background 0.2s linear;
 }
 
@@ -67,6 +68,7 @@
   font-size: larger;
   width: 45%;
   margin: 5px;
+  font-family: "Montserrat";
   cursor: pointer;
   transition: background 0.2s linear;
   margin-bottom: 130px;

@@ -4,32 +4,31 @@ import "./Product.css";
 import { useStateValue } from "../../../../StateProvider";
 
 const Product = ({ id, title, description, price, image }) => {
-  // const [, dispatch] = useStateValue();
-
   const state = useStateValue();
   const [basket, setBasket] = state.basket;
 
-  const addToBasket = (e) => {
-    setBasket([
-      ...basket,
-      {
-        id,
-        title,
-        description,
-        price,
-        image,
-      },
-    ]);
-    // dispatch({
-    //   type: "ADD_TO_BASKET",
-    //   item: {
-    //     id,
-    //     title,
-    //     description,
-    //     price,
-    //     image,
-    //   },
-    // });
+  const addToBasket = () => {
+    const s = basket.findIndex((item) => item.id === id);
+
+    if (s === -1) {
+      setBasket([
+        ...basket,
+        {
+          id,
+          title,
+          description,
+          price,
+          image,
+          quantity: 1,
+        },
+      ]);
+    }
+
+    if (s !== -1) {
+      let newArray = [...basket];
+      newArray[s] = { ...newArray[s], quantity: newArray[s].quantity + 1 };
+      setBasket(newArray);
+    }
   };
 
   return (
@@ -38,7 +37,11 @@ const Product = ({ id, title, description, price, image }) => {
         <div className="product__container">
           <div className="product__left-section">
             <h3 className="product__title">{title}</h3>
-            <p className="product__details">{description}</p>
+            <p className="product__details">
+              {description.length > 60
+                ? description.substr(0, 60) + "..."
+                : description}
+            </p>
 
             <div className="product__price">
               € <span className="product__price-subText">{price}</span>

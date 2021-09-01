@@ -9,4 +9,5 @@ rtfat					refreshtokenforaccesstoken
 ttgrt					tokentogetrefreshtoken
 ttgat                   tokentogetaccesstoken
 
-mongo_uri=mongodb://localhost:27017/restaurant-app
+
+mongo_uri=mongodb+srv://asimimam:marvelnet@practice-cluster.ysjju.mongodb.net/restaurant-app?retryWrites=true&w=majority

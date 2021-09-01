@@ -15,6 +15,7 @@ const Register = () => {
     addressLine2: "",
     city: "",
     images: "",
+    postalCode: "",
   });
 
   const [fileImage, setFileImage] = useState(null);
@@ -230,6 +231,17 @@ const Register = () => {
                 placeholder="Address line 1"
                 className="register__input"
                 value={registerForm.addressLine2}
+                onChange={handleInputChange}
+              />
+            </div>
+
+            <div className="register__input-group">
+              <input
+                type="text"
+                name="postalCode"
+                placeholder="Postal Code"
+                className="register__input"
+                value={registerForm.postalCode}
                 onChange={handleInputChange}
               />
             </div>

@@ -15,6 +15,7 @@ const CreateProduct = () => {
   const [imageUpload, setImageUpload] = useState(false);
   const [imageShow, setImageShow] = useState();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const [data, setData] = useState({
     product_id: "",
@@ -78,7 +79,8 @@ const CreateProduct = () => {
 
       return res;
     } catch (error) {
-      alert(error.response.data.error);
+      // alert(error.response.data.error);
+      setError(error.response.data.error);
     }
   };
 
@@ -112,6 +114,7 @@ const CreateProduct = () => {
 
   return (
     <div className="create__product">
+      {error && <div className="error__box">{error}</div>}
       <h1 style={{ margin: "0 30px " }}>Create Product</h1>
 
       {/* <div className="create__product-container"> */}

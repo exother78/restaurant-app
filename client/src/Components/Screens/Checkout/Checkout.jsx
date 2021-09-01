@@ -8,38 +8,50 @@ import axios from "axios";
 const Checkout = () => {
   const state = useStateValue();
   const { userAPI } = useStateValue();
-  const userID = userAPI.userID;
+  const { userID, email, lastName, name } = userAPI;
+  const [postalCode, setPostalCode] = userAPI.postalCode;
   const [basket, setBasket] = state.basket;
   const [address, setAddress] = useState("Gujranwala");
   const [street, setStreet] = useState("6");
   const [error, setError] = useState("");
-  const [success, setSuccess] = useState("");
 
   const handleClick = async () => {
-    console.log(userID);
-
     try {
+      const time = new Date();
       if (userID) {
-        await axios
-          .patch(`/api/user/updateorders/${userID}`, {
-            orders: basket,
-          })
-          .then((response) => {
-            setSuccess(response.data.message);
-            setBasket([]);
-          });
+        if (basket.length > 0) {
+          await axios
+            .patch(`/api/user/updateorders/${userID}`, {
+              orders: {
+                postalCode,
+                address,
+                email,
+                name,
+                lastName,
+                time,
+                userID,
+                basket,
+              },
+            })
+            .then((response) => {
+              setBasket([]);
+              window.location.href = "/";
+            });
+        }
       }
     } catch (error) {
-      console.log("something errorish came here");
-      console.log(error);
       setError(error.response.data.error);
     }
+  };
+
+  const postalCodeChange = (e) => {
+    setPostalCode(e.target.value);
+    localStorage.setItem("pcl", e.target.value);
   };
 
   return (
     <div className="checkout">
       {error && <div className="error__box">{error}</div>}
-      {success && <div className="success__box">{success}</div>}
 
       <div className="checkout__categories">
         <div className="checkout__category">
@@ -67,6 +79,17 @@ const Checkout = () => {
                 value={street}
                 placeholder="street no.6 house no.1"
                 onChange={(e) => setStreet(e.target.value)}
+              />
+            </div>
+
+            <div className="checkout__form-group">
+              <label htmlFor="street">Enter Street No.</label>
+              <input
+                type="text"
+                name="postalCode"
+                value={postalCode}
+                placeholder="Postal Code"
+                onChange={postalCodeChange}
               />
             </div>
           </div>

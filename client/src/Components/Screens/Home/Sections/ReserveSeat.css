@@ -50,7 +50,7 @@
   font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
   font-weight: 900;
   letter-spacing: 1.2px;
-  font-size: larger;
+  font-size: medium;
   color: black;
   outline: none;
   border-width: none;
@@ -76,6 +76,7 @@
 .reserve-seat__select select option {
   font-weight: 600;
   background: white;
+  font-size: medium;
   color: black;
 }
 

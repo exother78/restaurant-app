@@ -1,4 +1,5 @@
 const User = require("../models/User");
+const Order = require("../models/OrdersModel");
 const ErrorResponse = require("../utils/errorResponse");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
@@ -16,8 +17,6 @@ exports.register = async (req, res, next) => {
   } = req.body;
 
   try {
-    // console.log("address", address);
-    // if(password)
     const user = await User.create({
       firstName,
       lastName,
@@ -30,15 +29,6 @@ exports.register = async (req, res, next) => {
     });
     sendToken(user, 201, res);
   } catch (error) {
-    // if (error.code === 11000) {
-    //   res.json({
-    //     error:
-    //       "Duplicate Emails detected, Please try with a different email address",
-    //   });
-    // }
-    // res.json({ error });
-
-    // console.log("error: ", error);
     next(error);
   }
 };
@@ -53,15 +43,12 @@ exports.login = async (req, res, next) => {
     const user = await User.findOne({ email }).select("+password");
 
     if (!user) {
-      //   console.log(user);
       return next(new ErrorResponse("Invalid Credentials", 404));
     }
 
     const isMatch = await user.matchPasswords(password);
 
     if (!isMatch) return next(new ErrorResponse("Wrong Password", 401));
-
-    console.log(user);
 
     sendToken(user, 200, res);
   } catch (error) {
@@ -76,7 +63,6 @@ exports.forgotPassword = async (req, res, next) => {
 
   try {
     const user = await User.findOne({ email });
-    // console.log(user);
 
     if (!user) return next(new ErrorResponse("no email found", 404));
 
@@ -91,8 +77,6 @@ exports.forgotPassword = async (req, res, next) => {
     user.resetPasswordToken = undefined;
     user.resetPasswordExpire = undefined;
     await user.save();
-
-    // res.status(500).json({ success: false, error: err });
 
     return next(new ErrorResponse("Password Reset Unsuccessful", 500));
   }
@@ -139,7 +123,6 @@ exports.refreshToken = async (req, res, next) => {
   const rtfat = req.cookies.rtfat;
 
   try {
-    // if (!rtfat) next(new ErrorResponse("Please login or register"));
     if (!rtfat)
       res.status(400).json({ success: true, error: "Not Found Token" });
 
@@ -167,40 +150,21 @@ exports.logout = async (req, res, next) => {
 
 exports.updateOrders = async (req, res, next) => {
   try {
-    // const u = await User.findOne({ firstName: "asim" }).then((response) => {
-    //   console.log("something", response);
-
-    //   const orders = response.orders;
-
-    //   console.log("orders: ", orders);
-
-    //   response.orders = [...orders, ...req.body.orders];
-    //   console.log('after orders: ' , response.orders)
-
-    //   await User.save()
-
-    //   // response.forEach((doc) => {
-    //   //   doc.firstName = "bhai-" + doc.firstName;
-    //   //   User.save(doc);
-    //   // });
-    // });
-
-    // return res.status(200).json({success:true, u})
-
-    const something = await User.findOneAndUpdate(
+    await User.findOneAndUpdate(
       { _id: req.params.id },
       {},
       async function (err, user) {
         if (err) {
-          console.log(err);
-          return;
+          return err;
         }
         if (!err) {
           const userOrders = user.orders;
-          const reqOrders = req.body.orders;
-          const concat = userOrders.concat(reqOrders);
-          user.orders = await concat;
-          await user.save();
+
+          const { orders } = req.body;
+
+          console.log("concat: ", orders);
+          user.orders = [...userOrders, orders];
+          user.save();
           return user;
         }
       }
@@ -216,11 +180,19 @@ exports.updateOrders = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
   try {
-    // const u = await User.find({ _id: req.params.id }, { orders: 1, _id: 0 });
     const orders = await User.find({ _id: req.params.id }, "orders");
 
-    // console.log("this is u: ", u);
     res.status(200).json({ success: true, orders });
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.allOrders = async (req, res, next) => {
+  try {
+    const u = await User.find({}, { _id: 0, orders: 1 });
+
+    res.status(200).json({ success: true, orders: u });
   } catch (error) {
     next(error);
   }
@@ -236,7 +208,5 @@ const sendToken = async (user, statusCode, res) => {
     maxAge: 7 * 24 * 60 * 60 * 1000, //7d
   });
 
-  // const token = await user.getSignedToken();
-  // res.status(statusCode).json({ success: true, user, token, accessToken });
   res.status(statusCode).json({ success: true, user, accessToken });
 };

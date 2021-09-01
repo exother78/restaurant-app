@@ -4,6 +4,7 @@ const {
   updatePostalCode,
   createPostalCode,
   getPostalCode,
+  getOnePostalCode,
 } = require("../controllers/PostalCode");
 
 router
@@ -15,5 +16,7 @@ router
   .route("/dashboard/postalcodes/:id")
   .delete(deletePostalCode)
   .patch(updatePostalCode);
+
+router.route("/dashboard/onepostalcode/:postalCode").get(getOnePostalCode);
 
 module.exports = router;

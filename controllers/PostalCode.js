@@ -5,14 +5,26 @@ const ErrorResponse = require("../utils/errorResponse");
 const Location = {
   getPostalCode: async (req, res, next) => {
     try {
-      // const u = await User.find(
-      //   {},
-      //   { firstName: 1, lastName: 1, _id: 1, orders: 1 }
-      // );
-      // return res.status(200).json({ success: true, u });
       const codes = await PostalCode.find();
       if (!codes) return next(new ErrorResponse("No Postal Code Found", 401));
       return res.status(200).json({ success: true, codes });
+    } catch (error) {
+      next(error);
+    }
+  },
+
+  getOnePostalCode: async (req, res, next) => {
+    try {
+      const { postalCode } = req.params;
+
+      const code = await PostalCode.findOne({ postalCode: postalCode });
+      if (!code)
+        return res.status(404).json({
+          success: false,
+          error: "Delivery not available at your location",
+        });
+
+      return res.status(200).json({ success: true, code });
     } catch (error) {
       next(error);
     }

@@ -99,7 +99,8 @@
   outline: none;
   border: 1px solid lightgray;
   border-radius: 5px;
-  font-size: medium;
+  font-size: small;
+  font-family: "Montserrat";
   font-weight: 500;
   letter-spacing: 1px;
 }
@@ -137,7 +138,7 @@
 }
 
 option {
-  letter-spacing: 3px;
-  font-size: 17px;
+  font-size: small;
   font-weight: 500;
+  font-family: "Montserrat";
 }

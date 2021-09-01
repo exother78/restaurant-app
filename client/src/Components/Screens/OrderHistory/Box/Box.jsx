@@ -1,29 +1,9 @@
-import React, { useState, useEffect } from "react";
-import "./Box.css";
+import React, { useState } from "react";
+import "../../../DevAdmin/Orders/Box/Box.css";
 import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
 
-const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
-  const [date, setDate] = useState(null);
+const Box = ({ basket, postalCode, address, email, name, lastName }) => {
   const [openBox, setOpenBox] = useState(false);
-  const [pending, setPending] = useState(false);
-
-  useEffect(() => {
-    if (time) {
-      const orderTime = new Date(time).getTime();
-      const nowTime = new Date().getTime() - 60 * 60 * 1000;
-
-      const compare = orderTime > nowTime;
-      setPending(compare);
-
-      setDate(
-        new Date(time).toLocaleString("en-US", {
-          day: "numeric",
-          month: "numeric",
-          year: "numeric",
-        })
-      );
-    }
-  }, [time]);
 
   const handleClick = () => {
     setOpenBox(!openBox);
@@ -41,7 +21,6 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
               <td>email</td>
               <td>address</td>
               <td>Postal Code</td>
-              <td>date</td>
               <td></td>
             </tr>
           </thead>
@@ -51,7 +30,6 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
               <th style={{ textTransform: "lowercase" }}>{email}</th>
               <th>{address} </th>
               <th>{postalCode}</th>
-              <th>{time ? date : ""}</th>
 
               <th>
                 <ArrowForwardIosIcon
@@ -75,7 +53,6 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
                 <td>Price</td>
                 <td>instructions</td>
                 <td>Quantity</td>
-                <td></td>
               </tr>
             </thead>
             <tbody>
@@ -85,7 +62,6 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
                   <th>{item.price}</th>
                   <th>{item.description}</th>
                   <th>{item.quantity}</th>
-                  <th>{pending ? "Pending" : "Delivered"}</th>
                 </tr>
               ))}
             </tbody>

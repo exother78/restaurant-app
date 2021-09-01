@@ -3,6 +3,7 @@ import "./ReserveSeat.css";
 import axios from "axios";
 
 const ReserveSeat = () => {
+  const [error, setError] = useState(null);
   const [data, setData] = useState({
     persons: "",
     date: "",
@@ -36,14 +37,22 @@ const ReserveSeat = () => {
         email: "",
       });
 
-      alert("Successfully Reserved your Seat...");
+      // alert("Successfully Reserved your Seat...");
+      window.location.href = "/";
     } catch (err) {
-      alert(err.response.data.error);
+      setError(err.response.data.error);
     }
   };
 
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }
+
   return (
     <div className="reserve-seat">
+      {error && <div className="error__box">{error}</div>}
       <h1 className="reserve-seat__title">Reserve Your Seat now</h1>
 
       <img
@@ -55,7 +64,11 @@ const ReserveSeat = () => {
       <div className="reserve-seat__select">
         <form action="" onSubmit={handleSubmit}>
           <div className="people-form">
-            <select name="persons" onChange={changed} required defaultValue="1">
+            <select name="persons" onChange={changed} required defaultValue="0">
+              <option value="0" disabled>
+                How many people?
+              </option>
+
               <option value="1 Person">1 Person</option>
               <option value="2 People">2 People</option>
               <option value="3 People">3 People</option>
@@ -131,7 +144,7 @@ const ReserveSeat = () => {
               type="email"
               name="email"
               placeholder="Email"
-              data={data.email}
+              value={data.email}
               onChange={changed}
             />
           </div>

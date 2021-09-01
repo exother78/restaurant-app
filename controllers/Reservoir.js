@@ -26,7 +26,6 @@ const Reservoir = {
 
       res.status(200).json({ success: true, msg: "Success", tables });
     } catch (err) {
-      // res.status(500).json({ success: false, msg: "unsuccessful" });
       next(err);
     }
   },

@@ -24,6 +24,7 @@ import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
 // import Dashboard from "./DevAdmin/Dashboard/Dashboard";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
+import AllReservoirs from "./DevAdmin/Reservoirs/AllReservoirs";
 // import ManageOrders from "./DevAdmin/Orders/Orders/ManageOrders";
 // import RegisteredUsers from "./DevAdmin/users/RegisteredUsers";
 // import CreateProduct from "./DevAdmin/Products/CreateProduct";
@@ -71,6 +72,15 @@ function App() {
           <Route path="/logout">
             <Logout />
           </Route>
+
+          {/* <Route path="/dashboard/all_reservoirs">
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <AllReservoirs />
+            </Suspense>
+          </Route> */}
 
           <Route path="/dashboard/postalcodes">
             <Suspense fallback={<Loading />}>
@@ -151,7 +161,6 @@ function App() {
 
           <Route path="/dashboard">
             {isAdmin ? (
-
               <Suspense fallback={<Loading />}>
                 <Dashboard />
                 <DashboardHome />

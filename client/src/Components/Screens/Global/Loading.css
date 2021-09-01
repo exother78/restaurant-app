@@ -9,13 +9,21 @@
   animation: check 0.7s forwards infinite linear;
 }
 
+.loadings {
+  width: 20px;
+  height: 20px;
+  border: none;
+  border-top: 2px solid dodgerblue;
+  border-left: 2px solid dodgerblue;
+  margin: 0px !important;
+  border-radius: 50%;
+  animation: check 0.7s forwards infinite linear;
+}
+
 @keyframes check {
   0% {
     transform: rotate(0deg);
   }
-  /* 50% {
-    transform: rotate(180deg);
-  } */
 
   100% {
     transform: rotate(360deg);

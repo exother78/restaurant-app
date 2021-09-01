@@ -23,18 +23,110 @@
   object-position: center;
 }
 
-.slider__title {
-  margin-top: -75px;
+.sliderPostal__title {
+  margin-bottom: 10px;
+}
+
+.sliderFront__sidebox {
+  position: absolute;
+  left: 20px;
+  top: 140px;
+  background: #d70f64;
+  width: 180px;
+  height: 180px;
+  color: white;
+  padding: 10px;
+}
+
+.sliderFront__sidebox-line {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.sliderFront__sidebox-line span {
+  font-size: 13px;
+  font-family: "Montserrat";
+}
+
+.sliderFront__sidebox-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sliderFront__order-btn {
+  padding: 6px 15px;
+  margin-top: 10px;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border: none;
+  transition: all 0.15s linear;
+  background: white;
+  color: black;
+}
+
+.sliderFront__order-btn:hover {
+  background: dodgerblue;
+  color: white;
+}
+
+.home__address-postal-field {
+  margin: 0 auto;
+  width: 90%;
+  height: calc(100vh);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.sliderPostalCode__field {
+  display: flex;
+  justify-content: center;
+  background: white;
+  padding: 10px 20px;
+}
+
+.sliderPostalCode__input-field {
+  padding: 10px 5px;
+  min-width: 300px;
+  border: 1px solid lightgray;
+  margin-right: 10px;
+  font-size: 15px;
+  outline: none;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.sliderPostalCode__find-btn {
+  background: white;
+  padding: 10px 30px;
+  margin-left: 10px;
+  border: none;
+  font-size: large;
+  font-weight: bold;
+  background: #d70f64;
+  color: white;
+  letter-spacing: 1.1px;
+  cursor: pointer;
 }
 
 .home__address-field {
   margin: 0 auto;
   width: 90%;
-  height: calc(95vh);
-  display: flex;
+  display: none;
+  height: calc(110vh);
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+.slider__title {
+  margin-top: -75px;
+  margin-bottom: 20px;
 }
 
 .home__location {

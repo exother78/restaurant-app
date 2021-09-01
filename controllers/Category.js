@@ -10,7 +10,6 @@ const category = {
 
       res.status(200).json({ categories });
     } catch (err) {
-      // res.status(400).json({ msg: err.message });
       next(err);
     }
   },
@@ -25,8 +24,6 @@ const category = {
         .json({ success: true, message: "Category Created", category });
     } catch (err) {
       next(err);
-      // console.log(err);
-      // res.status(400).json({ msg: err.message });
     }
   },
 
@@ -35,27 +32,13 @@ const category = {
     const id = req.params.id;
 
     try {
-      // if (images) {
       const category = await Category.findByIdAndUpdate(id, { name, images });
       if (!category)
         return res
           .status(400)
           .json({ error: "No Category found with this id" });
       res.status(200).json({ success: true, msg: "Updated successfully" });
-      // console.log("image: ", images, " name: ", name);
-      // }
-
-      // if (!images) {
-      //   const category = await Category.findByIdAndUpdate(id, { name });
-      //   if (!category)
-      //     return res
-      //       .status(400)
-      //       .json({ error: "No Category found with this id" });
-
-      //   res.status(200).json({ success: true, msg: "Updated successfully" });
-      // }
     } catch (err) {
-      // res.status(400).json({ msg: err.message });
       next(err);
     }
   },
@@ -70,7 +53,6 @@ const category = {
         .status(200)
         .json({ success: true, message: "Successfully deleted a category" });
     } catch (err) {
-      // res.status(400).json({ error: err.message });
       next(err);
     }
   },

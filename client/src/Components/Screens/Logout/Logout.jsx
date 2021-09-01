@@ -8,8 +8,6 @@ const Logout = () => {
       localStorage.removeItem("login");
     };
 
-    console.log("logged out");
-
     window.location.href = "/";
     logout();
   }, []);

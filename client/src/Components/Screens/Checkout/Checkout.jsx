@@ -8,8 +8,8 @@ import axios from "axios";
 const Checkout = () => {
   const state = useStateValue();
   const { userAPI } = useStateValue();
-  const { userID, email, lastName, name } = userAPI;
   const [postalCode, setPostalCode] = userAPI.postalCode;
+  const { userID, email, lastName, name } = userAPI;
   const [basket, setBasket] = state.basket;
   const [address, setAddress] = useState("Gujranwala");
   const [street, setStreet] = useState("6");
@@ -19,25 +19,30 @@ const Checkout = () => {
     try {
       const time = new Date();
       if (userID) {
-        if (basket.length > 0) {
-          await axios
-            .patch(`/api/user/updateorders/${userID}`, {
-              orders: {
-                postalCode,
-                address,
-                email,
-                name,
-                lastName,
-                time,
-                userID,
-                basket,
-              },
-            })
-            .then((response) => {
-              setBasket([]);
-              window.location.href = "/";
-            });
+        if (postalCode) {
+          if (basket.length > 0) {
+            await axios
+              .patch(`/api/user/updateorders/${userID}`, {
+                orders: {
+                  postalCode,
+                  address,
+                  email,
+                  name,
+                  lastName,
+                  time,
+                  userID,
+                  basket,
+                },
+              })
+              .then(() => {
+                setBasket([]);
+                window.location.href = "/";
+              });
+          }
         }
+      }
+      if (!postalCode) {
+        setError("Please enter your postal code first");
       }
     } catch (error) {
       setError(error.response.data.error);
@@ -48,6 +53,12 @@ const Checkout = () => {
     setPostalCode(e.target.value);
     localStorage.setItem("pcl", e.target.value);
   };
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }
 
   return (
     <div className="checkout">
@@ -87,7 +98,7 @@ const Checkout = () => {
               <input
                 type="text"
                 name="postalCode"
-                value={postalCode}
+                value={postalCode ? postalCode : ""}
                 placeholder="Postal Code"
                 onChange={postalCodeChange}
               />

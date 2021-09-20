@@ -195,3 +195,18 @@ input.location__field::placeholder {
     transform: scale(1.02);
   }
 }
+
+.btnClick {
+  transform: scale(8);
+  position: relative;
+}
+
+.btnClick::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  background: black;
+  opacity: 0.1;
+}

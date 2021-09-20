@@ -21,6 +21,7 @@ const Register = () => {
   const [fileImage, setFileImage] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleFileChange = (e) => {
     const getFile = e.target.files[0];
@@ -59,6 +60,7 @@ const Register = () => {
       } catch (error) {
         setLoading(false);
         console.log("error occured", error.response.data.error);
+        setError(error.response.data.error);
       }
     };
 
@@ -83,6 +85,8 @@ const Register = () => {
         window.location.href = "/";
       } catch (err) {
         setLoading(false);
+        setError(err.response.data.error);
+
         console.log("register function error: ", err);
       }
     };
@@ -96,7 +100,8 @@ const Register = () => {
       }
     } catch (err) {
       setLoading(false);
-      alert(err.response.data.error);
+
+      // alert(err.response.data.error);
     }
   };
 
@@ -113,10 +118,17 @@ const Register = () => {
     setFileImage(null);
   };
 
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }
+
   if (loading) return <Loading />;
 
   return (
     <div className="register">
+      {error && <div className="error__box">{error}</div>}
       <form className="form" onSubmit={handleSubmit}>
         <div className="register__form">
           <div className="register__img">

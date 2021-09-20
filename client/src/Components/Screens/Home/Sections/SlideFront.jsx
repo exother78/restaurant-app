@@ -11,10 +11,11 @@ import { Link } from "react-router-dom";
 const SlideFront = () => {
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
+  const [data, setData] = userAPI.postalData;
   const [loading, setLoading] = useState(false);
   const [postalCodeChange, setPostalCodeChange] = useState("");
   const [error, setError] = useState(null);
-  const [data, setData] = useState({});
+  // const [data, setData] = useState({});
 
   const getCode = async (postal) => {
     try {
@@ -26,28 +27,44 @@ const SlideFront = () => {
     }
   };
 
-  useEffect(() => {
-    if (postalCode) {
-      localStorage.setItem("pcl", postalCode);
-      getCode(postalCode);
-    }
-    if (!postalCode) {
-      const postal = localStorage.getItem("pcl");
-      if (postal) {
-        setPostalCode(postal);
-        getCode(postal)
-          .then((response) => {
-            setPostalCode(response.postalCode);
-          })
-          .catch((err) => localStorage.removeItem("pcl"));
-      }
+  // useEffect(() => {
+  //   // to remove an element in the object not neccessary here
+  //   // const queryObj = {
+  //   //   page: "something",
+  //   //   sort: "sort type",
+  //   //   queryString: "queryString type",
+  //   //   limit: "limit type",
+  //   // }; //queryString = req.query
 
-      if (!postal) {
-        localStorage.removeItem("pcl");
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  //   // const excludedFields = ["page", "sort", "limit"];
+  //   // excludedFields.forEach((el) => {
+  //   //   console.log("el: ", el);
+  //   //   console.log("queryObj: ", queryObj);
+  //   //   delete queryObj[el];
+  //   //   console.log("result: ", queryObj);
+  //   // });
+
+  //   if (postalCode) {
+  //     localStorage.setItem("pcl", postalCode);
+  //     getCode(postalCode);
+  //   }
+  //   if (!postalCode) {
+  //     const postal = localStorage.getItem("pcl");
+  //     if (postal) {
+  //       setPostalCode(postal);
+  //       getCode(postal)
+  //         .then((response) => {
+  //           setPostalCode(response.postalCode);
+  //         })
+  //         .catch((err) => localStorage.removeItem("pcl"));
+  //     }
+
+  //     // if (!postal) {
+  //     //   localStorage.removeItem("pcl");
+  //     // }
+  //   }
+  //   // eslint-disable-next-line react-hooks/exhaustive-deps
+  // }, []);
 
   const handlePostalFind = async () => {
     getCode(postalCodeChange)
@@ -91,7 +108,7 @@ const SlideFront = () => {
           <ScheduleIcon /> <span>11:00 AM - 10:00 PM</span>
         </div>
         <div className="sliderFront__sidebox-line">
-          <AirlineSeatReclineNormalIcon /> <span>Pickup: 30 minutes</span>
+          <AirlineSeatReclineNormalIcon /> <span>Takeaway: 30 minutes</span>
         </div>
 
         <div className="sliderFront__sidebox-btn">

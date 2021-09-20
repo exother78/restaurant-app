@@ -26,7 +26,7 @@ const Login = () => {
       setError(err.response.data.error);
       setTimeout(() => {
         setError(null);
-      }, 3000);
+      }, 2000);
     }
   };
 

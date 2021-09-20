@@ -84,10 +84,7 @@ const Header = ({ dashboard }) => {
     try {
       await axios.get("/api/user/logout");
       localStorage.removeItem("login");
-      // // console.log(localStorage.clear());
-      // setIsLoggedIn(false);
-      // console.log("logout");
-
+      localStorage.removeItem("pcl");
       window.location.href = "/";
     } catch (err) {
       alert(err.response.data.error);

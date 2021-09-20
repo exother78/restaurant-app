@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./OrderTotal.css";
 import { getBasketTotal } from "../../../reducer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
@@ -7,9 +7,11 @@ import { useHistory } from "react-router-dom";
 
 const OrderTotal = () => {
   const history = useHistory();
-  // const [{ basket }, dispatch] = useStateValue();
   const state = useStateValue();
+  const { userAPI } = useStateValue();
+  const [postalCode, setPostalCode] = userAPI.postalCode;
   const [basket, setBasket] = state.basket;
+  const [error, setError] = useState(null);
 
   const emptyBasket = () => {
     setBasket([]);
@@ -20,6 +22,12 @@ const OrderTotal = () => {
       history.push("/checkout");
     }
   };
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }
 
   return (
     <div className="order__right-section">

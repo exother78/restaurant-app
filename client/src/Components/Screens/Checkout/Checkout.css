@@ -15,7 +15,6 @@
   position: relative;
   width: calc(100% - 20px);
   display: flex;
-  /* align-items: center; */
   padding: 0 10px 20px 10px;
   margin-bottom: 30px;
 }
@@ -41,7 +40,6 @@
 .checkout__category-details {
   flex: 0.7;
   display: flex;
-  /* flex-wrap: wrap; */
 }
 
 .checkout__form-group {
@@ -73,7 +71,6 @@
 }
 
 .checkout__payment-section {
-  /* display: flex; */
 }
 
 .paythebill__btn {
@@ -87,6 +84,7 @@
   transition: all 0.2s linear;
   max-width: 300px;
   margin: 0 auto;
+  color: #fff;
 }
 
 .paythebill__btn:hover {

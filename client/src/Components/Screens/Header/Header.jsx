@@ -9,6 +9,7 @@ import axios from "axios";
 // import image from "../../Images/my.jpeg";
 import avatar from "../../Images/avatar.png";
 import arrow from "../../Images/chevron-down-solid.svg";
+import Bars from "./HeaderComponents/Bars";
 
 const Header = ({ dashboard }) => {
   const state = useStateValue();
@@ -94,11 +95,12 @@ const Header = ({ dashboard }) => {
   return (
     <div className="Header">
       <div className="header__container">
-        <div className="bars">
+        <Bars handleBarsClick={handleBarsClick} />
+        {/* <div className="bars">
           <div className="header__bars" onClick={handleBarsClick}>
             <div className="header__bar"></div>
           </div>
-        </div>
+        </div> */}
 
         <Link className="header__logo" to="/">
           <h1>LOGO</h1>

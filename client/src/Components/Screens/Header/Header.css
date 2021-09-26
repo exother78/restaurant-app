@@ -260,6 +260,9 @@ nav {
   .header__login {
     display: none;
   }
+  .header__user-nav {
+    display: none;
+  }
 
   .header__cart {
     margin: 0;

@@ -1,11 +1,15 @@
 import React from "react";
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import {
+  PayPalScriptProvider,
+  PayPalButtons,
+  FUNDING,
+} from "@paypal/react-paypal-js";
 
 const Paypal = (props) => {
   return (
     <PayPalScriptProvider options={{ "client-id": "test" }}>
       <PayPalButtons
-        // fundingSource={FUNDING.PAYPAL}
+        fundingSource={FUNDING.PAYPAL}
         // style={{ layout: "horizontal" }}
         // createBillingAgreement={(data) =>
         //   console.log("create Billing agreement: ", data)

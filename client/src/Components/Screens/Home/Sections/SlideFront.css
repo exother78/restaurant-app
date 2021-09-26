@@ -206,7 +206,11 @@ input.location__field::placeholder {
 
 @media only screen and (max-width: 1000px) {
   .home__address-field {
-    justify-content: flex-end;
+    /* justify-content: flex-end; */
+    position: relative;
+    left: 50%;
+    top: 310px;
+    transform: translate(-50%, 0);
   }
 
   .home__location {

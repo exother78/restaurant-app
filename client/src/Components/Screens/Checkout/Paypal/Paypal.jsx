@@ -34,7 +34,6 @@ const Paypal = (props) => {
           height: 40,
         }}
       />
-      ;
     </PayPalScriptProvider>
   );
 };

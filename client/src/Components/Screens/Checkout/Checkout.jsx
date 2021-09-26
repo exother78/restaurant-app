@@ -23,23 +23,23 @@ const Checkout = () => {
         if (postalCode) {
           if (basket.length > 0) {
             console.log("transaction Success: ", data);
-            //   await axios
-            //     .patch(`/api/user/updateorders/${userID}`, {
-            //       orders: {
-            //         postalCode,
-            //         address,
-            //         email,
-            //         name,
-            //         lastName,
-            //         time,
-            //         userID,
-            //         basket,
-            //       },
-            //     })
-            //     .then(() => {
-            //       setBasket([]);
-            //       window.location.href = "/";
-            //     });
+            await axios
+              .patch(`/api/user/updateorders/${userID}`, {
+                orders: {
+                  postalCode,
+                  address,
+                  email,
+                  name,
+                  lastName,
+                  time,
+                  userID,
+                  basket,
+                },
+              })
+              .then(() => {
+                setBasket([]);
+                window.location.href = "/";
+              });
           }
         }
       }
@@ -145,7 +145,12 @@ const Checkout = () => {
           </div>
         </div>
 
-        <Paypal total={getBasketTotal(basket)} />
+        <Paypal
+          total={getBasketTotal(basket)}
+          onSucccess={transactionSuccess}
+          onCancel={transactionCancel}
+          onError={transactionError}
+        />
         {/* <button className="paythebill__btn" onClick={handleClick}></button> */}
         {/* <Paypal
           transactionSuccess={transactionSuccess}

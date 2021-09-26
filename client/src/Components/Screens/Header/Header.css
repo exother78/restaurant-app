@@ -256,6 +256,27 @@ nav {
   color: white;
 }
 
+.header__mobile__cart-btn {
+  width: 100%;
+  position: fixed;
+  bottom: -2px;
+}
+
+.header__mobile__cart-btn > button {
+  width: 100%;
+  padding: 15px;
+  background: #d70f64;
+  border: none;
+  outline: none;
+  font-size: 1.2rem;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.header__mobile__cart-btn > button > a {
+  color: white;
+}
+
 @media only screen and (max-width: 550px) {
   .header__login {
     display: none;
@@ -278,8 +299,6 @@ nav {
 
   nav {
     flex: 0.1;
-    background: green;
-    padding: 0;
     margin: 0;
   }
 }

@@ -247,6 +247,12 @@ const Header = ({ dashboard }) => {
           </div>
         </div>
       </div>
+
+      <div className="header__mobile__cart-btn">
+        <button>
+          <Link to="/cart">Go to Cart</Link>
+        </button>
+      </div>
     </div>
   );
 };

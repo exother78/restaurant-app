@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import "./Header.css";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 
@@ -20,6 +20,32 @@ const Header = ({ dashboard }) => {
   const name = state.userAPI.name;
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [basket] = state.basket;
+  const [y, setY] = useState(window.scrollY);
+  const [displayMobileCartButton, setDisplayMobileCartButton] = useState(false);
+
+  const handleNavigation = useCallback(
+    (e) => {
+      const window = e.currentTarget;
+      if (y > window.scrollY) {
+        console.log("scrolling up");
+        setDisplayMobileCartButton(true);
+      } else if (y < window.scrollY) {
+        console.log("scrolling down");
+        setDisplayMobileCartButton(false);
+      }
+      setY(window.scrollY);
+    },
+    [y]
+  );
+
+  useEffect(() => {
+    setY(window.scrollY);
+    window.addEventListener("scroll", handleNavigation);
+
+    return () => {
+      window.removeEventListener("scroll", handleNavigation);
+    };
+  }, [handleNavigation]);
   document.addEventListener("scroll", (e) => {
     const header = document.querySelector(".Header");
 
@@ -248,12 +274,18 @@ const Header = ({ dashboard }) => {
         </div>
       </div>
 
-      <div className="header__mobile__cart-btn">
+      <div
+        className="header__mobile__cart-btn"
+        // style={{ display: displayMobileCartButton ? "block" : "none" }}
+        style={{ maxHeight: displayMobileCartButton ? "70px" : "0" }}>
         <button>
           <Link to="/cart">
             <ShoppingBasketIcon style={{ marginRight: "20px" }} />
             Go to Cart
           </Link>
+          <span className="header__mobile__cart-btn-length">
+            {basket.length}
+          </span>
         </button>
       </div>
     </div>

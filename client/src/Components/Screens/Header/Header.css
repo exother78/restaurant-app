@@ -261,6 +261,8 @@ nav {
   width: 100%;
   position: fixed;
   bottom: -2px;
+  max-height: 70px;
+  transition: all 0.3s ease;
 }
 
 .header__mobile__cart-btn > button {
@@ -279,6 +281,19 @@ nav {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header__mobile__cart-btn-length {
+  background: white;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  position: absolute;
+  left: 80%;
+  top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 @media only screen and (max-width: 650px) {

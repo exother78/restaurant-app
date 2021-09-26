@@ -316,3 +316,9 @@ nav {
   background: dodgerblue;
   color: white;
 }
+
+@media only screen and (max-width: 550px) {
+  .header__login {
+    display: none;
+  }
+}

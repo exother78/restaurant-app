@@ -121,16 +121,11 @@ const SlideFront = () => {
         <div className="sliderFront__sidebox-line">
           <AirlineSeatReclineNormalIcon /> <span>Takeaway: 30 minutes</span>
         </div>
-        <div className="sliderFront__sidebox-line">
-          <span>{width}</span>
-        </div>
-        <div className="sliderFront__sidebox-line">
-          <span>{height}</span>
-        </div>
 
         <div className="sliderFront__sidebox-btn">
           <Link to="/order" className="sliderFront__order-btn">
-            Order Now!
+            {/* Order Now! */}
+            {"w: " + width} {" h: " + height}
           </Link>
         </div>
       </div>

@@ -37,7 +37,9 @@ const Footer = () => {
             <h3 className="footer__column-title">Our Menu</h3>
             <span className="footer__column-subText">Sushi </span>
             <span className="footer__column-subText">Burger</span>
-            <span className="footer__column-subText">Pizza</span>
+            {/* <span className="footer__column-subText">Pizza</span> */}
+            <span className="footer__column-subText">{}</span>
+
             <span className="footer__column-subText">Chicken Karahi</span>
             <div className="menu-page" style={{ padding: "0 5px" }}>
               <h4>Order Food Now!</h4>

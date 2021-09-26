@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./SlideFront.css";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import ScheduleIcon from "@material-ui/icons/Schedule";

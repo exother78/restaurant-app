@@ -4,6 +4,7 @@ import { useStateValue } from "../../../StateProvider";
 import CartProduct from "../Cart/Sections/CartProduct";
 import { getBasketTotal } from "../../../reducer";
 import axios from "axios";
+import Paypal from "./Paypal/Paypal";
 
 const Checkout = () => {
   const state = useStateValue();
@@ -15,29 +16,30 @@ const Checkout = () => {
   const [street, setStreet] = useState("6");
   const [error, setError] = useState("");
 
-  const handleClick = async () => {
+  const transactionSuccess = async (data) => {
     try {
       const time = new Date();
       if (userID) {
         if (postalCode) {
           if (basket.length > 0) {
-            await axios
-              .patch(`/api/user/updateorders/${userID}`, {
-                orders: {
-                  postalCode,
-                  address,
-                  email,
-                  name,
-                  lastName,
-                  time,
-                  userID,
-                  basket,
-                },
-              })
-              .then(() => {
-                setBasket([]);
-                window.location.href = "/";
-              });
+            console.log("transaction Success: ", data);
+            //   await axios
+            //     .patch(`/api/user/updateorders/${userID}`, {
+            //       orders: {
+            //         postalCode,
+            //         address,
+            //         email,
+            //         name,
+            //         lastName,
+            //         time,
+            //         userID,
+            //         basket,
+            //       },
+            //     })
+            //     .then(() => {
+            //       setBasket([]);
+            //       window.location.href = "/";
+            //     });
           }
         }
       }
@@ -47,6 +49,14 @@ const Checkout = () => {
     } catch (error) {
       setError(error.response.data.error);
     }
+  };
+
+  const transactionError = async (data) => {
+    console.log("Error Transaction: ", data);
+  };
+
+  const transactionCancel = async (data) => {
+    console.log("cancelled: ", data);
   };
 
   const postalCodeChange = (e) => {
@@ -134,9 +144,17 @@ const Checkout = () => {
             </div>
           </div>
         </div>
-        <button className="paythebill__btn" onClick={handleClick}>
-          Pay the bill
-        </button>
+
+        <Paypal total={getBasketTotal(basket)} />
+        {/* <button className="paythebill__btn" onClick={handleClick}></button> */}
+        {/* <Paypal
+          transactionSuccess={transactionSuccess}
+          transactionError={transactionError}
+          transactionCancel={transactionCancel}
+          total={getBasketTotal(basket)}
+          something="something else"
+        /> */}
+        {/* Payment Button */}
       </div>
     </div>
   );

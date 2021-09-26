@@ -171,6 +171,11 @@ input.location__field::placeholder {
   margin: 10px 20px;
 }
 
+@media only screen and (max-width: 1100px) {
+  .location__field {
+  }
+}
+
 @media only screen and (max-width: 700px) {
   .home__address-field {
     width: 90%;

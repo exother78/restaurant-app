@@ -88,12 +88,12 @@ const SlideFront = () => {
     <div className="home__slider-front">
       {error && <div className="error__box">{error}</div>}
 
-      <div className="home__slider">
+      {/* <div className="home__slider">
         <img
           src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
           alt=""
         />
-      </div>
+      </div> */}
 
       <div
         className="sliderFront__sidebox"
@@ -157,9 +157,10 @@ const SlideFront = () => {
             className="location__field"
             name="location"
             placeholder="Enter Address"
+            spellCheck="false"
           />
           <button className="location__field-btn btn-primary btn-anim">
-            Delivery
+            Save
           </button>
         </div>
       </div>

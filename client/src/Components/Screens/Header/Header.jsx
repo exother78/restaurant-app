@@ -117,7 +117,7 @@ const Header = ({ dashboard }) => {
                   alt=""
                   className="avatar__img"
                 />
-                <span className="text">Hi, {name}</span>
+                <span className="text header__user-nav-text">Hi, {name}</span>
                 <img src={arrow} alt="" className="avatar__arrow" />
               </div>
               <ul
@@ -250,7 +250,10 @@ const Header = ({ dashboard }) => {
 
       <div className="header__mobile__cart-btn">
         <button>
-          <Link to="/cart">Go to Cart</Link>
+          <Link to="/cart">
+            <ShoppingBasketIcon style={{ marginRight: "20px" }} />
+            Go to Cart
+          </Link>
         </button>
       </div>
     </div>

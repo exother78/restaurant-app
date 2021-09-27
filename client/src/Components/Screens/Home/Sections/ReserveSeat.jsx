@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./ReserveSeat.css";
 import axios from "axios";
+import PersonSelect from "./ReserveSeatComponents/PersonSelect";
 
 const ReserveSeat = () => {
   const [error, setError] = useState(null);
@@ -55,38 +56,17 @@ const ReserveSeat = () => {
       {error && <div className="error__box">{error}</div>}
       <h1 className="reserve-seat__title">Reserve Your Seat now</h1>
 
-      <img
-        src="https://images.pexels.com/photos/2923034/pexels-photo-2923034.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-        alt=""
-        className="reserve-seat__image"
-      />
+      <div className="reserve-seat__image">
+        {/* <img
+          src="https://images.pexels.com/photos/2923034/pexels-photo-2923034.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
+          alt=""
+        /> */}
+      </div>
 
       <div className="reserve-seat__select">
         <form action="" onSubmit={handleSubmit}>
           <div className="people-form">
-            <select name="persons" onChange={changed} required defaultValue="0">
-              <option value="0" disabled>
-                How many people?
-              </option>
-
-              <option value="1 Person">1 Person</option>
-              <option value="2 People">2 People</option>
-              <option value="3 People">3 People</option>
-              <option value="4 People">4 People</option>
-              <option value="5 People">5 People</option>
-              <option value="6 People">5 People</option>
-
-              <option value="7 People">6 People</option>
-              <option value="8 People">7 People</option>
-              <option value="9 People">8 People</option>
-              <option value="10 People">9 People</option>
-              <option value="11 People">10 People</option>
-              <option value="12 People">11 People</option>
-              <option value="13 People">12 People</option>
-              <option value="14 People">13 People</option>
-              <option value="15 People">14 People</option>
-              <option value="Large Party">Large Party</option>
-            </select>
+            <PersonSelect changed={changed} />
 
             <input
               type="date"

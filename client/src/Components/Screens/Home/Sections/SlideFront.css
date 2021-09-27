@@ -283,27 +283,6 @@ input.location__field::placeholder {
 
 @media only screen and (max-width: 600px) {
   .sliderPostalCode__field {
-    width: 90%;
+    width: 80%;
   }
 }
-
-/* @media only screen and (max-width: 700px) {
-
-
-
-} */
-
-/* .btnClick {
-  transform: scale(8);
-  position: relative;
-}
-
-.btnClick::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  background: black;
-  opacity: 0.1;
-} */

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./SlideFront.css";
 import DriveEtaIcon from "@material-ui/icons/DriveEta";
 import ScheduleIcon from "@material-ui/icons/Schedule";
@@ -9,17 +9,17 @@ import { useStateValue } from "./../../../../StateProvider";
 import { Link } from "react-router-dom";
 
 const SlideFront = () => {
-  const [height, setHeight] = useState(null);
-  const [width, setWidth] = useState(null);
-  useEffect(() => {
-    const d = document.querySelector(".home__slider-front");
+  // const [height, setHeight] = useState(null);
+  // const [width, setWidth] = useState(null);
+  // useEffect(() => {
+  //   const d = document.querySelector(".home__slider-front");
 
-    setWidth(d.clientWidth);
-    setHeight(d.clientHeight);
+  //   setWidth(d.clientWidth);
+  //   setHeight(d.clientHeight);
 
-    return;
-  }, []);
-  console.log("width: ", width);
+  //   return;
+  // }, []);
+  // console.log("width: ", width);
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
   const [data, setData] = userAPI.postalData;
@@ -124,8 +124,8 @@ const SlideFront = () => {
 
         <div className="sliderFront__sidebox-btn">
           <Link to="/order" className="sliderFront__order-btn">
-            {/* Order Now! */}
-            {"w: " + width} {" h: " + height}
+            Order Now!
+            {/* {"w: " + width} {" h: " + height} */}
           </Link>
         </div>
       </div>

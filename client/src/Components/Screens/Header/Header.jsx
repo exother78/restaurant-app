@@ -21,16 +21,16 @@ const Header = ({ dashboard }) => {
   const [avatarOpen, setAvatarOpen] = useState(false);
   const [basket] = state.basket;
   const [y, setY] = useState(window.scrollY);
-  const [displayMobileCartButton, setDisplayMobileCartButton] = useState(false);
+  const [displayMobileCartButton, setDisplayMobileCartButton] = useState(true);
 
   const handleNavigation = useCallback(
     (e) => {
       const window = e.currentTarget;
       if (y > window.scrollY) {
-        console.log("scrolling up");
+        // console.log("scrolling up");
         setDisplayMobileCartButton(true);
       } else if (y < window.scrollY) {
-        console.log("scrolling down");
+        // console.log("scrolling down");
         setDisplayMobileCartButton(false);
       }
       setY(window.scrollY);

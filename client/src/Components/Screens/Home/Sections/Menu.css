@@ -5,7 +5,7 @@
 }
 
 .menu__title {
-  margin-left: 40px;
+  margin-left: 20px;
 }
 
 .menu__categories {
@@ -18,12 +18,14 @@
 
 .menu__category {
   margin: 15px 0;
+  min-width: 220px;
   padding: 0;
+  /* background: purple; */
   display: flex;
   flex-direction: column;
   align-items: center;
   width: 30%;
-  min-width: 20%;
+  /* min-width: 20%; */
   text-align: center;
 }
 

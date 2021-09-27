@@ -93,8 +93,9 @@
 
 .home__address-postal-field {
   margin: 0 auto;
-  /* width: 90%; */
+  /* width: 100%; */
   height: calc(100vh);
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -102,19 +103,22 @@
 }
 
 .sliderPostalCode__field {
+  width: 35%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   background: white;
   padding: 10px 20px;
 }
 
 .sliderPostalCode__input-field {
   padding: 10px 5px;
-  min-width: 300px;
+  flex: 0.8;
+  /* min-width: 300px; */
   border: 1px solid lightgray;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   font-size: 15px;
   outline: none;
+
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -122,7 +126,8 @@
 .sliderPostalCode__find-btn {
   background: white;
   padding: 10px 30px;
-  margin-left: 10px;
+  /* margin-left: 10px; */
+  flex: 0.15;
   border: none;
   font-size: large;
   font-weight: bold;
@@ -204,6 +209,10 @@ input.location__field::placeholder {
   .home__location {
     width: 45%;
   }
+
+  .sliderPostalCode__field {
+    width: 40%;
+  }
 }
 
 @media only screen and (max-width: 1000px) {
@@ -220,12 +229,21 @@ input.location__field::placeholder {
     width: 50%;
     margin-bottom: 40px;
   }
+
+  .sliderPostalCode__field {
+    width: 45%;
+  }
 }
 
 @media only screen and (max-width: 800px) {
+  .sliderPostalCode__field {
+    width: 55%;
+  }
+
   .home__location {
     width: 60%;
   }
+
   .sliderFront__sidebox {
     left: 50%;
     top: 110px;
@@ -234,6 +252,10 @@ input.location__field::placeholder {
 }
 
 @media only screen and (max-width: 700px) {
+  .sliderPostalCode__field {
+    width: 80%;
+  }
+
   .home__address-field {
     width: 90%;
     max-width: 95%;
@@ -256,6 +278,12 @@ input.location__field::placeholder {
 
   .location__field-btn:hover {
     transform: scale(1.02);
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .sliderPostalCode__field {
+    width: 90%;
   }
 }
 

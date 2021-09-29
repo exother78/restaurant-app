@@ -3,7 +3,7 @@ import "./OrderTotal.css";
 import { getBasketTotal } from "../../../reducer";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
 import { useStateValue } from "../../../StateProvider";
-import { useHistory } from "react-router-dom";
+import { useHistory, Link } from "react-router-dom";
 
 const OrderTotal = () => {
   const history = useHistory();
@@ -56,12 +56,20 @@ const OrderTotal = () => {
         </h3>
       </div>
 
-      <button className="order__total-empty-button" onClick={emptyBasket}>
-        Empty Cart
-      </button>
-      <button className="order__total-checkout-button" onClick={checkoutClick}>
-        Checkout
-      </button>
+      <div className="order__total-btns">
+        <button className="order__total-empty-button" onClick={emptyBasket}>
+          Empty Cart
+        </button>
+        <Link
+          to={basket.length > 0 ? "/checkout" : "/order"}
+          className="order__total-checkout-button-link">
+          <button
+            className="order__total-checkout-button"
+            onClick={checkoutClick}>
+            Checkout
+          </button>
+        </Link>
+      </div>
     </div>
   );
 };

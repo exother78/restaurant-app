@@ -125,7 +125,6 @@ const SlideFront = () => {
         <div className="sliderFront__sidebox-btn">
           <Link to="/order" className="sliderFront__order-btn">
             Order Now!
-            {/* {"w: " + width} {" h: " + height} */}
           </Link>
         </div>
       </div>

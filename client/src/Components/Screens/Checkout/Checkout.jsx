@@ -12,8 +12,8 @@ const Checkout = () => {
   const [postalCode, setPostalCode] = userAPI.postalCode;
   const { userID, email, lastName, name } = userAPI;
   const [basket, setBasket] = state.basket;
-  const [address, setAddress] = useState("Gujranwala");
-  const [street, setStreet] = useState("6");
+  const [address, setAddress] = useState("");
+  const [street, setStreet] = useState("");
   const [error, setError] = useState("");
 
   const transactionSuccess = async (data) => {
@@ -87,7 +87,7 @@ const Checkout = () => {
                 type="text"
                 name="address"
                 value={address}
-                placeholder="Gujranwala"
+                placeholder="eg. Dusseldorf"
                 onChange={(e) => setAddress(e.target.value)}
               />
             </div>
@@ -98,7 +98,7 @@ const Checkout = () => {
                 type="text"
                 name="street"
                 value={street}
-                placeholder="street no.6 house no.1"
+                placeholder="eg. street no.6 house no.1"
                 onChange={(e) => setStreet(e.target.value)}
               />
             </div>

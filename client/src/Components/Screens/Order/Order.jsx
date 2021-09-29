@@ -56,9 +56,9 @@ const Order = () => {
             );
           })}
         </div>
-        <div className="order__right-section">
-          <OrderTotal />
-        </div>
+      </div>
+      <div className="order__right-section-order">
+        <OrderTotal />
       </div>
       {(!products || products.length === 0) && <Loading />}
     </>

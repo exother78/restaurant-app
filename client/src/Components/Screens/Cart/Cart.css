@@ -18,3 +18,27 @@
   margin: 10px 20px;
   flex: 1 1 40%;
 }
+
+@media only screen and (max-width: 1244px) {
+  .cart__container {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 1066px) {
+  .cart__container {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .cart__container {
+    width: 57%;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .cart__container {
+    width: 100%;
+  }
+}

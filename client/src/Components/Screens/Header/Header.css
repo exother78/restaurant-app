@@ -213,14 +213,16 @@ nav {
   border: none;
   min-width: 130px;
   background: black;
-  letter-spacing: 0.4px;
+  letter-spacing: 1.4px;
   color: white;
   transition: background 0.2s linear;
+  font-family: "Josefin Slab";
+  font-weight: 600;
 }
 
 .header__side-nav-button:hover {
   background: dodgerblue;
-  color: black;
+  color: #fff;
 }
 
 .header__side-nav-main-section {

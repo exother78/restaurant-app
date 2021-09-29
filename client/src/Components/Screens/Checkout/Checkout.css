@@ -17,6 +17,8 @@
   display: flex;
   padding: 0 10px 20px 10px;
   margin-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .checkout__category::after {
@@ -35,17 +37,32 @@
 
 .checkout__category-title {
   flex: 0.3;
+  min-width: 230px;
+  margin: 5px 0;
+  /* background-color: brown; */
+}
+
+.checkout__category-title h2 {
+  letter-spacing: 1.3px;
+  font-size: larger;
 }
 
 .checkout__category-details {
-  flex: 0.7;
+  min-width: 340px;
+  /* background: purple; */
+  margin: 5px 0 5px 10px;
+  flex: 1;
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .checkout__form-group {
-  width: 50%;
+  flex: 1;
+  min-width: 205px;
   display: flex;
   flex-direction: column;
+  /* justify-content: center; */
 }
 
 .checkout__category-details label {
@@ -53,24 +70,27 @@
   font-size: medium;
   letter-spacing: 0.7px;
   font-weight: 600;
-  color: #aaa;
+  color: rgb(156, 156, 156);
 }
 
 .checkout__category-details input {
-  padding: 10px 20px;
+  padding: 10px 10px;
   margin: 0 10px;
   border: none;
   outline: none;
   font-size: medium;
-  color: rgb(136, 134, 134);
+  font-weight: 600;
+  letter-spacing: 0.9px;
+  color: rgb(41, 40, 40);
+}
+
+.checkout__category-details input::placeholder {
+  color: #999;
 }
 
 .checkout__category-details > * {
   margin: 5px 0;
   width: 100%;
-}
-
-.checkout__payment-section {
 }
 
 .paythebill__btn {
@@ -91,4 +111,15 @@
   background: rgb(48, 143, 238);
   transform: scale(1.04);
   color: white;
+}
+
+@media only screen and (max-width: 600px) {
+  .checkout__category-details input {
+    font-size: small;
+  }
+}
+@media only screen and (max-width: 520px) {
+  .checkout__category-details {
+    min-width: 300px;
+  }
 }

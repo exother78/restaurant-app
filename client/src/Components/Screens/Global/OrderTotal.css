@@ -1,7 +1,24 @@
+.order__right-section {
+  position: fixed;
+  right: 0;
+  top: 70px;
+  width: calc(30% - 60px);
+  box-shadow: -5px 0px 10px 1px #ddd;
+  padding: 30px;
+  text-align: right;
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/* .order__right-section {
+  padding: 20px;
+} */
+
 .order__right-section-content {
   width: 100%;
   line-height: 1.7;
-  padding: 30px;
+  padding: 30px 0;
+  /* background-color: purple; */
 }
 
 .orderTotal__title {
@@ -41,7 +58,7 @@
   letter-spacing: 0.7px;
 }
 
-.order__total-checkout-button {
+/* .order__total-checkout-button {
   padding: 10px 20px;
   background: #d70f64;
   border: none;
@@ -53,13 +70,47 @@
   cursor: pointer;
   font-family: "Montserrat";
   transition: background 0.2s linear;
+} */
+
+.order__total-btns {
+  display: flex;
+  margin: 0 auto;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.order__total-empty-button,
+.order__total-checkout-button-link {
+  margin: 0 5px;
+  flex: 1 1 calc(50% - 20px);
+}
+.order__total-checkout-button {
+  background: #d70f64;
+}
+.order__total-empty-button {
+  background: black;
+}
+
+.order__total-checkout-button,
+.order__total-empty-button {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1.1rem;
+  width: 100%;
+  /* width: 45%; */
+  /* margin: 5px; */
+  cursor: pointer;
+  font-family: "Montserrat";
+  transition: background 0.2s linear;
 }
 
 .order__total-checkout-button a {
   color: white;
 }
 
-.order__total-empty-button {
+/* .order__total-empty-button {
   padding: 10px 20px;
   background: black;
   border: none;
@@ -72,9 +123,39 @@
   cursor: pointer;
   transition: background 0.2s linear;
   margin-bottom: 130px;
-}
+} */
 
 .order__total-empty-button:hover,
 .order__total-checkout-button:hover {
   background: dodgerblue;
+}
+
+@media only screen and (max-width: 1024px) {
+  .order__total-checkout-button,
+  .order__total-empty-button {
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (max-width: 850px) {
+  .order__total-checkout-button,
+  .order__total-empty-button {
+    font-size: 0.9rem;
+  }
+}
+
+@media only screen and (max-width: 773px) {
+  .order__total-checkout-button,
+  .order__total-empty-button {
+    font-size: 0.8rem;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .order__right-section {
+    position: relative;
+    top: auto;
+    width: calc(100% - 60px);
+    /* padding: 20px; */
+  }
 }

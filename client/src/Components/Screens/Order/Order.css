@@ -84,7 +84,6 @@
   top: 0;
   display: flex;
   flex-wrap: wrap;
-  /* width: 70%; */
   background: #fff;
   justify-content: center;
 }

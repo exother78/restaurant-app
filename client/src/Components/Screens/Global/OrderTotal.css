@@ -9,16 +9,10 @@
   height: 100%;
   overflow-y: scroll;
 }
-
-/* .order__right-section {
-  padding: 20px;
-} */
-
 .order__right-section-content {
   width: 100%;
   line-height: 1.7;
   padding: 30px 0;
-  /* background-color: purple; */
 }
 
 .orderTotal__title {
@@ -58,20 +52,6 @@
   letter-spacing: 0.7px;
 }
 
-/* .order__total-checkout-button {
-  padding: 10px 20px;
-  background: #d70f64;
-  border: none;
-  outline: none;
-  color: white;
-  font-size: larger;
-  width: 45%;
-  margin: 5px;
-  cursor: pointer;
-  font-family: "Montserrat";
-  transition: background 0.2s linear;
-} */
-
 .order__total-btns {
   display: flex;
   margin: 0 auto;
@@ -99,8 +79,6 @@
   color: white;
   font-size: 1.1rem;
   width: 100%;
-  /* width: 45%; */
-  /* margin: 5px; */
   cursor: pointer;
   font-family: "Montserrat";
   transition: background 0.2s linear;
@@ -109,21 +87,6 @@
 .order__total-checkout-button a {
   color: white;
 }
-
-/* .order__total-empty-button {
-  padding: 10px 20px;
-  background: black;
-  border: none;
-  outline: none;
-  color: white;
-  font-size: larger;
-  width: 45%;
-  margin: 5px;
-  font-family: "Montserrat";
-  cursor: pointer;
-  transition: background 0.2s linear;
-  margin-bottom: 130px;
-} */
 
 .order__total-empty-button:hover,
 .order__total-checkout-button:hover {
@@ -156,6 +119,5 @@
     position: relative;
     top: auto;
     width: calc(100% - 60px);
-    /* padding: 20px; */
   }
 }

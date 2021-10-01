@@ -2,9 +2,62 @@ import { useState } from "react";
 
 const MenuAPI = () => {
   const [menu, setMenu] = useState([
-    { category: "seafood", products: [{ name: "fish", price: 23 }] },
+    {
+      category: "antipasti",
+      image:
+        "https://images.pexels.com/photos/3637608/pexels-photo-3637608.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      products: [
+        {
+          name: "aloo samosa",
+          whisper: "verdure varie, farina tipo 00, spezie",
+          price: 5,
+        },
+        {
+          name: "chicken samosa",
+          whisper: "dadini di pollo, prezzemolo indiano, farina di ceci",
+          price: 4,
+        },
+        {
+          name: "chicken pakora",
+          whisper: "dadini di pollo, farina di ceci, spezie",
+          price: 5,
+        },
+        {
+          name: "falafel",
+          whisper: "polpette di ceci",
+          price: 5,
+        },
+        {
+          name: "fish finger",
+          whisper: "fritto di pesce",
+          price: 6,
+        },
+        {
+          name: "raita",
+          whisper: "yogurt con pomodori e cetrioli",
+          price: 4,
+        },
+        {
+          name: "kachoomar salad",
+          whisper: "insalata mista, cipolle, pomodori e cetrioli",
+          price: 4,
+        },
+        {
+          name: "russian salad",
+          whisper: "insalata mista, ananas, mele, uva secca, maionese",
+          price: 5,
+        },
+        {
+          name: "shahi starter mix",
+          whisper: "aloo samosa, chicken samosa, mix pakora, fish finger",
+          price: 10,
+        },
+      ],
+    },
     {
       category: "grill",
+      image:
+        "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "seekh kebab",
@@ -31,6 +84,8 @@ const MenuAPI = () => {
     },
     {
       category: "primi di riso",
+      image:
+        "https://images.pexels.com/photos/2624774/pexels-photo-2624774.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         { name: "white rice", whisper: "riso basmati bianco", price: 3 },
         {
@@ -58,6 +113,8 @@ const MenuAPI = () => {
     {
       category: "chicken",
       whisper: "secondi di pollo",
+      image:
+        "https://images.pexels.com/photos/106343/pexels-photo-106343.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "chicken kofta",
@@ -92,6 +149,8 @@ const MenuAPI = () => {
     {
       category: "ghosht",
       whisper: "secondi di carne di agnello e vitello",
+      image:
+        "https://images.pexels.com/photos/7741801/pexels-photo-7741801.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "mutton korma",
@@ -141,6 +200,8 @@ const MenuAPI = () => {
 
     {
       category: "pesce",
+      image:
+        "https://images.pexels.com/photos/1321124/pexels-photo-1321124.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "shahi ginga",
@@ -166,6 +227,8 @@ const MenuAPI = () => {
     },
     {
       category: "dolci e bevande",
+      image:
+        "https://images.unsplash.com/photo-1627615891798-15c5d482086a?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1331&q=80",
       products: [
         {
           name: "kheer",
@@ -187,6 +250,8 @@ const MenuAPI = () => {
     },
     {
       category: "bevande indiane",
+      image:
+        "https://images.pexels.com/photos/7183776/pexels-photo-7183776.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "mango lassi",
@@ -222,6 +287,10 @@ const MenuAPI = () => {
     },
     {
       category: "bevande",
+      image:
+        "https://images.unsplash.com/photo-1582106245687-cbb466a9f07f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=869&q=80",
+      // image2:
+      //   "https://images.unsplash.com/photo-1582106245687-cbb466a9f07f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=869&q=80",
       products: [
         { name: "acqua naturale/frizzante 1 lt", price: 2.5 },
         {
@@ -238,6 +307,8 @@ const MenuAPI = () => {
     },
     {
       category: "bevande calde",
+      image:
+        "https://images.pexels.com/photos/531829/pexels-photo-531829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         { name: "caffe", price: 1 },
         { name: "cappuccino", price: 1.5 },
@@ -247,6 +318,8 @@ const MenuAPI = () => {
     },
     {
       category: "verdure e legumi",
+      image:
+        "https://images.pexels.com/photos/7351635/pexels-photo-7351635.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "chana daal",
@@ -280,6 +353,8 @@ const MenuAPI = () => {
     },
     {
       category: "pane",
+      image:
+        "https://images.pexels.com/photos/2067621/pexels-photo-2067621.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
       products: [
         {
           name: "chapati",

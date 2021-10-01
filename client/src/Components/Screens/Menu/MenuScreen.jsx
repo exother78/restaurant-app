@@ -25,12 +25,16 @@ const MenuScreen = () => {
           {menuAPI?.menu?.map((item, i) => (
             <div className="menu-screen__group" key={i}>
               <h3 className="menu-screen__group-title">{item.category}</h3>
+              <div className="menu-screen__group-image">
+                <img src={item.image} alt="" />
+              </div>
               {item?.products?.map((product, index) => (
                 <div className="subText__group" key={index}>
                   <div className="subText__group-container">
                     <p className="menu-screen__group-subText">{product.name}</p>
+                    <br />
                     <p className="menu-screen__group-subText-short">
-                      ({product.whisper})
+                      {product?.whisper ? "(" + product.whisper + ")" : ""}
                     </p>
                   </div>
                 </div>

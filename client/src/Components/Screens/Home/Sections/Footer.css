@@ -81,7 +81,7 @@
 
 .footer__copyright-icon {
   font-size: x-large;
-  margin: 0 10px 0 0;
+  margin: 5px 10px 0 0;
 }
 
 @media only screen and (max-width: 700px) {

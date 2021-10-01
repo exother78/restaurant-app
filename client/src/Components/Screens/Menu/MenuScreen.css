@@ -4,7 +4,7 @@
   margin-bottom: 15px;
 }
 
-.menu-screen img {
+.menu-screen > img {
   position: absolute;
   top: 0;
   left: 0;
@@ -26,14 +26,16 @@
 }
 
 .menu-screen__group {
+  all: initial;
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* justify-content: center; */
   width: 32%;
   /* background: purple; */
-  margin: 5px;
+  margin: 10px 5px;
   min-width: 200px;
-  line-height: 2.4;
+  /* line-height:; */
 }
 
 .menu-screen__group-title {
@@ -43,9 +45,27 @@
   text-transform: capitalize;
 }
 
-.menu-screen__group-subText {
+.menu-screen__group-image {
+  width: 100%;
+  height: 100px;
+}
+
+.menu-screen__group-image > img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.subText__group {
+  margin: 10px;
   text-align: center;
-  font-size: 1.2rem;
+}
+
+.menu-screen__group-subText {
+  all: initial;
+  font-family: "Josefin Slab";
+  padding: 0;
+  font-size: 1.3rem;
   color: rgb(122, 120, 120);
   font-weight: 600;
   letter-spacing: 1.7px;
@@ -53,8 +73,8 @@
 }
 
 .menu-screen__group-subText-short {
-  /* background-color: green; */
-  font-size: smaller;
-  letter-spacing: 0.2px;
+  padding: 0;
+  font-size: 14px;
+  letter-spacing: 0.5px;
   font-weight: 600;
 }

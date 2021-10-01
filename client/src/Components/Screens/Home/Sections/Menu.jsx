@@ -1,8 +1,11 @@
 import React from "react";
 import "./Menu.css";
 import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import { useStateValue } from "../../../../StateProvider";
 
 const Menu = () => {
+  const { menuAPI } = useStateValue();
+  console.log("this is menu: ", menuAPI);
   return (
     <div className="menu">
       <h1 className="menu__title">Our Menu</h1>

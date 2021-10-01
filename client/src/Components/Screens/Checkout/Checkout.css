@@ -68,7 +68,7 @@
 .checkout__category-details label {
   margin: 0 10px 5px 10px;
   font-size: medium;
-  letter-spacing: 0.7px;
+  letter-spacing: 1.2px;
   font-weight: 600;
   color: rgb(156, 156, 156);
 }
@@ -80,12 +80,13 @@
   outline: none;
   font-size: medium;
   font-weight: 600;
-  letter-spacing: 0.9px;
+  letter-spacing: 1px;
   color: rgb(41, 40, 40);
 }
 
 .checkout__category-details input::placeholder {
   color: #999;
+  letter-spacing: 1px;
 }
 
 .checkout__category-details > * {

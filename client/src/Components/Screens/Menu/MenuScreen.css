@@ -29,7 +29,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 24%;
+  width: 32%;
+  /* background: purple; */
   margin: 5px;
   min-width: 200px;
   line-height: 2.4;
@@ -43,9 +44,17 @@
 }
 
 .menu-screen__group-subText {
+  text-align: center;
   font-size: 1.2rem;
   color: rgb(122, 120, 120);
   font-weight: 600;
   letter-spacing: 1.7px;
   text-transform: capitalize;
+}
+
+.menu-screen__group-subText-short {
+  /* background-color: green; */
+  font-size: smaller;
+  letter-spacing: 0.2px;
+  font-weight: 600;
 }

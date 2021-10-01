@@ -104,7 +104,7 @@ const Checkout = () => {
             </div>
 
             <div className="checkout__form-group">
-              <label htmlFor="street">Enter Street No.</label>
+              <label htmlFor="street">Postal Code</label>
               <input
                 type="text"
                 name="postalCode"

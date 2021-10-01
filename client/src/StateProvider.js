@@ -3,6 +3,7 @@ import axios from "axios";
 import UserAPI from "./Components/api/UserAPI";
 import ProductsAPI from "./Components/api/ProductsAPI";
 import CategoriesAPI from "./Components/api/CategoriesAPI";
+import MenuAPI from "./Components/api/MenuAPI";
 
 // Prepares the datalayer
 export const StateContext = createContext();
@@ -38,6 +39,7 @@ export const StateProvider = ({ children }) => {
     userAPI: UserAPI(token),
     productsAPI: ProductsAPI(),
     categoriesAPI: CategoriesAPI(),
+    menuAPI: MenuAPI(),
   };
 
   return (

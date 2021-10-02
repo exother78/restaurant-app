@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 const MenuAPI = () => {
-  const [menu, setMenu] = useState([
+  const [menu] = useState([
     {
       category: "antipasti",
       image:

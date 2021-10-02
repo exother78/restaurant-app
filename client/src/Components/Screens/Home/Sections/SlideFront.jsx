@@ -9,24 +9,23 @@ import { useStateValue } from "./../../../../StateProvider";
 import { Link } from "react-router-dom";
 
 const SlideFront = () => {
-  // const [height, setHeight] = useState(null);
-  // const [width, setWidth] = useState(null);
-  // useEffect(() => {
-  //   const d = document.querySelector(".home__slider-front");
-
-  //   setWidth(d.clientWidth);
-  //   setHeight(d.clientHeight);
-
-  //   return;
-  // }, []);
-  // console.log("width: ", width);
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
   const [data, setData] = userAPI.postalData;
   const [loading, setLoading] = useState(false);
   const [postalCodeChange, setPostalCodeChange] = useState("");
   const [error, setError] = useState(null);
-  // const [data, setData] = useState({});
+
+  // const something = {
+  //   some: "some",
+  //   nothing: "nothing",
+  //   test: "test is here",
+  // };
+
+  // delete something["some"];
+  // delete something["test"];
+
+  // console.log("something object: ", something);
 
   const getCode = async (postal) => {
     try {
@@ -122,11 +121,9 @@ const SlideFront = () => {
           <AirlineSeatReclineNormalIcon /> <span>Takeaway: 30 minutes</span>
         </div>
 
-        <div className="sliderFront__sidebox-btn">
-          <Link to="/order" className="sliderFront__order-btn">
-            Order Now!
-          </Link>
-        </div>
+        <Link to="/order" className="sliderFront__sidebox-btn">
+          <div className="sliderFront__order-btn">Order Now!</div>
+        </Link>
       </div>
 
       <div

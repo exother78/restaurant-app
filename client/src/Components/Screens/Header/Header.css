@@ -6,6 +6,7 @@
   left: 0;
   right: 0;
   z-index: 10;
+  user-select: none;
 }
 
 @keyframes topbottom {
@@ -83,14 +84,13 @@ nav {
   height: 45px;
   border-radius: 50%;
   object-fit: cover;
-  user-select: none;
 }
 
 .header__user-nav-img .text {
-  margin-left: 10px;
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 1.2px;
+  font-family: "Josefin Slab";
+  font-weight: 900;
+  letter-spacing: 1.3px;
+  margin-left: 15px;
 }
 
 .header__user-nav .avatar__arrow {
@@ -103,7 +103,6 @@ nav {
   list-style: none;
   margin-top: 20px;
   position: relative;
-  /* transition: all 0.3s ease; */
   animation: avatarlist 0.2s linear;
 }
 
@@ -317,11 +316,6 @@ nav {
     background: brown;
     margin: 0;
     padding: 0;
-    /* left: 0; */
-
-    /* left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%); */
   }
 
   .avatar__list {
@@ -359,12 +353,7 @@ nav {
   nav {
     flex: 0.1;
     margin: 0;
-    /* background: purple; */
     max-width: 50px;
     min-width: 50px;
-    /* position: relative; */
-
-    /* display: flex; */
-    /* justify-content: flex-end; */
   }
 }

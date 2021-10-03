@@ -330,7 +330,7 @@ const CreateCategory = () => {
                 name="name"
                 placeholder="Name *"
                 required
-                className="category__input"
+                className="category__input create__category-input-here"
                 value={categoryForm.name}
                 onChange={handleInputChange}
               />

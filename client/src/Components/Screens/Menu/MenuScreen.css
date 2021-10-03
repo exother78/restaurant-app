@@ -4,6 +4,10 @@
   margin-bottom: 15px;
 }
 
+.menu-screen img {
+  user-select: none;
+}
+
 .menu-screen > img {
   position: absolute;
   top: 0;

@@ -64,13 +64,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  /* left: 0;
-  right: 0; */
-  /* height: 50%; */
   color: rgb(214, 212, 212);
-  /* top: 0; */
-  /* min-height: 250px;
-  max-height: 400px; */
   display: flex;
   background: #eee;
   border: 4px dashed lightgrey;
@@ -78,6 +72,12 @@
   align-items: center;
   font-size: 17rem;
   cursor: pointer;
+}
+
+.create__category-input-here {
+  font-weight: 800;
+  font-size: medium;
+  letter-spacing: 1px;
 }
 
 .create__product-cancel-image {

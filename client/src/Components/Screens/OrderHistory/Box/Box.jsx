@@ -11,7 +11,10 @@ const Box = ({ basket, postalCode, address, email, name, lastName }) => {
 
   return (
     <>
-      <div className="manageOrders__box" onClick={handleClick}>
+      <div
+        className="manageOrders__box"
+        onClick={handleClick}
+        style={{ userSelect: "none" }}>
         <table
           className="manageOrders__box-first-table"
           style={{ background: openBox ? "#ddd" : "#eee" }}>

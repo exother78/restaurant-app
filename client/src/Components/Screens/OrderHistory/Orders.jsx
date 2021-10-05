@@ -30,9 +30,6 @@ const Orders = () => {
     <div>
       {error && <div className="error__box">{error}</div>}
 
-      <div className="ordersHistory">
-        <div className="orderHistory__container"></div>
-      </div>
       {orders?.length > 0 ? (
         orders?.map((order, i) => <Box {...order} key={i} />)
       ) : (

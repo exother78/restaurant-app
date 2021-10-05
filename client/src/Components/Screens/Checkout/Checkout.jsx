@@ -51,6 +51,11 @@ const Checkout = () => {
     }
   };
 
+  const getPrint = async () => {
+    await axios.get("/api/print");
+    console.log("print is done");
+  };
+
   const transactionError = async (data) => {
     console.log("Error Transaction: ", data);
   };
@@ -151,7 +156,9 @@ const Checkout = () => {
           onCancel={transactionCancel}
           onError={transactionError}
         />
-        {/* <button className="paythebill__btn" onClick={handleClick}></button> */}
+        <button className="paythebill__btn" onClick={getPrint}>
+          print the bill
+        </button>
         {/* <Paypal
           transactionSuccess={transactionSuccess}
           transactionError={transactionError}

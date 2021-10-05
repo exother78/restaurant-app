@@ -12,8 +12,6 @@ const products = {
           error: "Please Provide complete information",
         });
 
-      // console.log("body: ", req.body);
-
       const product = await Product.create({
         title,
         description,

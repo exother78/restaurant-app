@@ -7,7 +7,7 @@ let printer = new ThermalPrinter({
   interface: "tcp://192.168.10.7",
 });
 
-const printNow = () => {
+const printNow = (req, res) => {
   // printer.alignCenter();
   printer.println("Hello world is here");
   printer.newLine();

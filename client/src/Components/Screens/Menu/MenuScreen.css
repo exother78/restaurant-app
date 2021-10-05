@@ -34,9 +34,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 32%;
+  /* width: 32%; */
+  flex: 1 1 30%;
   margin: 10px 5px;
-  min-width: 200px;
+  min-width: 220px;
 }
 
 .menu-screen__group-title {
@@ -85,3 +86,15 @@
   letter-spacing: 0.5px;
   font-weight: 600;
 }
+/* 
+@media only screen and (max-width: 760px) {
+  .menu-screen__group {
+    min-width: 45%;
+  }
+}
+
+@media only screen and (max-width: 460px) {
+  .menu-screen__group {
+    min-width: 95%;
+  }
+} */

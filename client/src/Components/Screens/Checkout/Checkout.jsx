@@ -52,7 +52,12 @@ const Checkout = () => {
   };
 
   const getPrint = async () => {
-    await axios.get("/api/print");
+    try {
+      const d = await axios.get("/api/print");
+      console.log("this is all data: ", d);
+    } catch (error) {
+      console.log("this is error response: ", error.response);
+    }
     console.log("print is done");
   };
 

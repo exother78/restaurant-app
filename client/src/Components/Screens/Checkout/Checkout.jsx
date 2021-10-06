@@ -58,7 +58,7 @@ const Checkout = () => {
     } catch (error) {
       console.log("this is error response: ", error.response.data.error);
     }
-    console.log("print is done");
+    console.log("print is done right, Shahid");
   };
 
   const transactionError = async (data) => {

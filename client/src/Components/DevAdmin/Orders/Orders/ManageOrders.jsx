@@ -30,6 +30,14 @@ const ManageOrders = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
+  useEffect(() => {
+    if (token[0] && orders) {
+      // getOrders().then((response) => {
+      //   setOrders(response.data.orders);
+      // });
+      console.log("something happening");
+    }
+  });
 
   if (error) {
     setTimeout(() => {

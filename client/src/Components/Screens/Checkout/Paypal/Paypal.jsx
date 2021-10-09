@@ -5,7 +5,7 @@ import {
   FUNDING,
 } from "@paypal/react-paypal-js";
 
-const Paypal = (props) => {
+const Paypal = ({ onSuccess, onCancel, onError, total }) => {
   return (
     <PayPalScriptProvider options={{ "client-id": "test" }}>
       <PayPalButtons
@@ -14,23 +14,26 @@ const Paypal = (props) => {
         // createBillingAgreement={(data) =>
         //   console.log("create Billing agreement: ", data)
         // }
-        onApprove={(data) => console.log("onApprove: ", data)}
-        onError={(err) => console.log("error occured: ", err)}
-        onInit={(data) => console.log("on init: ", data)}
+        // onApprove={(data) => console.log("onApprove: ", data)}
+        onApprove={onSuccess}
+        onError={onError}
+        onCancel={onCancel}
+        // onError={(err) => console.log("error occured: ", err)}
+        // onInit={(data) => console.log("on init: ", data)}
         createOrder={(data, actions) => {
-          console.log("data: ", data);
-          console.log("actions: ", actions);
+          // console.log("data: ", data);
+          // console.log("actions: ", actions);
           return actions.order.create({
             purchase_units: [
               {
                 amount: {
-                  value: "2.00",
+                  value: total,
                 },
               },
             ],
           });
         }}
-        onCancel={(e) => console.log("cancelled payment: ", e)}
+        // onCancel={(e) => console.log("cancelled payment: ", e)}
         // disabled
         style={{
           layout: "horizontal",

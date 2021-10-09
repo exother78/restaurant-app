@@ -1,8 +1,9 @@
 const User = require("../models/User");
-const Order = require("../models/OrdersModel");
+const Order = require("../models/Orders");
 const ErrorResponse = require("../utils/errorResponse");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
+const pusher = require("pusher");
 
 exports.register = async (req, res, next) => {
   const {
@@ -145,6 +146,30 @@ exports.logout = async (req, res, next) => {
     return res.json({ msg: "Logged out" });
   } catch (err) {
     next(err);
+  }
+};
+
+exports.createOrder = async (req, res, next) => {
+  const { orders } = req.body;
+  console.log("these are the orders: ", orders);
+  try {
+    const user = await User.findOne({ _id: orders.userID });
+    console.log("this is the user that has founded: ", user);
+    if (!user) {
+      return res.status(401).json({ success: false, error: "user not found" });
+    }
+
+    const order = await Order.create(orders);
+
+    pusher.trigger("messages", "something", {
+      order: order,
+    });
+
+    return res.status(200).json({ success: true, msg: "Order Successful" });
+
+    // await User.create({});
+  } catch (error) {
+    return res.status(500).json({ error: error });
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect } from "react";
 // import ReactGa from "react-ga";
 import "./App.css";
 import Home from "./Screens/Home/Home";
@@ -18,6 +18,7 @@ import About from "./Screens/About/About";
 import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
+import Pusher from "pusher-js";
 
 // import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
@@ -65,6 +66,23 @@ function App() {
 
   //   ReactGa.pageview(window.location.pathname);
   // });
+
+  useEffect(() => {
+    const pusher = new Pusher("957d4302761e585c5d31", {
+      cluster: "ap2",
+    });
+
+    const channel = pusher.subscribe("messages");
+    channel.bind("something", (message) => {
+      console.log("message arrived: ", message);
+      alert(JSON.stringify(message));
+    });
+
+    return () => {
+      channel.unbind_all();
+      channel.unsubscribe();
+    };
+  });
   return (
     <Router>
       <div className="App">

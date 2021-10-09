@@ -17,49 +17,88 @@ const Checkout = () => {
   const [error, setError] = useState("");
 
   const transactionSuccess = async (data) => {
-    try {
-      const time = new Date();
-      if (userID) {
-        if (postalCode) {
-          if (basket.length > 0) {
-            console.log("transaction Success: ", data);
-            await axios
-              .patch(`/api/user/updateorders/${userID}`, {
-                orders: {
-                  postalCode,
-                  address,
-                  email,
-                  name,
-                  lastName,
-                  time,
-                  userID,
-                  basket,
-                },
-              })
-              .then(() => {
-                setBasket([]);
-                window.location.href = "/";
-              });
-          }
-        }
+    const time = Date.now();
+    console.log("time: ", time + 23);
+    if (userID && postalCode && address && basket.length > 0) {
+      console.log("this is data: ", data);
+      try {
+        await axios
+          .post("/api/users/createorder", {
+            orders: {
+              orderNumber: time,
+              userID,
+              postalCode,
+              address,
+              basket,
+              // time,
+            },
+          })
+          .then((data) => {
+            setBasket([]);
+            // window.location.href = "/";
+            console.log("created order data: ", data.data.msg);
+          });
+      } catch (error) {
+        setError(error.response.data.error);
       }
-      if (!postalCode) {
-        setError("Please enter your postal code first");
-      }
-    } catch (error) {
-      setError(error.response.data.error);
+    }
+
+    if (!address) {
+      setError("Please enter your address to continue order");
+    }
+    if (!userID) {
+      setError("Please Login to continue");
+    }
+
+    if (!postalCode) {
+      setError("Please Enter your postal code to continue");
     }
   };
 
-  const getPrint = async () => {
-    try {
-      const d = await axios.get("/api/print");
-      console.log("this is all data: ", d);
-    } catch (error) {
-      console.log("this is error response: ", error.response.data.error);
-    }
-    console.log("print is done right, Shahid");
-  };
+  // const transactionSuccesss = async (data) => {
+  //   try {
+  //     const time = new Date();
+  //     if (userID) {
+  //       if (postalCode) {
+  //         if (basket.length > 0) {
+  //           console.log("transaction Success: ", data);
+  //           await axios
+  //             .patch(`/api/user/updateorders/${userID}`, {
+  //               orders: {
+  //                 postalCode,
+  //                 address,
+  //                 email,
+  //                 name,
+  //                 lastName,
+  //                 time,
+  //                 userID,
+  //                 basket,
+  //               },
+  //             })
+  //             .then(() => {
+  //               setBasket([]);
+  //               window.location.href = "/";
+  //             });
+  //         }
+  //       }
+  //     }
+  //     if (!postalCode) {
+  //       setError("Please enter your postal code first");
+  //     }
+  //   } catch (error) {
+  //     setError(error.response.data.error);
+  //   }
+  // };
+
+  // const getPrint = async () => {
+  //   try {
+  //     const d = await axios.get("/api/print");
+  //     console.log("this is all data: ", d);
+  //   } catch (error) {
+  //     console.log("this is error response: ", error.response.data.error);
+  //   }
+  //   console.log("print is done right, Shahid");
+  // };
 
   const transactionError = async (data) => {
     console.log("Error Transaction: ", data);
@@ -73,6 +112,9 @@ const Checkout = () => {
     setPostalCode(e.target.value);
     localStorage.setItem("pcl", e.target.value);
   };
+
+  // console.log("address: ", address);
+  // console.log("street: ", street);
 
   if (error) {
     setTimeout(() => {
@@ -161,7 +203,7 @@ const Checkout = () => {
           onCancel={transactionCancel}
           onError={transactionError}
         />
-        <button className="paythebill__btn" onClick={getPrint}>
+        <button className="paythebill__btn" onClick={transactionSuccess}>
           print the bill
         </button>
         {/* <Paypal

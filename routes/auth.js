@@ -9,6 +9,7 @@ const {
   refreshToken,
   logout,
   updateOrders,
+  createOrder,
   getOrders,
   allOrders,
 } = require("../controllers/auth");
@@ -22,7 +23,8 @@ router.route("/logout").get(logout);
 
 router.route("/allorders").get(protect, adminAuth, allOrders);
 
-router.route("/updateorders/:id").patch(updateOrders);
+// router.route("/updateorders/:id").patch(updateOrders);
+router.route("/createorder").post(createOrder);
 
 router.route("/getorders/:id").get(getOrders);
 

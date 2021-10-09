@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
+// const pusher = require("./config/pusher");
 
 // Database
 connectDB();

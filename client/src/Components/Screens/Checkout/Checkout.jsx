@@ -10,7 +10,8 @@ const Checkout = () => {
   const state = useStateValue();
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
-  const { userID, email, lastName, name } = userAPI;
+  // const { userID, email, lastName, name } = userAPI;
+  const { userID } = userAPI;
   const [basket, setBasket] = state.basket;
   const [address, setAddress] = useState("");
   const [street, setStreet] = useState("");
@@ -23,7 +24,7 @@ const Checkout = () => {
       console.log("this is data: ", data);
       try {
         await axios
-          .post("/api/users/createorder", {
+          .post("/api/user/createorder", {
             orders: {
               orderNumber: time,
               userID,

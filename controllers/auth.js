@@ -3,7 +3,7 @@ const Order = require("../models/Orders");
 const ErrorResponse = require("../utils/errorResponse");
 const crypto = require("crypto");
 const jwt = require("jsonwebtoken");
-const pusher = require("pusher");
+const pusher = require("../config/pusher");
 
 exports.register = async (req, res, next) => {
   const {
@@ -162,13 +162,15 @@ exports.createOrder = async (req, res, next) => {
     const order = await Order.create(orders);
 
     pusher.trigger("messages", "something", {
-      order: order,
+      message: order,
+      msg: "something added",
     });
 
     return res.status(200).json({ success: true, msg: "Order Successful" });
 
     // await User.create({});
   } catch (error) {
+    console.log("ran successfully");
     return res.status(500).json({ error: error });
   }
 };

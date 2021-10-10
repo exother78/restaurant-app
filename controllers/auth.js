@@ -161,7 +161,7 @@ exports.createOrder = async (req, res, next) => {
 
     const order = await Order.create(orders);
 
-    pusher.trigger("messages", "something", {
+    pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
       message: order,
       msg: "something added",
     });

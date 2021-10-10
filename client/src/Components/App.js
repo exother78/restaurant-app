@@ -60,6 +60,7 @@ function App() {
   // const [products] = productsAPI.products;
   // const [isLoggedIn] = userAPI.isLoggedIn;
   const [isAdmin] = userAPI.isAdmin;
+  const { userID } = userAPI;
 
   // useEffect(() => {
   //   ReactGa.initialize("G-Z64MGQCGJF");
@@ -68,20 +69,23 @@ function App() {
   // });
 
   useEffect(() => {
-    const pusher = new Pusher("957d4302761e585c5d31", {
-      cluster: "ap2",
-    });
+    // console.log("this is the admin id: ", userID);
+    if (isAdmin) {
+      const pusher = new Pusher("957d4302761e585c5d31", {
+        cluster: "ap2",
+      });
 
-    const channel = pusher.subscribe("messages");
-    channel.bind("something", (message) => {
-      console.log("message arrived: ", message);
-      alert(JSON.stringify(message));
-    });
+      const channel = pusher.subscribe("messages_" + userID);
+      channel.bind("inserted", (message) => {
+        // console.log("message arrived: ", message);
+        alert(JSON.stringify(message));
+      });
 
-    return () => {
-      channel.unbind_all();
-      channel.unsubscribe();
-    };
+      return () => {
+        channel.unbind_all();
+        channel.unsubscribe();
+      };
+    }
   });
   return (
     <Router>

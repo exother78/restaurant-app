@@ -1,9 +1,14 @@
+const crypto = require("crypto");
+const jwt = require("jsonwebtoken");
+const PushNotifications = require("@pusher/push-notifications-server");
 const User = require("../models/User");
 const Order = require("../models/Orders");
 const ErrorResponse = require("../utils/errorResponse");
-const crypto = require("crypto");
-const jwt = require("jsonwebtoken");
 const pusher = require("../config/pusher");
+let beamsClient = new PushNotifications({
+  instanceId: "c4cc7847-0673-4e58-bb0e-bd0b21554558",
+  secretKey: "509D8A803A9EC7EF7869E7A6BFED8B5E68032E270DF8822E44BEA9F09A54E6C2",
+});
 
 exports.register = async (req, res, next) => {
   const {
@@ -160,11 +165,35 @@ exports.createOrder = async (req, res, next) => {
     }
 
     const order = await Order.create(orders);
+    if (!order) {
+      return res
+        .status(500)
+        .json({ success: false, error: "something bad happened" });
+    }
 
-    pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
-      message: order,
-      msg: "something added",
-    });
+    if (order) {
+      beamsClient
+        .publishToInterests(["hello_61261e08b394081bb085b31d"], {
+          web: {
+            notification: {
+              title: "Hello",
+              body: "Hello, world!",
+              deep_link: "localhost:3000/dashboard/all_orders",
+            },
+          },
+        })
+        .then((publishResponse) => {
+          console.log("Just published:", publishResponse.publishId);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    }
+
+    // pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
+    //   message: order,
+    //   msg: "something added",
+    // });
 
     return res.status(200).json({ success: true, msg: "Order Successful" });
 

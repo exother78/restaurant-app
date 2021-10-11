@@ -17,6 +17,7 @@
   "author": "Asim Imam Abdullah",
   "license": "ISC",
   "dependencies": {
+    "@pusher/push-notifications-server": "^1.2.4",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cloudinary": "^1.26.3",
@@ -30,6 +31,7 @@
     "mongoose": "^5.13.3",
     "node-thermal-printer": "^4.1.2",
     "nodemon": "^2.0.12",
+    "path": "^0.12.7",
     "pusher": "^5.0.0"
   }
 }

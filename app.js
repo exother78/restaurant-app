@@ -8,6 +8,24 @@ const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 // const pusher = require("./config/pusher");
 
+// const path = require("path");
+// const fs = require("fs");
+// //joining path of directory
+// const directoryPath = path.join("F:/");
+// console.log("dirname: ", __dirname);
+// //passsing directoryPath and callback function
+// fs.readdir(directoryPath, function (err, files) {
+//   //handling error
+//   if (err) {
+//     return console.log("Unable to scan directory: " + err);
+//   }
+//   //listing all files using forEach
+//   files.forEach(function (file) {
+//     // Do whatever you want to do with the file
+//     console.log(file);
+//   });
+// });
+
 // Database
 connectDB();
 

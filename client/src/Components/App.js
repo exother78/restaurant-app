@@ -1,5 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 // import ReactGa from "react-ga";
+import * as PusherPushNotifications from "@pusher/push-notifications-web";
+
 import "./App.css";
 import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
@@ -54,6 +56,7 @@ const ManageOrders = lazy(() =>
   import("./DevAdmin/Orders/Orders/ManageOrders")
 );
 const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
+// import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 function App() {
   const { userAPI } = useStateValue();
@@ -69,7 +72,59 @@ function App() {
   // });
 
   useEffect(() => {
+    if (isAdmin) {
+      const beamsClient = new PusherPushNotifications.Client({
+        instanceId: "c4cc7847-0673-4e58-bb0e-bd0b21554558",
+      });
+
+      beamsClient
+        .start()
+        .then(() => beamsClient.addDeviceInterest("hello_" + userID))
+        .then(() => console.log("successfully registered and subscribed"))
+        .catch((err) => console.log("error: ", err));
+
+      // beamsClient
+      //   .start()
+      //   .then(() => beamsClient.getDeviceInterests())
+      //   .then((device) => console.log("device : ", device));
+
+      // return () => {
+      //   beamsClient.removeDeviceInterest("hello");
+      // };
+
+      // beamsClient
+      //   .start()
+      //   .then(() => beamsClient.addDeviceInterest("hello"))
+      //   .then((err) => console.log("this is err: ", err));
+
+      // this is ok
+      // beamsClient
+      //   .start()
+      //   .then((data) => {
+      //     data._userId = "userID";
+
+      //     // console.log("this is beamsclient data: ", data._userId);
+      //     // console.log("device id: ", data._deviceId);
+      //     return beamsClient.getDeviceId();
+      //   })
+      //   .then((deviceId) => {
+      //     console.log("device id: ", deviceId);
+      //   });
+
+      // beamsClient
+      //   .start()
+      //   .then(() => beamsClient.addDeviceInterest("hello"))
+      //   .then(() => console.log("Successfully registered and subscribed!"))
+      //   .catch(console.error);
+    }
+  });
+
+  useEffect(() => {
     // console.log("this is the admin id: ", userID);
+
+    // console.log("navigator: ", navigator.serviceWorker.register("/sw.js"));
+    // console.log('navigator: ', navigator.serviceWorker.controller)
+
     if (isAdmin) {
       const pusher = new Pusher("957d4302761e585c5d31", {
         cluster: "ap2",

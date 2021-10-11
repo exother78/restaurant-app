@@ -6,8 +6,8 @@ const Order = require("../models/Orders");
 const ErrorResponse = require("../utils/errorResponse");
 const pusher = require("../config/pusher");
 let beamsClient = new PushNotifications({
-  instanceId: "c4cc7847-0673-4e58-bb0e-bd0b21554558",
-  secretKey: "509D8A803A9EC7EF7869E7A6BFED8B5E68032E270DF8822E44BEA9F09A54E6C2",
+  instanceId: "1e7b4671-5b27-48ae-bc5c-6cdb11b0a197",
+  secretKey: "AA32F5DD07F1E18097A16D45BE0F53B32B5436597B475DBDE52AD031278C85E7",
 });
 
 exports.register = async (req, res, next) => {
@@ -176,9 +176,9 @@ exports.createOrder = async (req, res, next) => {
         .publishToInterests(["hello_61261e08b394081bb085b31d"], {
           web: {
             notification: {
-              title: "Hello",
-              body: "Hello, world!",
-              deep_link: "localhost:3000/dashboard/all_orders",
+              title: "New Order!",
+              body: JSON.stringify(order),
+              deep_link: "https://asims-restaurant.herokuapp.com",
             },
           },
         })

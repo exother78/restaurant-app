@@ -1,6 +1,7 @@
 import React, { lazy, Suspense, useEffect } from "react";
 // import ReactGa from "react-ga";
 import * as PusherPushNotifications from "@pusher/push-notifications-web";
+// import { ClientOptions } from "@pusher/push-notifications-web";
 
 import "./App.css";
 import Home from "./Screens/Home/Home";
@@ -60,21 +61,27 @@ const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
 
 function App() {
   const { userAPI } = useStateValue();
+
   // const [products] = productsAPI.products;
   // const [isLoggedIn] = userAPI.isLoggedIn;
   const [isAdmin] = userAPI.isAdmin;
   const { userID } = userAPI;
 
-  // useEffect(() => {
-  //   ReactGa.initialize("G-Z64MGQCGJF");
+  // var noti = new Notification("New Order", { body: "something added" });
 
-  //   ReactGa.pageview(window.location.pathname);
-  // });
+  // console.log("noti: ", noti.onshow());
+  // noti.onshow = (sh) => {
+  //   console.log("soemthin to show: ", sh);
+
+  //   console.log("something notificationist happened");
+  // };
+
+  console.log("service: ", ServiceWorkerContainer);
 
   useEffect(() => {
     if (isAdmin) {
       const beamsClient = new PusherPushNotifications.Client({
-        instanceId: "c4cc7847-0673-4e58-bb0e-bd0b21554558",
+        instanceId: "1e7b4671-5b27-48ae-bc5c-6cdb11b0a197",
       });
 
       beamsClient
@@ -82,41 +89,22 @@ function App() {
         .then(() => beamsClient.addDeviceInterest("hello_" + userID))
         .then(() => console.log("successfully registered and subscribed"))
         .catch((err) => console.log("error: ", err));
-
-      // beamsClient
-      //   .start()
-      //   .then(() => beamsClient.getDeviceInterests())
-      //   .then((device) => console.log("device : ", device));
-
-      // return () => {
-      //   beamsClient.removeDeviceInterest("hello");
-      // };
-
-      // beamsClient
-      //   .start()
-      //   .then(() => beamsClient.addDeviceInterest("hello"))
-      //   .then((err) => console.log("this is err: ", err));
-
-      // this is ok
-      // beamsClient
-      //   .start()
-      //   .then((data) => {
-      //     data._userId = "userID";
-
-      //     // console.log("this is beamsclient data: ", data._userId);
-      //     // console.log("device id: ", data._deviceId);
-      //     return beamsClient.getDeviceId();
-      //   })
-      //   .then((deviceId) => {
-      //     console.log("device id: ", deviceId);
-      //   });
-
-      // beamsClient
-      //   .start()
-      //   .then(() => beamsClient.addDeviceInterest("hello"))
-      //   .then(() => console.log("Successfully registered and subscribed!"))
-      //   .catch(console.error);
     }
+  });
+
+  useEffect(() => {
+    // PusherPushNotifications.onNotificationReceived = ({
+    //   pushEvent,
+    //   payload,
+    // }) => {
+    //   pushEvent.waitUntil(
+    //     self.registration.showNotification("New Order", {
+    //       body: "body is this ",
+    //       icon: "something else",
+    //       data: "something nothing",
+    //     })
+    //   );
+    // };
   });
 
   useEffect(() => {

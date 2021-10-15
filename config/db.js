@@ -28,7 +28,7 @@ db.once("open", () => {
 
     console.log("full document: ", change.fullDocument);
 
-    pusher.trigger("messages", "something", {
+    pusher.trigger("hello_61261e08b394081bb085b31d", "inserted", {
       message: "hello world",
       msg: "something added",
     });

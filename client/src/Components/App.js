@@ -76,7 +76,23 @@ function App() {
   //   console.log("something notificationist happened");
   // };
 
-  console.log("service: ", ServiceWorkerContainer);
+  // console.log("service: ", ServiceWorkerContainer);
+  // console.log("something: happenening: ", navigator.serviceWorker.controller);
+  // navigator.serviceWorker.register("/service-worker.js");
+  // // console.log("navigator: ", navigator.serviceWorker.getRegistration());
+  // navigator.serviceWorker
+  //   .getRegistration()
+  //   .then((data) => console.log("data: ", data));
+
+  // navigator.serviceWorker.ready
+
+  // console.log("controller: ", navigator.serviceWorker.onmessage());
+  // navigator.serviceWorker.onmessage = () =>
+  //   console.log("something gonna happen");
+  // PusherPushNotifications.onNotificationReceived = ({ pushEvent, payload }) => {
+  //   console.log("something:", payload);
+  // };
+  // console.log("pusherpush: ", PusherPushNotifications);
 
   useEffect(() => {
     if (isAdmin) {
@@ -88,23 +104,11 @@ function App() {
         .start()
         .then(() => beamsClient.addDeviceInterest("hello_" + userID))
         .then(() => console.log("successfully registered and subscribed"))
-        .catch((err) => console.log("error: ", err));
+        .catch((err) => {
+          Notification.requestPermission();
+          console.log("error: ", err);
+        });
     }
-  });
-
-  useEffect(() => {
-    // PusherPushNotifications.onNotificationReceived = ({
-    //   pushEvent,
-    //   payload,
-    // }) => {
-    //   pushEvent.waitUntil(
-    //     self.registration.showNotification("New Order", {
-    //       body: "body is this ",
-    //       icon: "something else",
-    //       data: "something nothing",
-    //     })
-    //   );
-    // };
   });
 
   useEffect(() => {
@@ -114,11 +118,13 @@ function App() {
     // console.log('navigator: ', navigator.serviceWorker.controller)
 
     if (isAdmin) {
+      Pusher.logToConsole = true;
+
       const pusher = new Pusher("957d4302761e585c5d31", {
         cluster: "ap2",
       });
 
-      const channel = pusher.subscribe("messages_" + userID);
+      const channel = pusher.subscribe("hello_" + userID);
       channel.bind("inserted", (message) => {
         // console.log("message arrived: ", message);
         alert(JSON.stringify(message));

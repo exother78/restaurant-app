@@ -207,6 +207,11 @@ const Checkout = () => {
         <button className="paythebill__btn" onClick={transactionSuccess}>
           print the bill
         </button>
+
+        {/* <button className="paythebill__btn" onClick={() => window.self.print()}>
+          Print
+        </button> */}
+
         {/* <Paypal
           transactionSuccess={transactionSuccess}
           transactionError={transactionError}

@@ -118,19 +118,20 @@ function App() {
     // console.log('navigator: ', navigator.serviceWorker.controller)
 
     if (isAdmin) {
-      Pusher.logToConsole = true;
+      // Pusher.logToConsole = true;
 
-      const pusher = new Pusher("957d4302761e585c5d31", {
+      const pusher = new Pusher("0c82d85a358b4a26fd15", {
         cluster: "ap2",
       });
 
       const channel = pusher.subscribe("hello_" + userID);
       channel.bind("inserted", (message) => {
-        // console.log("message arrived: ", message);
+        console.log("message arrived: ", message);
         alert(JSON.stringify(message));
       });
 
       return () => {
+        console.log("ran unbinde");
         channel.unbind_all();
         channel.unsubscribe();
       };

@@ -30,7 +30,7 @@ db.once("open", () => {
 
     pusher.trigger("hello_61261e08b394081bb085b31d", "inserted", {
       message: "hello world",
-      msg: "something added",
+      msg: change.fullDocument,
     });
   });
 });

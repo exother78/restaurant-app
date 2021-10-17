@@ -3,6 +3,7 @@ import React, { lazy, Suspense, useEffect } from "react";
 import * as PusherPushNotifications from "@pusher/push-notifications-web";
 // import { ClientOptions } from "@pusher/push-notifications-web";
 
+// import axios from "axios";
 import "./App.css";
 import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
@@ -67,6 +68,28 @@ function App() {
   const [isAdmin] = userAPI.isAdmin;
   const { userID } = userAPI;
 
+  // const getorders = async () => {
+  //   if (isAdmin) {
+  //     try {
+  //       console.log("ran get orders");
+  //       const auth = {
+  //         headers: { Authorization: `Bearer ${token[0]}` },
+  //       };
+
+  //       await axios
+  //         .get("/api/user/allorders", auth)
+  //         .then((data) => console.log("data: ", data));
+  //     } catch (error) {
+  //       // setError(error.response.data.error);
+  //       console.log("error: ", error.response.data);
+  //     }
+  //   }
+  // };
+
+  // useEffect(() => {
+  //   getorders();
+  // });
+
   // var noti = new Notification("New Order", { body: "something added" });
 
   // console.log("noti: ", noti.onshow());
@@ -94,6 +117,21 @@ function App() {
   // };
   // console.log("pusherpush: ", PusherPushNotifications);
 
+  // const func = async () => {
+  //   return await fetch("http://localhost:5376/api/print/receipt", {
+  //     method: "GET",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //   });
+  // };
+
+  // useEffect(() => {
+  //   Promise.resolve(func())
+  //     .then((data) => data.json())
+  //     .then((response) => console.log("this is fetched data: ", response));
+  // });
+
   useEffect(() => {
     if (isAdmin) {
       const beamsClient = new PusherPushNotifications.Client({
@@ -111,32 +149,61 @@ function App() {
     }
   });
 
-  useEffect(() => {
-    // console.log("this is the admin id: ", userID);
+  // const notify = (message) => {
+  //   var notification = new Notification("New Order!", {
+  //     body: message,
+  //   });
 
-    // console.log("navigator: ", navigator.serviceWorker.register("/sw.js"));
-    // console.log('navigator: ', navigator.serviceWorker.controller)
+  //   notification.onClick = () => {
+  //     window.open("www.google.com");
+  //     window.location.href = "https://asims-restaurant.herokuapp.com";
+  //   };
 
-    if (isAdmin) {
-      // Pusher.logToConsole = true;
+  //   setTimeout(notification.close.bind(notification), 1000 * 60 * 60);
+  // };
 
-      const pusher = new Pusher("0c82d85a358b4a26fd15", {
-        cluster: "ap2",
-      });
+  // const checkNotification = (message) => {
+  //   if (Notification.permission === "granted") notify(message);
 
-      const channel = pusher.subscribe("hello_" + userID);
-      channel.bind("inserted", (message) => {
-        console.log("message arrived: ", message);
-        alert(JSON.stringify(message));
-      });
+  //   if (Notification.permission !== "granted") {
+  //     Notification.requestPermission((permission) => {
+  //       if (permission === "granted") {
+  //         notify();
+  //       }
+  //     });
+  //   }
+  // };
 
-      return () => {
-        console.log("ran unbinde");
-        channel.unbind_all();
-        channel.unsubscribe();
-      };
-    }
-  });
+  // useEffect(() => {
+  //   //   console.log("this is the admin id: ", userID);
+
+  //   // console.log("navigator: ", navigator.serviceWorker.register("/sw.js"));
+  //   // console.log('navigator: ', navigator.serviceWorker.controller)
+
+  //   if (isAdmin) {
+  //     // Pusher.logToConsole = true;
+
+  //     const pusher = new Pusher("0c82d85a358b4a26fd15", {
+  //       cluster: "ap2",
+  //     });
+
+  //     const channel = pusher.subscribe("hello_" + userID);
+  //     channel.bind("inserted", (message) => {
+  //       // console.log("message arrived: ", message);
+  //       // alert(JSON.stringify(message));
+  //     });
+
+  //     // return () => {
+  //     //   console.log("ran unbinde");
+  //     //   channel.unbind_all();
+  //     //   channel.unsubscribe();
+  //     //   console.log("ran unbind again");
+  //     // };
+  //     checkNotification("this is the new order that you can never know");
+  //   }
+
+  // console.log("permission: ", Notification.permission);
+  // });
   return (
     <Router>
       <div className="App">

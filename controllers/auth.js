@@ -156,10 +156,10 @@ exports.logout = async (req, res, next) => {
 
 exports.createOrder = async (req, res, next) => {
   const { orders } = req.body;
-  console.log("these are the orders: ", orders);
+  // console.log("these are the orders: ", orders);
   try {
     const user = await User.findOne({ _id: orders.userID });
-    console.log("this is the user that has founded: ", user);
+    // console.log("this is the user that has founded: ", user);
     if (!user) {
       return res.status(401).json({ success: false, error: "user not found" });
     }
@@ -246,13 +246,23 @@ exports.getOrders = async (req, res, next) => {
 
 exports.allOrders = async (req, res, next) => {
   try {
-    const u = await User.find({}, { _id: 0, orders: 1 });
-
-    res.status(200).json({ success: true, orders: u });
+    const u = await Order.find();
+    return res.status(200).json({ success: true, orders: u });
   } catch (error) {
     next(error);
   }
 };
+
+// if orders are in the users
+// exports.allOrders = async (req, res, next) => {
+//   try {
+//     const u = await User.find({}, { _id: 0, orders: 1 });
+
+//     res.status(200).json({ success: true, orders: u });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 const sendToken = async (user, statusCode, res) => {
   const accessToken = await user.getAccessToken();

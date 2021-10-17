@@ -8,22 +8,27 @@ const OrderSchema = new Schema(
       trim: true,
       unique: true,
     },
-    userID: {
+    // userID: {
+    //   type: String,
+    //   required: true,
+    //   trim: true,
+    // },
+
+    email: {
       type: String,
       required: true,
       trim: true,
     },
-
-    // email: {
-    //   type: String,
-    //   required: true,
-    //   trim: true,
-    // },
-    // name: {
-    //   type: String,
-    //   required: true,
-    //   trim: true,
-    // },
+    name: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
+    },
     postalCode: {
       type: Number,
       required: true,
@@ -34,10 +39,17 @@ const OrderSchema = new Schema(
       required: true,
       trim: true,
     },
+    street: {
+      type: String,
+    },
     basket: {
       type: Array,
       required: true,
       default: [],
+    },
+    time: {
+      type: Date,
+      required: true,
     },
   },
   {

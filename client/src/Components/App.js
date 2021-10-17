@@ -22,7 +22,7 @@ import About from "./Screens/About/About";
 import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
-import Pusher from "pusher-js";
+// import Pusher from "pusher-js";
 
 // import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";

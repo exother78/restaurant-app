@@ -25,6 +25,8 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
     }
   }, [time]);
 
+  console.log("this is pending: ", pending);
+
   const handleClick = () => {
     setOpenBox(!openBox);
   };

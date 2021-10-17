@@ -3,7 +3,9 @@ import "./ManageOrders.css";
 import { useStateValue } from "./../../../../StateProvider";
 import axios from "axios";
 import Loading from "../../../Screens/Global/Loading";
-const OneUser = lazy(() => import("../User/OneUser"));
+// import Box from "./../Box/Box";
+const Box = lazy(() => import("./../Box/Box"));
+// const OneUser = lazy(() => import("../User/OneUser"));
 
 const ManageOrders = () => {
   const [error, setError] = useState(null);
@@ -16,7 +18,9 @@ const ManageOrders = () => {
         headers: { Authorization: `Bearer ${token[0]}` },
       };
 
-      return await axios.get("/api/user/allorders", auth);
+      const orderr = await axios.get("/api/user/allorders", auth);
+      console.log("all orders:", orderr.data.orders);
+      return orderr;
     } catch (error) {
       setError(error.response.data.error);
     }
@@ -51,9 +55,10 @@ const ManageOrders = () => {
       <div className="manageOrders__container">
         {orders?.map((order, i) => (
           <React.Fragment key={i}>
-            {order.orders.length > 0 && (
+            {/* {console.log("order: ", order)} */}
+            {order?.basket?.length > 0 && (
               <Suspense fallback={<Loading />}>
-                <OneUser {...order} />
+                <Box {...order} />
               </Suspense>
             )}
           </React.Fragment>

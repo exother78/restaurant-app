@@ -107,6 +107,7 @@ const UserAPI = (token) => {
     lastName: user?.lastName,
     email: user?.email,
     userAddress: user?.address,
+    userStreet: user?.street,
     isAdmin: [isAdmin, setIsAdmin],
     isLoggedIn: [isLoggedIn, setIsLoggedIn],
     userID: user?._id,

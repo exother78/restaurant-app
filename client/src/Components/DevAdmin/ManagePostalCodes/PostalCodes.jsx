@@ -5,8 +5,12 @@ import Loading from "./../../Screens/Global/Loading";
 import PostalCodeBox from "./PostalCodeBox/PostalCodeBox";
 import CreatePostalCode from "./CreatePostalCode/CreatePostalCode";
 import PostalHeader from "./PostalHeader/PostalHeader";
+import { useStateValue } from "./../../../StateProvider";
+import NotFound from "./../../Screens/Global/NotFound";
 
 const PostalCodes = () => {
+  const { userAPI } = useStateValue();
+  const [isAdmin] = userAPI.isAdmin;
   const [createModalActive, setCreateModalActive] = useState(true);
   const [modalActive, setModalActive] = useState(false);
   // eslint-disable-next-line no-unused-vars
@@ -151,7 +155,9 @@ const PostalCodes = () => {
     }, 4000);
   }
 
-  if (loading) return <Loading />;
+  if (!isAdmin) return <NotFound />;
+
+  if (loading && isAdmin) return <Loading />;
 
   return (
     <div className="manage__postalCodes">

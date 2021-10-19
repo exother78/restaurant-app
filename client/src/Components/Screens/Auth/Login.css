@@ -15,6 +15,7 @@
   padding: 20px;
   width: 35%;
   margin: 40px;
+  position: relative;
 }
 
 .login__input-group {
@@ -35,7 +36,7 @@
   outline: none;
   border: 1px solid lightgray;
   border-radius: 5px;
-  font-size: large;
+  font-size: medium;
   font-weight: 900;
   letter-spacing: 1.5px;
   font-family: "Josefin Slab";
@@ -49,6 +50,7 @@
 
 .login__register,
 .forgot-password {
+  font-size: small;
   text-align: right;
   margin-right: 20px;
   margin-top: 8px;

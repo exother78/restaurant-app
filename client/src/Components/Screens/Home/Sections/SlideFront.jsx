@@ -155,7 +155,13 @@ const SlideFront = () => {
         </div>
       </div>
 
-      <div
+      <div className="slideFrontButtons">
+        <button>Order Now!</button>
+
+        <button>Visit Menu</button>
+      </div>
+
+      {/* <div
         className="home__address-field"
         style={{ display: postalCode ? "flex" : "none" }}>
         <h1 className="slider__title">The Food You Love</h1>
@@ -171,7 +177,7 @@ const SlideFront = () => {
             Save
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

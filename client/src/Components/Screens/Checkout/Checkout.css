@@ -39,7 +39,6 @@
   flex: 0.3;
   min-width: 230px;
   margin: 5px 0;
-  /* background-color: brown; */
 }
 
 .checkout__category-title h2 {
@@ -49,7 +48,6 @@
 
 .checkout__category-details {
   min-width: 340px;
-  /* background: purple; */
   margin: 5px 0 5px 10px;
   flex: 1;
   display: flex;
@@ -62,7 +60,6 @@
   min-width: 205px;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
 }
 
 .checkout__category-details label {

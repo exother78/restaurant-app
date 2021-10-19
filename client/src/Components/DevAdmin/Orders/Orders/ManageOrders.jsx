@@ -3,11 +3,14 @@ import "./ManageOrders.css";
 import { useStateValue } from "./../../../../StateProvider";
 import axios from "axios";
 import Loading from "../../../Screens/Global/Loading";
+import NotFound from "../../../Screens/Global/NotFound";
 // import Box from "./../Box/Box";
 const Box = lazy(() => import("./../Box/Box"));
 // const OneUser = lazy(() => import("../User/OneUser"));
 
 const ManageOrders = () => {
+  const { userAPI } = useStateValue();
+  const [isAdmin] = userAPI.isAdmin;
   const [error, setError] = useState(null);
   const { token } = useStateValue();
   const [orders, setOrders] = useState([]);
@@ -25,6 +28,7 @@ const ManageOrders = () => {
       setError(error.response.data.error);
     }
   };
+
   useEffect(() => {
     if (token[0]) {
       getOrders().then((response) => {
@@ -39,7 +43,7 @@ const ManageOrders = () => {
       // getOrders().then((response) => {
       //   setOrders(response.data.orders);
       // });
-      console.log("something happening");
+      // console.log("something happening");
     }
   });
 
@@ -47,6 +51,10 @@ const ManageOrders = () => {
     setTimeout(() => {
       setError(null);
     }, 2000);
+  }
+
+  if (!isAdmin) {
+    return <NotFound />;
   }
 
   return (

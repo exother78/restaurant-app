@@ -6,7 +6,7 @@ const func = async (payload) => {
     headers: {
       "Content-Type": "application/json",
     },
-    body: payload,
+    body: JSON.stringify(payload),
   });
 };
 

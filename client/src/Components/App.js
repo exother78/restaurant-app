@@ -12,7 +12,12 @@ import Login from "./Screens/Auth/Login";
 // import MenuScreen from "./Screens/Menu/MenuScreen";
 // import Order from "./Screens/Order/Order";
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Orders from "./Screens/OrderHistory/Orders";
 import Settings from "./Screens/Settings/Settings";
 import About from "./Screens/About/About";
@@ -222,30 +227,63 @@ function App() {
           </Route> */}
 
           <Route path="/dashboard/postalcodes">
-            <Suspense fallback={<Loading />}>
-              <Dashboard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <PostalCodes />
-            </Suspense>
+            {isAdmin ? (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
+                <Suspense fallback={<Loading />}>
+                  <PostalCodes />
+                </Suspense>
+              </>
+            ) : (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Header />
+                </Suspense>
+                <NotFound />
+              </>
+            )}
           </Route>
 
           <Route path="/dashboard/all_orders">
-            <Suspense fallback={<Loading />}>
-              <Dashboard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <ManageOrders />
-            </Suspense>
+            {isAdmin ? (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
+                <Suspense fallback={<Loading />}>
+                  <ManageOrders />
+                </Suspense>
+              </>
+            ) : (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Header />
+                </Suspense>
+                <NotFound />
+              </>
+            )}
           </Route>
 
           <Route path="/dashboard/all_users">
-            <Suspense fallback={<Loading />}>
-              <Dashboard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <RegisteredUsers />
-            </Suspense>
+            {isAdmin ? (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
+                <Suspense fallback={<Loading />}>
+                  <RegisteredUsers />
+                </Suspense>
+              </>
+            ) : (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Header />
+                </Suspense>
+                <NotFound />
+              </>
+            )}
           </Route>
 
           <Route path="/dashboard/products/create_product">
@@ -268,13 +306,24 @@ function App() {
           </Route>
 
           <Route path="/dashboard/products">
-            <Suspense fallback={<Loading />}>
-              <Dashboard />
-            </Suspense>
-            <AllProductsHeader />
-            <Suspense fallback={<Loading />}>
-              <AllProducts />
-            </Suspense>
+            {isAdmin ? (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
+                <AllProductsHeader />
+                <Suspense fallback={<Loading />}>
+                  <AllProducts />
+                </Suspense>
+              </>
+            ) : (
+              <>
+                <Suspense fallback={<Loading />}>
+                  <Header />
+                </Suspense>
+                <NotFound />
+              </>
+            )}
           </Route>
 
           <Route path="/dashboard/create_category">
@@ -291,7 +340,7 @@ function App() {
             ) : (
               <>
                 <Suspense fallback={<Loading />}>
-                  <Dashboard />
+                  <Header />
                 </Suspense>
                 <NotFound />
               </>
@@ -305,6 +354,7 @@ function App() {
                 <DashboardHome />
               </Suspense>
             ) : (
+              // <Redirect to={{ pathname: "/login" }} />
               <>
                 <Header /> <NotFound />
               </>

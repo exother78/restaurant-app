@@ -18,6 +18,7 @@ exports.register = async (req, res, next) => {
     password,
     address,
     addressLine2,
+    postalCode,
     city,
     images,
   } = req.body;
@@ -30,6 +31,7 @@ exports.register = async (req, res, next) => {
       password,
       address,
       addressLine2,
+      postalCode,
       city,
       images,
     });
@@ -271,8 +273,10 @@ const sendToken = async (user, statusCode, res) => {
   res.cookie("rtfat", refreshToken, {
     httpOnly: true,
     path: "/api/user/rtfat",
-    maxAge: 7 * 24 * 60 * 60 * 1000, //7d
+    maxAge: 7 * 60 * 60 * 1000, //7d
   });
 
-  res.status(statusCode).json({ success: true, user, accessToken });
+  return res
+    .status(statusCode)
+    .json({ success: true, postalCode: user.postalCode, accessToken });
 };

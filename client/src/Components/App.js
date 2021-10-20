@@ -12,12 +12,7 @@ import Login from "./Screens/Auth/Login";
 // import MenuScreen from "./Screens/Menu/MenuScreen";
 // import Order from "./Screens/Order/Order";
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Orders from "./Screens/OrderHistory/Orders";
 import Settings from "./Screens/Settings/Settings";
 import About from "./Screens/About/About";

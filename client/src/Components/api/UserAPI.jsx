@@ -10,6 +10,9 @@ const UserAPI = (token) => {
 
   const getCode = async (postal) => {
     try {
+      if (postal === "undefined") {
+        return;
+      }
       const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
       if (data.data.code.active) {
         setData(data.data.code);
@@ -41,6 +44,7 @@ const UserAPI = (token) => {
           const data = await axios.get("/api/private", auth);
           setUser(data.data.user);
           setIsLoggedIn(true);
+          console.log("data in user api: ", data.data.user);
 
           if (data.data.user.postalCode) {
             setPostalCode(data.data.user.postalCode);
@@ -73,7 +77,7 @@ const UserAPI = (token) => {
     // });
 
     if (postalCode) {
-      localStorage.setItem("pcl", postalCode);
+      // localStorage.setItem("pcl", postalCode);
       getCode(postalCode);
       // .then((response) =>
       //   console.log("response postal: ", response.posta  lCode)
@@ -94,12 +98,11 @@ const UserAPI = (token) => {
         // });
       }
 
-      if (!postal) {
+      if (!postal || postal === "undefined") {
         localStorage.removeItem("pcl");
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [postalCode]);
 
   return {
     image: user?.images?.url,

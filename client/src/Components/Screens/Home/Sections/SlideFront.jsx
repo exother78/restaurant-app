@@ -155,11 +155,11 @@ const SlideFront = () => {
         </div>
       </div>
 
-      <div className="slideFrontButtons">
+      {/* <div className="slideFrontButtons">
         <button>Order Now!</button>
 
         <button>Visit Menu</button>
-      </div>
+      </div> */}
 
       {/* <div
         className="home__address-field"

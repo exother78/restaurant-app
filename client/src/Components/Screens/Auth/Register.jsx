@@ -9,14 +9,16 @@ const Register = () => {
     firstName: "",
     lastName: "",
     email: "",
+    images: "",
     password: "",
     confirmPassword: "",
+    postalCode: "",
     address: "",
     addressLine2: "",
     city: "",
-    images: "",
-    postalCode: "",
   });
+
+  console.log("postal code: ", registerForm.postalCode);
 
   const [fileImage, setFileImage] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);
@@ -71,6 +73,7 @@ const Register = () => {
             ...registerForm,
             images: { public_id: d.data.public_id, url: d.data.url },
           });
+
           setLoading(false);
         }
 

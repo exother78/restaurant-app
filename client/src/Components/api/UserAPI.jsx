@@ -24,7 +24,7 @@ const UserAPI = (token) => {
         setPostalCode(null);
       }
     } catch (error) {
-      console.log("error in up catc ", error.response.data.error);
+      // console.log("error in up catc ", error.response.data.error);
       setPostalCode(null);
       // localStorage.removeItem("pcl");
       // return (
@@ -44,7 +44,7 @@ const UserAPI = (token) => {
           const data = await axios.get("/api/private", auth);
           setUser(data.data.user);
           setIsLoggedIn(true);
-          console.log("data in user api: ", data.data.user);
+          // console.log("data in user api: ", data.data.user);
 
           if (data.data.user.postalCode) {
             setPostalCode(data.data.user.postalCode);

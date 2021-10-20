@@ -12,7 +12,7 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
       const orderTime = new Date(time).getTime();
       const nowTime = new Date().getTime() - 60 * 60 * 1000;
 
-      console.log("time: ", new Date(time).toLocaleString());
+      // console.log("time: ", new Date(time).toLocaleString());
 
       const compare = orderTime > nowTime;
       setPending(compare);

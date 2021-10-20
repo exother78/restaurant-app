@@ -19,7 +19,7 @@ import About from "./Screens/About/About";
 // import Location from "./Screens/Location/Location";
 // import Cart from "./Screens/Cart/Cart";
 // import Checkout from "./Screens/Checkout/Checkout";
-import Logout from "./Screens/Logout/Logout";
+// import Logout from "./Screens/Logout/Logout";
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
 // import Pusher from "pusher-js";
@@ -148,6 +148,13 @@ function App() {
         });
     }
   });
+  // const s = navigator.serviceWorker.getRegistration();
+  // s.then((res) => console.log("res: ", res));
+
+  // const sw = new ServiceWorkerRegistration();
+  // const w = sw.scope("/service-worker.js");
+  // console.log("w: ", w);
+  // console.log("something: ", s);
 
   // const notify = (message) => {
   //   var notification = new Notification("New Order!", {
@@ -208,9 +215,9 @@ function App() {
     <Router>
       <div className="App">
         <Switch>
-          <Route path="/logout">
+          {/* <Route path="/logout">
             <Logout />
-          </Route>
+          </Route> */}
 
           {/* <Route path="/dashboard/all_reservoirs">
             <Suspense fallback={<Loading />}>

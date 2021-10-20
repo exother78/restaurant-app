@@ -112,7 +112,16 @@ const Header = ({ dashboard }) => {
       await axios.get("/api/user/logout");
       localStorage.removeItem("login");
       localStorage.removeItem("pcl");
+
       window.location.href = "/";
+
+      navigator.serviceWorker
+        .register("/service-worker.js")
+        .then((registration) => {
+          registration
+            .unregister()
+            .then((bool) => console.log("boolean: ", bool));
+        });
     } catch (err) {
       alert(err.response.data.error);
     }

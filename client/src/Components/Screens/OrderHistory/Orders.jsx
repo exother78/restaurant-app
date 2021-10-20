@@ -15,7 +15,8 @@ const Orders = () => {
       const func = async () => {
         try {
           await axios.get(`/api/user/getorders/${userID}`).then((response) => {
-            setOrders(response.data.orders[0].orders);
+            // console.log("reponse.data: ", response.data);
+            setOrders(response.data.orders);
           });
         } catch (error) {
           setError(error.response.data.error);

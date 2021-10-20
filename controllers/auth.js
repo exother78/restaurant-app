@@ -238,7 +238,7 @@ exports.updateOrders = async (req, res, next) => {
 
 exports.getOrders = async (req, res, next) => {
   try {
-    const orders = await User.find({ _id: req.params.id }, "orders");
+    const orders = await Order.find({ userID: req.params.id });
 
     res.status(200).json({ success: true, orders });
   } catch (error) {
@@ -278,5 +278,10 @@ const sendToken = async (user, statusCode, res) => {
 
   return res
     .status(statusCode)
-    .json({ success: true, postalCode: user.postalCode, accessToken });
+    .json({
+      success: true,
+      postalCode: user.postalCode,
+      accessToken,
+      id: user._id,
+    });
 };

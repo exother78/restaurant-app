@@ -1,17 +1,28 @@
-import axios from "axios";
-import React, { useEffect } from "react";
+// import axios from "axios";
+// import React, { useEffect } from "react";
 
-const Logout = () => {
-  useEffect(() => {
-    const logout = async () => {
-      await axios.get("/api/user/logout");
-      localStorage.removeItem("login");
-    };
+// const Logout = () => {
+//   const logout = async () => {
+//     await axios.get("/api/user/logout");
 
-    window.location.href = "/";
-    logout();
-  }, []);
-  return <div></div>;
-};
+//     // const sw = new ServiceWorkerRegistration();
+//     // const w = sw.scope("/service-worker.js").get();
+//     // console.log("w: ", w);
 
-export default Logout;
+//     navigator.serviceWorker
+//       .register("/service-worker.js")
+//       .then((registration) => {
+//         registration
+//           .unregister()
+//           .then((bool) => console.log("boolean: ", bool));
+//       });
+//     localStorage.removeItem("login");
+//   };
+//   useEffect(() => {
+//     logout();
+//     // window.location.href = "/";
+//   }, []);
+//   return <div></div>;
+// };
+
+// export default Logout;

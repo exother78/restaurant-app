@@ -24,7 +24,7 @@ export const StateProvider = ({ children }) => {
 
           setTimeout(() => {
             refreshToken();
-          }, 3 * 60 * 1000);
+          }, 30 * 1000);
         } catch (err) {
           alert("Please Login or regitser");
           localStorage.removeItem("login");

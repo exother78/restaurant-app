@@ -16,8 +16,10 @@ const Location = {
   getOnePostalCode: async (req, res, next) => {
     try {
       const { postalCode } = req.params;
+      console.log("postal code: ", postalCode);
 
-      const code = await PostalCode.findOne({ postalCode: postalCode });
+      const code = await PostalCode.findOne({ postalCode });
+      console.log("code: ", code);
       if (!code)
         return res.status(404).json({
           success: false,

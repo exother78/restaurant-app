@@ -1,4 +1,5 @@
 import React from "react";
+import axios from "axios";
 import jsPDF from "jspdf";
 
 const Reports = () => {
@@ -49,11 +50,42 @@ const Reports = () => {
     console.log("check if old date is less than date now : ", check);
   };
 
+  const getCode = async (postal) => {
+    try {
+      const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
+      console.log("data: ", data);
+      // setData(data.data.code);
+      return data.data.code;
+    } catch (error) {
+      console.log("error up: ", error.response);
+      // setError(error.response.data.error);
+    }
+  };
+
+  const handlePostalFind = async () => {
+    getCode("52250")
+      .then((response) => {
+        console.log("response: ", response);
+        // setLoading(false);
+        // localStorage.setItem("pcl", response.postalCode);
+        // setPostalCode(response.postalCode);
+      })
+      .catch(() => {
+        return;
+      });
+  };
+
   return (
     <div>
       <button onClick={getDate}>get date</button>
       <button onClick={generatePDF} type="primary">
         Generate Pdf
+      </button>
+      <br />
+      <button
+        onClick={handlePostalFind}
+        style={{ padding: "20px 40px", margin: "10px" }}>
+        get postal
       </button>
     </div>
   );

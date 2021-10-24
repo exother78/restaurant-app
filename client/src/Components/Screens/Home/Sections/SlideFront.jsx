@@ -16,17 +16,6 @@ const SlideFront = () => {
   const [postalCodeChange, setPostalCodeChange] = useState("");
   const [error, setError] = useState(null);
 
-  // const something = {
-  //   some: "some",
-  //   nothing: "nothing",
-  //   test: "test is here",
-  // };
-
-  // delete something["some"];
-  // delete something["test"];
-
-  // console.log("something object: ", something);
-
   const getCode = async (postal) => {
     try {
       const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
@@ -36,45 +25,6 @@ const SlideFront = () => {
       setError(error.response.data.error);
     }
   };
-
-  // useEffect(() => {
-  //   // to remove an element in the object not neccessary here
-  //   // const queryObj = {
-  //   //   page: "something",
-  //   //   sort: "sort type",
-  //   //   queryString: "queryString type",
-  //   //   limit: "limit type",
-  //   // }; //queryString = req.query
-
-  //   // const excludedFields = ["page", "sort", "limit"];
-  //   // excludedFields.forEach((el) => {
-  //   //   console.log("el: ", el);
-  //   //   console.log("queryObj: ", queryObj);
-  //   //   delete queryObj[el];
-  //   //   console.log("result: ", queryObj);
-  //   // });
-
-  //   if (postalCode) {
-  //     localStorage.setItem("pcl", postalCode);
-  //     getCode(postalCode);
-  //   }
-  //   if (!postalCode) {
-  //     const postal = localStorage.getItem("pcl");
-  //     if (postal) {
-  //       setPostalCode(postal);
-  //       getCode(postal)
-  //         .then((response) => {
-  //           setPostalCode(response.postalCode);
-  //         })
-  //         .catch((err) => localStorage.removeItem("pcl"));
-  //     }
-
-  //     // if (!postal) {
-  //     //   localStorage.removeItem("pcl");
-  //     // }
-  //   }
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, []);
 
   const handlePostalFind = async () => {
     getCode(postalCodeChange)

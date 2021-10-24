@@ -18,7 +18,7 @@ const Register = () => {
     city: "",
   });
 
-  console.log("postal code: ", registerForm.postalCode);
+  // console.log("postal code here: ", registerForm.postalCode);
 
   const [fileImage, setFileImage] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);

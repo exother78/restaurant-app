@@ -6,7 +6,6 @@ import { Link } from "react-router-dom";
 import { useStateValue } from "../../../StateProvider";
 import axios from "axios";
 
-// import image from "../../Images/my.jpeg";
 import avatar from "../../Images/avatar.png";
 import arrow from "../../Images/chevron-down-solid.svg";
 import Bars from "./HeaderComponents/Bars";
@@ -22,6 +21,7 @@ const Header = ({ dashboard }) => {
   const [basket] = state.basket;
   const [y, setY] = useState(window.scrollY);
   const [displayMobileCartButton, setDisplayMobileCartButton] = useState(true);
+  const [promotion, setPromotion] = useState(true);
 
   const handleNavigation = useCallback(
     (e) => {
@@ -128,176 +128,208 @@ const Header = ({ dashboard }) => {
   };
 
   return (
-    <div className="Header">
-      <div className="header__container">
-        <Bars handleBarsClick={handleBarsClick} />
-        {/* <div className="bars">
-          <div className="header__bars" onClick={handleBarsClick}>
-            <div className="header__bar"></div>
-          </div>
-        </div> */}
+    <>
+      {promotion && (
+        <div
+          className="promotionsLine"
+          style={{
+            padding: "4px",
+            background: "rgb(248 10 111)",
+            display: "flex",
+            justifyContent: "center",
+            position: "relative",
+          }}>
+          <p
+            style={{
+              color: "white",
+              fontFamily: "Montserrat",
+              letterSpacing: ".4px",
+              fontSize: "small",
+            }}>
+            10% discount on every purchase
+          </p>
+          <p
+            onClick={() => setPromotion(!promotion)}
+            style={{
+              color: "white",
+              fontFamily: "Montserrat",
+              position: "absolute",
+              right: "10px",
+              top: "50%",
+              transform: "translate(0, -50%)",
+              fontSize: "large",
+              cursor: "pointer",
+            }}>
+            x
+          </p>
+        </div>
+      )}
+      <div className="Header">
+        <div className="header__container">
+          <Bars handleBarsClick={handleBarsClick} />
 
-        <Link className="header__logo" to="/">
-          <h1>LOGO</h1>
-        </Link>
-
-        <nav>
-          {isLoggedIn && (
-            <div
-              className="header__user-nav"
-              onClick={() => setAvatarOpen(!avatarOpen)}>
-              <div className="header__user-nav-img">
-                <img
-                  src={userImage ? userImage : avatar}
-                  alt=""
-                  className="avatar__img"
-                />
-                <span className="text header__user-nav-text">Hi, {name}</span>
-                <img src={arrow} alt="" className="avatar__arrow" />
-              </div>
-              <ul
-                className="avatar__list"
-                style={{
-                  display: !avatarOpen ? "none" : "block",
-                }}>
-                <Link to="/orders">
-                  <li>Pending Orders</li>
-                </Link>
-                <Link to="/orders">
-                  <li>Order History</li>
-                </Link>
-                <Link to="/settings">
-                  <li>Settings</li>
-                </Link>
-                <li onClick={logoutUser}>Logout</li>
-              </ul>
-            </div>
-          )}
-
-          {!isLoggedIn ? (
-            <div className="header__login">
-              <Link to="/login">
-                <span
-                  className="header__loginText btn-anim btn btn-dark btn-main"
-                  style={{ letterSpacing: "2px" }}>
-                  Login
-                </span>
-              </Link>
-            </div>
-          ) : (
-            <div className="header__login">
-              <Link to="/" onClick={logoutUser}>
-                <span
-                  className="header__loginText btn-anim btn btn-dark btn-main"
-                  style={{ letterSpacing: "2px" }}>
-                  Logout
-                </span>
-              </Link>
-            </div>
-          )}
-
-          <Link to="/cart" className="header__cart btn-anim">
-            <ShoppingBasketIcon />
-            <span className="header__cart-subText">{basket.length}</span>
+          <Link className="header__logo" to="/">
+            <h1>LOGO</h1>
           </Link>
-        </nav>
-      </div>
 
-      <div className="header__side-nav">
-        <div className="header__side-nav__container">
-          {!isLoggedIn && (
-            <div className="header__side-nav-upper-section">
-              <div className="header__side-nav-upper-section-btns">
-                <Link to="/login">
-                  <button className="header__side-nav-button">Sign in</button>
-                </Link>
-                <Link to="/register">
-                  <button className="header__side-nav-button">Sign up</button>
-                </Link>
+          <nav>
+            {isLoggedIn && (
+              <div
+                className="header__user-nav"
+                onClick={() => setAvatarOpen(!avatarOpen)}>
+                <div className="header__user-nav-img">
+                  <img
+                    src={userImage ? userImage : avatar}
+                    alt=""
+                    className="avatar__img"
+                  />
+                  <span className="text header__user-nav-text">Hi, {name}</span>
+                  <img src={arrow} alt="" className="avatar__arrow" />
+                </div>
+                <ul
+                  className="avatar__list"
+                  style={{
+                    display: !avatarOpen ? "none" : "block",
+                  }}>
+                  <Link to="/orders">
+                    <li>Pending Orders</li>
+                  </Link>
+                  <Link to="/orders">
+                    <li>Order History</li>
+                  </Link>
+                  <Link to="/settings">
+                    <li>Settings</li>
+                  </Link>
+                  <li onClick={logoutUser}>Logout</li>
+                </ul>
               </div>
-            </div>
-          )}
-          <div className="header__side-nav-main-section">
-            <Link
-              to="/"
-              className="header__side-nav-text"
-              onClick={removeSideNav}>
-              <span>Home</span>
-            </Link>
-
-            {isAdmin && (
-              <Link
-                to="/dashboard"
-                className="header__side-nav-text"
-                onClick={removeSideNav}>
-                <span>Dashboard</span>
-              </Link>
             )}
 
-            <Link
-              to="/menu"
-              className="header__side-nav-text"
-              onClick={removeSideNav}>
-              <span>Menu</span>
-            </Link>
+            {!isLoggedIn ? (
+              <div className="header__login">
+                <Link to="/login">
+                  <span
+                    className="header__loginText btn-anim btn btn-dark btn-main"
+                    style={{ letterSpacing: "2px" }}>
+                    Login
+                  </span>
+                </Link>
+              </div>
+            ) : (
+              <div className="header__login">
+                <Link to="/" onClick={logoutUser}>
+                  <span
+                    className="header__loginText btn-anim btn btn-dark btn-main"
+                    style={{ letterSpacing: "2px" }}>
+                    Logout
+                  </span>
+                </Link>
+              </div>
+            )}
 
-            <Link
-              onClick={removeSideNav}
-              to="/order"
-              className="header__side-nav-text header__side-nav-text-order">
-              <span>Order Now !</span>
+            <Link to="/cart" className="header__cart btn-anim">
+              <ShoppingBasketIcon />
+              <span className="header__cart-subText">{basket.length}</span>
             </Link>
+          </nav>
+        </div>
 
-            {isLoggedIn && (
+        <div className="header__side-nav">
+          <div className="header__side-nav__container">
+            {!isLoggedIn && (
+              <div className="header__side-nav-upper-section">
+                <div className="header__side-nav-upper-section-btns">
+                  <Link to="/login">
+                    <button className="header__side-nav-button">Sign in</button>
+                  </Link>
+                  <Link to="/register">
+                    <button className="header__side-nav-button">Sign up</button>
+                  </Link>
+                </div>
+              </div>
+            )}
+            <div className="header__side-nav-main-section">
+              <Link
+                to="/"
+                className="header__side-nav-text"
+                onClick={removeSideNav}>
+                <span>Home</span>
+              </Link>
+
+              {isAdmin && (
+                <Link
+                  to="/dashboard"
+                  className="header__side-nav-text"
+                  onClick={removeSideNav}>
+                  <span>Dashboard</span>
+                </Link>
+              )}
+
+              <Link
+                to="/menu"
+                className="header__side-nav-text"
+                onClick={removeSideNav}>
+                <span>Menu</span>
+              </Link>
+
               <Link
                 onClick={removeSideNav}
-                to="/orders"
-                className="header__side-nav-text">
-                <span>Orders</span>
+                to="/order"
+                className="header__side-nav-text header__side-nav-text-order">
+                <span>Order Now !</span>
               </Link>
-            )}
 
-            <Link
-              to="find-us"
-              className="header__side-nav-text"
-              onClick={removeSideNav}>
-              <span>Location</span>
-            </Link>
+              {isLoggedIn && (
+                <Link
+                  onClick={removeSideNav}
+                  to="/orders"
+                  className="header__side-nav-text">
+                  <span>Orders</span>
+                </Link>
+              )}
 
-            <Link
-              to="/about"
-              className="header__side-nav-text"
-              onClick={removeSideNav}>
-              <span>About</span>
-            </Link>
-
-            {isLoggedIn && (
               <Link
-                to="/settings"
+                to="find-us"
                 className="header__side-nav-text"
                 onClick={removeSideNav}>
-                <span>Settings</span>
+                <span>Location</span>
               </Link>
-            )}
+
+              <Link
+                to="/about"
+                className="header__side-nav-text"
+                onClick={removeSideNav}>
+                <span>About</span>
+              </Link>
+
+              {isLoggedIn && (
+                <Link
+                  to="/settings"
+                  className="header__side-nav-text"
+                  onClick={removeSideNav}>
+                  <span>Settings</span>
+                </Link>
+              )}
+            </div>
           </div>
         </div>
-      </div>
 
-      <div
-        className="header__mobile__cart-btn"
-        // style={{ display: displayMobileCartButton ? "block" : "none" }}
-        style={{ maxHeight: displayMobileCartButton ? "70px" : "0" }}>
-        <button>
-          <Link to="/cart">
-            <ShoppingBasketIcon style={{ marginRight: "20px" }} />
-            Go to Cart
-          </Link>
-          <span className="header__mobile__cart-btn-length">
-            {basket.length}
-          </span>
-        </button>
+        <div
+          className="header__mobile__cart-btn"
+          // style={{ display: displayMobileCartButton ? "block" : "none" }}
+          style={{ maxHeight: displayMobileCartButton ? "70px" : "0" }}>
+          <button>
+            <Link to="/cart">
+              <ShoppingBasketIcon style={{ marginRight: "20px" }} />
+              Go to Cart
+            </Link>
+            <span className="header__mobile__cart-btn-length">
+              {basket.length}
+            </span>
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

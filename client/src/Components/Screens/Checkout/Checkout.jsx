@@ -17,10 +17,18 @@ const Checkout = () => {
   const [street, setStreet] = useState("");
   const [error, setError] = useState("");
 
+  console.log("address ;", address);
+
   const transactionSuccess = async (data) => {
     const time = Date.now();
     // console.log("time: ", time + 23);
+
+    console.log("came above the if: ");
+
+    console.log("address: ", address);
     if (userID && postalCode && address && basket.length > 0) {
+      console.log("came below the if: ");
+
       // console.log("this is data: ", data);
       try {
         await axios
@@ -40,6 +48,7 @@ const Checkout = () => {
           })
           .then((data) => {
             setBasket([]);
+            console.log("came in then");
             // window.location.href = "/";
             console.log("created order data: ", data.data.msg);
           });
@@ -106,7 +115,8 @@ const Checkout = () => {
   // };
 
   const transactionError = async (data) => {
-    console.log("Error Transaction: ", data);
+    // console.log();
+    setError("Transaction not successful");
   };
 
   const transactionCancel = async (data) => {
@@ -202,12 +212,17 @@ const Checkout = () => {
           </div>
         </div>
 
-        <Paypal
-          total={getBasketTotal(basket)}
-          onSucccess={transactionSuccess}
-          onCancel={transactionCancel}
-          onError={transactionError}
-        />
+        <div
+          className="paypalButton"
+          style={{ display: getBasketTotal(basket) === 0 ? "none" : "block" }}>
+          <Paypal
+            total={getBasketTotal(basket)}
+            onSuccess={transactionSuccess}
+            onCancel={transactionCancel}
+            onError={transactionError}
+            setError={setError}
+          />
+        </div>
         <button className="paythebill__btn" onClick={transactionSuccess}>
           print the bill
         </button>

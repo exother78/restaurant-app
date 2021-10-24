@@ -3,44 +3,70 @@ import {
   PayPalScriptProvider,
   PayPalButtons,
   FUNDING,
+  usePayPalScriptReducer,
 } from "@paypal/react-paypal-js";
+import Loading from "../../Global/Loading";
 
-const Paypal = ({ onSuccess, onCancel, onError, total }) => {
+// const client =
+//   "ATSNzle97H2HdLUL3GMnS5I8PuKouWyteOOCVNR-3UqTW5N_0tFs3ddtDitE1IfqAlRXI4hbaEo2yDT9";
+// const secret =
+//   "EFdJlkmjHi7aD3SJ9otZUZZ0zuRbKFrKYS8BwxL5Xogl_hxrlA93a7vsoRPbkJfzxQKfnYSwWx1TvXpb";
+// const initialOptions = {};
+
+const Paypal = ({ onSuccess, onCancel, onError, total, setError }) => {
+  const [{ isPending, isResolved }] = usePayPalScriptReducer();
+
   return (
-    <PayPalScriptProvider options={{ "client-id": "test" }}>
-      <PayPalButtons
-        fundingSource={FUNDING.PAYPAL}
-        // style={{ layout: "horizontal" }}
-        // createBillingAgreement={(data) =>
-        //   console.log("create Billing agreement: ", data)
-        // }
-        // onApprove={(data) => console.log("onApprove: ", data)}
-        onApprove={onSuccess}
-        onError={onError}
-        onCancel={onCancel}
-        // onError={(err) => console.log("error occured: ", err)}
-        // onInit={(data) => console.log("on init: ", data)}
-        createOrder={(data, actions) => {
-          // console.log("data: ", data);
-          // console.log("actions: ", actions);
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: {
-                  value: total,
-                },
-              },
-            ],
-          });
-        }}
-        // onCancel={(e) => console.log("cancelled payment: ", e)}
-        // disabled
-        style={{
-          layout: "horizontal",
-          label: "checkout",
-          height: 40,
-        }}
-      />
+    <PayPalScriptProvider
+      options={{
+        "client-id":
+          "Ac8o4swJtckfwVOCnGLmPeW4KuApWFOLBx4LLW8TcnUD7t5AkSBU6i1yeuPK822ps6QJt-5gL9swQsWI",
+        "merchant-id": "UGUFDKZNBH2TN",
+        "buyer-country": "DE",
+        currency: "EURO",
+        locale: "de_DE",
+      }}>
+      {isPending ? (
+        <Loading />
+      ) : isResolved ? (
+        <PayPalButtons
+          // disabled="true"
+          fundingSource={FUNDING.PAYPAL}
+          // style={{ layout: "horizontal" }}
+          // createBillingAgreement={(data) =>
+          //   console.log("create Billing agreement: ", data)
+          // }
+          // onApprove={(data) => console.log("onApprove: ", data)}
+          onApprove={onSuccess}
+          onError={onError}
+          onCancel={onCancel}
+          // onError={(err) => console.log("error occured: ", err)}
+          // onInit={(data) => console.log("on init: ", data)}
+          createOrder={(data, actions) => {
+            // console.log("data: ", data);
+            // console.log("actions: ", actions);
+            if (total !== 0)
+              return actions.order.create({
+                purchase_units: [
+                  {
+                    amount: {
+                      value: total,
+                    },
+                  },
+                ],
+              });
+          }}
+          // onCancel={(e) => console.log("cancelled payment: ", e)}
+          // disabled
+          style={{
+            layout: "horizontal",
+            label: "checkout",
+            height: 40,
+          }}
+        />
+      ) : (
+        setError("Paypal button not loaded please refresh")
+      )}
     </PayPalScriptProvider>
   );
 };

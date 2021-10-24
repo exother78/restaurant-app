@@ -58,8 +58,7 @@ const ManageOrders = lazy(() =>
   import("./DevAdmin/Orders/Orders/ManageOrders")
 );
 const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
-// import * as PusherPushNotifications from "@pusher/push-notifications-web";
-
+const Reports = lazy(() => import("./DevAdmin/Reports/Reports"));
 function App() {
   const { userAPI } = useStateValue();
 
@@ -227,6 +226,15 @@ function App() {
               <AllReservoirs />
             </Suspense>
           </Route> */}
+
+          <Route path="/dashboard/reports">
+            <Suspense fallback={<Loading />}>
+              <Dashboard />
+            </Suspense>
+            <Suspense fallback={<Loading />}>
+              <Reports />
+            </Suspense>
+          </Route>
 
           <Route path="/dashboard/postalcodes">
             {isAdmin ? (

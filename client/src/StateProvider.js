@@ -30,7 +30,7 @@ export const StateProvider = ({ children }) => {
           localStorage.removeItem("login");
         }
       };
-      refreshToken();
+      refreshToken().catch(() => console.log("error"));
     }
   }, []);
 

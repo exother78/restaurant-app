@@ -26,16 +26,40 @@ const SlideFront = () => {
     }
   };
 
+  const getPostalCode = async (postal) => {
+    try {
+      return await axios.get(`/api/dashboard/onepostalcode/${postal}`);
+      // .catch((error) => console.log("error came in: ", error.response));
+    } catch (error) {
+      // return error.response;
+      console.log("came here in error");
+      setPostalCode(null);
+      setData(null);
+      localStorage.removeItem("pcl");
+    }
+  };
+
   const handlePostalFind = async () => {
-    getCode(postalCodeChange)
+    getPostalCode(postalCodeChange)
       .then((response) => {
-        setLoading(false);
-        localStorage.setItem("pcl", response.postalCode);
-        setPostalCode(response.postalCode);
+        if (response) {
+          console.log("postal code in front: ", response);
+          setData(response.data.code);
+          setPostalCode(response.data.code.postalCode);
+          localStorage.setItem("pcl", response.data.code.postalCode);
+        }
       })
-      .catch(() => {
-        return;
-      });
+      .catch((error) => console.log("error: ", error));
+
+    // getCode(postalCodeChange)
+    //   .then((response) => {
+    //     setLoading(false);
+    //     localStorage.setItem("pcl", response.postalCode);
+    //     setPostalCode(response.postalCode);
+    //   })
+    //   .catch(() => {
+    //     return;
+    //   });
   };
 
   if (error) {
@@ -111,11 +135,24 @@ const SlideFront = () => {
         <button>Visit Menu</button>
       </div> */}
 
-      {/* <div
+      <div
         className="home__address-field"
         style={{ display: postalCode ? "flex" : "none" }}>
         <h1 className="slider__title">The Food You Love</h1>
-        <div className="home__location">
+
+        <div className="home__location-buttons">
+          <Link to="/order" className="home__location-buttons-link">
+            <button className="home__location-buttons-button">
+              Order Now!
+            </button>
+          </Link>
+          <Link to="/menu" className="home__location-buttons-link">
+            <button className="home__location-buttons-button">
+              Visit Menu!
+            </button>
+          </Link>
+        </div>
+        {/* <div className="home__location">
           <input
             type="text"
             className="location__field"
@@ -126,8 +163,8 @@ const SlideFront = () => {
           <button className="location__field-btn btn-primary btn-anim">
             Save
           </button>
-        </div>
-      </div> */}
+        </div> */}
+      </div>
     </div>
   );
 };

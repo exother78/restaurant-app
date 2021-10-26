@@ -9,7 +9,7 @@ const MenuAPI = () => {
       products: [
         {
           name: "aloo samosa",
-          whisper: "verdure varie, farina tipo 00, spezie",
+          whisper: "verdure varie, farina tipo, spezie",
           price: 5,
         },
         {
@@ -62,7 +62,7 @@ const MenuAPI = () => {
         {
           name: "seekh kebab",
           whisper: "carne maccinata di pollo speziata e cotto al forno",
-          price: 45,
+          price: 8,
         },
         {
           name: "chicken tikka",

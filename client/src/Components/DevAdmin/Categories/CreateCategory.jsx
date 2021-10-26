@@ -140,7 +140,7 @@ const CreateCategory = () => {
     setTimeout(() => {
       setSuccess(null);
       setError(null);
-    }, 4000);
+    }, 2000);
   }
 
   const handleInputChange = (e) => {

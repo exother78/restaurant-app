@@ -4,7 +4,9 @@ const PushNotifications = require("@pusher/push-notifications-server");
 const User = require("../models/User");
 const Order = require("../models/Orders");
 const ErrorResponse = require("../utils/errorResponse");
+const PostalCode = require("../models/PostalCode");
 const pusher = require("../config/pusher");
+
 let beamsClient = new PushNotifications({
   instanceId: "1e7b4671-5b27-48ae-bc5c-6cdb11b0a197",
   secretKey: "AA32F5DD07F1E18097A16D45BE0F53B32B5436597B475DBDE52AD031278C85E7",
@@ -158,39 +160,41 @@ exports.logout = async (req, res, next) => {
 
 exports.createOrder = async (req, res, next) => {
   const { orders } = req.body;
-  // console.log("these are the orders: ", orders);
+  console.log("these are the orders: ", orders);
   try {
+    const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
+    console.log("postalCode: ", postalCode);
+
     const user = await User.findOne({ _id: orders.userID });
-    // console.log("this is the user that has founded: ", user);
     if (!user) {
       return res.status(401).json({ success: false, error: "user not found" });
     }
 
-    const order = await Order.create(orders);
-    if (!order) {
-      return res
-        .status(500)
-        .json({ success: false, error: "something bad happened" });
-    }
+    // const order = await Order.create(orders);
+    // if (!order) {
+    //   return res
+    //     .status(500)
+    //     .json({ success: false, error: "something bad happened" });
+    // }
 
-    if (order) {
-      beamsClient
-        .publishToInterests(["hello_61261e08b394081bb085b31d"], {
-          web: {
-            notification: {
-              title: "New Order!",
-              body: JSON.stringify(order),
-              deep_link: "https://asims-restaurant.herokuapp.com",
-            },
-          },
-        })
-        .then((publishResponse) => {
-          console.log("Just published:", publishResponse.publishId);
-        })
-        .catch((error) => {
-          console.log("Error:", error);
-        });
-    }
+    // if (order) {
+    //   beamsClient
+    //     .publishToInterests(["hello_61261e08b394081bb085b31d"], {
+    //       web: {
+    //         notification: {
+    //           title: "New Order!",
+    //           body: JSON.stringify(order),
+    //           deep_link: "https://asims-restaurant.herokuapp.com",
+    //         },
+    //       },
+    //     })
+    //     .then((publishResponse) => {
+    //       console.log("Just published:", publishResponse.publishId);
+    //     })
+    //     .catch((error) => {
+    //       console.log("Error:", error);
+    //     });
+    // }
 
     // pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
     //   message: order,
@@ -276,12 +280,10 @@ const sendToken = async (user, statusCode, res) => {
     maxAge: 7 * 60 * 60 * 1000, //7d
   });
 
-  return res
-    .status(statusCode)
-    .json({
-      success: true,
-      postalCode: user.postalCode,
-      accessToken,
-      id: user._id,
-    });
+  return res.status(statusCode).json({
+    success: true,
+    postalCode: user.postalCode,
+    accessToken,
+    id: user._id,
+  });
 };

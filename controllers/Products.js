@@ -5,8 +5,9 @@ const products = {
     try {
       const { title, description, product_id, category, price, images } =
         req.body;
+      console.log("something:", req.body);
 
-      if (!title || !description || !product_id || !price || !images)
+      if (!title || !description || !product_id || !price)
         return res.status(400).json({
           success: false,
           error: "Please Provide complete information",

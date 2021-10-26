@@ -4,16 +4,13 @@ import jsPDF from "jspdf";
 
 const Reports = () => {
   const generatePDF = () => {
-    console.log("came here");
     var doc = new jsPDF("p", "pt", "a4");
-    // console.log("jsPDF:", jsPDF);
 
     doc.html(document.querySelector("#content"), {
       callback: function (pdf) {
         pdf.save("mypdf.pdf");
       },
     });
-    console.log("came here too");
   };
 
   const arr = [
@@ -50,7 +47,7 @@ const Reports = () => {
     console.log("check if old date is less than date now : ", check);
   };
 
-  const getCode = async (postal) => {
+  const getPostalCode = async (postal) => {
     try {
       const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
       console.log("data: ", data);
@@ -62,8 +59,8 @@ const Reports = () => {
     }
   };
 
-  const handlePostalFind = async () => {
-    getCode("52250")
+  const postal = async () => {
+    getPostalCode("52250")
       .then((response) => {
         console.log("response: ", response);
         // setLoading(false);
@@ -82,9 +79,7 @@ const Reports = () => {
         Generate Pdf
       </button>
       <br />
-      <button
-        onClick={handlePostalFind}
-        style={{ padding: "20px 40px", margin: "10px" }}>
+      <button onClick={postal} style={{ padding: "20px 40px", margin: "10px" }}>
         get postal
       </button>
     </div>

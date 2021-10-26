@@ -72,12 +72,19 @@ const CreateProduct = () => {
 
   const productFunc = async (d) => {
     try {
-      const res = await axios.post("/api/products", {
-        ...data,
-        images: { public_id: d.data.public_id, url: d.data.url },
-      });
-
-      return res;
+      if (d) {
+        const res = await axios.post("/api/products", {
+          ...data,
+          images: { public_id: d.data.public_id, url: d.data.url },
+        });
+        return res;
+      }
+      if (!d) {
+        const res = await axios.post("/api/products", {
+          ...data,
+        });
+        return res;
+      }
     } catch (error) {
       // alert(error.response.data.error);
       setError(error.response.data.error);
@@ -86,18 +93,23 @@ const CreateProduct = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
-    uploadImage()
-      .then(productFunc)
-      .then(() => {
+    if (imageUpload) {
+      setLoading(true);
+      uploadImage()
+        .then(productFunc)
+        .then(() => {
+          setCallback(!callback);
+          setLoading(false);
+          history.push("/dashboard/products");
+        });
+    }
+    if (!imageUpload) {
+      productFunc().then(() => {
         setCallback(!callback);
         setLoading(false);
         history.push("/dashboard/products");
       });
-    // try {
-    // } catch (err) {
-    //   console.log("err: ", err);
-    // }
+    }
   };
 
   if (!isAdmin) {
@@ -106,6 +118,12 @@ const CreateProduct = () => {
         You don't have permission to visit this route
       </h1>
     );
+  }
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
   }
 
   if (loading) {
@@ -122,7 +140,7 @@ const CreateProduct = () => {
         <div className="create__product-container-leftSection">
           {!imageShow && (
             <input
-              required
+              // required
               type="file"
               name="file"
               onChange={handleFileChange}
@@ -132,7 +150,7 @@ const CreateProduct = () => {
           {imageShow && (
             <div className="create__product-image-preview">
               <img
-                required
+                // required
                 src={imageShow}
                 alt=""
                 width="100%"

@@ -149,6 +149,7 @@ function App() {
         });
     }
   });
+
   // const s = navigator.serviceWorker.getRegistration();
   // s.then((res) => console.log("res: ", res));
 

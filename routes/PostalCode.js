@@ -1,4 +1,8 @@
 const router = require("express").Router();
+const express = require("express");
+const cors = require("cors");
+const app = express();
+
 const {
   deletePostalCode,
   updatePostalCode,
@@ -17,6 +21,8 @@ router
   .delete(deletePostalCode)
   .patch(updatePostalCode);
 
-router.route("/dashboard/onepostalcode/:postalCode").get(getOnePostalCode);
+router
+  .route("/dashboard/onepostalcode/:postalCode")
+  .get(cors(), getOnePostalCode);
 
 module.exports = router;

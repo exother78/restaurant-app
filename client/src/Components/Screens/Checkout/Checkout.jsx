@@ -10,6 +10,8 @@ const Checkout = () => {
   const state = useStateValue();
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
+  // const [street, setStreet] = userAPI.street;
+  // const [address, setAddress] = userAPI.address;
   const { email, lastName, name } = userAPI;
   const { userID } = userAPI;
   const [basket, setBasket] = state.basket;
@@ -17,19 +19,10 @@ const Checkout = () => {
   const [street, setStreet] = useState("");
   const [error, setError] = useState("");
 
-  console.log("address ;", address);
-
   const transactionSuccess = async (data) => {
     const time = Date.now();
-    // console.log("time: ", time + 23);
 
-    console.log("came above the if: ");
-
-    console.log("address: ", address);
     if (userID && postalCode && address && basket.length > 0) {
-      console.log("came below the if: ");
-
-      // console.log("this is data: ", data);
       try {
         await axios
           .post("/api/user/createorder", {
@@ -48,12 +41,12 @@ const Checkout = () => {
           })
           .then((data) => {
             setBasket([]);
-            console.log("came in then");
             // window.location.href = "/";
-            console.log("created order data: ", data.data.msg);
           });
       } catch (error) {
+        console.log("came here");
         setError(error.response.data.error);
+        console.log("came down here");
       }
     }
 
@@ -114,8 +107,7 @@ const Checkout = () => {
   //   console.log("print is done right, Shahid");
   // };
 
-  const transactionError = async (data) => {
-    // console.log();
+  const transactionError = async () => {
     setError("Transaction not successful");
   };
 
@@ -127,9 +119,6 @@ const Checkout = () => {
     setPostalCode(e.target.value);
     localStorage.setItem("pcl", e.target.value);
   };
-
-  // console.log("address: ", address);
-  // console.log("street: ", street);
 
   if (error) {
     setTimeout(() => {
@@ -153,7 +142,7 @@ const Checkout = () => {
               <input
                 type="text"
                 name="address"
-                value={address}
+                value={address ? address : ""}
                 placeholder="eg. Dusseldorf"
                 onChange={(e) => setAddress(e.target.value)}
               />
@@ -164,7 +153,7 @@ const Checkout = () => {
               <input
                 type="text"
                 name="street"
-                value={street}
+                value={street ? street : ""}
                 placeholder="eg. street no.6 house no.1"
                 onChange={(e) => setStreet(e.target.value)}
               />
@@ -212,17 +201,17 @@ const Checkout = () => {
           </div>
         </div>
 
-        <div
+        {/* <div
           className="paypalButton"
-          style={{ display: getBasketTotal(basket) === 0 ? "none" : "block" }}>
-          <Paypal
-            total={getBasketTotal(basket)}
-            onSuccess={transactionSuccess}
-            onCancel={transactionCancel}
-            onError={transactionError}
-            setError={setError}
-          />
-        </div>
+          style={{ display: getBasketTotal(basket) === 0 ? "none" : "block" }}> */}
+        <Paypal
+          total={getBasketTotal(basket)}
+          onSuccess={transactionSuccess}
+          onCancel={transactionCancel}
+          onError={transactionError}
+          setError={setError}
+        />
+        {/* </div> */}
         <button className="paythebill__btn" onClick={transactionSuccess}>
           print the bill
         </button>

@@ -16,23 +16,21 @@ const Location = {
   getOnePostalCode: async (req, res, next) => {
     try {
       const { postalCode } = req.params;
-      console.log("postal code: ", postalCode);
 
       const code = await PostalCode.findOne({ postalCode });
-      console.log("code: ", code);
       if (!code)
         return res.status(404).json({
           success: false,
           error: "Delivery not available at your location",
         });
 
-      if (!code.active) {
-        return res.status(300).json({
-          success: false,
-          error:
-            "Delivery is temporarily unavailable at your location, please try with a different postal Code",
-        });
-      }
+      // if (!code.active) {
+      //   return res.status(400).json({
+      //     success: false,
+      //     error:
+      //       "Delivery is temporarily unavailable at your location, please try after some time",
+      //   });
+      // }
 
       return res.status(200).json({ success: true, code });
     } catch (error) {

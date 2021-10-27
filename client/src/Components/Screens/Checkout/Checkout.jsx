@@ -20,13 +20,6 @@ const Checkout = () => {
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
 
-  // if (!userID || !postalCode || !address || !street || basket.length === 0) {
-  //   setDeferLoading(true);
-  // }
-  // if (userID && postalCode && address && street && basket.length > 0) {
-  //   setDeferLoading(false);
-  // }
-
   const transactionSuccess = async (data) => {
     const time = Date.now();
 
@@ -63,9 +56,7 @@ const Checkout = () => {
           });
       }
     } catch (error) {
-      // console.log("came here");
       setError(error.response.data.error);
-      // console.log("came down here");
     }
   };
 
@@ -241,9 +232,9 @@ const Checkout = () => {
             />
           </button>
           {/* </div> */}
-          <button className="paythebill__btn" onClick={transactionSuccess}>
+          {/* <button className="paythebill__btn" onClick={transactionSuccess}>
             print the bill
-          </button>
+          </button> */}
 
           {/* <button className="paythebill__btn" onClick={() => window.self.print()}>
           Print

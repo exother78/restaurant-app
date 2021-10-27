@@ -182,7 +182,7 @@ exports.createOrder = async (req, res, next) => {
         web: {
           notification: {
             title: "New Order!",
-            body: "something else",
+            body: order.basket,
             deep_link: "https://asims-restaurant.herokuapp.com",
             icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
           },

@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 const SlideFront = () => {
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
-  const [setMinimumOrder] = userAPI.minOrder;
+  const [, setMinimumOrder] = userAPI.minOrder;
   const [data, setData] = userAPI.postalData;
   const [loading] = useState(false);
   const [postalCodeChange, setPostalCodeChange] = useState("");
@@ -54,6 +54,9 @@ const SlideFront = () => {
             localStorage.removeItem("pcl");
             setData(null);
             setMinimumOrder(null);
+            setError(
+              "Delivery is currently not available at your location right now"
+            );
             return;
           }
           if (response.data.code.active) {

@@ -47,7 +47,8 @@
 .product__right-section {
   flex: 0.2;
   width: 100%;
-  background-color: green;
+  background-color: #ddd;
+  border: none;
   min-width: 100px;
   height: 100px;
 }

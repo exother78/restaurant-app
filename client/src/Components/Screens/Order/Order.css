@@ -80,12 +80,16 @@
 }
 
 .order__allContainer {
-  background: #ddd;
+  background: #fff;
 }
 
 /* .order__container-category img {
   object-fit: cover;
 } */
+
+.order__container-category-text {
+  text-decoration: double;
+}
 
 .order__container {
   position: relative;
@@ -94,6 +98,7 @@
   flex-wrap: wrap;
   background: #fff;
   justify-content: center;
+  margin-bottom: 15px;
 }
 
 .order__container > * {

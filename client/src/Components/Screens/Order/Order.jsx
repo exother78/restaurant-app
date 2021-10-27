@@ -25,7 +25,7 @@ const Order = () => {
     console.log("arr: ", arr);
   };
 
-  if (!products) {
+  if (!products || !categories) {
     return <Loading />;
   }
 
@@ -48,20 +48,50 @@ const Order = () => {
           </div>
         </div>
         <div className="order__allContainer">
-          {categories?.map((item) => (
-            <div className="order__container-category">
-              <h2
-                className="order__container-category-text"
-                style={{ padding: "7px 0" }}>
-                {item?.name}
-              </h2>
-              <img
-                src={item?.images?.url}
-                width="100%"
-                height="150"
-                style={{ objectFit: "cover" }}
-                alt=""
-              />
+          {categories?.map((item, i) => (
+            <div
+              key={i}
+              className="order__container-category"
+              style={{ margin: "10px 0" }}>
+              <div
+                className="order__container-category-data"
+                style={{ width: "90%", margin: "0 auto" }}>
+                <h2
+                  className="order__container-category-text"
+                  style={{
+                    padding: "7px 0",
+                    marginBottom: "10px",
+                    textTransform: "capitalize",
+                    letterSpacing: ".4px",
+                    fontSize: "x-large",
+                  }}>
+                  {item?.name}
+                </h2>
+                <img
+                  src={item?.images?.url}
+                  width="100%"
+                  height="150"
+                  style={{ objectFit: "cover", marginBottom: "10px" }}
+                  alt=""
+                />
+              </div>
+
+              <div className="order__container">
+                {products
+                  .filter((cat) => cat.category === item.name)
+                  .map((p, i) => {
+                    return (
+                      <Product
+                        key={i}
+                        id={p.product_id}
+                        title={p.title}
+                        description={p.description}
+                        price={p.price}
+                        image={p.images.url}
+                      />
+                    );
+                  })}
+              </div>
             </div>
           ))}
 

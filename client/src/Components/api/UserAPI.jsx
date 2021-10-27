@@ -11,20 +11,20 @@ const UserAPI = (token) => {
   // const [street, setStreet] = useState(null);
   // const [address, setAddress] = useState(null);
 
-  const getCode = async (postal) => {
-    try {
-      if (postal === "undefined") {
-        return;
-      }
-      const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
-      setData(data.data.code);
-      setPostalCode(data.data.code.postalCode);
-      return data.data.code;
-    } catch (error) {
-      setPostalCode(null);
-      localStorage.removeItem("pcl");
-    }
-  };
+  // const getCode = async (postal) => {
+  //   try {
+  //     if (postal === "undefined") {
+  //       return;
+  //     }
+  //     const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
+  //     setData(data.data.code);
+  //     setPostalCode(data.data.code.postalCode);
+  //     return data.data.code;
+  //   } catch (error) {
+  //     setPostalCode(null);
+  //     localStorage.removeItem("pcl");
+  //   }
+  // };
 
   const getPostalCode = async (postal) => {
     try {
@@ -33,6 +33,9 @@ const UserAPI = (token) => {
       return error.response;
     }
   };
+
+  // console.log("data: ", data);
+  // console.log("postalCode: ", postalCode);
 
   useEffect(() => {
     if (token) {
@@ -66,13 +69,20 @@ const UserAPI = (token) => {
     async (postal) => {
       await getPostalCode(postal)
         .then((response) => {
-          console.log("response is here: ", response.data.code);
-          if (!postalCode) setPostalCode(postal);
-          if (!response.data.code.active) return;
-          if (response.data.code.active) {
-            setData(response.data.code);
-            setMinimumOrder(response.data.code.minOrder);
-            localStorage.setItem("pcl", response.data.code.postalCode);
+          // console.log("response is here: ", response.data.code);
+          if (response) {
+            if (!postalCode) setPostalCode(postal);
+            if (!response.data.code.active) {
+              localStorage.removeItem("pcl");
+              setData(null);
+              setMinimumOrder(null);
+              return;
+            }
+            if (response.data.code.active) {
+              setData(response.data.code);
+              setMinimumOrder(response.data.code.minOrder);
+              localStorage.setItem("pcl", response.data.code.postalCode);
+            }
           }
         })
         .catch((error) =>
@@ -145,7 +155,7 @@ const UserAPI = (token) => {
     userID: user?._id,
     postalCode: [postalCode, setPostalCode],
     postalData: [data, setData],
-    minOrder: [minimumOrder],
+    minOrder: [minimumOrder, setMinimumOrder],
   };
 };
 

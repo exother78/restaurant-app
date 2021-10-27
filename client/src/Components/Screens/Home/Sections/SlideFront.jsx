@@ -11,20 +11,21 @@ import { Link } from "react-router-dom";
 const SlideFront = () => {
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
+  const [setMinimumOrder] = userAPI.minOrder;
   const [data, setData] = userAPI.postalData;
-  const [loading, setLoading] = useState(false);
+  const [loading] = useState(false);
   const [postalCodeChange, setPostalCodeChange] = useState("");
   const [error, setError] = useState(null);
 
-  const getCode = async (postal) => {
-    try {
-      const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
-      setData(data.data.code);
-      return data.data.code;
-    } catch (error) {
-      setError(error.response.data.error);
-    }
-  };
+  // const getCode = async (postal) => {
+  //   try {
+  //     const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
+  //     setData(data.data.code);
+  //     return data.data.code;
+  //   } catch (error) {
+  //     setError(error.response.data.error);
+  //   }
+  // };
 
   const getPostalCode = async (postal) => {
     try {
@@ -42,11 +43,25 @@ const SlideFront = () => {
   const handlePostalFind = async () => {
     getPostalCode(postalCodeChange)
       .then((response) => {
+        // if (response) {
+        //   console.log("postal code in front: ", response);
+        //   setData(response.data.code);
+        //   setPostalCode(response.data.code.postalCode);
+        //   localStorage.setItem("pcl", response.data.code.postalCode);
+        // }
         if (response) {
-          console.log("postal code in front: ", response);
-          setData(response.data.code);
-          setPostalCode(response.data.code.postalCode);
-          localStorage.setItem("pcl", response.data.code.postalCode);
+          if (!response.data.code.active) {
+            localStorage.removeItem("pcl");
+            setData(null);
+            setMinimumOrder(null);
+            return;
+          }
+          if (response.data.code.active) {
+            setData(response.data.code);
+            setMinimumOrder(response.data.code.minOrder);
+            localStorage.setItem("pcl", response.data.code.postalCode);
+            setPostalCode(postalCodeChange);
+          }
         }
       })
       .catch((error) => console.log("error: ", error));

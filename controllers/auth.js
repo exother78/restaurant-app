@@ -170,36 +170,36 @@ exports.createOrder = async (req, res, next) => {
       return res.status(401).json({ success: false, error: "user not found" });
     }
 
-    // const order = await Order.create(orders);
-    // if (!order) {
-    //   return res
-    //     .status(500)
-    //     .json({ success: false, error: "something bad happened" });
-    // }
+    const order = await Order.create(orders);
+    if (!order) {
+      return res
+        .status(500)
+        .json({ success: false, error: "something bad happened" });
+    }
 
-    // if (order) {
-    //   beamsClient
-    //     .publishToInterests(["hello_61261e08b394081bb085b31d"], {
-    //       web: {
-    //         notification: {
-    //           title: "New Order!",
-    //           body: JSON.stringify(order),
-    //           deep_link: "https://asims-restaurant.herokuapp.com",
-    //         },
-    //       },
-    //     })
-    //     .then((publishResponse) => {
-    //       console.log("Just published:", publishResponse.publishId);
-    //     })
-    //     .catch((error) => {
-    //       console.log("Error:", error);
-    //     });
-    // }
+    if (order) {
+      beamsClient
+        .publishToInterests(["hello_61261e08b394081bb085b31d"], {
+          web: {
+            notification: {
+              title: "New Order!",
+              body: JSON.stringify(order),
+              deep_link: "https://asims-restaurant.herokuapp.com",
+            },
+          },
+        })
+        .then((publishResponse) => {
+          console.log("Just published:", publishResponse.publishId);
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+        });
+    }
 
-    // pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
-    //   message: order,
-    //   msg: "something added",
-    // });
+    pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
+      message: order,
+      msg: "something added",
+    });
 
     return res.status(200).json({ success: true, msg: "Order Successful" });
 

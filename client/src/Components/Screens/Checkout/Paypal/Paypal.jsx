@@ -21,17 +21,17 @@ const Paypal = ({ onSuccess, onCancel, onError, total, setError }) => {
   return (
     <PayPalScriptProvider
       options={{
-        "client-id":
-          "ATSNzle97H2HdLUL3GMnS5I8PuKouWyteOOCVNR-3UqTW5N_0tFs3ddtDitE1IfqAlRXI4hbaEo2yDT9",
         // "client-id":
-        //   "Ac8o4swJtckfwVOCnGLmPeW4KuApWFOLBx4LLW8TcnUD7t5AkSBU6i1yeuPK822ps6QJt-5gL9swQsWI",
-        "merchant-id": "92V8XPRZFHZRE",
+        //   "ATSNzle97H2HdLUL3GMnS5I8PuKouWyteOOCVNR-3UqTW5N_0tFs3ddtDitE1IfqAlRXI4hbaEo2yDT9",
+        "client-id":
+          "Ac8o4swJtckfwVOCnGLmPeW4KuApWFOLBx4LLW8TcnUD7t5AkSBU6i1yeuPK822ps6QJt-5gL9swQsWI",
+        // "merchant-id": "92V8XPRZFHZRE",
         // // "buyer-country": "IT",
         // // locale: "de_DE",
-        locale: "en_US",
+        // locale: "en_US",
         // // locale: "it_IT",
-        intent: "capture",
-        currency: "EUR",
+        // intent: "capture",
+        // currency: "EUR",
       }}>
       {/* {isPending ? (
         <Loading />

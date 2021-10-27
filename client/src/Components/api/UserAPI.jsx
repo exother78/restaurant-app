@@ -26,6 +26,7 @@ const UserAPI = (token) => {
   //   }
   // };
 
+  // console.log("userid: ", user._id);
   const getPostalCode = async (postal) => {
     try {
       return await axios.get(`/api/dashboard/onepostalcode/${postal}`);

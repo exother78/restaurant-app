@@ -16,10 +16,11 @@ import {
 //   locale: "de_DE",
 // };
 
-const Paypal = ({ onSuccess, onCancel, onError, total, setError }) => {
+const Paypal = ({ onSuccess, onCancel, onError, total, loading, setError }) => {
   // const [{ isPending, isResolved }] = usePayPalScriptReducer();
   return (
     <PayPalScriptProvider
+      deferLoading={loading}
       options={{
         // "client-id":
         //   "ATSNzle97H2HdLUL3GMnS5I8PuKouWyteOOCVNR-3UqTW5N_0tFs3ddtDitE1IfqAlRXI4hbaEo2yDT9",

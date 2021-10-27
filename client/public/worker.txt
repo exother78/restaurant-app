@@ -1,0 +1,19 @@
+//part1
+  // pushEvent.waitUntil(handleNotification(payload));
+  // Promise.resolve(func(payload))
+  //   .then((data) => data.json())
+  //   .then((response) => {
+  //     console.log("this is fetched data: ", response);
+  //     // dataReceived = response;
+  //   });
+
+part2
+  // const notification = new Notification(payload.notification.title, {
+    //   body: "this is something you don't know",
+    //   icon: "https://picsum.photos/200",
+    // });
+    // notification.onclick = (e) => {
+    //   e.preventDefault();
+    //   window.open("https://asims-restaurant.herokuapp.com");
+    //   notification.close();
+    // };

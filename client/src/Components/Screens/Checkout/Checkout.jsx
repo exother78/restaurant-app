@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./Checkout.css";
 import { useStateValue } from "../../../StateProvider";
 import CartProduct from "../Cart/Sections/CartProduct";
@@ -18,12 +18,30 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [street, setStreet] = useState("");
   const [error, setError] = useState("");
+  const [deferLoading, setDeferLoading] = useState(true);
+
+  // if (!userID || !postalCode || !address || !street || basket.length === 0) {
+  //   setDeferLoading(true);
+  // }
+  // if (userID && postalCode && address && street && basket.length > 0) {
+  //   setDeferLoading(false);
+  // }
 
   const transactionSuccess = async (data) => {
     const time = Date.now();
 
-    if (userID && postalCode && address && basket.length > 0) {
-      try {
+    try {
+      if (!address) {
+        setError("Please enter your address to continue order");
+      }
+      if (!userID) {
+        setError("Please Login to continue");
+      }
+
+      if (!postalCode) {
+        setError("Please Enter your postal code to continue");
+      }
+      if (userID && postalCode && address && basket.length > 0) {
         await axios
           .post("/api/user/createorder", {
             orders: {
@@ -41,24 +59,13 @@ const Checkout = () => {
           })
           .then((data) => {
             setBasket([]);
-            // window.location.href = "/";
+            window.location.href = "/";
           });
-      } catch (error) {
-        // console.log("came here");
-        setError(error.response.data.error);
-        // console.log("came down here");
       }
-    }
-
-    if (!address) {
-      setError("Please enter your address to continue order");
-    }
-    if (!userID) {
-      setError("Please Login to continue");
-    }
-
-    if (!postalCode) {
-      setError("Please Enter your postal code to continue");
+    } catch (error) {
+      // console.log("came here");
+      setError(error.response.data.error);
+      // console.log("came down here");
     }
   };
 
@@ -125,6 +132,17 @@ const Checkout = () => {
       setError(null);
     }, 2000);
   }
+
+  useEffect(() => {
+    if (!userID || !postalCode || !address || !street || basket.length === 0) {
+      console.log("ran not");
+      setDeferLoading(true);
+    }
+    if (userID && postalCode && address && street && basket.length > 0) {
+      console.log("ran true");
+      setDeferLoading(false);
+    }
+  }, [street, userID, postalCode, basket, address, deferLoading]);
 
   return (
     <div className="checkout">
@@ -219,12 +237,13 @@ const Checkout = () => {
               onCancel={transactionCancel}
               onError={transactionError}
               setError={setError}
+              loading={deferLoading}
             />
           </button>
           {/* </div> */}
-          {/* <button className="paythebill__btn" onClick={transactionSuccess}>
+          <button className="paythebill__btn" onClick={transactionSuccess}>
             print the bill
-          </button> */}
+          </button>
 
           {/* <button className="paythebill__btn" onClick={() => window.self.print()}>
           Print

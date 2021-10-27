@@ -30,7 +30,6 @@ const SlideFront = () => {
   const getPostalCode = async (postal) => {
     try {
       return await axios.get(`/api/dashboard/onepostalcode/${postal}`);
-      // .catch((error) => console.log("error came in: ", error.response));
     } catch (error) {
       // return error.response;
       console.log("came here in error");

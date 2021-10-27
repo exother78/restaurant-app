@@ -241,6 +241,9 @@ input.location__field::placeholder {
   .home__location {
     width: 45%;
   }
+  .home__location-buttons {
+    width: 45%;
+  }
 
   .sliderPostalCode__field {
     width: 40%;
@@ -262,6 +265,10 @@ input.location__field::placeholder {
     margin-bottom: 40px;
   }
 
+  .home__location-buttons {
+    width: 50%;
+  }
+
   .sliderPostalCode__field {
     width: 45%;
   }
@@ -273,6 +280,9 @@ input.location__field::placeholder {
   }
 
   .home__location {
+    width: 60%;
+  }
+  .home__location-buttons {
     width: 60%;
   }
 
@@ -299,6 +309,10 @@ input.location__field::placeholder {
     width: 90%;
   }
 
+  .home__location-buttons {
+    width: 90%;
+  }
+
   .location__field:focus {
     transform: scale(1);
   }
@@ -316,5 +330,30 @@ input.location__field::placeholder {
 @media only screen and (max-width: 600px) {
   .sliderPostalCode__field {
     width: 80%;
+  }
+
+  /* .home__location {
+    flex-direction: column;
+    width: 100%;
+  } */
+  .home__location-buttons {
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 430px) {
+  .home__location-buttons {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    /* background: brown; */
+  }
+
+  .home__location-buttons-link {
+    width: calc(100% - 30px);
+    margin: 6px 0;
+  }
+
+  .home__location-buttons-button {
   }
 }

@@ -83,12 +83,22 @@
   background: #fff;
 }
 
-/* .order__container-category img {
+.order__container-category-data img {
   object-fit: cover;
-} */
+  margin-bottom: 10px;
+}
+
+.order__container-category-data {
+  width: 90%;
+  margin: 0 auto;
+}
 
 .order__container-category-text {
-  text-decoration: double;
+  padding: 7px 0;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  letter-spacing: 0.4px;
+  font-size: x-large;
 }
 
 .order__container {
@@ -140,6 +150,10 @@
 @media only screen and (max-width: 700px) {
   .order__right-section-order {
     display: none;
+  }
+
+  .order__container-category-data {
+    width: calc(100% - 20px);
   }
 
   .order {

@@ -41,7 +41,15 @@ const Order = () => {
         <div className="order__header">
           <div className="order__categories">
             {categories.map((category, i) => (
-              <p className="order__category" key={i}>
+              <p
+                className="order__category"
+                key={i}
+                onClick={() => {
+                  document.getElementById(category.name).scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                  });
+                }}>
                 {category.name}
               </p>
             ))}
@@ -50,30 +58,13 @@ const Order = () => {
         <div className="order__allContainer">
           {categories?.map((item, i) => (
             <div
+              id={item.name}
               key={i}
               className="order__container-category"
               style={{ margin: "10px 0" }}>
-              <div
-                className="order__container-category-data"
-                style={{ width: "90%", margin: "0 auto" }}>
-                <h2
-                  className="order__container-category-text"
-                  style={{
-                    padding: "7px 0",
-                    marginBottom: "10px",
-                    textTransform: "capitalize",
-                    letterSpacing: ".4px",
-                    fontSize: "x-large",
-                  }}>
-                  {item?.name}
-                </h2>
-                <img
-                  src={item?.images?.url}
-                  width="100%"
-                  height="150"
-                  style={{ objectFit: "cover", marginBottom: "10px" }}
-                  alt=""
-                />
+              <div className="order__container-category-data">
+                <h2 className="order__container-category-text">{item?.name}</h2>
+                <img src={item?.images?.url} width="100%" height="150" alt="" />
               </div>
 
               <div className="order__container">

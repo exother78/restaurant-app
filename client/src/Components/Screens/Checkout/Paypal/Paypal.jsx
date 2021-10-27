@@ -61,8 +61,6 @@ const Paypal = ({ onSuccess, onCancel, onError, total, setError }) => {
               ],
             });
         }}
-        // onCancel={(e) => console.log("cancelled payment: ", e)}
-        // disabled
         style={{
           layout: "horizontal",
           label: "checkout",

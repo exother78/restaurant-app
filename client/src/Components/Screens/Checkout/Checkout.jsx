@@ -44,9 +44,9 @@ const Checkout = () => {
             // window.location.href = "/";
           });
       } catch (error) {
-        console.log("came here");
+        // console.log("came here");
         setError(error.response.data.error);
-        console.log("came down here");
+        // console.log("came down here");
       }
     }
 
@@ -222,9 +222,9 @@ const Checkout = () => {
             />
           </button>
           {/* </div> */}
-          <button className="paythebill__btn" onClick={transactionSuccess}>
+          {/* <button className="paythebill__btn" onClick={transactionSuccess}>
             print the bill
-          </button>
+          </button> */}
 
           {/* <button className="paythebill__btn" onClick={() => window.self.print()}>
           Print

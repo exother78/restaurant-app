@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const UserAPI = (token) => {
   const [user, setUser] = useState({});
@@ -7,6 +7,7 @@ const UserAPI = (token) => {
   const [isAdmin, setIsAdmin] = useState(false);
   const [postalCode, setPostalCode] = useState(null);
   const [data, setData] = useState({});
+  const [minimumOrder, setMinimumOrder] = useState(null);
   // const [street, setStreet] = useState(null);
   // const [address, setAddress] = useState(null);
 
@@ -61,22 +62,47 @@ const UserAPI = (token) => {
       getUser();
     }
   }, [token]);
+  const runGetCode = useCallback(
+    async (postal) => {
+      await getPostalCode(postal)
+        .then((response) => {
+          console.log("response is here: ", response.data.code);
+          if (!postalCode) setPostalCode(postal);
+          if (!response.data.code.active) return;
+          if (response.data.code.active) {
+            setData(response.data.code);
+            setMinimumOrder(response.data.code.minOrder);
+            localStorage.setItem("pcl", response.data.code.postalCode);
+          }
+        })
+        .catch((error) =>
+          console.log("something wrong here: ", error.response)
+        );
+    },
+    [postalCode]
+  );
 
-  const runGetCode = async (postal) => {
-    await getPostalCode(postal)
-      .then((response) => {
-        // console.log("response: ", response);
-        setData(response.data.code);
-        localStorage.setItem("pcl", response.data.code.postalCode);
-      })
-      .catch((error) => console.log("something wrong here: ", error.response));
-  };
+  // const runGetCode = async (postal) => {
+  //   await getPostalCode(postal)
+  //     .then((response) => {
+  //       console.log("response is here: ", response);
+  //       if (!postalCode) setPostalCode(postal);
+  //       setData(response.data.code);
+  //       setMinimumOrder(response.data.code.minOrder);
+  //       localStorage.setItem("pcl", response.data.code.postalCode);
+  //     })
+  //     .catch((error) => console.log("something wrong here: ", error.response));
+  // };
 
+  const postal = localStorage.getItem("pcl");
   useEffect(() => {
     if (postalCode) {
       runGetCode(postalCode);
     }
-  }, [postalCode]);
+    if (postal) {
+      runGetCode(postal);
+    }
+  }, [postalCode, postal, runGetCode]);
 
   // useEffect(() => {
   //   if (postalCode) {
@@ -119,6 +145,7 @@ const UserAPI = (token) => {
     userID: user?._id,
     postalCode: [postalCode, setPostalCode],
     postalData: [data, setData],
+    minOrder: [minimumOrder],
   };
 };
 

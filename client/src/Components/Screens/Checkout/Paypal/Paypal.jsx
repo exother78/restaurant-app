@@ -26,10 +26,10 @@ const Paypal = ({ onSuccess, onCancel, onError, total, setError }) => {
         // "client-id":
         //   "Ac8o4swJtckfwVOCnGLmPeW4KuApWFOLBx4LLW8TcnUD7t5AkSBU6i1yeuPK822ps6QJt-5gL9swQsWI",
         "merchant-id": "92V8XPRZFHZRE",
-        // "buyer-country": "IT",
-        // locale: "de_DE",
+        // // "buyer-country": "IT",
+        // // locale: "de_DE",
         locale: "en_US",
-        // locale: "it_IT",
+        // // locale: "it_IT",
         intent: "capture",
         currency: "EUR",
       }}>
@@ -49,6 +49,7 @@ const Paypal = ({ onSuccess, onCancel, onError, total, setError }) => {
         // onError={(err) => console.log("error occured: ", err)}
         // onInit={(data) => console.log("on init: ", data)}
         createOrder={(data, actions) => {
+          console.log("data: ", data);
           if (total !== 0)
             return actions.order.create({
               purchase_units: [

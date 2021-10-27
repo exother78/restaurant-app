@@ -20,8 +20,8 @@ const productSchema = new Schema(
 
     description: {
       type: String,
-      required: true,
-      minlength: 6,
+      // required: true,
+      // minlength: 6,
     },
 
     images: {

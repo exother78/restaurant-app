@@ -79,6 +79,14 @@
   }
 }
 
+.order__allContainer {
+  background: #ddd;
+}
+
+/* .order__container-category img {
+  object-fit: cover;
+} */
+
 .order__container {
   position: relative;
   top: 0;

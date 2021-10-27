@@ -20,6 +20,11 @@ const Order = () => {
     }
   });
 
+  const func = () => {
+    var arr = products.filter((item) => item.category === "antipasti");
+    console.log("arr: ", arr);
+  };
+
   if (!products) {
     return <Loading />;
   }
@@ -42,8 +47,25 @@ const Order = () => {
             ))}
           </div>
         </div>
-        <div className="order__container">
-          {products.map((p, i) => {
+        <div className="order__allContainer">
+          {categories?.map((item) => (
+            <div className="order__container-category">
+              <h2
+                className="order__container-category-text"
+                style={{ padding: "7px 0" }}>
+                {item?.name}
+              </h2>
+              <img
+                src={item?.images?.url}
+                width="100%"
+                height="150"
+                style={{ objectFit: "cover" }}
+                alt=""
+              />
+            </div>
+          ))}
+
+          {/* {products.map((p, i) => {
             return (
               <Product
                 key={i}
@@ -54,7 +76,8 @@ const Order = () => {
                 image={p.images.url}
               />
             );
-          })}
+          })} */}
+          {/* <button onClick={func}>click to check</button> */}
         </div>
       </div>
       <div className="order__right-section-order">

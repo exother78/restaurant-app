@@ -192,7 +192,7 @@ const CreateProduct = () => {
 
           <div className="create__product-input">
             <input
-              required
+              // required
               type="text"
               placeholder="Description"
               value={data.description}

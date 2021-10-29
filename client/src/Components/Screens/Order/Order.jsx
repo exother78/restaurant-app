@@ -20,10 +20,10 @@ const Order = () => {
     }
   });
 
-  const func = () => {
-    var arr = products.filter((item) => item.category === "antipasti");
-    console.log("arr: ", arr);
-  };
+  // const func = () => {
+  //   var arr = products.filter((item) => item.category === "antipasti");
+  //   console.log("arr: ", arr);
+  // };
 
   if (!products || !categories) {
     return <Loading />;
@@ -38,7 +38,7 @@ const Order = () => {
             alt=""
           />
         </div>
-        <div className="order__header">
+        <div className="order__header" style={{ userSelect: "none" }}>
           <div className="order__categories">
             {categories.map((category, i) => (
               <p
@@ -47,7 +47,7 @@ const Order = () => {
                 onClick={() => {
                   document.getElementById(category.name).scrollIntoView({
                     behavior: "smooth",
-                    block: "center",
+                    block: "start",
                   });
                 }}>
                 {category.name}

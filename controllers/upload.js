@@ -21,7 +21,7 @@ const upload = {
         .status(400)
         .json({ success: false, error: "Please Provide a valid format" });
 
-    if (file.size > 1024 * 1024) {
+    if (file.size > 1024 * 2048) {
       removeTmp(file.tempFilePath);
       return res.status(400).json({ error: "Size too large" });
     }

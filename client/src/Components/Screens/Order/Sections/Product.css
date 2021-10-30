@@ -28,6 +28,7 @@
   letter-spacing: 1px;
   font-size: x-large;
   margin: 0;
+  text-transform: capitalize;
 }
 
 .product__details {

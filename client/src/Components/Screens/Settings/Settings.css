@@ -1,0 +1,68 @@
+.user__settings {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.user__settings-details {
+  width: 25%;
+  height: calc(100vh - 100px);
+  border-right: 1px solid grey;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.user__settings-details-image {
+  width: 100%;
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.user__settings-details-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user__settings-details-image h3 {
+  margin: 20px 0;
+}
+
+.user__settings .sectionsOfUser {
+  width: 100%;
+  margin-top: 30px;
+  position: relative;
+  flex: 1;
+}
+
+.user__settings .sectionsOfUser p {
+  width: 90%;
+  margin: 2px auto;
+  padding: 10px;
+  display: flex;
+}
+
+.user__settings .sectionsOfUser p a {
+  color: white;
+  font-size: large;
+  font-family: "Josefin Slab";
+  padding: 15px;
+  background-color: #d70f64;
+  font-weight: 600;
+  letter-spacing: 1px;
+  transition: all 0.5s ease;
+  flex: 1;
+}
+
+.user__settings .sectionsOfUser p a:hover {
+  background-color: #ff006a;
+}
+
+.user__settings .sectionsOfUser p a:active {
+  background: #f15495;
+  transform: translateY(4px);
+}

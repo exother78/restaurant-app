@@ -166,6 +166,12 @@
 
 .home__location-buttons-link {
   width: 40%;
+  transition: all 0.2s ease;
+}
+
+.home__location-buttons-link:active {
+  transform: translateY(4px);
+  background: #e70664;
 }
 
 .home__location-buttons-button {
@@ -176,9 +182,11 @@
   border: none;
   outline: none;
   cursor: pointer;
+  transition: all 0.3s ease;
 }
 
 .home__location-buttons-button:hover {
+  /* transform: translateY(-1px); */
   background: rgb(255 0 141);
 }
 

@@ -5,7 +5,7 @@ import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 // import axios from "axios";
 import "./App.css";
-import Home from "./Screens/Home/Home";
+// import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
 import Login from "./Screens/Auth/Login";
 // import Register from "./Screens/Auth/Register";
@@ -13,9 +13,9 @@ import Login from "./Screens/Auth/Login";
 // import Order from "./Screens/Order/Order";
 
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Orders from "./Screens/OrderHistory/Orders";
-import Settings from "./Screens/Settings/Settings";
-import About from "./Screens/About/About";
+// import Orders from "./Screens/OrderHistory/Orders";
+// import Settings from "./Screens/Settings/Settings";
+// import About from "./Screens/About/About";
 // import Location from "./Screens/Location/Location";
 // import Cart from "./Screens/Cart/Cart";
 // import Checkout from "./Screens/Checkout/Checkout";
@@ -36,15 +36,20 @@ import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProducts
 // import AllProducts from "./DevAdmin/Products/Products/AllProducts";
 // import RegisteredUsers from "./DevAdmin/users/RegisteredUsers";
 // import Orders from "./DevAdmin/Orders/Orders/Orders";
+const Home = lazy(async () => import("./Screens/Home/Home"));
 const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
 const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
 const Location = lazy(() => import("./Screens/Location/Location"));
 const Order = lazy(() => import("./Screens/Order/Order"));
 const Cart = lazy(() => import("./Screens/Cart/Cart"));
+const Settings = lazy(() => import("./Screens/Settings/Settings"));
+const About = lazy(() => import("./Screens/About/About"));
+const Orders = lazy(() => import("./Screens/OrderHistory/Orders"));
 const Checkout = lazy(() => import("./Screens/Checkout/Checkout"));
 const CreateCategory = lazy(() =>
   import("./DevAdmin/Categories/CreateCategory")
 );
+
 const MenuScreen = lazy(() => import("./Screens/Menu/MenuScreen"));
 const CreateProduct = lazy(() => import("./DevAdmin/Products/CreateProduct"));
 const Register = lazy(() => import("./Screens/Auth/Register"));
@@ -390,8 +395,9 @@ function App() {
           </Route>
           <Route path="/about">
             <Header />
-
-            <About />
+            <Suspense fallback={<Loading />}>
+              <About />
+            </Suspense>
           </Route>
 
           <Route path="/order">
@@ -403,12 +409,16 @@ function App() {
 
           <Route path="/settings">
             <Header />
-            <Settings />
+            <Suspense fallback={<Loading />}>
+              <Settings />
+            </Suspense>
           </Route>
 
           <Route path="/orders">
             <Header />
-            <Orders />
+            <Suspense fallback={<Loading />}>
+              <Orders />
+            </Suspense>
           </Route>
 
           <Route path="/menu">
@@ -441,14 +451,13 @@ function App() {
           </Route>
 
           <Route path="/">
-            {/* {!products ? (
-              <Loading />
-            ) : ( */}
             <>
               <Header />
-              <Home />
+
+              <Suspense fallback={<Loading />}>
+                <Home />
+              </Suspense>
             </>
-            {/* )} */}
           </Route>
         </Switch>
       </div>

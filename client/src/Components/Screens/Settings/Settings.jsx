@@ -11,6 +11,8 @@ const Settings = () => {
   const lastName = userAPI.lastName;
   const userAddress = userAPI.userAddress;
   const userStreet = userAPI.userStreet;
+  const email = userAPI.email;
+  const postalCode = userAPI.postalCode;
 
   return (
     <div className="user__settings">
@@ -43,6 +45,19 @@ const Settings = () => {
             <p className="title">last name: </p>
             <p className="desc">{lastName && lastName}</p>
           </div>
+          <div className="name">
+            <p className="title">Email: </p>
+            <p className="desc">{email && email}</p>
+          </div>
+          <div className="name">
+            <p className="title">password: </p>
+            <p className="desc"></p>
+          </div>
+          <div className="name">
+            <p className="title">Postal code: </p>
+            <p className="desc">{postalCode && postalCode}</p>
+          </div>
+
           <div className="name">
             <p className="title">address: </p>
             <p className="desc">{userAddress && userAddress}</p>

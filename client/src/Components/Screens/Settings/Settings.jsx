@@ -6,10 +6,11 @@ import "./Settings.css";
 
 const Settings = () => {
   const { userAPI } = useStateValue();
-
   const userImage = userAPI.image;
   const firstName = userAPI.name;
   const lastName = userAPI.lastName;
+  const userAddress = userAPI.userAddress;
+  const userStreet = userAPI.userStreet;
 
   return (
     <div className="user__settings">
@@ -29,6 +30,28 @@ const Settings = () => {
           <p>
             <Link to="/menu">See Menu</Link>
           </p>
+        </div>
+      </div>
+
+      <div className="user__settings-section">
+        <div className="main__details">
+          <div className="name">
+            <p className="title">first name: </p>
+            <p className="desc">{firstName && firstName}</p>
+          </div>
+          <div className="name">
+            <p className="title">last name: </p>
+            <p className="desc">{lastName && lastName}</p>
+          </div>
+          <div className="name">
+            <p className="title">address: </p>
+            <p className="desc">{userAddress && userAddress}</p>
+          </div>
+
+          <div className="name">
+            <p className="title">street Address: </p>
+            <p className="desc">{userStreet && userStreet}</p>
+          </div>
         </div>
       </div>
     </div>

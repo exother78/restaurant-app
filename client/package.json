@@ -8,6 +8,7 @@
     "@material-ui/icons": "^4.11.2",
     "@paypal/react-paypal-js": "^7.3.3",
     "@pusher/push-notifications-web": "^1.1.0",
+    "@react-hook/window-size": "^3.0.7",
     "@stripe/react-stripe-js": "^1.4.1",
     "@stripe/stripe-js": "^1.16.0",
     "@testing-library/jest-dom": "^5.14.1",
@@ -22,6 +23,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.3",
     "react-to-print": "^2.13.0",
+    "react-virtualized-auto-sizer": "^1.0.6",
+    "react-window": "^1.8.6",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

@@ -71,22 +71,28 @@
 .user__settings-section {
   flex: 1;
   padding: 20px;
-  /* background: purple; */
 }
 
 .user__settings-section .main__details {
-  width: 60%;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .user__settings-section .main__details .name {
+  min-width: 280px;
   width: 50%;
+  flex: 1 1 45%;
+  margin: 0 5px;
   display: flex;
   flex-direction: column;
-  /* margin: 20px 0; */
   margin-bottom: 30px;
   background: #ddd;
   padding: 10px;
-  /* border-bottom: 1px solid grey; */
+}
+
+.sectionsOfUser2 {
+  display: none;
 }
 
 .user__settings-section .main__details .name p {
@@ -106,4 +112,74 @@
 
 .user__settings-section .main__details .name p:last-child {
   text-align: right;
+}
+
+@media only screen and (max-width: 1300px) {
+  .user__settings-details {
+    width: 30%;
+  }
+  .user__settings-section {
+    width: 70%;
+  }
+}
+
+@media only screen and (max-width: 1100px) {
+  .user__settings-details {
+    width: 35%;
+  }
+  .user__settings-section {
+    width: 65%;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .user__settings-details {
+    width: 40%;
+  }
+  .user__settings-section {
+    width: 60%;
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  .user__settings-details {
+    width: 45%;
+  }
+  .user__settings-section {
+    width: 55%;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .user__settings {
+    flex-direction: column;
+  }
+  .user__settings .sectionsOfUser1 {
+    display: none;
+  }
+
+  .user__settings .sectionsOfUser2 {
+    display: block;
+  }
+  .user__settings-details {
+    width: 100%;
+    border: none;
+    height: fit-content;
+    border-right: none;
+  }
+  .user__settings-section {
+    width: calc(100% - 20px);
+    padding: 10px;
+  }
+
+  .main__details .name {
+    min-height: 50px;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .user__settings-section {
+    width: 100%;
+    padding: 0;
+  }
 }

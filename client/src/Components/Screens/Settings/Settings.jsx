@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useStateValue } from "../../../StateProvider";
 import Loading from "../Global/Loading";
 import { Link } from "react-router-dom";
@@ -22,7 +22,7 @@ const Settings = () => {
 
           <h3>{firstName && lastName && firstName + " " + lastName}</h3>
         </div>
-        <div className="sectionsOfUser">
+        <div className="sectionsOfUser sectionsOfUser1">
           <p>
             <Link to="/orders">Your Orders</Link>
           </p>
@@ -68,9 +68,51 @@ const Settings = () => {
             <p className="desc">{userStreet && userStreet}</p>
           </div>
         </div>
+        <div className="sectionsOfUser sectionsOfUser2">
+          <p>
+            <Link to="/orders">Your Orders</Link>
+          </p>
+          <p>
+            <Link to="/order">Order Food Now</Link>
+          </p>
+          <p>
+            <Link to="/menu">See Menu</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
 };
 
 export default Settings;
+
+// import React from "react";
+// import { FixedSizeList as List } from "react-window";
+
+// const Row = ({ index, style }) => (
+//   <div style={style}>
+//     Row {index}
+//     <img src="https://picsum.photos/200/300" alt="" width="20" height="20" />
+//   </div>
+// );
+
+// const Settings = () => {
+//   // const container = document.querySelector(".items__container");
+//   // const width = container.clientWidth;
+//   // console.log("width: ", width);
+
+//   const width = window.innerWidth;
+
+//   return (
+//     <List
+//       height={200}
+//       itemCount={1000}
+//       itemSize={35}
+//       width={width}
+//       layout="horizontal">
+//       {Row}
+//     </List>
+//   );
+// };
+
+// export default Settings;

@@ -26,7 +26,6 @@ const UserAPI = (token) => {
   //   }
   // };
 
-  // console.log("userid: ", user._id);
   const getPostalCode = async (postal) => {
     try {
       return await axios.get(`/api/dashboard/onepostalcode/${postal}`);
@@ -34,9 +33,6 @@ const UserAPI = (token) => {
       return error.response;
     }
   };
-
-  // console.log("data: ", data);
-  // console.log("postalCode: ", postalCode);
 
   useEffect(() => {
     if (token) {
@@ -52,12 +48,7 @@ const UserAPI = (token) => {
 
           if (data.data.user.postalCode) {
             setPostalCode(data.data.user.postalCode);
-            // localStorage.setItem("pcl", data.data.user.postalCode);
-            // const item = localStorage.getItem("pcl");
-            // console.log("check here: ", item);
           }
-          // setAddress(data?.data?.user?.address);
-          // setStreet(data?.data?.user?.street);
           data.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
         } catch (err) {
           alert(err.response.data.error);
@@ -70,7 +61,6 @@ const UserAPI = (token) => {
     async (postal) => {
       await getPostalCode(postal)
         .then((response) => {
-          // console.log("response is here: ", response.data.code);
           if (response) {
             if (!postalCode) setPostalCode(postal);
             if (!response.data.code.active) {
@@ -93,18 +83,6 @@ const UserAPI = (token) => {
     [postalCode]
   );
 
-  // const runGetCode = async (postal) => {
-  //   await getPostalCode(postal)
-  //     .then((response) => {
-  //       console.log("response is here: ", response);
-  //       if (!postalCode) setPostalCode(postal);
-  //       setData(response.data.code);
-  //       setMinimumOrder(response.data.code.minOrder);
-  //       localStorage.setItem("pcl", response.data.code.postalCode);
-  //     })
-  //     .catch((error) => console.log("something wrong here: ", error.response));
-  // };
-
   const postal = localStorage.getItem("pcl");
   useEffect(() => {
     if (postalCode) {
@@ -115,33 +93,6 @@ const UserAPI = (token) => {
     }
   }, [postalCode, postal, runGetCode]);
 
-  // useEffect(() => {
-  //   if (postalCode) {
-  //     console.log("came in useeffect2");
-  //     getCode(postalCode);
-  //     console.log("passed useeffect2");
-  //     console.log("check the postal code here: ", localStorage.getItem("pcl"));
-  //     return;
-  //   }
-  //   if (!postalCode) {
-  //     // console.log("came in useeffect2 down");
-
-  //     const postal = localStorage.getItem("pcl");
-  //     // console.log("useeffect2 down passed: ", postal);
-
-  //     if (postal) {
-  //       setPostalCode(postal);
-  //       getCode(postal);
-  //       return;
-  //     }
-
-  //     if (!postal || postal === "undefined") {
-  //       localStorage.removeItem("pcl");
-  //     }
-  //     return;
-  //   }
-  // }, [postalCode]);
-
   return {
     image: user?.images?.url,
     name: user?.firstName,
@@ -149,8 +100,6 @@ const UserAPI = (token) => {
     email: user?.email,
     userAddress: user?.address,
     userStreet: user?.street,
-    // address: [address, setAddress],
-    // street: [street, setStreet],
     isAdmin: [isAdmin, setIsAdmin],
     isLoggedIn: [isLoggedIn, setIsLoggedIn],
     userID: user?._id,

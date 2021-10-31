@@ -6,7 +6,6 @@
 .order__banner {
   height: 40vh;
   z-index: -1;
-  /* width: 70%; */
 }
 
 .order__banner img {
@@ -17,12 +16,10 @@
 }
 
 .order__header {
-  /* position: sticky; */
   z-index: 1;
   height: 60px;
   top: 70px;
   left: 0;
-  /* width: 70%; */
   background: #eee;
   margin: 0;
 }

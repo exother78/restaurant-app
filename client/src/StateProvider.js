@@ -17,7 +17,6 @@ export const StateProvider = ({ children }) => {
     const firstLogin = localStorage.getItem("login");
     if (firstLogin) {
       const refreshToken = async () => {
-        // console.log("ran token getter: ");
         try {
           const res = await axios.get("/api/user/rtfat");
           setToken(res.data.accessToken);

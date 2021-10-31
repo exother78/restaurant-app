@@ -8,23 +8,6 @@ const UserAPI = (token) => {
   const [postalCode, setPostalCode] = useState(null);
   const [data, setData] = useState({});
   const [minimumOrder, setMinimumOrder] = useState(null);
-  // const [street, setStreet] = useState(null);
-  // const [address, setAddress] = useState(null);
-
-  // const getCode = async (postal) => {
-  //   try {
-  //     if (postal === "undefined") {
-  //       return;
-  //     }
-  //     const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
-  //     setData(data.data.code);
-  //     setPostalCode(data.data.code.postalCode);
-  //     return data.data.code;
-  //   } catch (error) {
-  //     setPostalCode(null);
-  //     localStorage.removeItem("pcl");
-  //   }
-  // };
 
   const getPostalCode = async (postal) => {
     try {

@@ -10,8 +10,6 @@ const Checkout = () => {
   const state = useStateValue();
   const { userAPI } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
-  // const [street, setStreet] = userAPI.street;
-  // const [address, setAddress] = userAPI.address;
   const { email, lastName, name } = userAPI;
   const { userID } = userAPI;
   const [basket, setBasket] = state.basket;
@@ -215,9 +213,6 @@ const Checkout = () => {
             </div>
           </div>
 
-          {/* <div
-          className="paypalButton"
-          style={{ display: getBasketTotal(basket) === 0 ? "none" : "block" }}> */}
           <button
             type="submit"
             onClick={(e) => e.preventDefault()}
@@ -235,19 +230,6 @@ const Checkout = () => {
           {/* <button className="paythebill__btn" onClick={transactionSuccess}>
             print the bill
           </button> */}
-
-          {/* <button className="paythebill__btn" onClick={() => window.self.print()}>
-          Print
-        </button> */}
-
-          {/* <Paypal
-          transactionSuccess={transactionSuccess}
-          transactionError={transactionError}
-          transactionCancel={transactionCancel}
-          total={getBasketTotal(basket)}
-          something="something else"
-        /> */}
-          {/* Payment Button */}
         </div>
       </form>
     </div>

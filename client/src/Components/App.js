@@ -1,41 +1,18 @@
 import React, { lazy, Suspense, useEffect } from "react";
-// import ReactGa from "react-ga";
 import * as PusherPushNotifications from "@pusher/push-notifications-web";
-// import { ClientOptions } from "@pusher/push-notifications-web";
 
-// import axios from "axios";
 import "./App.css";
-// import Home from "./Screens/Home/Home";
 import Header from "./Screens/Header/Header";
 import Login from "./Screens/Auth/Login";
-// import Register from "./Screens/Auth/Register";
-// import MenuScreen from "./Screens/Menu/MenuScreen";
-// import Order from "./Screens/Order/Order";
-
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-// import Orders from "./Screens/OrderHistory/Orders";
-// import Settings from "./Screens/Settings/Settings";
-// import About from "./Screens/About/About";
-// import Location from "./Screens/Location/Location";
-// import Cart from "./Screens/Cart/Cart";
-// import Checkout from "./Screens/Checkout/Checkout";
-// import Logout from "./Screens/Logout/Logout";
+
 import Footer from "./Screens/Home/Sections/Footer";
 import Loading from "./Screens/Global/Loading";
-// import Pusher from "pusher-js";
 
-// import CreateCategory from "./DevAdmin/Categories/CreateCategory";
 import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
-// import Dashboard from "./DevAdmin/Dashboard/Dashboard";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
-// import AllReservoirs from "./DevAdmin/Reservoirs/AllReservoirs";
-// import ManageOrders from "./DevAdmin/Orders/Orders/ManageOrders";
-// import RegisteredUsers from "./DevAdmin/users/RegisteredUsers";
-// import CreateProduct from "./DevAdmin/Products/CreateProduct";
-// import AllProducts from "./DevAdmin/Products/Products/AllProducts";
-// import RegisteredUsers from "./DevAdmin/users/RegisteredUsers";
-// import Orders from "./DevAdmin/Orders/Orders/Orders";
+
 const Home = lazy(async () => import("./Screens/Home/Home"));
 const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
 const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
@@ -64,79 +41,12 @@ const ManageOrders = lazy(() =>
 );
 const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
 const Reports = lazy(() => import("./DevAdmin/Reports/Reports"));
-// import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 function App() {
   const { userAPI } = useStateValue();
 
-  // const [products] = productsAPI.products;
-  // const [isLoggedIn] = userAPI.isLoggedIn;
   const [isAdmin] = userAPI.isAdmin;
   const { userID } = userAPI;
-
-  // const getorders = async () => {
-  //   if (isAdmin) {
-  //     try {
-  //       console.log("ran get orders");
-  //       const auth = {
-  //         headers: { Authorization: `Bearer ${token[0]}` },
-  //       };
-
-  //       await axios
-  //         .get("/api/user/allorders", auth)
-  //         .then((data) => console.log("data: ", data));
-  //     } catch (error) {
-  //       // setError(error.response.data.error);
-  //       console.log("error: ", error.response.data);
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   getorders();
-  // });
-
-  // var noti = new Notification("New Order", { body: "something added" });
-
-  // console.log("noti: ", noti.onshow());
-  // noti.onshow = (sh) => {
-  //   console.log("soemthin to show: ", sh);
-
-  //   console.log("something notificationist happened");
-  // };
-
-  // console.log("service: ", ServiceWorkerContainer);
-  // console.log("something: happenening: ", navigator.serviceWorker.controller);
-  // navigator.serviceWorker.register("/service-worker.js");
-  // // console.log("navigator: ", navigator.serviceWorker.getRegistration());
-  // navigator.serviceWorker
-  //   .getRegistration()
-  //   .then((data) => console.log("data: ", data));
-
-  // navigator.serviceWorker.ready
-
-  // console.log("controller: ", navigator.serviceWorker.onmessage());
-  // navigator.serviceWorker.onmessage = () =>
-  //   console.log("something gonna happen");
-  // PusherPushNotifications.onNotificationReceived = ({ pushEvent, payload }) => {
-  //   console.log("something:", payload);
-  // };
-  // console.log("pusherpush: ", PusherPushNotifications);
-
-  // const func = async () => {
-  //   return await fetch("http://localhost:5376/api/print/receipt", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //   });
-  // };
-
-  // useEffect(() => {
-  //   Promise.resolve(func())
-  //     .then((data) => data.json())
-  //     .then((response) => console.log("this is fetched data: ", response));
-  // });
 
   useEffect(() => {
     if (isAdmin) {
@@ -154,70 +64,6 @@ function App() {
         });
     }
   });
-
-  // const s = navigator.serviceWorker.getRegistration();
-  // s.then((res) => console.log("res: ", res));
-
-  // const sw = new ServiceWorkerRegistration();
-  // const w = sw.scope("/service-worker.js");
-  // console.log("w: ", w);
-  // console.log("something: ", s);
-
-  // const notify = (message) => {
-  //   var notification = new Notification("New Order!", {
-  //     body: message,
-  //   });
-
-  //   notification.onClick = () => {
-  //     window.open("www.google.com");
-  //     window.location.href = "https://asims-restaurant.herokuapp.com";
-  //   };
-
-  //   setTimeout(notification.close.bind(notification), 1000 * 60 * 60);
-  // };
-
-  // const checkNotification = (message) => {
-  //   if (Notification.permission === "granted") notify(message);
-
-  //   if (Notification.permission !== "granted") {
-  //     Notification.requestPermission((permission) => {
-  //       if (permission === "granted") {
-  //         notify();
-  //       }
-  //     });
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   //   console.log("this is the admin id: ", userID);
-
-  //   // console.log("navigator: ", navigator.serviceWorker.register("/sw.js"));
-  //   // console.log('navigator: ', navigator.serviceWorker.controller)
-
-  //   if (isAdmin) {
-  //     // Pusher.logToConsole = true;
-
-  //     const pusher = new Pusher("0c82d85a358b4a26fd15", {
-  //       cluster: "ap2",
-  //     });
-
-  //     const channel = pusher.subscribe("hello_" + userID);
-  //     channel.bind("inserted", (message) => {
-  //       // console.log("message arrived: ", message);
-  //       // alert(JSON.stringify(message));
-  //     });
-
-  //     // return () => {
-  //     //   console.log("ran unbinde");
-  //     //   channel.unbind_all();
-  //     //   channel.unsubscribe();
-  //     //   console.log("ran unbind again");
-  //     // };
-  //     checkNotification("this is the new order that you can never know");
-  //   }
-
-  // console.log("permission: ", Notification.permission);
-  // });
   return (
     <Router>
       <div className="App">
@@ -411,6 +257,7 @@ function App() {
             <Header />
             <Suspense fallback={<Loading />}>
               <Settings />
+              <Footer />
             </Suspense>
           </Route>
 

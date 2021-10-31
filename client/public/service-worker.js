@@ -15,12 +15,9 @@ PusherPushNotifications.onNotificationReceived = ({
   payload,
   handleNotification,
 }) => {
-  //   // console.log("payload is here: ", payload);
-
   pushEvent.waitUntil(() => {
     handleNotification(payload);
     func();
-    // .then((response) => console.log("response: ", response));
   });
   //   // part1
 };

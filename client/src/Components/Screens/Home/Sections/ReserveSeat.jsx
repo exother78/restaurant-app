@@ -56,12 +56,7 @@ const ReserveSeat = () => {
       {error && <div className="error__box">{error}</div>}
       <h1 className="reserve-seat__title">Reserve Your Seat now</h1>
 
-      <div className="reserve-seat__image">
-        {/* <img
-          src="https://images.pexels.com/photos/2923034/pexels-photo-2923034.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-          alt=""
-        /> */}
-      </div>
+      <div className="reserve-seat__image"></div>
 
       <div className="reserve-seat__select">
         <form action="" onSubmit={handleSubmit}>
@@ -79,7 +74,6 @@ const ReserveSeat = () => {
             <select
               id="select__reserve-seat"
               typeof="time"
-              // value={data.time}
               onChange={changed}
               name="time">
               <option value="0">Select Time</option>

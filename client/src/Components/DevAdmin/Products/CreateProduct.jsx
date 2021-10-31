@@ -86,7 +86,6 @@ const CreateProduct = () => {
         return res;
       }
     } catch (error) {
-      // alert(error.response.data.error);
       setError(error.response.data.error);
     }
   };
@@ -135,12 +134,10 @@ const CreateProduct = () => {
       {error && <div className="error__box">{error}</div>}
       <h1 style={{ margin: "0 30px " }}>Create Product</h1>
 
-      {/* <div className="create__product-container"> */}
       <form onSubmit={handleSubmit} className="create__product-form">
         <div className="create__product-container-leftSection">
           {!imageShow && (
             <input
-              // required
               type="file"
               name="file"
               onChange={handleFileChange}
@@ -150,7 +147,6 @@ const CreateProduct = () => {
           {imageShow && (
             <div className="create__product-image-preview">
               <img
-                // required
                 src={imageShow}
                 alt=""
                 width="100%"
@@ -192,7 +188,6 @@ const CreateProduct = () => {
 
           <div className="create__product-input">
             <input
-              // required
               type="text"
               placeholder="Description"
               value={data.description}
@@ -230,7 +225,6 @@ const CreateProduct = () => {
           <button className="create__product-form-button">Submit</button>
         </div>
       </form>
-      {/* </div> */}
     </div>
   );
 };

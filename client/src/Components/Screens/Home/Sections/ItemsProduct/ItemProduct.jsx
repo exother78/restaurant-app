@@ -1,11 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import { useStateValue } from "../../../../../StateProvider";
 
 const ItemProduct = ({ title, description, price, images }) => {
-  // const { productsAPI } = useStateValue();
-  // const [products] = productsAPI.products;
-  // console.log("props: ", props);
   return (
     <Link to="/order" className="item__main">
       <div className="item">

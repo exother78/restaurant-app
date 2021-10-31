@@ -2,7 +2,6 @@
   height: max-content;
   position: relative;
   padding: 20px;
-  /* background-image: url("https://images.pexels.com/photos/7598248/pexels-photo-7598248.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"); */
   background-image: url("https://images.pexels.com/photos/172277/pexels-photo-172277.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260");
   background-size: cover;
   background-attachment: fixed;
@@ -43,7 +42,6 @@
 
 .menu__category-list {
   list-style: none;
-  /* line-height: 2; */
 }
 
 .menu__category-list li {

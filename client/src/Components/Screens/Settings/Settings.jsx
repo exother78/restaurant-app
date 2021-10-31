@@ -85,34 +85,3 @@ const Settings = () => {
 };
 
 export default Settings;
-
-// import React from "react";
-// import { FixedSizeList as List } from "react-window";
-
-// const Row = ({ index, style }) => (
-//   <div style={style}>
-//     Row {index}
-//     <img src="https://picsum.photos/200/300" alt="" width="20" height="20" />
-//   </div>
-// );
-
-// const Settings = () => {
-//   // const container = document.querySelector(".items__container");
-//   // const width = container.clientWidth;
-//   // console.log("width: ", width);
-
-//   const width = window.innerWidth;
-
-//   return (
-//     <List
-//       height={200}
-//       itemCount={1000}
-//       itemSize={35}
-//       width={width}
-//       layout="horizontal">
-//       {Row}
-//     </List>
-//   );
-// };
-
-// export default Settings;

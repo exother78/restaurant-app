@@ -20,11 +20,6 @@ const Order = () => {
     }
   });
 
-  // const func = () => {
-  //   var arr = products.filter((item) => item.category === "antipasti");
-  //   console.log("arr: ", arr);
-  // };
-
   if (!products || !categories) {
     return <Loading />;
   }
@@ -85,20 +80,6 @@ const Order = () => {
               </div>
             </div>
           ))}
-
-          {/* {products.map((p, i) => {
-            return (
-              <Product
-                key={i}
-                id={p.product_id}
-                title={p.title}
-                description={p.description}
-                price={p.price}
-                image={p.images.url}
-              />
-            );
-          })} */}
-          {/* <button onClick={func}>click to check</button> */}
         </div>
       </div>
       <div className="order__right-section-order">

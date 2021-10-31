@@ -4,9 +4,7 @@ import { useStateValue } from "./../../../../StateProvider";
 import axios from "axios";
 import Loading from "../../../Screens/Global/Loading";
 import NotFound from "../../../Screens/Global/NotFound";
-// import Box from "./../Box/Box";
 const Box = lazy(() => import("./../Box/Box"));
-// const OneUser = lazy(() => import("../User/OneUser"));
 
 const ManageOrders = () => {
   const { userAPI } = useStateValue();
@@ -38,14 +36,6 @@ const ManageOrders = () => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
-  useEffect(() => {
-    if (token[0] && orders) {
-      // getOrders().then((response) => {
-      //   setOrders(response.data.orders);
-      // });
-      // console.log("something happening");
-    }
-  });
 
   if (error) {
     setTimeout(() => {
@@ -63,7 +53,6 @@ const ManageOrders = () => {
       <div className="manageOrders__container">
         {orders?.map((order, i) => (
           <React.Fragment key={i}>
-            {/* {console.log("order: ", order)} */}
             {order?.basket?.length > 0 && (
               <Suspense fallback={<Loading />}>
                 <Box {...order} />

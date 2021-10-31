@@ -6,31 +6,12 @@
   position: relative;
   transform: translateY(-70px);
   background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260");
-
   background-size: cover;
-  /* background-attachment: fixed; */
   background-repeat: no-repeat;
   background-position: center;
   display: flex;
-  /* padding: 70px 20px 0 20px; */
   user-select: none;
 }
-
-/* .home__slider {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  left: 0;
-  top: 0;
-  z-index: -1;
-} */
-/* 
-.home__slider img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-} */
 
 .sliderPostal__title {
   margin-bottom: 10px;
@@ -38,12 +19,8 @@
 
 .sliderFront__sidebox {
   position: absolute;
-  /* margin-top: calc(70px + 30px);
-  margin-left: 20px; */
   left: 20px;
   top: 110px;
-  /* margin-top: calc(70px + 30px); */
-  /* margin-left: 20px; */
   background: #d70f64;
   width: 180px;
   height: 180px;
@@ -51,7 +28,6 @@
   min-height: 200px;
   max-height: 200px;
   max-width: 200px;
-  /* background-color: brown; */
   flex: 0.2;
   color: white;
   padding: 10px;
@@ -94,7 +70,6 @@
 
 .home__address-postal-field {
   margin: 0 auto;
-  /* width: 100%; */
   height: calc(100vh);
   flex: 1;
   display: flex;
@@ -140,12 +115,7 @@
 
 .home__address-field {
   margin: 0 auto;
-  /* margin-left: auto;
-  margin-right: auto; */
-  /* width: 100%; */
-  /* min-width: 90%; */
   flex: 1;
-  /* background: purple; */
   display: none;
   height: calc(100vh);
   justify-content: center;
@@ -186,7 +156,6 @@
 }
 
 .home__location-buttons-button:hover {
-  /* transform: translateY(-1px); */
   background: rgb(255 0 141);
 }
 
@@ -197,53 +166,6 @@
   letter-spacing: 0.2px;
   font-family: "Montserrat";
 }
-
-/* .home__location {
-  background: white;
-  padding: 10px 20px;
-  width: 40%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  box-shadow: 3px 3px 7px #555;
-}
-.location__field {
-  outline: none;
-  border: none;
-  width: calc(100% - 60px);
-  padding: 8px 30px;
-  height: 30px;
-  flex: 0.8;
-  border: 0.5px solid lightgray;
-  font-family: "Montserrat", "Encode Sans SC", serif;
-  transition: transform 0.2s linear;
-  font-size: small;
-  letter-spacing: 1px;
-}
-
-.location__field:focus {
-  transform: scale(1.03);
-}
-
-input.location__field::placeholder {
-  font-family: "Montserrat", "Encode Sans SC", serif;
-  font-weight: 600;
-  letter-spacing: 1px;
-}
-
-.location__field-btn {
-  font-family: "Montserrat", "Ubuntu", "Encode Sans SC", serif;
-  font-weight: 600;
-  letter-spacing: 1.1px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.2rem;
-  padding: 8px 30px;
-  flex: 0.15;
-  height: 100%;
-  min-height: 30px;
-} */
 
 @media only screen and (max-width: 1100px) {
   .home__location {
@@ -260,12 +182,9 @@ input.location__field::placeholder {
 
 @media only screen and (max-width: 1000px) {
   .home__address-field {
-    /* justify-content: flex-end; */
     position: relative;
     display: block;
-    /* left: 50%; */
     top: 200px;
-    /* transform: translate(-50%, 0); */
   }
 
   .home__location {
@@ -309,7 +228,6 @@ input.location__field::placeholder {
   .home__address-field {
     width: 90%;
     max-width: 95%;
-    /* margin: -65px auto; */
   }
 
   .home__location {
@@ -340,10 +258,6 @@ input.location__field::placeholder {
     width: 80%;
   }
 
-  /* .home__location {
-    flex-direction: column;
-    width: 100%;
-  } */
   .home__location-buttons {
     width: 100%;
   }
@@ -354,14 +268,10 @@ input.location__field::placeholder {
     width: 100%;
     flex-direction: column;
     align-items: center;
-    /* background: brown; */
   }
 
   .home__location-buttons-link {
     width: calc(100% - 30px);
     margin: 6px 0;
-  }
-
-  .home__location-buttons-button {
   }
 }

@@ -22,7 +22,6 @@ const PostalCodeBox = ({
   setError,
   handleDel,
   index,
-  // runUseEffect,
 }) => {
   const [loading, setLoading] = useState(false);
   const [activeBox, setActiveBox] = useState(active);
@@ -55,7 +54,6 @@ const PostalCodeBox = ({
           setLoading(false);
           setActiveBox(val);
           setCallback(!callback);
-          // runUseEffect();
         });
     } catch (error) {
       setError(error.response.data.error);
@@ -70,7 +68,6 @@ const PostalCodeBox = ({
         setLoading(false);
       });
       setCallback(!callback);
-      // runUseEffect();
       handleDel(index);
     } catch (error) {
       setError(error.response.data.error);

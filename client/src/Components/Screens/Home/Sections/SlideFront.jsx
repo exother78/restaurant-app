@@ -17,22 +17,10 @@ const SlideFront = () => {
   const [postalCodeChange, setPostalCodeChange] = useState("");
   const [error, setError] = useState(null);
 
-  // const getCode = async (postal) => {
-  //   try {
-  //     const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
-  //     setData(data.data.code);
-  //     return data.data.code;
-  //   } catch (error) {
-  //     setError(error.response.data.error);
-  //   }
-  // };
-
   const getPostalCode = async (postal) => {
     try {
       return await axios.get(`/api/dashboard/onepostalcode/${postal}`);
     } catch (error) {
-      // return error.response;
-      console.log("came here in error");
       setPostalCode(null);
       setData(null);
       localStorage.removeItem("pcl");
@@ -42,12 +30,6 @@ const SlideFront = () => {
   const handlePostalFind = async () => {
     getPostalCode(postalCodeChange)
       .then((response) => {
-        // if (response) {
-        //   console.log("postal code in front: ", response);
-        //   setData(response.data.code);
-        //   setPostalCode(response.data.code.postalCode);
-        //   localStorage.setItem("pcl", response.data.code.postalCode);
-        // }
         if (response) {
           if (!response.data.code.active) {
             localStorage.removeItem("pcl");
@@ -67,16 +49,6 @@ const SlideFront = () => {
         }
       })
       .catch((error) => console.log("error: ", error));
-
-    // getCode(postalCodeChange)
-    //   .then((response) => {
-    //     setLoading(false);
-    //     localStorage.setItem("pcl", response.postalCode);
-    //     setPostalCode(response.postalCode);
-    //   })
-    //   .catch(() => {
-    //     return;
-    //   });
   };
 
   if (error) {
@@ -88,13 +60,6 @@ const SlideFront = () => {
   return (
     <div className="home__slider-front">
       {error && <div className="error__box">{error}</div>}
-
-      {/* <div className="home__slider">
-        <img
-          src="https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260"
-          alt=""
-        />
-      </div> */}
 
       <div
         className="sliderFront__sidebox"
@@ -146,12 +111,6 @@ const SlideFront = () => {
         </div>
       </div>
 
-      {/* <div className="slideFrontButtons">
-        <button>Order Now!</button>
-
-        <button>Visit Menu</button>
-      </div> */}
-
       <div
         className="home__address-field"
         style={{ display: postalCode ? "flex" : "none" }}>
@@ -169,18 +128,6 @@ const SlideFront = () => {
             </button>
           </Link>
         </div>
-        {/* <div className="home__location">
-          <input
-            type="text"
-            className="location__field"
-            name="location"
-            placeholder="Enter Address"
-            spellCheck="false"
-          />
-          <button className="location__field-btn btn-primary btn-anim">
-            Save
-          </button>
-        </div> */}
       </div>
     </div>
   );

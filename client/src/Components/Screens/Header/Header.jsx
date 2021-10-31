@@ -27,10 +27,8 @@ const Header = ({ dashboard }) => {
     (e) => {
       const window = e.currentTarget;
       if (y > window.scrollY) {
-        // console.log("scrolling up");
         setDisplayMobileCartButton(true);
       } else if (y < window.scrollY) {
-        // console.log("scrolling down");
         setDisplayMobileCartButton(false);
       }
       setY(window.scrollY);
@@ -304,7 +302,6 @@ const Header = ({ dashboard }) => {
 
         <div
           className="header__mobile__cart-btn"
-          // style={{ display: displayMobileCartButton ? "block" : "none" }}
           style={{ maxHeight: displayMobileCartButton ? "70px" : "0" }}>
           <button>
             <Link to="/cart">

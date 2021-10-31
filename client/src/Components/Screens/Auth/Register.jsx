@@ -18,8 +18,6 @@ const Register = () => {
     city: "",
   });
 
-  // console.log("postal code here: ", registerForm.postalCode);
-
   const [fileImage, setFileImage] = useState(null);
   const [imageUpload, setImageUpload] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -103,8 +101,6 @@ const Register = () => {
       }
     } catch (err) {
       setLoading(false);
-
-      // alert(err.response.data.error);
     }
   };
 

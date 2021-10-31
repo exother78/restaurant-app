@@ -8,8 +8,6 @@ import { useHistory, Link } from "react-router-dom";
 const OrderTotal = () => {
   const history = useHistory();
   const state = useStateValue();
-  // const { userAPI } = useStateValue();
-  // const [postalCode, setPostalCode] = userAPI.postalCode;
   const [basket, setBasket] = state.basket;
   const [error, setError] = useState(null);
 

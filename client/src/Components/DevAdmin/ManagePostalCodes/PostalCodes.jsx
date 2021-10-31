@@ -13,8 +13,7 @@ const PostalCodes = () => {
   const [isAdmin] = userAPI.isAdmin;
   const [createModalActive, setCreateModalActive] = useState(true);
   const [modalActive, setModalActive] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const [allOffline, setAllOffline] = useState(false);
+  const [allOffline] = useState(false);
   const [error, setError] = useState("");
   const [codes, setCodes] = useState(null);
   const [showButtons, setShowButtons] = useState(false);
@@ -109,10 +108,6 @@ const PostalCodes = () => {
       setError(error.response.data.error);
     }
   };
-
-  // const runUseEffect = () => {
-  //   setCallback(!callback);
-  // };
 
   const getCodes = async () => {
     try {
@@ -210,7 +205,6 @@ const PostalCodes = () => {
             setError={setError}
             handleDel={handleDel}
             index={i}
-            // runUseEffect={runUseEffect}
             callback={callback}
           />
         ))

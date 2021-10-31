@@ -1,3 +1,32 @@
+.promotionsLine {
+  padding: 4px 0;
+  /* padding-right: 20px; */
+  background: rgb(248 10 111);
+  display: flex;
+  justify-content: center;
+  position: fixed;
+  z-index: 11;
+  width: 100%;
+}
+
+.promotionText {
+  color: white;
+  font-family: "Montserrat";
+  letter-spacing: 0.4px;
+  font-size: small;
+}
+
+.promotionCloseBtn {
+  color: white;
+  font-family: "Montserrat";
+  position: absolute;
+  right: 10px;
+  top: 40%;
+  transform: translate(0, -50%);
+  font-size: large;
+  cursor: pointer;
+}
+
 .Header {
   height: 70px;
   width: 100%;

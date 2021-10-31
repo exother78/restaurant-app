@@ -44,10 +44,10 @@
 
 .item__description {
   font-size: 0.8rem;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.3px;
   font-family: "Montserrat";
-  color: grey;
+  color: rgb(105, 104, 104);
 }
 
 .item__price-rating {

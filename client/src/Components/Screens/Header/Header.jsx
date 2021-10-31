@@ -21,7 +21,7 @@ const Header = ({ dashboard }) => {
   const [basket] = state.basket;
   const [y, setY] = useState(window.scrollY);
   const [displayMobileCartButton, setDisplayMobileCartButton] = useState(true);
-  const [promotion, setPromotion] = useState(true);
+  const [promotion, setPromotion] = useState(false);
 
   const handleNavigation = useCallback(
     (e) => {
@@ -126,40 +126,28 @@ const Header = ({ dashboard }) => {
       alert(err.response.data.error);
     }
   };
+  useEffect(() => {
+    setTimeout(() => {
+      setPromotion(true);
+    }, 3000);
+  }, []);
+
+  useEffect(() => {
+    if (promotion) {
+      setTimeout(() => {
+        setPromotion(false);
+      }, 6000);
+    }
+  }, [promotion]);
 
   return (
     <>
       {promotion && (
-        <div
-          className="promotionsLine"
-          style={{
-            padding: "4px",
-            background: "rgb(248 10 111)",
-            display: "flex",
-            justifyContent: "center",
-            position: "relative",
-          }}>
-          <p
-            style={{
-              color: "white",
-              fontFamily: "Montserrat",
-              letterSpacing: ".4px",
-              fontSize: "small",
-            }}>
-            10% discount on every purchase
-          </p>
+        <div className="promotionsLine">
+          <p className="promotionText">10% discount on every purchase</p>
           <p
             onClick={() => setPromotion(!promotion)}
-            style={{
-              color: "white",
-              fontFamily: "Montserrat",
-              position: "absolute",
-              right: "10px",
-              top: "50%",
-              transform: "translate(0, -50%)",
-              fontSize: "large",
-              cursor: "pointer",
-            }}>
+            className="promotionCloseBtn">
             x
           </p>
         </div>

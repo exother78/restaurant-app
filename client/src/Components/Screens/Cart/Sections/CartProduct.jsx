@@ -57,6 +57,7 @@ const CartProduct = ({
         </div>
         <div className="cart__product-price-incre">
           <button
+            type="button"
             className="cartProduct__minus cartProduct__same"
             onClick={handleSubtract}>
             -
@@ -65,6 +66,7 @@ const CartProduct = ({
             {quantity}
           </span>
           <button
+            type="button"
             className="cartProduct__plus cartProduct__same"
             onClick={handleAdd}>
             +

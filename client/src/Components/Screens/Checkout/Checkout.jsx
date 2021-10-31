@@ -8,7 +8,7 @@ import Paypal from "./Paypal/Paypal";
 
 const Checkout = () => {
   const state = useStateValue();
-  const { userAPI } = useStateValue();
+  const { userAPI, token } = useStateValue();
   const [postalCode, setPostalCode] = userAPI.postalCode;
   const { email, lastName, name } = userAPI;
   const { userID } = userAPI;
@@ -34,21 +34,29 @@ const Checkout = () => {
       }
       if (userID && postalCode && address && basket.length > 0) {
         await axios
-          .post("/api/user/createorder", {
-            orders: {
-              orderNumber: time + 1983,
-              userID,
-              postalCode,
-              address,
-              street,
-              basket,
-              name,
-              email,
-              lastName,
-              time,
+          .post(
+            "/api/user/createorder",
+            {
+              orders: {
+                orderNumber: time + 1983,
+                userID,
+                postalCode,
+                address,
+                street,
+                basket,
+                name,
+                email,
+                lastName,
+                time,
+              },
             },
-          })
-          .then((data) => {
+            {
+              headers: {
+                Authorization: `Bearer ${token[0]}`,
+              },
+            }
+          )
+          .then(() => {
             setBasket([]);
             window.location.href = "/";
           });
@@ -124,11 +132,9 @@ const Checkout = () => {
 
   useEffect(() => {
     if (!userID || !postalCode || !address || !street || basket.length === 0) {
-      console.log("ran not");
       setDeferLoading(true);
     }
     if (userID && postalCode && address && street && basket.length > 0) {
-      console.log("ran true");
       setDeferLoading(false);
     }
   }, [street, userID, postalCode, basket, address, deferLoading]);

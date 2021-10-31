@@ -15,7 +15,7 @@ router
 
 router
   .route("/product/:id")
-  .delete(deleteProduct)
+  .delete(protect, adminAuth, deleteProduct)
   .put(protect, adminAuth, updateProduct);
 
 module.exports = router;

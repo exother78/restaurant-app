@@ -66,8 +66,7 @@ const CreateProduct = () => {
 
       return res;
     } catch (error) {
-      console.log("createProduct uploadimage: error: ", error.response);
-      return error.response.data;
+      setError(error.response.data.error);
     }
   };
 
@@ -129,44 +128,6 @@ const CreateProduct = () => {
     if (!d) {
       funcWithoutImg();
     }
-    // try {
-    //   // var res;
-    //   if (d) {
-    //     const res = await axios.post(
-    //       "/api/products",
-    //       {
-    //         ...data,
-    //         images: { public_id: d.data.public_id, url: d.data.url },
-    //       },
-    //       {
-    //         headers: {
-    //           Authorization: `Bearer ${token[0]}`,
-    //         },
-    //       }
-    //     );
-    //     // return res;
-    //     // funcWithImg(d);
-    //   }
-    //   if (!d) {
-    //     const res = await axios.post(
-    //       "/api/products",
-    //       {
-    //         ...data,
-    //       },
-    //       {
-    //         headers: {
-    //           Authorization: `Bearer ${token[0]}`,
-    //         },
-    //       }
-    //     );
-    //     return res;
-    //     // funcWithoutImg();
-    //   }
-    //   // return res;
-    // } catch (error) {
-    //   setError(error?.response?.data?.error);
-    //   console.log("error: ", error?.response);
-    // }
   };
 
   const handleSubmit = async (e) => {
@@ -174,21 +135,9 @@ const CreateProduct = () => {
     if (imageUpload) {
       setLoading(true);
       uploadImage().then(productFunc);
-      // .then((res) => {
-      //   console.log("sdfkasjdlfjal: ", res);
-      //   setCallback(!callback);
-      //   setLoading(false);
-      //   // history.push("/dashboard/products");
-      // });
     }
     if (!imageUpload) {
-      productFunc().then((res) => {
-        // if (res.error) return;
-        // console.log("sflskdj: ", res);
-        // setCallback(!callback);
-        // setLoading(false);
-        // history.push("/dashboard/products");
-      });
+      productFunc();
     }
   };
 

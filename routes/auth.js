@@ -8,7 +8,7 @@ const {
   resetPassword,
   refreshToken,
   logout,
-  updateOrders,
+  // updateOrders,
   createOrder,
   getOrders,
   allOrders,
@@ -24,7 +24,7 @@ router.route("/logout").get(logout);
 router.route("/allorders").get(protect, adminAuth, allOrders);
 
 // router.route("/updateorders/:id").patch(updateOrders);
-router.route("/createorder").post(createOrder);
+router.route("/createorder").post(protect, createOrder);
 
 router.route("/getorders/:id").get(getOrders);
 

@@ -12,7 +12,7 @@ const Settings = () => {
   const userAddress = userAPI.userAddress;
   const userStreet = userAPI.userStreet;
   const email = userAPI.email;
-  const postalCode = userAPI.postalCode;
+  const [postalCode] = userAPI.postalCode;
 
   return (
     <div className="user__settings">

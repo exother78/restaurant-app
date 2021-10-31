@@ -19,10 +19,10 @@ const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
 const Location = lazy(() => import("./Screens/Location/Location"));
 const Order = lazy(() => import("./Screens/Order/Order"));
 const Cart = lazy(() => import("./Screens/Cart/Cart"));
-const Settings = lazy(() => import("./Screens/Settings/Settings"));
 const About = lazy(() => import("./Screens/About/About"));
 const Orders = lazy(() => import("./Screens/OrderHistory/Orders"));
 const Checkout = lazy(() => import("./Screens/Checkout/Checkout"));
+const Settings = lazy(() => import("./Screens/Settings/Settings"));
 const CreateCategory = lazy(() =>
   import("./DevAdmin/Categories/CreateCategory")
 );
@@ -218,7 +218,6 @@ function App() {
                 <DashboardHome />
               </Suspense>
             ) : (
-              // <Redirect to={{ pathname: "/login" }} />
               <>
                 <Header /> <NotFound />
               </>
@@ -257,7 +256,6 @@ function App() {
             <Header />
             <Suspense fallback={<Loading />}>
               <Settings />
-              <Footer />
             </Suspense>
           </Route>
 
@@ -285,7 +283,7 @@ function App() {
           </Route>
 
           <Route path="/login">
-            <Header disable={false} />
+            <Header />
             <Login />
           </Route>
 

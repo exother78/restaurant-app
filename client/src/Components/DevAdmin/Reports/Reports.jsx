@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import jsPDF from "jspdf";
 
 const Reports = () => {
-  const generatePDF = () => {
+  const [array, setArray] = useState([]);
+  const generatePDF = async () => {
+    await getDate();
     var doc = new jsPDF("p", "pt", "a4");
 
     doc.html(document.querySelector("#content"), {
@@ -31,46 +33,23 @@ const Reports = () => {
     "08/07/2021, 1:13:49 PM",
   ];
 
-  const getDate = () => {
+  const getDate = async () => {
     const date = new Date();
     console.log("date :", date.getMonth());
     const manualDate = "10/20/2021, 1:13:49 PM";
     const mDate = new Date(manualDate);
 
     // arr.every((item, s) => console.log("item: ", item, " s: ", s));
-    var filteredArray = arr.filter(
+    var filteredArray = await arr.filter(
       (item) => new Date(item).getMonth() < date.getMonth()
     );
     console.log("filtered array: ", filteredArray);
+    await setArray(filteredArray);
 
     const check = date > mDate;
     console.log("check if old date is less than date now : ", check);
   };
-
-  const getPostalCode = async (postal) => {
-    try {
-      const data = await axios.get(`/api/dashboard/onepostalcode/${postal}`);
-      console.log("data: ", data);
-      // setData(data.data.code);
-      return data.data.code;
-    } catch (error) {
-      console.log("error up: ", error.response);
-      // setError(error.response.data.error);
-    }
-  };
-
-  const postal = async () => {
-    getPostalCode("52250")
-      .then((response) => {
-        console.log("response: ", response);
-        // setLoading(false);
-        // localStorage.setItem("pcl", response.postalCode);
-        // setPostalCode(response.postalCode);
-      })
-      .catch(() => {
-        return;
-      });
-  };
+  console.log("array: ", array);
 
   return (
     <div>
@@ -79,9 +58,13 @@ const Reports = () => {
         Generate Pdf
       </button>
       <br />
-      <button onClick={postal} style={{ padding: "20px 40px", margin: "10px" }}>
-        get postal
-      </button>
+
+      <div id="content">
+        <h3></h3>
+        {array.map((item) => (
+          <h3>{item}</h3>
+        ))}
+      </div>
     </div>
   );
 };

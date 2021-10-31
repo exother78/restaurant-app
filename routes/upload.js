@@ -4,6 +4,6 @@ const { adminAuth } = require("../middleware/AdminAuth");
 const { protect } = require("../middleware/protect");
 
 router.route("/upload").post(uploadImage);
-router.route("/destroy").post(destroyImage);
+router.route("/destroy").post(protect, adminAuth, destroyImage);
 
 module.exports = router;

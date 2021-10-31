@@ -5,9 +5,17 @@ const {
   deleteProduct,
   updateProduct,
 } = require("../controllers/Products");
+const { protect } = require("../middleware/protect");
+const { adminAuth } = require("../middleware/AdminAuth");
 
-router.route("/products").get(getProducts).post(createProduct);
+router
+  .route("/products")
+  .get(getProducts)
+  .post(protect, adminAuth, createProduct);
 
-router.route("/product/:id").delete(deleteProduct).put(updateProduct);
+router
+  .route("/product/:id")
+  .delete(deleteProduct)
+  .put(protect, adminAuth, updateProduct);
 
 module.exports = router;

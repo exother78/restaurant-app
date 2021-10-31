@@ -85,7 +85,12 @@ const AllProductsProduct = ({
     return (
       <div className="allproducts__product">
         <div className="allproducts__items">
-          <img src={images?.url} alt="" className="allproducts__items__image" />
+          <img
+            src={images?.url}
+            alt=""
+            className="allproducts__items__image"
+            loading="lazy"
+          />
 
           <div className="allproducts__items__text">
             <span className="allproducts__items__title">{title}</span>

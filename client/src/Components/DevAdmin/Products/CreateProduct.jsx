@@ -7,7 +7,7 @@ import { useHistory } from "react-router";
 
 const CreateProduct = () => {
   const history = useHistory();
-  const { categoriesAPI, productsAPI, userAPI } = useStateValue();
+  const { categoriesAPI, productsAPI, userAPI, token } = useStateValue();
   const [isAdmin] = userAPI.isAdmin;
   const [categories] = categoriesAPI.categories;
   const [callback, setCallback] = productsAPI.callback;
@@ -67,46 +67,127 @@ const CreateProduct = () => {
       return res;
     } catch (error) {
       console.log("createProduct uploadimage: error: ", error.response);
+      return error.response.data;
+    }
+  };
+
+  const funcWithImg = async (d) => {
+    try {
+      const res = await axios.post(
+        "/api/products",
+        {
+          ...data,
+          images: { public_id: d.data.public_id, url: d.data.url },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token[0]}`,
+          },
+        }
+      );
+      setCallback(!callback);
+      setLoading(false);
+      history.push("/dashboard/products");
+
+      return res;
+    } catch (error) {
+      setError(error.response.data.error);
+      setLoading(false);
+      return error.response.data;
+    }
+  };
+
+  const funcWithoutImg = async () => {
+    try {
+      const res = await axios.post(
+        "/api/products",
+        {
+          ...data,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token[0]}`,
+          },
+        }
+      );
+      setCallback(!callback);
+      setLoading(false);
+      history.push("/dashboard/products");
+
+      return res;
+    } catch (error) {
+      setError(error.response.data.error);
+      setLoading(false);
+      return error.response.data;
     }
   };
 
   const productFunc = async (d) => {
-    try {
-      if (d) {
-        const res = await axios.post("/api/products", {
-          ...data,
-          images: { public_id: d.data.public_id, url: d.data.url },
-        });
-        return res;
-      }
-      if (!d) {
-        const res = await axios.post("/api/products", {
-          ...data,
-        });
-        return res;
-      }
-    } catch (error) {
-      setError(error.response.data.error);
+    if (d) {
+      funcWithImg(d);
     }
+    if (!d) {
+      funcWithoutImg();
+    }
+    // try {
+    //   // var res;
+    //   if (d) {
+    //     const res = await axios.post(
+    //       "/api/products",
+    //       {
+    //         ...data,
+    //         images: { public_id: d.data.public_id, url: d.data.url },
+    //       },
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${token[0]}`,
+    //         },
+    //       }
+    //     );
+    //     // return res;
+    //     // funcWithImg(d);
+    //   }
+    //   if (!d) {
+    //     const res = await axios.post(
+    //       "/api/products",
+    //       {
+    //         ...data,
+    //       },
+    //       {
+    //         headers: {
+    //           Authorization: `Bearer ${token[0]}`,
+    //         },
+    //       }
+    //     );
+    //     return res;
+    //     // funcWithoutImg();
+    //   }
+    //   // return res;
+    // } catch (error) {
+    //   setError(error?.response?.data?.error);
+    //   console.log("error: ", error?.response);
+    // }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (imageUpload) {
       setLoading(true);
-      uploadImage()
-        .then(productFunc)
-        .then(() => {
-          setCallback(!callback);
-          setLoading(false);
-          history.push("/dashboard/products");
-        });
+      uploadImage().then(productFunc);
+      // .then((res) => {
+      //   console.log("sdfkasjdlfjal: ", res);
+      //   setCallback(!callback);
+      //   setLoading(false);
+      //   // history.push("/dashboard/products");
+      // });
     }
     if (!imageUpload) {
-      productFunc().then(() => {
-        setCallback(!callback);
-        setLoading(false);
-        history.push("/dashboard/products");
+      productFunc().then((res) => {
+        // if (res.error) return;
+        // console.log("sflskdj: ", res);
+        // setCallback(!callback);
+        // setLoading(false);
+        // history.push("/dashboard/products");
       });
     }
   };

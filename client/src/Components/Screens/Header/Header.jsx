@@ -44,20 +44,23 @@ const Header = ({ dashboard }) => {
       window.removeEventListener("scroll", handleNavigation);
     };
   }, [handleNavigation]);
-  document.addEventListener("scroll", (e) => {
-    const header = document.querySelector(".Header");
 
-    if (header && window.scrollY > 5) {
-      header.classList.add("white");
-    }
-    if (
-      header &&
-      header.classList.value.includes("white") &&
-      window.scrollY < 5
-    ) {
-      header.classList.remove("white");
-    }
-  });
+  useEffect(() => {
+    document.addEventListener("scroll", (e) => {
+      const header = document.querySelector(".Header");
+
+      if (header && window.scrollY > 5) {
+        header.classList.add("white");
+      }
+      if (
+        header &&
+        header.classList.value.includes("white") &&
+        window.scrollY < 5
+      ) {
+        header.classList.remove("white");
+      }
+    });
+  }, []);
 
   const handleBarsClick = () => {
     const bars = document.querySelector(".header__bars");
@@ -111,8 +114,6 @@ const Header = ({ dashboard }) => {
       localStorage.removeItem("login");
       localStorage.removeItem("pcl");
 
-      window.location.href = "/";
-
       navigator.serviceWorker
         .register("/service-worker.js")
         .then((registration) => {
@@ -120,23 +121,24 @@ const Header = ({ dashboard }) => {
             .unregister()
             .then((bool) => console.log("boolean: ", bool));
         });
+      window.location.href = "/";
     } catch (err) {
       alert(err.response.data.error);
     }
   };
-  useEffect(() => {
-    setTimeout(() => {
-      setPromotion(true);
-    }, 3000);
-  }, []);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setPromotion(true);
+  //   }, 3000);
+  // }, []);
 
-  useEffect(() => {
-    if (promotion) {
-      setTimeout(() => {
-        setPromotion(false);
-      }, 6000);
-    }
-  }, [promotion]);
+  // useEffect(() => {
+  //   if (promotion) {
+  //     setTimeout(() => {
+  //       setPromotion(false);
+  //     }, 6000);
+  //   }
+  // }, [promotion]);
 
   return (
     <>

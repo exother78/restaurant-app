@@ -9,15 +9,14 @@ const func = async (payload) => {
     body: JSON.stringify(payload),
   });
 };
-
 PusherPushNotifications.onNotificationReceived = ({
   pushEvent,
   payload,
   handleNotification,
 }) => {
-  pushEvent.waitUntil(() => {
-    handleNotification(payload);
-    func();
-  });
-  //   // part1
+  func(payload);
+  pushEvent.waitUntil(handleNotification(payload));
 };
+
+//   //   // part1
+// };

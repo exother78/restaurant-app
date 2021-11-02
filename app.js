@@ -6,7 +6,6 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
-const compression = require("compression");
 // const pusher = require("./config/pusher");
 
 // const path = require("path");
@@ -33,17 +32,6 @@ connectDB();
 // middleware
 const app = express();
 
-app.use(
-  compression({
-    level: 6,
-    threshold: 0,
-    filter: (req, res) => {
-      if (req.headers["x-no-compression"]) return false;
-
-      return compression.filter(req, res);
-    },
-  })
-);
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -61,16 +49,16 @@ app.use("/api", require("./routes/CategoryRoute"));
 app.use("/api", require("./routes/Reservoir"));
 app.use("/api", require("./routes/users"));
 app.use("/api", require("./routes/PostalCode"));
+app.use("/api", require("./routes/reports"));
 app.use("/api", require("./routes/print"));
 
+app.use(express.static("client/build"));
+// if (process.env.NODE_ENV === "production") {
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+// }
 app.use(errorHandler);
-
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  });
-}
 
 const port = process.env.PORT || 5000;
 

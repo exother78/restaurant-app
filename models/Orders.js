@@ -13,6 +13,10 @@ const OrderSchema = new Schema(
       required: true,
       trim: true,
     },
+    paymentID: {
+      type: String,
+      required: true,
+    },
 
     email: {
       type: String,
@@ -46,6 +50,10 @@ const OrderSchema = new Schema(
       type: Array,
       required: true,
       default: [],
+    },
+    total: {
+      type: Number,
+      required: true,
     },
     time: {
       type: Date,

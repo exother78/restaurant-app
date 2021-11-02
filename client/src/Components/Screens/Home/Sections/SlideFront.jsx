@@ -13,7 +13,7 @@ const SlideFront = () => {
   const [postalCode, setPostalCode] = userAPI.postalCode;
   const [, setMinimumOrder] = userAPI.minOrder;
   const [data, setData] = userAPI.postalData;
-  const [loading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [postalCodeChange, setPostalCodeChange] = useState("");
   const [error, setError] = useState(null);
 
@@ -21,6 +21,7 @@ const SlideFront = () => {
     try {
       return await axios.get(`/api/dashboard/onepostalcode/${postal}`);
     } catch (error) {
+      setLoading(false);
       setPostalCode(null);
       setData(null);
       localStorage.removeItem("pcl");
@@ -28,6 +29,7 @@ const SlideFront = () => {
   };
 
   const handlePostalFind = async () => {
+    setLoading(true);
     getPostalCode(postalCodeChange)
       .then((response) => {
         if (response) {
@@ -35,6 +37,7 @@ const SlideFront = () => {
             localStorage.removeItem("pcl");
             setData(null);
             setMinimumOrder(null);
+            setLoading(false);
             setError(
               "Delivery is currently not available at your location right now"
             );
@@ -44,6 +47,7 @@ const SlideFront = () => {
             setData(response.data.code);
             setMinimumOrder(response.data.code.minOrder);
             localStorage.setItem("pcl", response.data.code.postalCode);
+            setLoading(false);
             setPostalCode(postalCodeChange);
           }
         }
@@ -85,7 +89,7 @@ const SlideFront = () => {
       <div
         className="home__address-postal-field"
         style={{ display: !postalCode ? "flex" : "none" }}>
-        <h3 className="sliderPostal__title">Find Your Postal Code</h3>
+        <h2 className="sliderPostal__title">Find Your Postal Code</h2>
 
         <div className="sliderPostalCode__field">
           <input
@@ -97,7 +101,9 @@ const SlideFront = () => {
             onChange={(e) => setPostalCodeChange(e.target.value)}
           />
           <button
-            style={{ maxHeight: "40px" }}
+            style={{
+              maxHeight: "40px",
+            }}
             className="sliderPostalCode__find-btn"
             onClick={!loading ? handlePostalFind : null}>
             {loading ? (

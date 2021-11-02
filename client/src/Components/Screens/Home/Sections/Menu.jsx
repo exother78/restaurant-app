@@ -23,7 +23,7 @@ const Menu = () => {
           </div>
         ))}
         <div className="menu-page">
-          <h4>Click Here to See full menu</h4>
+          <p>Click Here to See full menu</p>
           <span
             className="menu-to-menuscreen-arrow"
             onClick={() => (window.location.href = "/menu")}>

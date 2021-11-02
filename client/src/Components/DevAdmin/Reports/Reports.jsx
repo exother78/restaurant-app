@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import jsPDF from "jspdf";
+import axios from "axios";
+import "./Reports.css";
 
 const Reports = () => {
+  const [error, setError] = useState(null);
   const [array, setArray] = useState([]);
   const generatePDF = async () => {
-    await getDate();
+    // await getDate();
     var doc = new jsPDF("p", "pt", "a4");
 
     doc.html(document.querySelector("#content"), {
@@ -14,55 +17,119 @@ const Reports = () => {
     });
   };
 
-  const arr = [
-    "10/23/2021, 1:13:49 PM",
-    "10/22/2021, 1:13:49 PM",
-    "10/18/2021, 1:13:49 PM",
-    "10/12/2021, 1:13:49 PM",
-    "10/03/2021, 1:13:49 PM",
-    "09/04/2021, 1:13:49 PM",
-    "05/09/2021, 1:13:49 PM",
-    "03/29/2021, 1:13:49 PM",
-    "11/24/2021, 1:13:49 PM",
-    "12/09/2021, 1:13:49 PM",
-    "05/08/2021, 1:13:49 PM",
-    "02/29/2021, 1:13:49 PM",
-    "11/26/2021, 1:13:49 PM",
-    "12/04/2021, 1:13:49 PM",
-    "08/07/2021, 1:13:49 PM",
-  ];
+  // const arr = [
+  //   "10/23/2021, 1:13:49 PM",
+  //   "10/22/2021, 1:13:49 PM",
+  //   "10/18/2021, 1:13:49 PM",
+  //   "10/12/2021, 1:13:49 PM",
+  //   "10/03/2021, 1:13:49 PM",
+  //   "09/04/2021, 1:13:49 PM",
+  //   "05/09/2021, 1:13:49 PM",
+  //   "03/29/2021, 1:13:49 PM",
+  //   "11/24/2021, 1:13:49 PM",
+  //   "12/09/2021, 1:13:49 PM",
+  //   "05/08/2021, 1:13:49 PM",
+  //   "02/29/2021, 1:13:49 PM",
+  //   "11/26/2021, 1:13:49 PM",
+  //   "12/04/2021, 1:13:49 PM",
+  //   "08/07/2021, 1:13:49 PM",
+  // ];
 
-  const getDate = async () => {
-    const date = new Date();
-    console.log("date :", date.getMonth());
-    const manualDate = "10/20/2021, 1:13:49 PM";
-    const mDate = new Date(manualDate);
+  // const getDate = async () => {
+  //   const date = new Date();
 
-    // arr.every((item, s) => console.log("item: ", item, " s: ", s));
-    var filteredArray = await arr.filter(
-      (item) => new Date(item).getMonth() < date.getMonth()
-    );
-    console.log("filtered array: ", filteredArray);
-    await setArray(filteredArray);
+  //   console.log("check date: ", date < new Date(arr[0]));
+  //   // console.log("date :", date.getMonth());
+  //   const manualDate = "10/20/2021, 1:13:49 PM";
+  //   var filteredArray = await arr.filter(
+  //     (item) => new Date(item).getMonth() < date.getMonth()
+  //   );
+  //   await setArray(filteredArray);
+  // };
 
-    const check = date > mDate;
-    console.log("check if old date is less than date now : ", check);
+  const getReport = async (month) => {
+    try {
+      const report = await axios.get("/api/dashboard/reports/11");
+      // .then((res) => console.log("response: ", res.data.array));
+      setArray(report.data.array);
+      console.log(report.data.array);
+      return report;
+    } catch (error) {
+      setError(error.response.data.error);
+    }
   };
   console.log("array: ", array);
 
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }
+
   return (
-    <div>
-      <button onClick={getDate}>get date</button>
+    <div className="dashboard__reports">
+      {error && <div className="error__box">{error}</div>}
+
+      <button>get date</button>
       <button onClick={generatePDF} type="primary">
         Generate Pdf
       </button>
       <br />
 
+      <button onClick={getReport}>Get report of january</button>
+
       <div id="content">
-        <h3>something in here</h3>
-        {array.map((item) => (
-          <h3>{item}</h3>
-        ))}
+        <table>
+          <thead>
+            <tr>
+              <th>name</th>
+              {/* </tr> */}
+              {/* <tr> */}
+              <th>email</th>
+              {/* </tr> */}
+              {/* <tr> */}
+              <th>amount</th>
+            </tr>
+          </thead>
+          <tbody>
+            {array.map((item, i) => (
+              <tr key={i}>
+                <td style={{ textTransform: "capitalize" }}>
+                  {item.name + " " + item.lastName}
+                </td>
+                <td>{item?.email}</td>
+                <td>{item?.total}</td>
+              </tr>
+            ))}
+            <tr>
+              <td>asim imam</td>
+              <td>user01@gmail.com</td>
+              <td>76</td>
+            </tr>
+            <tr>
+              <td>asim imam</td>
+              <td>user01@gmail.com</td>
+              <td>76</td>
+            </tr>
+            <tr>
+              <td>asim imam</td>
+              <td>user01@gmail.com</td>
+              <td>76</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td
+                colSpan={2}
+                style={{
+                  textAlign: "right",
+                  paddingRight: "60px",
+                  fontSize: "larger",
+                }}>
+                {76 * 3}
+              </td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );

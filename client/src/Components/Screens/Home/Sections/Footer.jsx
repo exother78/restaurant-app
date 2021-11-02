@@ -10,7 +10,7 @@ const Footer = () => {
         <h1 className="footer__title">Know Us</h1>
         <div className="footer__container">
           <div className="footer__column">
-            <h3 className="footer__column-title">Discover</h3>
+            <h2 className="footer__column-title">Discover</h2>
             <Link to="/about" className="footer__column-subText">
               <span>About Us</span>
             </Link>

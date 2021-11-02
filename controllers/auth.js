@@ -160,10 +160,22 @@ exports.logout = async (req, res, next) => {
 
 exports.createOrder = async (req, res, next) => {
   const { orders } = req.body;
-  console.log("these are the orders: ", orders);
   try {
     const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
-    console.log("postalCode: ", postalCode);
+
+    if (!postalCode) {
+      return res.status(401).json({
+        success: false,
+        error: "Delivery not available at your location",
+      });
+    }
+    if (!postalCode.active) {
+      return res.status(400).json({
+        success: false,
+        error:
+          "Currently delivery is unavailable at your location. Please try with a different Postal",
+      });
+    }
 
     const user = await User.findOne({ _id: orders.userID });
     if (!user) {
@@ -172,9 +184,10 @@ exports.createOrder = async (req, res, next) => {
 
     const order = await Order.create(orders);
     if (!order) {
-      return res
-        .status(500)
-        .json({ success: false, error: "something bad happened" });
+      return res.status(500).json({
+        success: false,
+        error: "payment received order not generated",
+      });
     }
 
     if (order) {
@@ -182,7 +195,7 @@ exports.createOrder = async (req, res, next) => {
         web: {
           notification: {
             title: "New Order!",
-            body: order.basket,
+            body: JSON.stringify(order.basket),
             deep_link: "https://asims-restaurant.herokuapp.com",
             icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
           },
@@ -190,17 +203,12 @@ exports.createOrder = async (req, res, next) => {
       });
     }
 
-    // pusher.trigger("messages_61261e08b394081bb085b31d", "inserted", {
-    //   message: order,
-    //   msg: "something added",
-    // });
-
     return res.status(200).json({ success: true, msg: "Order Successful" });
 
     // await User.create({});
   } catch (error) {
-    console.log("ran successfully");
-    return res.status(500).json({ error: error });
+    // return res.status(500).json({ error: error });
+    next(error);
   }
 };
 
@@ -218,7 +226,6 @@ exports.updateOrders = async (req, res, next) => {
 
           const { orders } = req.body;
 
-          console.log("concat: ", orders);
           user.orders = [...userOrders, orders];
           user.save();
           return user;

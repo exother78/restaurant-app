@@ -15,6 +15,7 @@
 
 .sliderPostal__title {
   margin-bottom: 10px;
+  letter-spacing: 0.4px;
 }
 
 .sliderFront__sidebox {
@@ -101,12 +102,16 @@
   padding: 10px 30px;
   flex: 0.15;
   border: none;
-  font-size: large;
+  font-size: x-large;
   font-weight: bold;
   background: rgb(248, 10, 111);
   color: white;
-  letter-spacing: 1.1px;
+  letter-spacing: 2px;
+  text-transform: capitalize;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sliderPostalCode__find-btn:hover {

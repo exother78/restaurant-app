@@ -25,6 +25,8 @@
   margin-top: 20px;
   text-transform: capitalize;
   letter-spacing: 1px;
+  font-size: large;
+  font-weight: 600;
 }
 
 .categories::-webkit-scrollbar {

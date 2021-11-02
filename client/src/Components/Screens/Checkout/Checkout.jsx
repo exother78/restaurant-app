@@ -20,7 +20,9 @@ const Checkout = () => {
 
   const transactionSuccess = async (data) => {
     const time = Date.now();
+    console.log("data: ", data);
 
+    console.log("run it again");
     try {
       if (!address) {
         setError("Please enter your address to continue order");
@@ -32,6 +34,8 @@ const Checkout = () => {
       if (!postalCode) {
         setError("Please Enter your postal code to continue");
       }
+
+      console.log("run it again and agian");
       if (userID && postalCode && address && basket.length > 0) {
         await axios
           .post(
@@ -42,12 +46,14 @@ const Checkout = () => {
                 userID,
                 postalCode,
                 address,
+                paymentID: data.orderID,
                 street,
                 basket,
                 name,
                 email,
                 lastName,
                 time,
+                total: getBasketTotal(basket),
               },
             },
             {
@@ -121,7 +127,7 @@ const Checkout = () => {
 
   const postalCodeChange = (e) => {
     setPostalCode(e.target.value);
-    localStorage.setItem("pcl", e.target.value);
+    // localStorage.setItem("pcl", e.target.value);
   };
 
   if (error) {
@@ -141,7 +147,7 @@ const Checkout = () => {
 
   return (
     <div className="checkout">
-      {error && <div className="error__box">{error}</div>}
+      {/* {error && <div className="error__box">{error}</div>} */}
       <form>
         <div className="checkout__categories">
           <div className="checkout__category">
@@ -233,7 +239,9 @@ const Checkout = () => {
             />
           </button>
           {/* </div> */}
-          {/* <button className="paythebill__btn" onClick={transactionSuccess}>
+          {/* <button
+            className="paythebill__btn"
+            onClick={() => transactionSuccess({ orderID: "something" })}>
             print the bill
           </button> */}
         </div>

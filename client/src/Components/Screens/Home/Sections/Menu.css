@@ -58,19 +58,22 @@
   justify-content: space-between;
 }
 
-.menu-page h4 {
+.menu-page p {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: 0.6px;
   margin-right: 10px;
 }
 
 .menu-to-menuscreen-arrow {
-  width: 40px;
+  width: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 50%;
   background: dodgerblue;
   color: white;
-  height: 40px;
+  height: 35px;
   margin-left: 10px;
   transition: all 0.2s linear;
   cursor: pointer;

@@ -63,12 +63,15 @@ const ReserveSeat = () => {
           <div className="people-form">
             <PersonSelect changed={changed} />
 
+            <label htmlFor="date"></label>
             <input
               type="date"
               className="date-picker"
               value={data.date}
               onChange={changed}
               name="date"
+              required
+              placeholder="pick a date"
             />
 
             <select

@@ -3,11 +3,13 @@ import "./Home.css";
 
 // Sections
 import SlideFront from "./Sections/SlideFront";
-import Menu from "./Sections/Menu";
-import ReserveSeat from "./Sections/ReserveSeat";
+// import Menu from "./Sections/Menu";
+// import ReserveSeat from "./Sections/ReserveSeat";
 import Footer from "./Sections/Footer";
 import Loading from "../Global/Loading";
 
+const Menu = lazy(() => import("./Sections/Menu"));
+const ReserveSeat = lazy(() => import("./Sections/ReserveSeat"));
 const Categories = lazy(() => import("./Sections/Categories"));
 const Items = lazy(() => import("./Sections/Items"));
 

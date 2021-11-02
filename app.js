@@ -6,6 +6,7 @@ const fileUpload = require("express-fileupload");
 const path = require("path");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
+const compression = require("compression");
 // const pusher = require("./config/pusher");
 
 // const path = require("path");
@@ -40,6 +41,7 @@ app.use(
     useTempFiles: true,
   })
 );
+app.use(compression());
 
 app.use("/api/user", require("./routes/auth"));
 app.use("/api/private", require("./routes/private"));
@@ -53,11 +55,11 @@ app.use("/api", require("./routes/reports"));
 app.use("/api", require("./routes/print"));
 
 app.use(express.static("client/build"));
-// if (process.env.NODE_ENV === "production") {
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-});
-// }
+if (process.env.NODE_ENV === "production") {
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+  });
+}
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;

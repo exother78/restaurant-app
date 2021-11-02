@@ -58,6 +58,16 @@ const Reports = () => {
       setError(error.response.data.error);
     }
   };
+
+  const check = () => {
+    const something =
+      "https://res.cloudinary.com/shahi-restaurant/image/upload/v1635337700/Restaurant/tvhyrhldlupgujp4vmye.jpg";
+
+    something.endsWith("jpg");
+
+    console.log("length; ", something.endsWith("jpg"));
+    console.log("cehck: ", something.includes("jpg"));
+  };
   console.log("array: ", array);
 
   if (error) {
@@ -77,6 +87,18 @@ const Reports = () => {
       <br />
 
       <button onClick={getReport}>Get report of january</button>
+      <button
+        onClick={check}
+        style={{
+          margin: "40px",
+          padding: "20px",
+          background: "dodgerblue",
+          color: "white",
+          fontSize: "larger",
+          border: "none",
+        }}>
+        get strings
+      </button>
 
       <div id="content">
         <table>

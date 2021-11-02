@@ -12,8 +12,9 @@ import Loading from "./Screens/Global/Loading";
 import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
+import Home from "./Screens/Home/Home";
 
-const Home = lazy(async () => import("./Screens/Home/Home"));
+// const Home = lazy(async () => import("./Screens/Home/Home"));
 const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
 const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
 const Location = lazy(() => import("./Screens/Location/Location"));
@@ -44,7 +45,6 @@ const Reports = lazy(() => import("./DevAdmin/Reports/Reports"));
 
 function App() {
   const { userAPI } = useStateValue();
-
   const [isAdmin] = userAPI.isAdmin;
   const { userID } = userAPI;
 

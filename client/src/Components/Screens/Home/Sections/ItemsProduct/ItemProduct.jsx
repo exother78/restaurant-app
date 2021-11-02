@@ -5,7 +5,16 @@ const ItemProduct = ({ title, description, price, images }) => {
   return (
     <Link to="/order" className="item__main">
       <div className="item">
-        <img src={images?.url} alt="" className="item__image" loading="lazy" />
+        <img
+          src={
+            images.url && images.url.endsWith("jpg")
+              ? images.url.replace("jpg", "webp")
+              : images.url
+          }
+          alt=""
+          className="item__image"
+          loading="lazy"
+        />
 
         <div className="item__text">
           <span className="item__title">{title && title}</span>

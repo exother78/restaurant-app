@@ -5,7 +5,6 @@ const User = require("../models/User");
 const Order = require("../models/Orders");
 const ErrorResponse = require("../utils/errorResponse");
 const PostalCode = require("../models/PostalCode");
-// const pusher = require("../config/pusher");
 
 let beamsClient = new PushNotifications({
   instanceId: "1e7b4671-5b27-48ae-bc5c-6cdb11b0a197",
@@ -204,10 +203,7 @@ exports.createOrder = async (req, res, next) => {
     }
 
     return res.status(200).json({ success: true, msg: "Order Successful" });
-
-    // await User.create({});
   } catch (error) {
-    // return res.status(500).json({ error: error });
     next(error);
   }
 };

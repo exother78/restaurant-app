@@ -8,8 +8,4 @@ const pusher = new Pusher({
   useTLS: true,
 });
 
-// pusher.trigger("messages", "something", {
-//   message: "hello world",
-// });
-
 module.exports = pusher;

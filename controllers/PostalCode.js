@@ -24,14 +24,6 @@ const Location = {
           error: "Delivery not available at your location",
         });
 
-      // if (!code.active) {
-      //   return res.status(400).json({
-      //     success: false,
-      //     error:
-      //       "Delivery is temporarily unavailable at your location, please try after some time",
-      //   });
-      // }
-
       return res.status(200).json({ success: true, code });
     } catch (error) {
       next(error);

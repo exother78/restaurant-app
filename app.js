@@ -7,7 +7,6 @@ const path = require("path");
 const connectDB = require("./config/db");
 const errorHandler = require("./middleware/error");
 const compression = require("compression");
-// const pusher = require("./config/pusher");
 
 // const path = require("path");
 // const fs = require("fs");

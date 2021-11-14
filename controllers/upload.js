@@ -41,10 +41,6 @@ const upload = {
         });
       }
     );
-
-    // } catch (err) {
-    //   next(err);
-    // }
   },
 
   destroyImage: async (req, res) => {

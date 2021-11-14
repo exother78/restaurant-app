@@ -21,7 +21,6 @@ const products = {
         product_id,
         price,
         images,
-        // ...req.body,
       });
 
       if (!product) return next(new ErrorResponse("Something wrong ", 500));
@@ -30,9 +29,6 @@ const products = {
         .status(200)
         .json({ success: true, msg: "Successfully created Product", product });
     } catch (err) {
-      // console.log(err);
-      // console.log("error here: ", err);
-      // res.status(400).json({ msg: err.message });
       next(err);
     }
   },
@@ -46,7 +42,6 @@ const products = {
 
       res.status(200).json({ success: true, products });
     } catch (err) {
-      // res.status(500).json({ error: err.message });
       next(err);
     }
   },
@@ -58,7 +53,6 @@ const products = {
 
       res.status(200).json({ success: true, message: "deleted" });
     } catch (err) {
-      // res.status(400).json({ error: "no products found" });
       next(err);
     }
   },

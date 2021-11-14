@@ -8,7 +8,6 @@ let printer = new ThermalPrinter({
 });
 
 const printNow = (req, res) => {
-  // printer.alignCenter();
   printer.println("Hello world is here");
   printer.newLine();
   printer.alignLeft();

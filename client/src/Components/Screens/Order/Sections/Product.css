@@ -2,7 +2,7 @@
   width: 100%;
   min-width: 330px;
   height: 120px;
-  background: purple;
+  /* background: purple; */
   margin: 10px 20px;
   max-width: 430px;
   position: relative;
@@ -71,7 +71,7 @@
   right: 10px;
   bottom: 10px;
   border: none;
-  background: dodgerblue;
+  background: rgb(248, 10, 111);
   cursor: pointer;
 }
 

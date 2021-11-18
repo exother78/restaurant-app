@@ -77,20 +77,29 @@
 }
 
 .reserve-seat__submit-btn button {
-  font-family: "Josefin Slab", "Ubuntu", "Encode Sans SC", serif;
+  font-family: "Josefin Slab";
   text-transform: capitalize;
   padding: 10px 20px;
-  display: flex;
+  /* display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
   margin: 10px auto 0 auto;
   letter-spacing: 1.9px;
-  border-radius: 4px;
+  border-radius: 2px;
   min-width: 150px;
   font-weight: 600;
   font-size: x-large;
   border: none;
   outline: none;
+  color: white;
+  cursor: pointer;
+  transition: all 0.15s linear;
+}
+
+.reserve-seat__submit-btn button:hover {
+  background: rgb(45, 147, 250);
+  color: white;
+  transform: scale(1.06) translateY(-4px) translateX(-2px);
 }
 
 @media only screen and (max-width: 700px) {

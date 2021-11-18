@@ -53,7 +53,7 @@ const ReserveSeat = () => {
   return (
     <div className="reserve-seat">
       {error && <div className="error__box">{error}</div>}
-      <h1 className="reserve-seat__title">Reserve Your Seat now</h1>
+      <h1 className="reserve-seat__title">Reserve Your Table now</h1>
 
       <div className="reserve-seat__image"></div>
 
@@ -126,7 +126,10 @@ const ReserveSeat = () => {
           </div>
 
           <div className="reserve-seat__submit-btn">
-            <button type="submit" className="btn btn-primary btn-anim">
+            <button
+              type="submit"
+              className=""
+              style={{ background: "rgb(248, 10, 111)" }}>
               Submit
             </button>
           </div>

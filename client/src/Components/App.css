@@ -31,25 +31,5 @@ a {
 .btn-anim:hover {
   background: rgb(45, 147, 250);
   color: white;
-  transform: scale(1.02);
+  transform: scale(1.06);
 }
-
-/* -------------------------------- Create Product ------------------- */
-
-/* @import url("./DevAdmin/Products/CreateProduct.css"); */
-
-/* ---------------------------- All Products ---------------------------------- */
-
-/* @import url("./DevAdmin/Products/Products/AllProducts.css"); */
-
-/* ---------------------------- All Products Product --------------------------- */
-
-/* @import url("./DevAdmin/Products/Products/AllProducts-Product/AllProductsProduct.css"); */
-
-/* -------------------------------- All Products Header ------------------------------/ */
-
-/* @import url("./DevAdmin/Products/AllProductsHeader/AllProductsHeader.css"); */
-
-/* ------------------------ Order Page ----------------------------------- */
-
-/* @import url("./Screens/Order/Order.css"); */

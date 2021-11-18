@@ -143,6 +143,14 @@
   width: 40%;
   transition: all 0.2s ease;
 }
+/* .home__location-buttons-link {
+  transform: translateY(-6px);
+} */
+.home__location-buttons-link:hover {
+  background: rgb(255 0 141);
+  transform: translateY(-4px);
+  box-shadow: -5px 5px 10px #ddd;
+}
 
 .home__location-buttons-link:active {
   transform: translateY(4px);
@@ -158,10 +166,6 @@
   outline: none;
   cursor: pointer;
   transition: all 0.3s ease;
-}
-
-.home__location-buttons-button:hover {
-  background: rgb(255 0 141);
 }
 
 .home__location-buttons-button {

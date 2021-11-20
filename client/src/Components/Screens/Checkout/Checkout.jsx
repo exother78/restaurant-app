@@ -20,9 +20,7 @@ const Checkout = () => {
 
   const transactionSuccess = async (data) => {
     const time = Date.now();
-    console.log("data: ", data);
 
-    console.log("run it again");
     try {
       if (!address) {
         setError("Please enter your address to continue order");
@@ -35,7 +33,6 @@ const Checkout = () => {
         setError("Please Enter your postal code to continue");
       }
 
-      console.log("run it again and agian");
       if (userID && postalCode && address && basket.length > 0) {
         await axios
           .post(
@@ -147,7 +144,7 @@ const Checkout = () => {
 
   return (
     <div className="checkout">
-      {/* {error && <div className="error__box">{error}</div>} */}
+      {error && <div className="error__box">{error}</div>}
       <form>
         <div className="checkout__categories">
           <div className="checkout__category">

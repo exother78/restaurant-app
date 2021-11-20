@@ -271,12 +271,14 @@ function App() {
 
             <Suspense fallback={<Loading />}>
               <Register />
+              <Footer />
             </Suspense>
           </Route>
 
           <Route path="/login">
             <Header />
             <Login />
+            <Footer />
           </Route>
 
           <Route path="/find-us">

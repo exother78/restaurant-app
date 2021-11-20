@@ -33,3 +33,21 @@ a {
   color: white;
   transform: scale(1.06);
 }
+
+.menu-to-menuscreen-arrow {
+  width: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  background: rgb(248, 10, 111);
+  color: white;
+  height: 35px;
+  margin-left: 10px;
+  transition: all 0.2s linear;
+  cursor: pointer;
+}
+
+.menu-to-menuscreen-arrow:hover {
+  box-shadow: 0 0 1px 10px #ccc;
+}

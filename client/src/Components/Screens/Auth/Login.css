@@ -69,14 +69,15 @@
 
 .login__submit-button {
   font-size: x-large;
-  background: dodgerblue;
+  background: rgb(20, 129, 238);
   cursor: pointer;
   color: white;
   border: none;
+  transition: all 0.2s ease-in;
 }
 
 .login__submit-button:hover {
-  background-color: rgb(20, 129, 238);
+  background-color: rgb(19, 109, 199);
 }
 
 @media only screen and (max-width: 1100px) {

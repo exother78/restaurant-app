@@ -54,12 +54,13 @@ const Order = () => {
         <div className="order__allContainer">
           {categories?.map((item, i) => (
             <div
-              id={item.name}
               key={i}
               className="order__container-category"
-              style={{ margin: "10px 0" }}>
+              style={{ padding: "10px 0" }}>
               <div className="order__container-category-data">
-                <h2 className="order__container-category-text">{item?.name}</h2>
+                <h2 className="order__container-category-text" id={item?.name}>
+                  {item?.name}
+                </h2>
                 <img src={item?.images?.url} width="100%" height="150" alt="" />
               </div>
 

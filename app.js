@@ -1,6 +1,6 @@
-if (process.env.NODE_ENV != "production") {
-  require("dotenv").config();
-}
+// if (process.env.NODE_ENV != "production") {
+require("dotenv").config();
+// }
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
@@ -56,11 +56,11 @@ app.use("/api", require("./routes/reports"));
 app.use("/api", require("./routes/print"));
 
 app.use(express.static("client/build"));
-if (process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "client", "build", "index.html"));
-  });
-}
+// if (process.env.NODE_ENV === "production") {
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+});
+// }
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;

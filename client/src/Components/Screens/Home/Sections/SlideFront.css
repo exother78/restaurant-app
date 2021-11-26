@@ -23,6 +23,7 @@
   left: 20px;
   top: 110px;
   background: #d70f64;
+  /* background: #; */
   width: 180px;
   height: 180px;
   min-width: 200px;
@@ -104,7 +105,7 @@
   border: none;
   font-size: x-large;
   font-weight: bold;
-  background: rgb(248, 10, 111);
+  background: #fa257e;
   color: white;
   letter-spacing: 2px;
   text-transform: capitalize;
@@ -112,10 +113,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: all 0.1s ease;
 }
 
 .sliderPostalCode__find-btn:hover {
-  background: rgb(255 0 141);
+  background: rgb(248, 10, 111);
+  box-shadow: -5px 5px 10px #ddd;
 }
 
 .home__address-field {
@@ -140,6 +143,7 @@
 }
 
 .home__location-buttons-link {
+  /* background: #e70664; */
   width: 40%;
   transition: all 0.2s ease;
 }
@@ -147,33 +151,36 @@
   transform: translateY(-6px);
 } */
 .home__location-buttons-link:hover {
-  background: rgb(255 0 141);
+  /* background: rgb(255 0 141); */
   transform: translateY(-4px);
   box-shadow: -5px 5px 10px #ddd;
 }
 
 .home__location-buttons-link:active {
   transform: translateY(4px);
-  background: #e70664;
+  /* background: #e70664; */
 }
 
 .home__location-buttons-button {
   width: 100%;
-  background: rgb(248, 10, 111);
+  background: #fa257e;
   padding: 10px 20px;
   color: white;
   border: none;
   outline: none;
   cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.home__location-buttons-button {
-  color: white;
   font-size: medium;
   font-weight: 600;
   letter-spacing: 0.2px;
   font-family: "Montserrat";
+  transition: all 0.3s ease;
+}
+
+.home__location-buttons-button:hover {
+  /* background: #fa257e; */
+  background: rgb(248, 10, 111);
+
+  /* color: white; */
 }
 
 @media only screen and (max-width: 1100px) {

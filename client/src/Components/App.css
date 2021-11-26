@@ -40,7 +40,7 @@ a {
   justify-content: center;
   align-items: center;
   border-radius: 50%;
-  background: rgb(248, 10, 111);
+  background: rgb(250, 51, 134);
   color: white;
   height: 35px;
   margin-left: 10px;
@@ -48,6 +48,10 @@ a {
   cursor: pointer;
 }
 
+.menu-to-menuscreen-arrow:active {
+  transform: scale(0.9);
+}
+
 .menu-to-menuscreen-arrow:hover {
-  box-shadow: 0 0 1px 10px #ccc;
+  box-shadow: 0 0 5px 10px #ccc;
 }

@@ -101,7 +101,9 @@ const AllProductsProduct = ({
             </span>
 
             <div className="allproducts__items__price-rating">
-              <span className="allproducts__items__price">€ {price}</span>
+              <span className="allproducts__items__price">
+                € {parseFloat(price).toFixed(2)}
+              </span>
               <span className="allproducts__items__button">{category}</span>
             </div>
           </div>

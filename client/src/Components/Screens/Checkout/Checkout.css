@@ -62,15 +62,22 @@
   flex-direction: column;
 }
 
-.checkout__category-details label {
+.checkout__category-details .checkout__form-group label {
   margin: 0 10px 5px 10px;
   font-size: medium;
   letter-spacing: 1.2px;
   font-weight: 600;
   color: rgb(156, 156, 156);
+  display: flex;
+  justify-content: space-between;
 }
 
-.checkout__category-details input {
+.checkout__category-details .checkout__form-group .checkout__form-group-span {
+  font-size: small;
+  color: rgb(226, 5, 5);
+}
+
+.checkout__category-details .checkout__form-group input {
   padding: 10px 10px;
   margin: 0 10px;
   border: none;

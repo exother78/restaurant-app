@@ -129,7 +129,8 @@ const ReserveSeat = () => {
             <button
               type="submit"
               className=""
-              style={{ background: "rgb(248, 10, 111)" }}>
+              // style={{ background: "rgb(250, 51, 134)" }}>
+            >
               Submit
             </button>
           </div>

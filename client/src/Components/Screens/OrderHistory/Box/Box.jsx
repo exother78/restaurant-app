@@ -48,7 +48,8 @@ const Box = ({ basket, postalCode, address, email, name, lastName }) => {
 
         <div
           className="manageOrders__box-description"
-          style={{ display: openBox ? "block" : "none" }}>
+          // style={{ display: openBox ? "block" : "none" }}>
+          style={{ maxHeight: openBox ? "400px" : "0" }}>
           <table className="manageOrders__box-second-table">
             <thead>
               <tr>

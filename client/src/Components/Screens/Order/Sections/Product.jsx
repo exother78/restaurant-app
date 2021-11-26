@@ -44,11 +44,14 @@ const Product = ({ id, title, description, price, image }) => {
             </p>
 
             <div className="product__price">
-              € <span className="product__price-subText">{price}</span>
+              €{" "}
+              <span className="product__price-subText">
+                {parseFloat(price).toFixed(2)}
+              </span>
             </div>
           </div>
           <div className="product__right-section">
-            <img className="product__image" src={image} alt="" />
+            <img className="product__image" src={image} alt="" loading="lazy" />
 
             <button className="product__add-button" onClick={addToBasket}>
               <AddIcon className="addIcon" />

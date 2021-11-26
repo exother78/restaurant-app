@@ -44,13 +44,13 @@ const OrderTotal = () => {
         </h2>
         {basket?.map((item, i) => (
           <div key={i} className="order__total-list">
-            <p className="order__total-title">{item.title}</p>
-            <p className="order__total-price">{item.price}</p>
+            <p className="order__total-title">{item?.title}</p>
+            <p className="order__total-price">{item?.price}</p>
           </div>
         ))}
         <h3 className="order__total">
           <span> total </span>
-          {getBasketTotal(basket)}
+          {parseFloat(getBasketTotal(basket)).toFixed(2)}
         </h3>
       </div>
 

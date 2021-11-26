@@ -145,8 +145,22 @@ const Checkout = () => {
   return (
     <div className="checkout">
       {error && <div className="error__box">{error}</div>}
+
+      <div
+        className="errorShowPayment"
+        style={{
+          position: "relative",
+          display: deferLoading ? "flex" : "none",
+          justifyContent: "center",
+          color: "red",
+          fontWeight: "600",
+          letterSpacing: ".7px",
+          transition: "all .3s ease-in",
+        }}>
+        <p>* Please login and fill the Complete details to proceed payment </p>
+      </div>
       <form>
-        <div className="checkout__categories">
+        <div className="checkout__categories" style={{ marginTop: "20px" }}>
           <div className="checkout__category">
             <div className="checkout__category-title">
               <h2>Delivery Address</h2>
@@ -154,7 +168,19 @@ const Checkout = () => {
 
             <div className="checkout__category-details">
               <div className="checkout__form-group">
-                <label htmlFor="address">Address</label>
+                <label
+                  htmlFor="address"
+                  style={{ display: "flex", justifyContent: "space-between" }}>
+                  Address
+                  <span
+                    className="checkout__form-group-span"
+                    style={{
+                      display: address.length === 0 ? "block" : "none",
+                    }}>
+                    Enter Address*
+                  </span>
+                </label>
+
                 <input
                   type="text"
                   name="address"
@@ -166,7 +192,16 @@ const Checkout = () => {
               </div>
 
               <div className="checkout__form-group">
-                <label htmlFor="street">Enter Street No.</label>
+                <label htmlFor="street">
+                  Enter Street No.
+                  <span
+                    className="checkout__form-group-span"
+                    style={{
+                      display: address.length === 0 ? "block" : "none",
+                    }}>
+                    Enter Street*
+                  </span>
+                </label>
                 <input
                   type="text"
                   name="street"
@@ -178,7 +213,16 @@ const Checkout = () => {
               </div>
 
               <div className="checkout__form-group">
-                <label htmlFor="street">Postal Code</label>
+                <label htmlFor="street">
+                  Postal Code
+                  <span
+                    className="checkout__form-group-span"
+                    style={{
+                      display: address.length === 0 ? "block" : "none",
+                    }}>
+                    Enter Postal Code*
+                  </span>
+                </label>
                 <input
                   type="text"
                   name="postalCode"
@@ -215,8 +259,8 @@ const Checkout = () => {
                 className="checkout__payment-section"
                 style={{ width: "60%" }}>
                 <h2 style={{ marginTop: "20px" }}>
-                  Total <span style={{ marginLeft: "20px" }}></span>{" "}
-                  {getBasketTotal(basket)} €
+                  Total <span style={{ marginLeft: "20px" }}></span>
+                  {parseFloat(getBasketTotal(basket))?.toFixed(2)} €
                 </h2>
               </div>
             </div>
@@ -227,7 +271,7 @@ const Checkout = () => {
             onClick={(e) => e.preventDefault()}
             style={{ border: "none" }}>
             <Paypal
-              total={getBasketTotal(basket)}
+              total={parseFloat(getBasketTotal(basket)).toFixed(2)}
               onSuccess={transactionSuccess}
               onCancel={transactionCancel}
               onError={transactionError}

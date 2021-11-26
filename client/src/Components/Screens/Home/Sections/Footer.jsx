@@ -55,7 +55,8 @@ const Footer = () => {
       </div>
       <div className="footer__final-line">
         <span className="copyright-text">
-          <span className="footer__copyright-icon"> © </span>Copyrights 2021.
+          <span className="footer__copyright-icon"> ©</span>All Copyrights
+          Reserved 2021
         </span>
       </div>
     </>

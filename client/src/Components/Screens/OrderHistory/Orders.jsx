@@ -10,6 +10,9 @@ const Orders = () => {
   const [orders, setOrders] = useState(null);
   const [error, setError] = useState("");
 
+  const s = 5.43;
+  console.log("number : ", parseFloat(s).toFixed(2));
+
   useEffect(() => {
     if (userID) {
       const func = async () => {

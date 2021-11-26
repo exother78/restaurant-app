@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Header.css";
 import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import logoImage from "./logo.webp";
 
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../../StateProvider";
@@ -157,7 +158,13 @@ const Header = ({ dashboard }) => {
           <Bars handleBarsClick={handleBarsClick} />
 
           <Link className="header__logo" to="/">
-            <h1>LOGO</h1>
+            <h1>
+              <img
+                src={logoImage}
+                alt=""
+                style={{ height: "50px", width: "130px", objectFit: "cover" }}
+              />
+            </h1>
           </Link>
 
           <nav>

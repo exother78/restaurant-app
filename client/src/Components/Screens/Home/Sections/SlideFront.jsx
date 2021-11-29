@@ -25,6 +25,8 @@ const SlideFront = () => {
       setPostalCode(null);
       setData(null);
       localStorage.removeItem("pcl");
+      setPostalCodeChange("");
+      setError(error.response.data.error);
     }
   };
 
@@ -105,7 +107,9 @@ const SlideFront = () => {
               maxHeight: "40px",
             }}
             className="sliderPostalCode__find-btn"
-            onClick={!loading ? handlePostalFind : null}>
+            onClick={
+              !loading && postalCodeChange.length > 0 ? handlePostalFind : null
+            }>
             {loading ? (
               <div className="loadings">
                 <div></div>

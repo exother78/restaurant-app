@@ -3,8 +3,8 @@
     "main.css": "/static/css/main.b1d56586.chunk.css",
     "main.js": "/static/js/main.5ab9008a.chunk.js",
     "main.js.map": "/static/js/main.5ab9008a.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.0430378d.js",
-    "runtime-main.js.map": "/static/js/runtime-main.0430378d.js.map",
+    "runtime-main.js": "/static/js/runtime-main.3628a99e.js",
+    "runtime-main.js.map": "/static/js/runtime-main.3628a99e.js.map",
     "static/js/2.67ad912a.chunk.js": "/static/js/2.67ad912a.chunk.js",
     "static/js/2.67ad912a.chunk.js.map": "/static/js/2.67ad912a.chunk.js.map",
     "static/js/3.17dd041b.chunk.js": "/static/js/3.17dd041b.chunk.js",
@@ -68,7 +68,7 @@
     "static/css/23.5edf5c43.chunk.css": "/static/css/23.5edf5c43.chunk.css",
     "static/js/23.648a8e1b.chunk.js": "/static/js/23.648a8e1b.chunk.js",
     "static/js/23.648a8e1b.chunk.js.map": "/static/js/23.648a8e1b.chunk.js.map",
-    "static/css/24.106e5368.chunk.css": "/static/css/24.106e5368.chunk.css",
+    "static/css/24.d14442ab.chunk.css": "/static/css/24.d14442ab.chunk.css",
     "static/js/24.e9aa31c1.chunk.js": "/static/js/24.e9aa31c1.chunk.js",
     "static/js/24.e9aa31c1.chunk.js.map": "/static/js/24.e9aa31c1.chunk.js.map",
     "static/css/25.40fc2af0.chunk.css": "/static/css/25.40fc2af0.chunk.css",
@@ -108,7 +108,7 @@
     "static/css/21.8e156bd5.chunk.css.map": "/static/css/21.8e156bd5.chunk.css.map",
     "static/css/22.19e91cf7.chunk.css.map": "/static/css/22.19e91cf7.chunk.css.map",
     "static/css/23.5edf5c43.chunk.css.map": "/static/css/23.5edf5c43.chunk.css.map",
-    "static/css/24.106e5368.chunk.css.map": "/static/css/24.106e5368.chunk.css.map",
+    "static/css/24.d14442ab.chunk.css.map": "/static/css/24.d14442ab.chunk.css.map",
     "static/css/25.40fc2af0.chunk.css.map": "/static/css/25.40fc2af0.chunk.css.map",
     "static/css/26.7bd803d2.chunk.css.map": "/static/css/26.7bd803d2.chunk.css.map",
     "static/css/27.06978aeb.chunk.css.map": "/static/css/27.06978aeb.chunk.css.map",
@@ -131,7 +131,7 @@
     "static/media/white-wood-textures.2bc08f26.jpg": "/static/media/white-wood-textures.2bc08f26.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.0430378d.js",
+    "static/js/runtime-main.3628a99e.js",
     "static/js/3.17dd041b.chunk.js",
     "static/css/main.b1d56586.chunk.css",
     "static/js/main.5ab9008a.chunk.js"

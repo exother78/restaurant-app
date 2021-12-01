@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Header.css";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
 import { Link } from "react-router-dom";
 import { useStateValue } from "../../../StateProvider";
@@ -100,7 +100,6 @@ const Header = ({ dashboard }) => {
       sideNav = document.querySelector(".header__side-nav");
     }
 
-    // const sideNav = document.querySelector(".header__side-nav");
     if (sideNav && bars.classList.value.includes("bars-opened") && bars) {
       bars.classList.remove("bars-opened");
 
@@ -216,7 +215,7 @@ const Header = ({ dashboard }) => {
             )}
 
             <Link to="/cart" className="header__cart btn-anim">
-              <ShoppingBasketIcon />
+              <ShoppingBasketRoundedIcon />
               <span className="header__cart-subText">{basket.length}</span>
             </Link>
           </nav>
@@ -307,7 +306,7 @@ const Header = ({ dashboard }) => {
           style={{ maxHeight: displayMobileCartButton ? "70px" : "0" }}>
           <button>
             <Link to="/cart">
-              <ShoppingBasketIcon style={{ marginRight: "20px" }} />
+              <ShoppingBasketRoundedIcon style={{ marginRight: "20px" }} />
               Go to Cart
             </Link>
             <span className="header__mobile__cart-btn-length">

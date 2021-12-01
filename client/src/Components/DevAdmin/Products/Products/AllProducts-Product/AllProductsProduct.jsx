@@ -1,7 +1,7 @@
 import React from "react";
 import "./AllProductsProduct.css";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import axios from "axios";
 import Loading from "../../../../Screens/Global/Loading";
 
@@ -110,10 +110,10 @@ const AllProductsProduct = ({
 
           <div className="allproducts__edit-delete">
             <button onClick={handleEdit}>
-              <EditIcon />
+              <EditRoundedIcon />
             </button>
             <button onClick={() => handleDelete(_id, images)}>
-              <DeleteIcon />
+              <DeleteRoundedIcon />
             </button>
           </div>
         </div>

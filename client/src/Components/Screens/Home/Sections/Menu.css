@@ -51,14 +51,7 @@
   letter-spacing: 1px;
   margin: 25px 0;
 }
-
-.menu-page {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.menu-page p {
+.footer__order-page-link-text {
   font-size: 17px;
   font-weight: 600;
   letter-spacing: 0.6px;

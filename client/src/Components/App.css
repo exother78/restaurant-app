@@ -48,10 +48,24 @@ a {
   cursor: pointer;
 }
 
+.footer__order-page-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .menu-to-menuscreen-arrow:active {
   transform: scale(0.9);
 }
 
 .menu-to-menuscreen-arrow:hover {
   box-shadow: 0 0 5px 10px #ccc;
+}
+
+.socialLinksIcons {
+  transition: transform 0.2s linear;
+  cursor: pointer;
+}
+.socialLinksIcons:hover {
+  transform: scale(1.2);
 }

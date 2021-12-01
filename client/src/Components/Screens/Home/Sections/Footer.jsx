@@ -1,7 +1,11 @@
 import React from "react";
 import "./Footer.css";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { Link } from "react-router-dom";
+
+import FacebookIcon from "../../../Images/facebookicon.png";
+import InstagramIcon from "../../../Images/instagramicon.png";
+import TripAdvisorIcon from "../../../Images/tripadvisor.png";
 
 const Footer = () => {
   return (
@@ -15,6 +19,21 @@ const Footer = () => {
               <span>About Us</span>
             </Link>
             <span className="footer__column-subText">Reserve Table</span>
+            <span className="footer__column-subText">
+              <a href="https://www.facebook.com/shahiristorante">
+                <img src={FacebookIcon} alt="" className="socialLinksIcons" />
+              </a>
+              <a href="https://www.instagram.com/shahi_ristorante/">
+                <img src={InstagramIcon} alt="" className="socialLinksIcons" />
+              </a>
+              <a href="https://www.tripadvisor.it/Restaurant_Review-g1931037-d15662862-Reviews-Shahi_Ristorante_Pizzeria-Soliera_Province_of_Modena_Emilia_Romagna.html">
+                <img
+                  src={TripAdvisorIcon}
+                  alt=""
+                  className="socialLinksIcons"
+                />
+              </a>
+            </span>
           </div>
 
           <div className="footer__column">
@@ -47,7 +66,7 @@ const Footer = () => {
               <span
                 className="menu-to-menuscreen-arrow"
                 onClick={() => (window.location.href = "/order")}>
-                <ArrowForwardIcon />
+                <ArrowForwardRoundedIcon />
               </span>
             </div>
           </div>

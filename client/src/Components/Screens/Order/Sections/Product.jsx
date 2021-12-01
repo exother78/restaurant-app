@@ -1,5 +1,5 @@
 import React from "react";
-import AddIcon from "@material-ui/icons/Add";
+import AddRoundedIcon from "@mui/icons-material/AddRounded";
 import "./Product.css";
 import { useStateValue } from "../../../../StateProvider";
 
@@ -54,7 +54,7 @@ const Product = ({ id, title, description, price, image }) => {
             <img className="product__image" src={image} alt="" loading="lazy" />
 
             <button className="product__add-button" onClick={addToBasket}>
-              <AddIcon className="addIcon" />
+              <AddRoundedIcon className="addIcon" />
             </button>
           </div>
         </div>

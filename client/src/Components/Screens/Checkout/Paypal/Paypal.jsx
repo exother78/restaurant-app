@@ -33,9 +33,6 @@ const Paypal = ({ onSuccess, onCancel, onError, total, loading, setError }) => {
         intent: "capture",
         currency: "EUR",
       }}>
-      {/* {isPending ? (
-        <Loading />
-      ) : isResolved ? ( */}
       <PayPalButtons
         fundingSource={FUNDING.PAYPAL}
         // style={{ layout: "horizontal" }}
@@ -67,7 +64,6 @@ const Paypal = ({ onSuccess, onCancel, onError, total, loading, setError }) => {
           height: 40,
         }}
       />
-      {/* ) : ( setError("Paypal button not loaded please refresh") )} */}
     </PayPalScriptProvider>
   );
 };

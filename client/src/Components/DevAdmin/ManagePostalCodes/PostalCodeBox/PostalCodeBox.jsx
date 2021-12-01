@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "./PostalCodeBox.css";
 import axios from "axios";
-import DeleteIcon from "@material-ui/icons/Delete";
-import EditIcon from "@material-ui/icons/Edit";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
+import EditRoundedIcon from "@mui/icons-material/EditRounded";
 import Loading from "./../../../Screens/Global/Loading";
 
 const PostalCodeBox = ({
@@ -123,12 +123,12 @@ const PostalCodeBox = ({
       {showButtons && (
         <div className="postalCode__box-btns">
           <button className="postalCode__box-btns-btn" onClick={editButton}>
-            <EditIcon className="editIcon" />
+            <EditRoundedIcon className="editIcon" />
           </button>
           <button
             className="postalCode__box-btns-btn"
             onClick={deletePostalCode}>
-            <DeleteIcon className="deleteIcon" />
+            <DeleteRoundedIcon className="deleteIcon" />
           </button>
         </div>
       )}

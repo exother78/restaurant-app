@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./OrderTotal.css";
 import { getBasketTotal } from "../../../reducer";
-import ShoppingBasketIcon from "@material-ui/icons/ShoppingBasket";
+import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 import { useStateValue } from "../../../StateProvider";
 import { useHistory, Link } from "react-router-dom";
 
@@ -38,7 +38,7 @@ const OrderTotal = () => {
             justifyContent: "space-evenly",
           }}>
           {basket?.length} items in Cart
-          <ShoppingBasketIcon
+          <ShoppingBasketRoundedIcon
             style={{ color: "#d70f64", fontSize: "xx-large" }}
           />
         </h2>

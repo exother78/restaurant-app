@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import "./SlideFront.css";
-import DriveEtaIcon from "@material-ui/icons/DriveEta";
-import ScheduleIcon from "@material-ui/icons/Schedule";
-import AirlineSeatReclineNormalIcon from "@material-ui/icons/AirlineSeatReclineNormal";
-import EuroIcon from "@material-ui/icons/Euro";
+import DeliveryDiningRoundedIcon from "@mui/icons-material/DeliveryDiningRounded";
+import ScheduleRoundedIcon from "@mui/icons-material/ScheduleRounded";
+import AirlineSeatReclineNormalRoundedIcon from "@mui/icons-material/AirlineSeatReclineNormalRounded";
+import EuroRoundedIcon from "@mui/icons-material/EuroRounded";
 import axios from "axios";
 import { useStateValue } from "./../../../../StateProvider";
 import { Link } from "react-router-dom";
@@ -71,16 +71,18 @@ const SlideFront = () => {
         className="sliderFront__sidebox"
         style={{ display: postalCode ? "block" : "none" }}>
         <div className="sliderFront__sidebox-line">
-          <EuroIcon /> <span>Delivery Price: {data?.deliveryPrice}</span>
+          <EuroRoundedIcon /> <span>Delivery Price: {data?.deliveryPrice}</span>
         </div>
         <div className="sliderFront__sidebox-line">
-          <DriveEtaIcon /> <span>Delivery: {data?.estimatedTime} minutes</span>
+          <DeliveryDiningRoundedIcon />
+          <span>Delivery: {data?.estimatedTime} minutes</span>
         </div>
         <div className="sliderFront__sidebox-line">
-          <ScheduleIcon /> <span>11:00 AM - 10:00 PM</span>
+          <ScheduleRoundedIcon /> <span>11:00 AM - 10:00 PM</span>
         </div>
         <div className="sliderFront__sidebox-line">
-          <AirlineSeatReclineNormalIcon /> <span>Takeaway: 30 minutes</span>
+          <AirlineSeatReclineNormalRoundedIcon />
+          <span>Takeaway: 30 minutes</span>
         </div>
 
         <Link to="/order" className="sliderFront__sidebox-btn">

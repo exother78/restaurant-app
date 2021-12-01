@@ -1,6 +1,6 @@
 import React from "react";
 import "./Menu.css";
-import ArrowForwardIcon from "@material-ui/icons/ArrowForward";
+import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { useStateValue } from "../../../../StateProvider";
 
 const Menu = () => {
@@ -22,12 +22,14 @@ const Menu = () => {
             </ul>
           </div>
         ))}
-        <div className="menu-page">
-          <p>Click Here to See full menu</p>
+        <div className="footer__order-page-link">
+          <p className="footer__order-page-link-text">
+            Click Here to See full menu
+          </p>
           <span
             className="menu-to-menuscreen-arrow"
             onClick={() => (window.location.href = "/menu")}>
-            <ArrowForwardIcon />
+            <ArrowForwardRoundedIcon />
           </span>
         </div>
       </div>

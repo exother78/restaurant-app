@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../../../DevAdmin/Orders/Box/Box.css";
-import ArrowForwardIosIcon from "@material-ui/icons/ArrowForwardIos";
+import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
 
 const Box = ({ basket, postalCode, address, email, name, lastName }) => {
   const [openBox, setOpenBox] = useState(false);
@@ -35,7 +35,7 @@ const Box = ({ basket, postalCode, address, email, name, lastName }) => {
               <th>{postalCode}</th>
 
               <th>
-                <ArrowForwardIosIcon
+                <ArrowForwardIosRoundedIcon
                   style={{
                     transform: openBox ? "rotate(90deg)" : "none",
                     transition: "transform .3s ease",
@@ -48,7 +48,6 @@ const Box = ({ basket, postalCode, address, email, name, lastName }) => {
 
         <div
           className="manageOrders__box-description"
-          // style={{ display: openBox ? "block" : "none" }}>
           style={{ maxHeight: openBox ? "400px" : "0" }}>
           <table className="manageOrders__box-second-table">
             <thead>

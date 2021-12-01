@@ -16,6 +16,7 @@
   position: relative;
   display: flex;
   align-items: center;
+  z-index: -2;
 }
 
 .about__frontImg-text {
@@ -27,18 +28,138 @@
 .about__frontImg-text::before {
   content: "";
   position: absolute;
-  background: purple;
-  opacity: 0.6;
+  background: black;
+  opacity: 0.7;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
+  z-index: -1;
 }
 
 .about__frontImg-text h1 {
   color: white;
-  z-index: 1;
   padding: 7px 20px;
-  font-family: Montserrat;
   font-size: 1.9rem;
+  z-index: 11;
+  opacity: 0.8;
+  line-height: 1.2;
+}
+
+/* about content section */
+
+.about__content {
+  background: #eee;
+  width: 100%;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.2;
+  margin: 5px auto;
+  width: 65vw;
+  color: rgb(54, 52, 52);
+}
+
+.about__content * {
+  font-family: "Montserrat";
+}
+
+.about__content h3 {
+  text-align: center;
+  padding: 0 30px;
+  line-height: 1.4;
+  font-size: 1.1rem;
+}
+
+/* about details section */
+
+.about__details {
+  min-height: 50vh;
+  background: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 30px 0;
+}
+
+.about__details * {
+  font-family: "Montserrat";
+}
+
+.about__logo-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+.about__details-logoImg {
+  margin: 10px 0;
+  object-fit: cover;
+  object-position: center;
+}
+
+.about__details-field {
+  text-align: center;
+}
+
+.about__details-flex {
+  text-align: center;
+  line-height: 1.6;
+  display: flex;
+  width: 100%;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.about__details-flex .about__details-flex-field {
+  flex: 1 1 45%;
+  margin: 5px 5px;
+  padding: 10px 15px;
+  max-width: 500px;
+  min-width: 380px;
+  display: flex;
+  align-items: center;
+}
+.about__details-flex .about__details-flex-field > a {
+  margin: 0 10px;
+}
+
+.about__details-flex-field-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: transparent;
+  padding: 10px;
+  position: relative;
+}
+
+.about__details-flex-field-icon::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgb(250, 51, 134);
+  opacity: 0.7;
+  transition: all 0.2s linear;
+}
+
+.about__details-flex-field:hover > .about__details-flex-field-icon::before {
+  opacity: 1;
+}
+
+.about__details-flex .about__details-flex-field:hover > p {
+  color: grey;
+}
+
+.about__details-flex .about__details-flex-field > p {
+  margin-left: 50px;
+  display: flex;
+  justify-content: space-between;
+  min-width: 330px;
 }

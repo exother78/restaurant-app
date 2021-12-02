@@ -60,7 +60,7 @@ function App() {
           console.log("error: ", err);
         });
     }
-  });
+  }, [userID, isAdmin]);
   return (
     <Router>
       <div className="App">

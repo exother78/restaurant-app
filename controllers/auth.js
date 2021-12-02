@@ -195,7 +195,7 @@ exports.createOrder = async (req, res, next) => {
         web: {
           notification: {
             title: "New Order!",
-            body: JSON.stringify(order.basket),
+            body: JSON.stringify(order),
             deep_link: "https://shahiristorante.it",
             icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
           },

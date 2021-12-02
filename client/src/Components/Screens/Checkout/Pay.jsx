@@ -25,19 +25,19 @@ const Pay = () => {
   const transactionSuccess = async (data) => {
     const time = Date.now();
 
-    try {
-      if (!address) {
-        setError("Please enter your address to continue order");
-      }
-      if (!userID) {
-        setError("Please Login to continue");
-      }
+    if (!address) {
+      setError("Please enter your address to continue order");
+    }
+    if (!userID) {
+      setError("Please Login to continue");
+    }
 
-      if (!postalCode) {
-        setError("Please Enter your postal code to continue");
-      }
+    if (!postalCode) {
+      setError("Please Enter your postal code to continue");
+    }
 
-      if (userID && postalCode && address && basket.length > 0) {
+    if (userID && postalCode && address && basket.length > 0) {
+      try {
         await axios
           .post(
             "/api/user/createorder",
@@ -67,9 +67,9 @@ const Pay = () => {
             setBasket([]);
             // window.location.href = "/";
           });
+      } catch (error) {
+        setError(error.response.data.error);
       }
-    } catch (error) {
-      setError(error.response.data.error);
     }
   };
 

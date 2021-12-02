@@ -10,6 +10,7 @@ import { useStateValue } from "../StateProvider";
 import NotFound from "./Screens/Global/NotFound";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
 import Home from "./Screens/Home/Home";
+import Pay from "./Screens/Checkout/Pay";
 
 const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
 const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
@@ -47,7 +48,7 @@ function App() {
   useEffect(() => {
     if (isAdmin) {
       const beamsClient = new PusherPushNotifications.Client({
-        instanceId: "1e7b4671-5b27-48ae-bc5c-6cdb11b0a197",
+        instanceId: "db4a97cf-d521-4a2c-95ff-244e44360d69",
       });
 
       beamsClient
@@ -214,6 +215,12 @@ function App() {
                 <Header /> <NotFound />
               </>
             )}
+          </Route>
+
+          <Route path="/paymentoptions">
+            <Header />
+            <Pay />
+            <Footer />
           </Route>
 
           <Route path="/checkout">

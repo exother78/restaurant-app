@@ -9,17 +9,18 @@ const Orders = () => {
 
   const [orders, setOrders] = useState(null);
   const [error, setError] = useState("");
+  const [pendingOrders, setPendingOrders] = useState(null);
 
-  const s = 5.43;
-  console.log("number : ", parseFloat(s).toFixed(2));
+  // const s = 5.43;
+  // console.log("number : ", parseFloat(s).toFixed(2));
 
   useEffect(() => {
     if (userID) {
       const func = async () => {
         try {
           await axios.get(`/api/user/getorders/${userID}`).then((response) => {
-            // console.log("reponse.data: ", response.data);
-            setOrders(response.data.orders);
+            setOrders(response?.data?.orders);
+            console.log("orders: ", response?.data?.orders);
           });
         } catch (error) {
           setError(error.response.data.error);
@@ -30,9 +31,129 @@ const Orders = () => {
     }
   }, [userID]);
 
+  useEffect(() => {
+    if (orders) {
+      orders?.forEach((item) => {
+        if (new Date(item.time) > Date.now()) {
+          console.log("order is pending");
+          return;
+        }
+      });
+    }
+  });
+
   return (
     <div>
       {error && <div className="error__box">{error}</div>}
+
+      <div
+        className="ordersHistory__front-boxes"
+        style={{
+          display: "flex",
+          width: "100%",
+          minHeight: "400px",
+          flexWrap: "wrap",
+          marginTop: "30px",
+        }}>
+        <div
+          className="orders__pending-box"
+          style={{
+            background: "#FCCD0F",
+            flex: "1 1 30%",
+            margin: "0 5px",
+            minWidth: "300px",
+            height: "60%",
+            minHeight: "300px",
+            maxHeight: "400px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+          <p
+            style={{
+              color: "white",
+              fontFamily: "Montserrat",
+              textAlign: "center",
+            }}>
+            <span style={{ fontFamily: "Montserrat" }}>Pending Orders</span>
+            <br />
+            <span
+              style={{
+                fontSize: "xx-large",
+                textAlign: "center",
+                padding: "10px",
+              }}>
+              2
+            </span>
+          </p>
+        </div>
+
+        <div
+          className="orders__completed-box"
+          style={{
+            background: "green",
+            flex: "1 1 30%",
+            margin: "0 5px",
+            minWidth: "300px",
+            height: "60%",
+            minHeight: "300px",
+            maxHeight: "400px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+          <p
+            style={{
+              color: "white",
+              fontFamily: "Montserrat",
+              textAlign: "center",
+            }}>
+            <span style={{ fontFamily: "Montserrat" }}>Completed Orders</span>
+            <br />
+            <span
+              style={{
+                fontSize: "xx-large",
+                textAlign: "center",
+                padding: "10px",
+              }}>
+              0
+            </span>
+          </p>
+        </div>
+
+        <div
+          className="orders__cancelled-box"
+          style={{
+            background: "red",
+            flex: "1 1 30%",
+            margin: "0 5px",
+            minWidth: "300px",
+            height: "60%",
+            minHeight: "300px",
+            maxHeight: "400px",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}>
+          <p
+            style={{
+              color: "white",
+              fontFamily: "Montserrat",
+              textAlign: "center",
+            }}>
+            <span style={{ fontFamily: "Montserrat" }}>Cancelled Orders</span>
+            <br />
+            <span
+              style={{
+                fontSize: "xx-large",
+                textAlign: "center",
+                padding: "10px",
+              }}>
+              1
+            </span>
+          </p>
+        </div>
+      </div>
 
       {orders?.length > 0 ? (
         orders?.map((order, i) => <Box {...order} key={i} />)

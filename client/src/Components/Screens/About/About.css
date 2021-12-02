@@ -108,7 +108,7 @@
 
 .about__details-flex {
   text-align: center;
-  line-height: 1.6;
+  line-height: 2.3;
   display: flex;
   width: 100%;
   flex-wrap: wrap;
@@ -120,7 +120,7 @@
   margin: 5px 5px;
   padding: 10px 15px;
   max-width: 500px;
-  min-width: 380px;
+  min-width: 300px;
   display: flex;
   align-items: center;
 }
@@ -135,6 +135,12 @@
   background: transparent;
   padding: 10px;
   position: relative;
+}
+
+.about__details-flex-field-icon-svg {
+  font-size: 2.4rem;
+  color: white;
+  z-index: 1;
 }
 
 .about__details-flex-field-icon::before {
@@ -161,5 +167,23 @@
   margin-left: 50px;
   display: flex;
   justify-content: space-between;
-  min-width: 330px;
+  width: 300px;
+}
+
+.about__details-flex .about__details-flex-field.socialIcons {
+  justify-content: center;
+}
+
+@media only screen and (max-width: 420px) {
+  .about__details-flex .about__details-flex-field {
+    flex: 1;
+  }
+
+  .about__details-flex .about__details-flex-field > p {
+    margin-left: 10px;
+  }
+
+  .about__content h3 {
+    padding: 0;
+  }
 }

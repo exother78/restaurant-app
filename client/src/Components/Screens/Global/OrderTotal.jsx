@@ -5,7 +5,7 @@ import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded
 import { useStateValue } from "../../../StateProvider";
 import { useHistory, Link } from "react-router-dom";
 
-const OrderTotal = () => {
+const OrderTotal = (props) => {
   const history = useHistory();
   const state = useStateValue();
   const [basket, setBasket] = state.basket;

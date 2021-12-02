@@ -8,6 +8,8 @@ const UserAPI = (token) => {
   const [postalCode, setPostalCode] = useState(null);
   const [data, setData] = useState({});
   const [minimumOrder, setMinimumOrder] = useState(null);
+  const [street, setStreet] = useState(null);
+  const [address, setAddress] = useState(null);
 
   const getPostalCode = async (postal) => {
     try {
@@ -89,6 +91,8 @@ const UserAPI = (token) => {
     postalCode: [postalCode, setPostalCode],
     postalData: [data, setData],
     minOrder: [minimumOrder, setMinimumOrder],
+    street: [street, setStreet],
+    address: [address, setAddress],
   };
 };
 

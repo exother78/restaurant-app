@@ -98,24 +98,28 @@
   width: 100%;
 }
 
-.paythebill__btn {
-  padding: 10px 20px;
-  background: dodgerblue;
-  border: none;
-  font-size: 1.2rem;
-  letter-spacing: 1.2px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s linear;
-  max-width: 300px;
-  margin: 0 auto;
-  color: #fff;
+.checkout__category-details .checkout__payment-section {
+  width: 60%;
 }
 
-.paythebill__btn:hover {
-  background: rgb(48, 143, 238);
-  transform: scale(1.04);
+.checkout__payment-section-total {
+  margin-left: 20px;
+}
+
+.checkout__proceedToPay {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 50px;
+}
+
+.checkout__proceedToPay-link {
   color: white;
+  padding: 10px 20px;
+  background: dodgerblue;
+  min-width: 300px;
+  text-align: center;
+  font-family: "Montserrat";
 }
 
 @media only screen and (max-width: 600px) {

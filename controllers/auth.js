@@ -7,8 +7,8 @@ const ErrorResponse = require("../utils/errorResponse");
 const PostalCode = require("../models/PostalCode");
 
 let beamsClient = new PushNotifications({
-  instanceId: "1e7b4671-5b27-48ae-bc5c-6cdb11b0a197",
-  secretKey: "AA32F5DD07F1E18097A16D45BE0F53B32B5436597B475DBDE52AD031278C85E7",
+  instanceId: "db4a97cf-d521-4a2c-95ff-244e44360d69",
+  secretKey: "88D65419311979504DE2F7977C3B801CDD13BB1A212961557D96446F80A03DDE",
 });
 
 exports.register = async (req, res, next) => {
@@ -79,7 +79,7 @@ exports.forgotPassword = async (req, res, next) => {
 
     await user.save();
 
-    const resetUrl = `localhost:5000/resetpassword/${resetToken}`;
+    const resetUrl = `/resetpassword/${resetToken}`;
 
     res.status(201).json({ success: true, data: user, resetUrl });
   } catch (err) {
@@ -161,6 +161,7 @@ exports.createOrder = async (req, res, next) => {
   const { orders } = req.body;
   try {
     const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
+    console.log("postalCOde : ", postalCode);
 
     if (!postalCode) {
       return res.status(401).json({
@@ -168,7 +169,7 @@ exports.createOrder = async (req, res, next) => {
         error: "Delivery not available at your location",
       });
     }
-    if (!postalCode.active) {
+    if (postalCode.active === false) {
       return res.status(400).json({
         success: false,
         error:
@@ -195,7 +196,7 @@ exports.createOrder = async (req, res, next) => {
           notification: {
             title: "New Order!",
             body: JSON.stringify(order.basket),
-            deep_link: "https://asims-restaurant.herokuapp.com",
+            deep_link: "https://shahiristorante.it",
             icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
           },
         },
@@ -208,34 +209,34 @@ exports.createOrder = async (req, res, next) => {
   }
 };
 
-exports.updateOrders = async (req, res, next) => {
-  try {
-    await User.findOneAndUpdate(
-      { _id: req.params.id },
-      {},
-      async function (err, user) {
-        if (err) {
-          return err;
-        }
-        if (!err) {
-          const userOrders = user.orders;
+// exports.updateOrders = async (req, res, next) => {
+//   try {
+//     await User.findOneAndUpdate(
+//       { _id: req.params.id },
+//       {},
+//       async function (err, user) {
+//         if (err) {
+//           return err;
+//         }
+//         if (!err) {
+//           const userOrders = user.orders;
 
-          const { orders } = req.body;
+//           const { orders } = req.body;
 
-          user.orders = [...userOrders, orders];
-          user.save();
-          return user;
-        }
-      }
-    ).then(() => {
-      return res
-        .status(200)
-        .json({ success: true, message: "Order Successful" });
-    });
-  } catch (error) {
-    next(error);
-  }
-};
+//           user.orders = [...userOrders, orders];
+//           user.save();
+//           return user;
+//         }
+//       }
+//     ).then(() => {
+//       return res
+//         .status(200)
+//         .json({ success: true, message: "Order Successful" });
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 
 exports.getOrders = async (req, res, next) => {
   try {

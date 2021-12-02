@@ -1,0 +1,13 @@
+.paymentOptions {
+  min-height: 100vh;
+}
+
+.paymentOptions .order__right-section {
+  position: static;
+  width: auto;
+  margin-top: 70px;
+}
+
+.paymentOptions .order__total-btns {
+  display: none;
+}

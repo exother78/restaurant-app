@@ -7,6 +7,7 @@ import CancelRoundedIcon from "@mui/icons-material/CancelRounded";
 import FacebookIcon from "../../Images/facebookicon.png";
 import InstagramIcon from "../../Images/instagramicon.png";
 import TripAdvisorIcon from "../../Images/tripadvisor.png";
+import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
 
 const About = () => {
   return (
@@ -19,7 +20,6 @@ const About = () => {
           </div>
         </div>
         <div className="about__content">
-          <h1>This is the content Heading</h1>
           <br />
           <h3>
             If you want to immerse yourself in new and particular flavors,
@@ -49,63 +49,44 @@ const About = () => {
             </div>
           </div>
 
-          <div className="about__details-flex" style={{ lineHeight: "2.3" }}>
+          <div className="about__details-flex">
             <div className="about__details-flex-field">
               <div className="about__details-flex-field-icon">
-                <FmdGoodRoundedIcon
-                  style={{ fontSize: "2.4rem", color: "white", zIndex: "1" }}
-                />
+                <FmdGoodRoundedIcon className="about__details-flex-field-icon-svg" />
               </div>
               <p>Via Carpi Ravarino 124/126 41019 Soliera (MO)</p>
             </div>
             <div className="about__details-flex-field">
               <div className="about__details-flex-field-icon">
-                <PhoneRoundedIcon
-                  style={{ fontSize: "2.4rem", color: "white", zIndex: "1" }}
-                />
+                <EmailRoundedIcon className="about__details-flex-field-icon-svg" />
               </div>
               <p>ristorante.shahi@gmail.com</p>
             </div>
             <div className="about__details-flex-field">
               <div className="about__details-flex-field-icon">
-                <PhoneRoundedIcon
-                  style={{ fontSize: "2.4rem", color: "white", zIndex: "1" }}
-                />
+                <PhoneRoundedIcon className="about__details-flex-field-icon-svg" />
               </div>
               <p>+39 059 3968633</p>
             </div>
-            <div
-              className="about__details-flex-field"
-              style={{ minWidth: "380px" }}>
+            <div className="about__details-flex-field">
               <div className="about__details-flex-field-icon">
-                <CancelRoundedIcon
-                  style={{ fontSize: "2.4rem", color: "white", zIndex: "1" }}
-                />
+                <CancelRoundedIcon className="about__details-flex-field-icon-svg" />
               </div>
-              <p
-                style={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  minWidth: "330px",
-                }}>
+              <p>
                 <span>Monday:</span> <span>Closed</span>
               </p>
             </div>
 
-            <div
-              className="about__details-flex-field"
-              style={{ minWidth: "380px" }}>
+            <div className="about__details-flex-field">
               <div className="about__details-flex-field-icon">
-                <FmdGoodRoundedIcon
-                  style={{ fontSize: "2.4rem", color: "white", zIndex: "1" }}
-                />
+                <FmdGoodRoundedIcon className="about__details-flex-field-icon-svg" />
               </div>
               <p>
                 <span>Tue - Sun:</span> <span>7:00 AM - 11:00 PM</span>
               </p>
             </div>
 
-            <div className="about__details-flex-field">
+            <div className="about__details-flex-field socialIcons">
               <a href="https://www.facebook.com/shahiristorante">
                 <img src={FacebookIcon} alt="" className="socialLinksIcons" />
               </a>

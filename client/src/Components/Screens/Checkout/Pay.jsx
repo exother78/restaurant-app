@@ -18,11 +18,8 @@ const Pay = () => {
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
 
-  if (basket.length === 0) {
-    window.location.href = "/";
-  }
-
-  const transactionSuccess = async (data) => {
+  const transactionSuccess = async (data, e) => {
+    e.preventDefault();
     const time = Date.now();
 
     if (!address) {
@@ -65,7 +62,7 @@ const Pay = () => {
           )
           .then(() => {
             setBasket([]);
-            // window.location.href = "/";
+            window.location.href = "/";
           });
       } catch (error) {
         setError(error.response.data.error);
@@ -101,10 +98,11 @@ const Pay = () => {
           padding: "10px",
           textAlign: "center",
         }}>
-        <button
-          onClick={() => transactionSuccess({ orderID: "something now" })}>
+        {/* <button
+          onClick={(e) => transactionSuccess({ orderID: "something now" }, e)}
+          style={{ padding: "10px 15px", margin: "10px" }}>
           Pay the bill
-        </button>
+        </button> */}
         <Paypal
           total={parseFloat(getBasketTotal(basket)).toFixed(2)}
           onSuccess={transactionSuccess}

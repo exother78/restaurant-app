@@ -48,13 +48,13 @@ function App() {
   useEffect(() => {
     if (isAdmin) {
       const beamsClient = new PusherPushNotifications.Client({
-        instanceId: "db4a97cf-d521-4a2c-95ff-244e44360d69",
+        instanceId: "8f9950c1-3405-4dfd-a3a1-48254faff0a3",
       });
 
       beamsClient
         .start()
-        .then(() => beamsClient.addDeviceInterest("hello_" + userID))
-        .then(() => console.log("successfully registered and subscribed"))
+        .then(() => beamsClient.addDeviceInterest(`hello_${userID && userID}`))
+        .then(() => console.log("Successfully registered and subscribed!"))
         .catch((err) => {
           Notification.requestPermission();
           console.log("error: ", err);

@@ -1,22 +1,13 @@
 importScripts("https://js.pusher.com/beams/service-worker.js");
 
-// const func = async (payload) => {
-//   return await fetch("http://localhost:5376/api/print/receipt", {
-//     method: "POST",
-//     headers: {
-//       "Content-Type": "application/json",
-//     },
-//     body: JSON.stringify(payload),
-//   });
-// };
 PusherPushNotifications.onNotificationReceived = ({
   pushEvent,
   payload,
   handleNotification,
 }) => {
-  // func(payload);
+  // Your custom notification handling logic here 🛠️
+  // This method triggers the default notification handling logic offered by
+  // the Beams SDK. This gives you an opportunity to modify the payload.
+  // E.g. payload.notification.title = "A client-determined title!"
   pushEvent.waitUntil(handleNotification(payload));
 };
-
-//   //   // part1
-// };

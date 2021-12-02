@@ -7,8 +7,8 @@ const ErrorResponse = require("../utils/errorResponse");
 const PostalCode = require("../models/PostalCode");
 
 let beamsClient = new PushNotifications({
-  instanceId: "db4a97cf-d521-4a2c-95ff-244e44360d69",
-  secretKey: "88D65419311979504DE2F7977C3B801CDD13BB1A212961557D96446F80A03DDE",
+  instanceId: "8f9950c1-3405-4dfd-a3a1-48254faff0a3",
+  secretKey: "7F0291D5E3BBDB90C5F120A937FB3FEC08DDCF080316172C7DE8DA6E03ADBAF7",
 });
 
 exports.register = async (req, res, next) => {
@@ -195,9 +195,10 @@ exports.createOrder = async (req, res, next) => {
         web: {
           notification: {
             title: "New Order!",
-            body: JSON.stringify(order),
+            body: "You have a new order. Don't worry I have printed the receipt for you",
             deep_link: "https://shahiristorante.it",
             icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
+            data: order,
           },
         },
       });

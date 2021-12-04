@@ -161,7 +161,7 @@ exports.createOrder = async (req, res, next) => {
   const { orders } = req.body;
   try {
     const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
-    console.log("postalCOde : ", postalCode);
+    // console.log("postalCOde : ", postalCode);
 
     if (!postalCode) {
       return res.status(401).json({
@@ -183,6 +183,7 @@ exports.createOrder = async (req, res, next) => {
     // }
 
     const order = await Order.create(orders);
+    console.log("this is the error");
     if (!order) {
       return res.status(500).json({
         success: false,

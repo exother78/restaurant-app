@@ -1,4 +1,4 @@
-import React, { useEffect, useState, lazy, Suspense } from "react";
+import React, { useEffect, useState, lazy, Suspense, useCallback } from "react";
 import "./ManageOrders.css";
 import { useStateValue } from "./../../../../StateProvider";
 import axios from "axios";
@@ -13,19 +13,18 @@ const ManageOrders = () => {
   const { token } = useStateValue();
   const [orders, setOrders] = useState([]);
 
-  const getOrders = async () => {
+  const getOrders = useCallback(async () => {
     try {
       const auth = {
         headers: { Authorization: `Bearer ${token[0]}` },
       };
 
       const orderr = await axios.get("/api/user/allorders", auth);
-      console.log("all orders:", orderr.data.orders);
       return orderr;
     } catch (error) {
       setError(error.response.data.error);
     }
-  };
+  }, [token]);
 
   useEffect(() => {
     if (token[0]) {
@@ -33,9 +32,7 @@ const ManageOrders = () => {
         setOrders(response.data.orders);
       });
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [token]);
+  }, [token, getOrders]);
 
   if (error) {
     setTimeout(() => {

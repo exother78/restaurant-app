@@ -10,7 +10,6 @@ const OrderSchema = new Schema(
     },
     userID: {
       type: String,
-      required: true,
       trim: true,
     },
     paymentID: {
@@ -30,9 +29,9 @@ const OrderSchema = new Schema(
     },
     lastName: {
       type: String,
-      required: true,
       trim: true,
     },
+    phone: { type: String, trim: true },
     postalCode: {
       type: Number,
       required: true,

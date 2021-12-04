@@ -9,12 +9,15 @@ import axios from "axios";
 const Pay = () => {
   const state = useStateValue();
   const { userAPI, token } = useStateValue();
-  const { email, lastName, name } = userAPI;
+  const { email, lastName, name, phone } = userAPI;
   const { userID } = userAPI;
   const [basket, setBasket] = state?.basket;
   const [postalCode] = userAPI?.postalCode;
   const [address] = userAPI?.address;
   const [building] = userAPI?.building;
+  const [checkPhone] = userAPI?.checkPhone;
+  const [checkEmail] = userAPI?.checkEmail;
+  const [checkName] = userAPI?.checkName;
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
 
@@ -25,15 +28,15 @@ const Pay = () => {
     if (!address) {
       setError("Please enter your address to continue order");
     }
-    if (!userID) {
-      setError("Please Login to continue");
-    }
+    // if (!userID) {
+    //   setError("Please Login to continue");
+    // }
 
     if (!postalCode) {
       setError("Please Enter your postal code to continue");
     }
 
-    if (userID && postalCode && address && basket.length > 0) {
+    if (postalCode && address && basket.length > 0) {
       try {
         await axios
           .post(
@@ -47,9 +50,10 @@ const Pay = () => {
                 paymentID: data.orderID,
                 building,
                 basket,
-                name,
-                email,
+                name: name ? name : checkName,
+                email: email ? email : checkEmail,
                 lastName,
+                phone: phone ? phone : checkPhone,
                 time,
                 total: getBasketTotal(basket),
               },
@@ -86,6 +90,12 @@ const Pay = () => {
       setDeferLoading(false);
     }
   }, [building, userID, postalCode, basket, address, deferLoading]);
+
+  if (error) {
+    setTimeout(() => {
+      setError(null);
+    }, 2000);
+  }
   return (
     <div className="paymentOptions">
       {error && <div className="error__box">{error}</div>}

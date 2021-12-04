@@ -97,6 +97,7 @@ const UserAPI = (token) => {
     isAdmin: [isAdmin, setIsAdmin],
     isLoggedIn: [isLoggedIn, setIsLoggedIn],
     userID: user?._id,
+    phone: user?.phone,
     postalCode: [postalCode, setPostalCode],
     postalData: [data, setData],
     minOrder: [minimumOrder, setMinimumOrder],

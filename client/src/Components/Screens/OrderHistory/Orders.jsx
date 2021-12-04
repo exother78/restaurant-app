@@ -9,7 +9,10 @@ const Orders = () => {
 
   const [orders, setOrders] = useState(null);
   const [error, setError] = useState("");
-  const [pendingOrders, setPendingOrders] = useState(null);
+  const [pendingOrders, setPendingOrders] = useState({});
+  const [completedOrders, setCompletedOrders] = useState({});
+
+  console.log("completed orders: ", completedOrders);
 
   useEffect(() => {
     if (userID) {
@@ -17,7 +20,6 @@ const Orders = () => {
         try {
           await axios.get(`/api/user/getorders/${userID}`).then((response) => {
             setOrders(response?.data?.orders);
-            console.log("orders: ", response?.data?.orders);
           });
         } catch (error) {
           setError(error.response.data.error);
@@ -30,14 +32,34 @@ const Orders = () => {
 
   useEffect(() => {
     if (orders) {
-      orders?.forEach((item) => {
-        if (new Date(item.time) > Date.now()) {
-          console.log("order is pending");
+      orders.forEach((item) => {
+        const orderDate = new Date(item.time).valueOf() + 45 * 60 * 1000;
+        if (new Date(orderDate) > new Date(Date.now())) {
+          // setPendingOrders((prevState) => ({
+          //   orders: [...prevState?.orders, item],
+          // }));
+          return;
+        }
+
+        // console.log(
+        //   "now date: ",
+        //   new Date(Date.now()),
+        //   "  order date: ",
+        //   new Date(orderDate)
+        // );
+        if (new Date(Date.now()) > new Date(orderDate)) {
+          console.log("greater: ", item);
+
+          // setCompletedOrders((prevState) => ({
+          //   orders: [...prevState?.orders, item],
+          // }));
+          // setCompletedOrders((data) => [...completedOrders, item]);
           return;
         }
       });
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [orders]);
 
   return (
     <div>
@@ -71,16 +93,17 @@ const Orders = () => {
               color: "white",
               fontFamily: "Montserrat",
               textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
             }}>
             <span style={{ fontFamily: "Montserrat" }}>Pending Orders</span>
-            <br />
             <span
               style={{
                 fontSize: "xx-large",
                 textAlign: "center",
                 padding: "10px",
               }}>
-              2
+              {pendingOrders?.length > 0 ? pendingOrders?.length : "0"}
             </span>
           </p>
         </div>
@@ -88,7 +111,7 @@ const Orders = () => {
         <div
           className="orders__completed-box"
           style={{
-            background: "green",
+            background: "#15ff00",
             flex: "1 1 30%",
             margin: "0 5px",
             minWidth: "300px",
@@ -104,16 +127,18 @@ const Orders = () => {
               color: "white",
               fontFamily: "Montserrat",
               textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
             }}>
             <span style={{ fontFamily: "Montserrat" }}>Completed Orders</span>
-            <br />
+
             <span
               style={{
                 fontSize: "xx-large",
                 textAlign: "center",
                 padding: "10px",
               }}>
-              0
+              {completedOrders?.length > 0 ? completedOrders?.length : "0"}
             </span>
           </p>
         </div>
@@ -137,9 +162,11 @@ const Orders = () => {
               color: "white",
               fontFamily: "Montserrat",
               textAlign: "center",
+              display: "flex",
+              flexDirection: "column",
             }}>
             <span style={{ fontFamily: "Montserrat" }}>Cancelled Orders</span>
-            <br />
+
             <span
               style={{
                 fontSize: "xx-large",

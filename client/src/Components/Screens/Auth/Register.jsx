@@ -17,7 +17,7 @@ const Register = () => {
     confirmPassword: "",
     postalCode: "",
     address: "",
-    addressLine2: "",
+    building: "",
     city: "",
   });
 
@@ -242,10 +242,10 @@ const Register = () => {
             <div className="register__input-group">
               <input
                 type="text"
-                name="addressLine2"
-                placeholder="Address line 1"
+                name="building"
+                placeholder="eg. building #01 floor 2, flat 34"
                 className="register__input"
-                value={registerForm.addressLine2}
+                value={registerForm.building}
                 onChange={handleInputChange}
               />
             </div>

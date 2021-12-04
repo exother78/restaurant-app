@@ -8,8 +8,17 @@ const UserAPI = (token) => {
   const [postalCode, setPostalCode] = useState(null);
   const [data, setData] = useState({});
   const [minimumOrder, setMinimumOrder] = useState(null);
-  const [street, setStreet] = useState(null);
+  const [building, setBuilding] = useState(null);
   const [address, setAddress] = useState(null);
+  const [checkName, setCheckName] = useState(
+    user?.firstName ? user?.firstName : null
+  );
+  const [checkEmail, setCheckEmail] = useState(
+    user?.email ? user?.email : null
+  );
+  const [checkPhone, setCheckPhone] = useState(
+    user?.phone ? user?.phone : null
+  );
 
   const getPostalCode = async (postal) => {
     try {
@@ -84,15 +93,18 @@ const UserAPI = (token) => {
     lastName: user?.lastName,
     email: user?.email,
     userAddress: user?.address,
-    userStreet: user?.street,
+    userBuilding: user?.building,
     isAdmin: [isAdmin, setIsAdmin],
     isLoggedIn: [isLoggedIn, setIsLoggedIn],
     userID: user?._id,
     postalCode: [postalCode, setPostalCode],
     postalData: [data, setData],
     minOrder: [minimumOrder, setMinimumOrder],
-    street: [street, setStreet],
+    building: [building, setBuilding],
     address: [address, setAddress],
+    checkName: [checkName, setCheckName],
+    checkEmail: [checkEmail, setCheckEmail],
+    checkPhone: [checkPhone, setCheckPhone],
   };
 };
 

@@ -53,11 +53,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  line-height: 1.8;
 }
 
 .checkout__form-group {
-  flex: 1;
-  min-width: 205px;
+  flex: 1 1 30%;
+  min-width: 270px;
   display: flex;
   flex-direction: column;
 }
@@ -111,6 +112,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 50px;
+  border: none;
 }
 
 .checkout__proceedToPay-link {
@@ -120,6 +122,23 @@
   min-width: 300px;
   text-align: center;
   font-family: "Montserrat";
+  font-size: medium;
+  transition: all 0.2s linear;
+  position: relative;
+}
+
+.checkout__proceedToPay-link:hover {
+  background: rgb(9, 93, 177);
+}
+
+.checkout__proceedToPay-link span {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translate(-15px, -50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media only screen and (max-width: 600px) {

@@ -18,7 +18,7 @@ exports.register = async (req, res, next) => {
     email,
     password,
     address,
-    addressLine2,
+    building,
     postalCode,
     city,
     images,
@@ -31,7 +31,7 @@ exports.register = async (req, res, next) => {
       email,
       password,
       address,
-      addressLine2,
+      building,
       postalCode,
       city,
       images,
@@ -177,10 +177,10 @@ exports.createOrder = async (req, res, next) => {
       });
     }
 
-    const user = await User.findOne({ _id: orders.userID });
-    if (!user) {
-      return res.status(401).json({ success: false, error: "user not found" });
-    }
+    // const user = await User.findOne({ _id: orders.userID });
+    // if (!user) {
+    //   return res.status(401).json({ success: false, error: "user not found" });
+    // }
 
     const order = await Order.create(orders);
     if (!order) {

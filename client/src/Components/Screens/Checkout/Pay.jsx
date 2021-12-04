@@ -9,12 +9,12 @@ import axios from "axios";
 const Pay = () => {
   const state = useStateValue();
   const { userAPI, token } = useStateValue();
-  const [postalCode] = userAPI.postalCode;
   const { email, lastName, name } = userAPI;
   const { userID } = userAPI;
-  const [basket, setBasket] = state.basket;
-  const [address] = userAPI.address;
-  const [street] = userAPI.street;
+  const [basket, setBasket] = state?.basket;
+  const [postalCode] = userAPI?.postalCode;
+  const [address] = userAPI?.address;
+  const [building] = userAPI?.building;
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
 
@@ -45,7 +45,7 @@ const Pay = () => {
                 postalCode,
                 address,
                 paymentID: data.orderID,
-                street,
+                building,
                 basket,
                 name,
                 email,
@@ -79,13 +79,13 @@ const Pay = () => {
   };
 
   useEffect(() => {
-    if (!postalCode || !address || !street || basket.length === 0) {
+    if (!postalCode || !address || !building || basket.length === 0) {
       setDeferLoading(true);
     }
-    if (postalCode && address && street && basket.length > 0) {
+    if (postalCode && address && building && basket.length > 0) {
       setDeferLoading(false);
     }
-  }, [street, userID, postalCode, basket, address, deferLoading]);
+  }, [building, userID, postalCode, basket, address, deferLoading]);
   return (
     <div className="paymentOptions">
       {error && <div className="error__box">{error}</div>}
@@ -98,11 +98,11 @@ const Pay = () => {
           padding: "10px",
           textAlign: "center",
         }}>
-        {/* <button
+        <button
           onClick={(e) => transactionSuccess({ orderID: "something now" }, e)}
           style={{ padding: "10px 15px", margin: "10px" }}>
           Pay the bill
-        </button> */}
+        </button>
         <Paypal
           total={parseFloat(getBasketTotal(basket)).toFixed(2)}
           onSuccess={transactionSuccess}

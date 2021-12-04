@@ -64,7 +64,6 @@ const Header = ({ dashboard }) => {
 
   const handleBarsClick = () => {
     const bars = document.querySelector(".header__bars");
-    // const sideNav = document.querySelector(".header__side-nav");
 
     let sideNav;
 
@@ -109,9 +108,8 @@ const Header = ({ dashboard }) => {
 
   const logoutUser = async () => {
     try {
-      await axios.get("/api/user/logout");
-      localStorage.removeItem("login");
       localStorage.removeItem("pcl");
+      localStorage.removeItem("login");
 
       navigator.serviceWorker
         .register("/service-worker.js")
@@ -120,6 +118,7 @@ const Header = ({ dashboard }) => {
             .unregister()
             .then((bool) => console.log("boolean: ", bool));
         });
+      await axios.get("/api/user/logout");
       window.location.href = "/";
     } catch (err) {
       alert(err.response.data.error);

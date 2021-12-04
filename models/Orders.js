@@ -43,7 +43,7 @@ const OrderSchema = new Schema(
       required: true,
       trim: true,
     },
-    street: {
+    building: {
       type: String,
     },
     basket: {

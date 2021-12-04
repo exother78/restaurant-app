@@ -10,7 +10,7 @@ const Settings = () => {
   const firstName = userAPI.name;
   const lastName = userAPI.lastName;
   const userAddress = userAPI.userAddress;
-  const userStreet = userAPI.userStreet;
+  const userBuilding = userAPI.userBuilding;
   const email = userAPI.email;
   const [postalCode] = userAPI.postalCode;
 
@@ -64,8 +64,8 @@ const Settings = () => {
           </div>
 
           <div className="name">
-            <p className="title">street Address: </p>
-            <p className="desc">{userStreet && userStreet}</p>
+            <p className="title">Building: </p>
+            <p className="desc">{userBuilding && userBuilding}</p>
           </div>
         </div>
         <div className="sectionsOfUser sectionsOfUser2">

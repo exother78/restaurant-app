@@ -4,6 +4,7 @@ import { useStateValue } from "../../../StateProvider";
 import CartProduct from "../Cart/Sections/CartProduct";
 import { getBasketTotal } from "../../../reducer";
 import { Link } from "react-router-dom";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 
 const Checkout = () => {
   const state = useStateValue();
@@ -11,7 +12,11 @@ const Checkout = () => {
   const [postalCode, setPostalCode] = userAPI.postalCode;
   const [basket] = state.basket;
   const [address, setAddress] = userAPI.address;
-  const [street, setStreet] = userAPI.street;
+  const [building, setBuilding] = userAPI.building;
+  const [checkEmail, setCheckEmail] = userAPI.checkEmail;
+  const [checkName, setCheckName] = userAPI.checkName;
+  const [checkPhone, setCheckPhone] = userAPI.checkPhone;
+
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
 
@@ -26,13 +31,13 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    if (!postalCode || !address || !street || basket.length === 0) {
+    if (!postalCode || !address || !building || basket.length === 0) {
       setDeferLoading(true);
     }
-    if (postalCode && address && street && basket.length > 0) {
+    if (postalCode && address && building && basket.length > 0) {
       setDeferLoading(false);
     }
-  }, [street, postalCode, basket, address, deferLoading]);
+  }, [building, postalCode, basket, address, deferLoading]);
 
   return (
     <div className="checkout">
@@ -84,28 +89,28 @@ const Checkout = () => {
               </div>
 
               <div className="checkout__form-group">
-                <label htmlFor="street">
-                  Enter Street No.
+                <label htmlFor="building">
+                  Enter Building name or Apartment, floor
                   <span
                     className="checkout__form-group-span"
                     style={{
-                      display: street?.length === 0 ? "block" : "none",
+                      display: building?.length === 0 ? "block" : "none",
                     }}>
-                    Enter Street*
+                    Enter Building, floor*
                   </span>
                 </label>
                 <input
                   type="text"
-                  name="street"
+                  name="building"
                   required
-                  value={street ? street : ""}
-                  placeholder="eg. street no.6 house no.1"
-                  onChange={(e) => setStreet(e.target.value)}
+                  value={building ? building : ""}
+                  placeholder="eg. building #01 floor 2, flat 34"
+                  onChange={(e) => setBuilding(e.target.value)}
                 />
               </div>
 
               <div className="checkout__form-group">
-                <label htmlFor="street">
+                <label htmlFor="postalCode">
                   Postal Code
                   <span
                     className="checkout__form-group-span"
@@ -122,6 +127,67 @@ const Checkout = () => {
                   value={postalCode ? postalCode : ""}
                   placeholder="Postal Code"
                   onChange={postalCodeChange}
+                />
+              </div>
+
+              <div className="checkout__form-group">
+                <label htmlFor="checkName">
+                  Full Name
+                  <span
+                    className="checkout__form-group-span"
+                    style={{
+                      display: checkName?.length === 0 ? "block" : "none",
+                    }}>
+                    Enter Full Name*
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="checkName"
+                  required
+                  value={checkName ? checkName : ""}
+                  placeholder="Full Name"
+                  onChange={(e) => setCheckName(e.target.value)}
+                />
+              </div>
+              <div className="checkout__form-group">
+                <label htmlFor="checkEmail">
+                  Email
+                  <span
+                    className="checkout__form-group-span"
+                    style={{
+                      display: checkEmail?.length === 0 ? "block" : "none",
+                    }}>
+                    Enter Email*
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="checkEmail"
+                  required
+                  value={checkEmail ? checkEmail : ""}
+                  placeholder="Postal Code"
+                  onChange={(e) => setCheckEmail(e.target.value)}
+                />
+              </div>
+              <div className="checkout__form-group">
+                <label htmlFor="checkPhone">
+                  Phone Number
+                  <span
+                    className="checkout__form-group-span"
+                    style={{
+                      display: checkPhone?.length === 0 ? "block" : "none",
+                    }}>
+                    Enter Your Phone Number*
+                  </span>
+                </label>
+                <input
+                  type="text"
+                  name="checkPhone"
+                  required
+                  value={checkPhone ? checkPhone : ""}
+                  placeholder="Phone Number"
+                  onChange={(e) => setCheckPhone(e.target.value)}
                 />
               </div>
             </div>
@@ -157,11 +223,17 @@ const Checkout = () => {
             </div>
           </div>
 
-          <div className="checkout__proceedToPay">
+          <button
+            type="button"
+            onClick={(e) => e.preventDefault()}
+            className="checkout__proceedToPay">
             <Link className="checkout__proceedToPay-link" to="/paymentoptions">
               Proceed To Pay
+              <span>
+                <ArrowForwardIosIcon />
+              </span>
             </Link>
-          </div>
+          </button>
         </div>
       </form>
     </div>

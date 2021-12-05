@@ -24,7 +24,7 @@ router.route("/allorders").get(protect, adminAuth, allOrders);
 
 router.route("/createorder").post(createOrder);
 
-router.route("/getorders/:id").get(protect, getOrders);
+router.route("/getorders/:id").get(getOrders);
 
 router.route("/forgotpassword").post(forgotPassword);
 

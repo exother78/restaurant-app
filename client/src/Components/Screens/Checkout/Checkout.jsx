@@ -31,13 +31,38 @@ const Checkout = () => {
   }
 
   useEffect(() => {
-    if (!postalCode || !address || !building || basket.length === 0) {
+    if (
+      !postalCode ||
+      !address ||
+      !building ||
+      !checkName ||
+      !checkEmail ||
+      !checkPhone ||
+      basket.length === 0
+    ) {
       setDeferLoading(true);
     }
-    if (postalCode && address && building && basket.length > 0) {
+    if (
+      postalCode &&
+      address &&
+      building &&
+      checkName &&
+      checkEmail &&
+      checkPhone &&
+      basket.length > 0
+    ) {
       setDeferLoading(false);
     }
-  }, [building, postalCode, basket, address, deferLoading]);
+  }, [
+    building,
+    postalCode,
+    basket,
+    address,
+    deferLoading,
+    checkName,
+    checkEmail,
+    checkPhone,
+  ]);
 
   return (
     <div className="checkout">
@@ -224,10 +249,12 @@ const Checkout = () => {
           </div>
 
           <button
-            type="button"
+            type="submit"
             onClick={(e) => e.preventDefault()}
             className="checkout__proceedToPay">
-            <Link className="checkout__proceedToPay-link" to="/paymentoptions">
+            <Link
+              className="checkout__proceedToPay-link"
+              to={!deferLoading && "/paymentoptions"}>
               Proceed To Pay
               <span>
                 <ArrowForwardIosIcon />

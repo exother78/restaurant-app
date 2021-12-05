@@ -37,6 +37,19 @@
   user-select: none;
 }
 
+.Header::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: lightgrey;
+  opacity: 0.2;
+  z-index: -1;
+  filter: blur(3px);
+}
+
 @keyframes topbottom {
   from {
     height: 0;
@@ -47,8 +60,12 @@
   }
 }
 
-.Header.white .header__logo {
-  color: black;
+.Header .header__logo g:last-child {
+  fill: white;
+}
+
+.Header.white .header__logo g:last-child {
+  fill: rgb(65, 63, 63);
 }
 
 .Header.white::after {

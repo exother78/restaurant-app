@@ -89,6 +89,7 @@ const Pay = () => {
     if (postalCode && address && building && basket.length > 0) {
       setDeferLoading(false);
     }
+    if (basket?.length === 0) setError("No items in the cart");
   }, [building, userID, postalCode, basket, address, deferLoading]);
 
   if (error) {
@@ -108,11 +109,11 @@ const Pay = () => {
           padding: "10px",
           textAlign: "center",
         }}>
-        <button
+        {/* <button
           onClick={(e) => transactionSuccess({ orderID: "something now" }, e)}
           style={{ padding: "10px 15px", margin: "10px" }}>
           Pay the bill
-        </button>
+        </button> */}
         <Paypal
           total={parseFloat(getBasketTotal(basket)).toFixed(2)}
           onSuccess={transactionSuccess}

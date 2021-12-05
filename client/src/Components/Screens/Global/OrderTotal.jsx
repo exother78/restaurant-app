@@ -11,6 +11,8 @@ const OrderTotal = (props) => {
   const [basket, setBasket] = state.basket;
   const [error, setError] = useState(null);
 
+  console.log("basket: ", basket);
+
   const emptyBasket = () => {
     setBasket([]);
   };
@@ -30,13 +32,7 @@ const OrderTotal = (props) => {
   return (
     <div className="order__right-section">
       <div className="order__right-section-content">
-        <h2
-          className="orderTotal__title"
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-evenly",
-          }}>
+        <h2 className="orderTotal__title">
           {basket?.length} items in Cart
           <ShoppingBasketRoundedIcon
             style={{ color: "#d70f64", fontSize: "xx-large" }}
@@ -45,7 +41,10 @@ const OrderTotal = (props) => {
         {basket?.map((item, i) => (
           <div key={i} className="order__total-list">
             <p className="order__total-title">{item?.title}</p>
-            <p className="order__total-price">{item?.price}</p>
+            <p className="order__total-price">
+              <span className="order__total-list-text">x{item?.quantity}</span>
+              {item?.price}
+            </p>
           </div>
         ))}
         <h3 className="order__total">

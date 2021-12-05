@@ -18,6 +18,9 @@
 
 .orderTotal__title {
   letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .order__total-list {
@@ -28,17 +31,27 @@
 
 .order__total-list > * {
   margin: 0;
+  flex: 0.2 1 40%;
 }
 
 .order__total-title {
   font-size: medium;
   font-weight: 600;
   letter-spacing: 0.9px;
+  text-align: left;
 }
 
 .order__total-price {
-  font-size: medium;
+  font-size: 1.4rem;
   letter-spacing: 0.7px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.order__total-list-text {
+  font-size: 1rem;
+  margin-left: 30%;
 }
 
 .order__total {

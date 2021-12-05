@@ -9,11 +9,8 @@ const Orders = () => {
 
   const [orders, setOrders] = useState(null);
   const [error, setError] = useState("");
-  const [pendingOrders, setPendingOrders] = useState({});
-  const [completedOrders, setCompletedOrders] = useState({});
-
-  console.log("completed orders: ", completedOrders);
-
+  const [pendingOrders, setPendingOrders] = useState([]);
+  const [completedOrders, setCompletedOrders] = useState([]);
   useEffect(() => {
     if (userID) {
       const func = async () => {
@@ -35,9 +32,7 @@ const Orders = () => {
       orders.forEach((item) => {
         const orderDate = new Date(item.time).valueOf() + 45 * 60 * 1000;
         if (new Date(orderDate) > new Date(Date.now())) {
-          // setPendingOrders((prevState) => ({
-          //   orders: [...prevState?.orders, item],
-          // }));
+          setPendingOrders((data) => [...data, item]);
           return;
         }
 
@@ -48,17 +43,11 @@ const Orders = () => {
         //   new Date(orderDate)
         // );
         if (new Date(Date.now()) > new Date(orderDate)) {
-          console.log("greater: ", item);
-
-          // setCompletedOrders((prevState) => ({
-          //   orders: [...prevState?.orders, item],
-          // }));
-          // setCompletedOrders((data) => [...completedOrders, item]);
+          setCompletedOrders((data) => [...data, item]);
           return;
         }
       });
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [orders]);
 
   return (

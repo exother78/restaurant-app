@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Header.css";
+import Logo from "./Logo";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
 import { Link } from "react-router-dom";
@@ -155,7 +156,9 @@ const Header = ({ dashboard }) => {
           <Bars handleBarsClick={handleBarsClick} />
 
           <Link className="header__logo" to="/">
-            <h1>LOGO</h1>
+            <h1 style={{ position: "relative" }}>
+              <Logo />
+            </h1>
           </Link>
 
           <nav>

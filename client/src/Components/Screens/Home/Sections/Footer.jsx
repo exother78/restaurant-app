@@ -6,12 +6,16 @@ import { Link } from "react-router-dom";
 import FacebookIcon from "../../../Images/facebookicon.png";
 import InstagramIcon from "../../../Images/instagramicon.png";
 import TripAdvisorIcon from "../../../Images/tripadvisor.png";
+import Logo from "../../Header/Logo";
 
 const Footer = () => {
   return (
     <>
       <div className="footer">
-        <h1 className="footer__title">Know Us</h1>
+        <h1 className="footer__title" style={{ textAlign: "center" }}>
+          <Logo fill="rgb(65, 63, 63)" />
+        </h1>
+
         <div className="footer__container">
           <div className="footer__column">
             <h2 className="footer__column-title">Discover</h2>

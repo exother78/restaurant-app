@@ -66,7 +66,7 @@ const Pay = () => {
           )
           .then(() => {
             setBasket([]);
-            window.location.href = "/";
+            // window.location.href = "/";
           });
       } catch (error) {
         setError(error.response.data.error);

@@ -2,6 +2,7 @@ import React from "react";
 import "./Menu.css";
 import ArrowForwardRoundedIcon from "@mui/icons-material/ArrowForwardRounded";
 import { useStateValue } from "../../../../StateProvider";
+import { Link } from "react-router-dom";
 
 const Menu = () => {
   const { menuAPI } = useStateValue();
@@ -26,11 +27,9 @@ const Menu = () => {
           <p className="footer__order-page-link-text">
             Click Here to See full menu
           </p>
-          <span
-            className="menu-to-menuscreen-arrow"
-            onClick={() => (window.location.href = "/menu")}>
+          <Link className="menu-to-menuscreen-arrow" to="/menu">
             <ArrowForwardRoundedIcon />
-          </span>
+          </Link>
         </div>
       </div>
     </div>

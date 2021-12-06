@@ -37,11 +37,11 @@ const UserAPI = (token) => {
           };
 
           const data = await axios.get("/api/private", auth);
-          setUser(data.data.user);
+          setUser(data?.data.user);
           setIsLoggedIn(true);
 
-          if (data.data.user.postalCode) {
-            setPostalCode(data.data.user.postalCode);
+          if (data?.data.user.postalCode) {
+            setPostalCode(data?.data.user.postalCode);
           }
           data.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
         } catch (err) {

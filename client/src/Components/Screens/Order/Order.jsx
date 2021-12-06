@@ -34,7 +34,7 @@ const Order = () => {
             alt=""
           />
         </div>
-        <div className="order__header" style={{ userSelect: "none" }}>
+        <div className="order__header">
           <div className="order__categories">
             {categories.map((category, i) => (
               <p
@@ -53,10 +53,7 @@ const Order = () => {
         </div>
         <div className="order__allContainer">
           {categories?.map((item, i) => (
-            <div
-              key={i}
-              className="order__container-category"
-              style={{ padding: "10px 0" }}>
+            <div key={i} className="order__container-category">
               <div className="order__container-category-data">
                 <h2 className="order__container-category-text" id={item?.name}>
                   {item?.name}

@@ -1,3 +1,18 @@
+@font-face {
+  font-family: "Montserrat";
+  src: url("./Fonts/montserrat-v18-latin-regular.woff");
+  font-style: normal;
+  font-weight: normal;
+  font-display: block;
+}
+@font-face {
+  font-family: "Josefin Slab";
+  src: url("./Fonts/JosefinSlab-Regular.ttf");
+  font-style: normal;
+  font-weight: normal;
+  font-display: block;
+}
+
 .btn {
   padding: 7px 15px;
 }
@@ -34,6 +49,13 @@ a {
   transform: scale(1.06);
 }
 
+.footer__order-page-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5px;
+}
+
 .menu-to-menuscreen-arrow {
   width: 35px;
   display: flex;
@@ -46,12 +68,6 @@ a {
   margin-left: 10px;
   transition: all 0.2s linear;
   cursor: pointer;
-}
-
-.footer__order-page-link {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .menu-to-menuscreen-arrow:active {

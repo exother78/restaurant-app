@@ -79,7 +79,7 @@ const Pay = () => {
   };
 
   const transactionCancel = async (data) => {
-    console.log("cancelled: ", data);
+    setError("Cancelled Transaction");
   };
 
   useEffect(() => {
@@ -102,13 +102,7 @@ const Pay = () => {
       {error && <div className="error__box">{error}</div>}
       <OrderTotal />
 
-      <div
-        className="paymentOptions-Paypal-btn"
-        style={{
-          width: "100%",
-          padding: "10px",
-          textAlign: "center",
-        }}>
+      <div className="paymentOptions-Paypal-btn">
         {/* <button
           onClick={(e) => transactionSuccess({ orderID: "something now" }, e)}
           style={{ padding: "10px 15px", margin: "10px" }}>

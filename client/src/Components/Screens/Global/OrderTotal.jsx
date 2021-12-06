@@ -11,8 +11,6 @@ const OrderTotal = (props) => {
   const [basket, setBasket] = state.basket;
   const [error, setError] = useState(null);
 
-  console.log("basket: ", basket);
-
   const emptyBasket = () => {
     setBasket([]);
   };

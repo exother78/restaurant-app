@@ -12,7 +12,7 @@ const Footer = () => {
   return (
     <>
       <div className="footer">
-        <h1 className="footer__title" style={{ textAlign: "center" }}>
+        <h1 className="footer__title">
           <Logo fill="rgb(65, 63, 63)" />
         </h1>
 
@@ -63,15 +63,11 @@ const Footer = () => {
             <span className="footer__column-subText">Pizza</span>
 
             <span className="footer__column-subText">Chicken Karahi</span>
-            <div
-              className="footer__order-page-link"
-              style={{ padding: "0 5px" }}>
+            <div className="footer__order-page-link">
               <h4>Order Food Now!</h4>
-              <span
-                className="menu-to-menuscreen-arrow"
-                onClick={() => (window.location.href = "/order")}>
+              <Link className="menu-to-menuscreen-arrow" to="/order">
                 <ArrowForwardRoundedIcon />
-              </span>
+              </Link>
             </div>
           </div>
         </div>

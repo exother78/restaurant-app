@@ -11,3 +11,9 @@
 .paymentOptions .order__total-btns {
   display: none;
 }
+
+.paymentOptions-Paypal-btn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+}

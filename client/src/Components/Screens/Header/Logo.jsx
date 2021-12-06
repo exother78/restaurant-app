@@ -7,7 +7,7 @@ const Logo = ({ fill }) => {
         width="280"
         height="39.67048819740995"
         viewBox="0 0 280 39.67048819740995"
-        className="css-1j8o68f">
+        className="header__logo-svg-exact">
         <defs id="SvgjsDefs6515"></defs>
         <g
           id="SvgjsG6516"

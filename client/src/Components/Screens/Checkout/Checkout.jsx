@@ -71,18 +71,12 @@ const Checkout = () => {
       <div
         className="errorShowPayment"
         style={{
-          position: "relative",
           display: deferLoading ? "flex" : "none",
-          justifyContent: "center",
-          color: "red",
-          fontWeight: "600",
-          letterSpacing: ".7px",
-          transition: "all .3s ease-in",
         }}>
         <p>* Please fill the Complete details to proceed payment </p>
       </div>
       <form>
-        <div className="checkout__categories" style={{ marginTop: "20px" }}>
+        <div className="checkout__categories">
           <div className="checkout__category">
             <div className="checkout__category-title">
               <h2>Delivery Address</h2>
@@ -90,9 +84,7 @@ const Checkout = () => {
 
             <div className="checkout__category-details">
               <div className="checkout__form-group">
-                <label
-                  htmlFor="address"
-                  style={{ display: "flex", justifyContent: "space-between" }}>
+                <label htmlFor="address">
                   Address
                   <span
                     className="checkout__form-group-span"
@@ -223,9 +215,7 @@ const Checkout = () => {
               <h2>Review Items and Delivery</h2>
             </div>
 
-            <div
-              className="checkout__category-details"
-              style={{ flexWrap: "wrap" }}>
+            <div className="checkout__category-details">
               {basket?.map((item, i) => (
                 <CartProduct {...item} removeID={i} key={i} />
               ))}
@@ -254,7 +244,7 @@ const Checkout = () => {
             className="checkout__proceedToPay">
             <Link
               className="checkout__proceedToPay-link"
-              to={!deferLoading && "/paymentoptions"}>
+              to={!deferLoading ? "/paymentoptions" : "/checkout"}>
               Proceed To Pay
               <span>
                 <ArrowForwardIosIcon />

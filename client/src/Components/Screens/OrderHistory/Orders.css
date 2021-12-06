@@ -1,0 +1,58 @@
+.order__history {
+  width: 100%;
+  height: 100%;
+}
+
+.ordersHistory__front-boxes {
+  display: flex;
+  width: 100%;
+  min-height: 400px;
+  flex-wrap: wrap;
+  margin-top: 30px;
+}
+
+.orders__box {
+  background: #fccd0f;
+  flex: 1 1 30%;
+  margin: 0 5px;
+  min-width: 300px;
+  height: 60%;
+  min-height: 300px;
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.orders__box-text-subText1 {
+  font-family: "Montserrat";
+}
+
+.orders__box-text {
+  color: white;
+  font-family: "Montserrat";
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.orders__box-text-subText {
+  font-size: xx-large;
+  text-align: center;
+  padding: 10px;
+}
+
+/* next section started  */
+
+.orders__completed-box {
+  background: #15ff00;
+  flex: 1 1 30%;
+  margin: 0 5px;
+  min-width: 300px;
+  height: 60%;
+  min-height: 300px;
+  max-height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

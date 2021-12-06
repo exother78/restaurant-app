@@ -156,7 +156,7 @@ const Header = ({ dashboard }) => {
           <Bars handleBarsClick={handleBarsClick} />
 
           <Link className="header__logo" to="/">
-            <h1 style={{ position: "relative" }}>
+            <h1>
               <Logo />
             </h1>
           </Link>
@@ -197,9 +197,7 @@ const Header = ({ dashboard }) => {
             {!isLoggedIn ? (
               <div className="header__login">
                 <Link to="/login">
-                  <span
-                    className="header__loginText btn-anim btn btn-dark btn-main"
-                    style={{ letterSpacing: "2px" }}>
+                  <span className="header__loginText btn-anim btn btn-dark btn-main">
                     Login
                   </span>
                 </Link>
@@ -207,9 +205,7 @@ const Header = ({ dashboard }) => {
             ) : (
               <div className="header__login">
                 <Link to="/" onClick={logoutUser}>
-                  <span
-                    className="header__loginText btn-anim btn btn-dark btn-main"
-                    style={{ letterSpacing: "2px" }}>
+                  <span className="header__loginText btn-anim btn btn-dark btn-main">
                     Logout
                   </span>
                 </Link>
@@ -308,7 +304,7 @@ const Header = ({ dashboard }) => {
           style={{ maxHeight: displayMobileCartButton ? "70px" : "0" }}>
           <button>
             <Link to="/cart">
-              <ShoppingBasketRoundedIcon style={{ marginRight: "20px" }} />
+              <ShoppingBasketRoundedIcon className="ShoppingBasketRoundedIcon" />
               Go to Cart
             </Link>
             <span className="header__mobile__cart-btn-length">

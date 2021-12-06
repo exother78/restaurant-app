@@ -11,6 +11,7 @@ import NotFound from "./Screens/Global/NotFound";
 import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
 import Home from "./Screens/Home/Home";
 import Pay from "./Screens/Checkout/Pay";
+import ScrollToTop from "./Screens/Global/ScrollToTop";
 
 const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
 const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
@@ -205,20 +206,23 @@ function App() {
           </Route>
 
           <Route path="/dashboard">
-            {isAdmin ? (
-              <Suspense fallback={<Loading />}>
-                <Dashboard />
-                <DashboardHome />
-              </Suspense>
-            ) : (
-              <>
-                <Header /> <NotFound />
-              </>
-            )}
+            <>
+              {isAdmin ? (
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                  <DashboardHome />
+                </Suspense>
+              ) : (
+                <>
+                  <Header /> <NotFound />
+                </>
+              )}
+            </>
           </Route>
 
           <Route path="/paymentoptions">
             <Header />
+            <ScrollToTop />
             <Pay />
             <Footer />
           </Route>
@@ -233,12 +237,14 @@ function App() {
 
           <Route path="/cart">
             <Header />
+
             <Suspense fallback={<Loading />}>
               <Cart />
             </Suspense>
           </Route>
           <Route path="/about">
             <Header />
+            <ScrollToTop />
             <Suspense fallback={<Loading />}>
               <About />
             </Suspense>
@@ -246,6 +252,7 @@ function App() {
 
           <Route path="/order">
             <Header />
+            <ScrollToTop />
             <Suspense fallback={<Loading />}>
               <Order />
             </Suspense>
@@ -253,6 +260,7 @@ function App() {
 
           <Route path="/settings">
             <Header />
+
             <Suspense fallback={<Loading />}>
               <Settings />
             </Suspense>
@@ -260,6 +268,7 @@ function App() {
 
           <Route path="/orders">
             <Header />
+            <ScrollToTop />
             <Suspense fallback={<Loading />}>
               <Orders />
             </Suspense>
@@ -284,12 +293,14 @@ function App() {
 
           <Route path="/login">
             <Header />
+
             <Login />
             <Footer />
           </Route>
 
           <Route path="/find-us">
             <Header />
+            <ScrollToTop />
             <Suspense fallback={<Loading />}>
               <Location />
             </Suspense>
@@ -299,7 +310,7 @@ function App() {
           <Route path="/">
             <>
               <Header />
-
+              <ScrollToTop />
               <Suspense fallback={<Loading />}>
                 <Home />
               </Suspense>

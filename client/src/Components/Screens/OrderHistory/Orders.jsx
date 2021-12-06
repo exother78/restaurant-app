@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useStateValue } from "../../../StateProvider";
 import Box from "./Box/Box";
+import "./Orders.css";
 
 const Orders = () => {
   const { userAPI } = useStateValue();
@@ -36,12 +37,6 @@ const Orders = () => {
           return;
         }
 
-        // console.log(
-        //   "now date: ",
-        //   new Date(Date.now()),
-        //   "  order date: ",
-        //   new Date(orderDate)
-        // );
         if (new Date(Date.now()) > new Date(orderDate)) {
           setCompletedOrders((data) => [...data, item]);
           return;
@@ -51,119 +46,34 @@ const Orders = () => {
   }, [orders]);
 
   return (
-    <div>
+    <div className="order__history">
       {error && <div className="error__box">{error}</div>}
 
-      <div
-        className="ordersHistory__front-boxes"
-        style={{
-          display: "flex",
-          width: "100%",
-          minHeight: "400px",
-          flexWrap: "wrap",
-          marginTop: "30px",
-        }}>
-        <div
-          className="orders__pending-box"
-          style={{
-            background: "#FCCD0F",
-            flex: "1 1 30%",
-            margin: "0 5px",
-            minWidth: "300px",
-            height: "60%",
-            minHeight: "300px",
-            maxHeight: "400px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <p
-            style={{
-              color: "white",
-              fontFamily: "Montserrat",
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-            }}>
-            <span style={{ fontFamily: "Montserrat" }}>Pending Orders</span>
-            <span
-              style={{
-                fontSize: "xx-large",
-                textAlign: "center",
-                padding: "10px",
-              }}>
+      <div className="ordersHistory__front-boxes">
+        <div className="orders__box">
+          <p className="orders__box-text">
+            <span className="orders__box-text-subText1">Pending Orders</span>
+            <span className="orders__box-text-subText">
               {pendingOrders?.length > 0 ? pendingOrders?.length : "0"}
             </span>
           </p>
         </div>
 
-        <div
-          className="orders__completed-box"
-          style={{
-            background: "#15ff00",
-            flex: "1 1 30%",
-            margin: "0 5px",
-            minWidth: "300px",
-            height: "60%",
-            minHeight: "300px",
-            maxHeight: "400px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <p
-            style={{
-              color: "white",
-              fontFamily: "Montserrat",
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-            }}>
-            <span style={{ fontFamily: "Montserrat" }}>Completed Orders</span>
+        <div className="orders__box" style={{ background: "#15ff00" }}>
+          <p className="orders__box-text">
+            <span className="orders__box-text-subText1">Completed Orders</span>
 
-            <span
-              style={{
-                fontSize: "xx-large",
-                textAlign: "center",
-                padding: "10px",
-              }}>
+            <span className="orders__box-text-subText">
               {completedOrders?.length > 0 ? completedOrders?.length : "0"}
             </span>
           </p>
         </div>
 
-        <div
-          className="orders__cancelled-box"
-          style={{
-            background: "red",
-            flex: "1 1 30%",
-            margin: "0 5px",
-            minWidth: "300px",
-            height: "60%",
-            minHeight: "300px",
-            maxHeight: "400px",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-          }}>
-          <p
-            style={{
-              color: "white",
-              fontFamily: "Montserrat",
-              textAlign: "center",
-              display: "flex",
-              flexDirection: "column",
-            }}>
-            <span style={{ fontFamily: "Montserrat" }}>Cancelled Orders</span>
+        <div className="orders__box" style={{ background: "red" }}>
+          <p className="orders__box-text">
+            <span className="orders__box-text-subText1">Cancelled Orders</span>
 
-            <span
-              style={{
-                fontSize: "xx-large",
-                textAlign: "center",
-                padding: "10px",
-              }}>
-              1
-            </span>
+            <span className="orders__box-text-subText">1</span>
           </p>
         </div>
       </div>

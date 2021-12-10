@@ -25,13 +25,27 @@ const Footer = () => {
             <span className="footer__column-subText">Reserve Table</span>
             <span className="footer__column-subText">
               <a href="https://www.facebook.com/shahiristorante">
-                <img src={FacebookIcon} alt="" className="socialLinksIcons" />
+                <img
+                  src={FacebookIcon}
+                  alt=""
+                  width="48"
+                  height="48"
+                  className="socialLinksIcons"
+                />
               </a>
               <a href="https://www.instagram.com/shahi_ristorante/">
-                <img src={InstagramIcon} alt="" className="socialLinksIcons" />
+                <img
+                  src={InstagramIcon}
+                  alt=""
+                  className="socialLinksIcons"
+                  width="48"
+                  height="48"
+                />
               </a>
               <a href="https://www.tripadvisor.it/Restaurant_Review-g1931037-d15662862-Reviews-Shahi_Ristorante_Pizzeria-Soliera_Province_of_Modena_Emilia_Romagna.html">
                 <img
+                  width="48"
+                  height="48"
                   src={TripAdvisorIcon}
                   alt=""
                   className="socialLinksIcons"

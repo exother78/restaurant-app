@@ -244,7 +244,7 @@ const Checkout = () => {
             className="checkout__proceedToPay">
             <Link
               className="checkout__proceedToPay-link"
-              to={!deferLoading ? "/paymentoptions" : "/checkout"}>
+              to={!deferLoading ? "/checkout/paymentoptions" : "/checkout"}>
               Proceed To Pay
               <span>
                 <ArrowForwardIosIcon />

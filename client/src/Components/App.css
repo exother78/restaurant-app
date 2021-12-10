@@ -1,13 +1,13 @@
 @font-face {
-  font-family: "Montserrat";
-  src: url("./Fonts/montserrat-v18-latin-regular.woff");
+  font-family: "Josefin Slab";
+  src: url("./Fonts/JosefinSlab-Regular.ttf");
   font-style: normal;
   font-weight: normal;
   font-display: block;
 }
 @font-face {
-  font-family: "Josefin Slab";
-  src: url("./Fonts/JosefinSlab-Regular.ttf");
+  font-family: "Montserrat";
+  src: url("./Fonts/montserrat-v18-latin-regular.woff");
   font-style: normal;
   font-weight: normal;
   font-display: block;

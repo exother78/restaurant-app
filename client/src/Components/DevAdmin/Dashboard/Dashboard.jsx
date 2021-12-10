@@ -69,6 +69,13 @@ const Dashboard = () => {
               className="headers__side-nav-text">
               <span>Categories</span>
             </Link>
+
+            <Link
+              onClick={removeSideNav}
+              to="/dashboard/reports"
+              className="headers__side-nav-text">
+              <span>Reports</span>
+            </Link>
           </div>
         </div>
       </div>

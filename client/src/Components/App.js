@@ -2,17 +2,18 @@ import React, { lazy, Suspense, useEffect } from "react";
 import * as PusherPushNotifications from "@pusher/push-notifications-web";
 import "./App.css";
 import Header from "./Screens/Header/Header";
-import Login from "./Screens/Auth/Login";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Footer from "./Screens/Home/Sections/Footer";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Loading from "./Screens/Global/Loading";
 import { useStateValue } from "../StateProvider";
-import NotFound from "./Screens/Global/NotFound";
-import AllProductsHeader from "./DevAdmin/Products/AllProductsHeader/AllProductsHeader";
 import Home from "./Screens/Home/Home";
-import Pay from "./Screens/Checkout/Pay";
 import ScrollToTop from "./Screens/Global/ScrollToTop";
 
+const NotFound = lazy(() => import("./Screens/Global/NotFound"));
+const Login = lazy(() => import("./Screens/Auth/Login"));
+const AllProductsHeader = lazy(() =>
+  import("./DevAdmin/Products/AllProductsHeader/AllProductsHeader")
+);
+const Pay = lazy(() => import("./Screens/Checkout/Pay"));
 const RegisteredUsers = lazy(() => import("./DevAdmin/users/RegisteredUsers"));
 const Dashboard = lazy(() => import("./DevAdmin/Dashboard/Dashboard"));
 const Location = lazy(() => import("./Screens/Location/Location"));
@@ -65,258 +66,238 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <Switch>
-          {/* <Route path="/dashboard/all_reservoirs">
-            <Suspense fallback={<Loading />}>
-              <Dashboard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <AllReservoirs />
-            </Suspense>
-          </Route> */}
-
-          <Route path="/dashboard/reports">
-            <Suspense fallback={<Loading />}>
-              <Dashboard />
-            </Suspense>
-            <Suspense fallback={<Loading />}>
-              <Reports />
-            </Suspense>
-          </Route>
-
-          <Route path="/dashboard/postalcodes">
-            {isAdmin ? (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                </Suspense>
-                <Suspense fallback={<Loading />}>
-                  <PostalCodes />
-                </Suspense>
-              </>
-            ) : (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Header />
-                </Suspense>
-                <NotFound />
-              </>
-            )}
-          </Route>
-
-          <Route path="/dashboard/all_orders">
-            {isAdmin ? (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                </Suspense>
-                <Suspense fallback={<Loading />}>
-                  <ManageOrders />
-                </Suspense>
-              </>
-            ) : (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Header />
-                </Suspense>
-                <NotFound />
-              </>
-            )}
-          </Route>
-
-          <Route path="/dashboard/all_users">
-            {isAdmin ? (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                </Suspense>
-                <Suspense fallback={<Loading />}>
-                  <RegisteredUsers />
-                </Suspense>
-              </>
-            ) : (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Header />
-                </Suspense>
-                <NotFound />
-              </>
-            )}
-          </Route>
-
-          <Route path="/dashboard/products/create_product">
-            {isAdmin ? (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                </Suspense>
-                <AllProductsHeader />
-                <Suspense fallback={<Loading />}>
-                  <CreateProduct />
-                </Suspense>
-              </>
-            ) : (
-              <>
-                <Header />
-                <NotFound />
-              </>
-            )}
-          </Route>
-
-          <Route path="/dashboard/products">
-            {isAdmin ? (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                </Suspense>
-                <AllProductsHeader />
-                <Suspense fallback={<Loading />}>
-                  <AllProducts />
-                </Suspense>
-              </>
-            ) : (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Header />
-                </Suspense>
-                <NotFound />
-              </>
-            )}
-          </Route>
-
-          <Route path="/dashboard/create_category">
-            {isAdmin ? (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                </Suspense>
-
-                <Suspense fallback={<Loading />}>
-                  <CreateCategory />
-                </Suspense>
-              </>
-            ) : (
-              <>
-                <Suspense fallback={<Loading />}>
-                  <Header />
-                </Suspense>
-                <NotFound />
-              </>
-            )}
-          </Route>
-
-          <Route path="/dashboard">
-            <>
-              {isAdmin ? (
-                <Suspense fallback={<Loading />}>
-                  <Dashboard />
-                  <DashboardHome />
-                </Suspense>
-              ) : (
+        <Routes>
+          <Route path="/" element={<Header />}>
+            <Route
+              index
+              element={
                 <>
-                  <Header /> <NotFound />
+                  <ScrollToTop />
+                  <Home />
                 </>
-              )}
-            </>
+              }
+            />
+            <Route
+              path="menu"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <MenuScreen />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="order"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <Order />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="checkout"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <Checkout />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="checkout/paymentOptions"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <Pay />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="about"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <About />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="find-us"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <Location />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="orders"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <Orders />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="login"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <Login />
+                  </Suspense>
+                </>
+              }
+            />
+
+            <Route
+              path="register"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Register />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="cart"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Cart />
+                </Suspense>
+              }
+            />
+
+            <Route
+              path="settings"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Settings />
+                </Suspense>
+              }
+            />
           </Route>
+          {isAdmin ? (
+            <Route
+              path="/dashboard"
+              element={
+                <Suspense fallback={<Loading />}>
+                  <Dashboard />
+                </Suspense>
+              }>
+              <Route
+                index
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <DashboardHome />
+                  </Suspense>
+                }
+              />
 
-          <Route path="/paymentoptions">
-            <Header />
-            <ScrollToTop />
-            <Pay />
-            <Footer />
-          </Route>
+              <Route
+                path="postalcodes"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <PostalCodes />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="all_orders"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ManageOrders />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="all_users"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <RegisteredUsers />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="products"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <AllProductsHeader />
+                  </Suspense>
+                }>
+                <Route
+                  index
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <AllProducts />
+                    </Suspense>
+                  }
+                />
+                <Route
+                  path="create_product"
+                  element={
+                    <Suspense fallback={<Loading />}>
+                      <CreateProduct />
+                    </Suspense>
+                  }
+                />
+              </Route>
+              <Route
+                path="create_category"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <CreateCategory />
+                  </Suspense>
+                }
+              />
 
-          <Route path="/checkout">
-            <Header />
-
-            <Suspense fallback={<Loading />}>
-              <Checkout />
-            </Suspense>
-          </Route>
-
-          <Route path="/cart">
-            <Header />
-
-            <Suspense fallback={<Loading />}>
-              <Cart />
-            </Suspense>
-          </Route>
-          <Route path="/about">
-            <Header />
-            <ScrollToTop />
-            <Suspense fallback={<Loading />}>
-              <About />
-            </Suspense>
-          </Route>
-
-          <Route path="/order">
-            <Header />
-            <ScrollToTop />
-            <Suspense fallback={<Loading />}>
-              <Order />
-            </Suspense>
-          </Route>
-
-          <Route path="/settings">
-            <Header />
-
-            <Suspense fallback={<Loading />}>
-              <Settings />
-            </Suspense>
-          </Route>
-
-          <Route path="/orders">
-            <Header />
-            <ScrollToTop />
-            <Suspense fallback={<Loading />}>
-              <Orders />
-            </Suspense>
-          </Route>
-
-          <Route path="/menu">
-            <Header />
-
-            <Suspense fallback={<Loading />}>
-              <MenuScreen />
-            </Suspense>
-          </Route>
-
-          <Route path="/register">
-            <Header />
-
-            <Suspense fallback={<Loading />}>
-              <Register />
-              <Footer />
-            </Suspense>
-          </Route>
-
-          <Route path="/login">
-            <Header />
-
-            <Login />
-            <Footer />
-          </Route>
-
-          <Route path="/find-us">
-            <Header />
-            <ScrollToTop />
-            <Suspense fallback={<Loading />}>
-              <Location />
-            </Suspense>
-            <Footer />
-          </Route>
-
-          <Route path="/">
-            <>
-              <Header />
-              <ScrollToTop />
-              <Suspense fallback={<Loading />}>
-                <Home />
-              </Suspense>
-            </>
-          </Route>
-        </Switch>
+              <Route
+                path="all_reservoirs"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <ManageOrders />
+                  </Suspense>
+                }
+              />
+              <Route
+                path="reports"
+                element={
+                  <Suspense fallback={<Loading />}>
+                    <Reports />
+                  </Suspense>
+                }
+              />
+            </Route>
+          ) : (
+            <Route
+              path="dashboard/*"
+              element={
+                <>
+                  <Header />
+                  <Suspense fallback={<Loading />}>
+                    <NotFound />
+                  </Suspense>
+                </>
+              }
+            />
+          )}
+        </Routes>
       </div>
     </Router>
   );

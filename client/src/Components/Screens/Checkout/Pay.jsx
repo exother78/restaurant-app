@@ -5,6 +5,7 @@ import { useStateValue } from "../../../StateProvider";
 import { getBasketTotal } from "../../../reducer";
 import Paypal from "./Paypal/Paypal";
 import axios from "axios";
+import Footer from "../Home/Sections/Footer";
 
 const Pay = () => {
   const state = useStateValue();
@@ -24,17 +25,6 @@ const Pay = () => {
   const transactionSuccess = async (data, e) => {
     e.preventDefault();
     const time = Date.now();
-
-    if (!address) {
-      setError("Please enter your address to continue order");
-    }
-    // if (!userID) {
-    //   setError("Please Login to continue");
-    // }
-
-    if (!postalCode) {
-      setError("Please Enter your postal code to continue");
-    }
 
     if (postalCode && address && basket.length > 0) {
       try {
@@ -98,26 +88,29 @@ const Pay = () => {
     }, 2000);
   }
   return (
-    <div className="paymentOptions">
-      {error && <div className="error__box">{error}</div>}
-      <OrderTotal />
+    <>
+      <div className="paymentOptions">
+        {error && <div className="error__box">{error}</div>}
+        <OrderTotal />
 
-      <div className="paymentOptions-Paypal-btn">
-        {/* <button
+        <div className="paymentOptions-Paypal-btn">
+          {/* <button
           onClick={(e) => transactionSuccess({ orderID: "something now" }, e)}
           style={{ padding: "10px 15px", margin: "10px" }}>
           Pay the bill
         </button> */}
-        <Paypal
-          total={parseFloat(getBasketTotal(basket)).toFixed(2)}
-          onSuccess={transactionSuccess}
-          onCancel={transactionCancel}
-          onError={transactionError}
-          setError={setError}
-          loading={deferLoading}
-        />
+          <Paypal
+            total={parseFloat(getBasketTotal(basket)).toFixed(2)}
+            onSuccess={transactionSuccess}
+            onCancel={transactionCancel}
+            onError={transactionError}
+            setError={setError}
+            loading={deferLoading}
+          />
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

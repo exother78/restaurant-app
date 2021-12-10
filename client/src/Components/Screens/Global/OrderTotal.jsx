@@ -3,10 +3,10 @@ import "./OrderTotal.css";
 import { getBasketTotal } from "../../../reducer";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 import { useStateValue } from "../../../StateProvider";
-import { useHistory, Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
-const OrderTotal = (props) => {
-  const history = useHistory();
+const OrderTotal = () => {
+  const navigate = useNavigate();
   const state = useStateValue();
   const [basket, setBasket] = state.basket;
   const [error, setError] = useState(null);
@@ -17,7 +17,7 @@ const OrderTotal = (props) => {
 
   const checkoutClick = () => {
     if (basket.length > 0) {
-      history.push("/checkout");
+      navigate("/checkout");
     }
   };
 

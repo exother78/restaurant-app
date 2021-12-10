@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import "./Header.css";
+import { Outlet } from "react-router-dom";
 import Logo from "./Logo";
 import ShoppingBasketRoundedIcon from "@mui/icons-material/ShoppingBasketRounded";
 
@@ -165,7 +166,10 @@ const Header = ({ dashboard }) => {
             {isLoggedIn && (
               <div
                 className="header__user-nav"
-                onClick={() => setAvatarOpen(!avatarOpen)}>
+                onClick={() => {
+                  setAvatarOpen(!avatarOpen)
+                  removeSideNav()
+                }}>
                 <div className="header__user-nav-img">
                   <img
                     src={userImage ? userImage : avatar}
@@ -180,13 +184,13 @@ const Header = ({ dashboard }) => {
                   style={{
                     display: !avatarOpen ? "none" : "block",
                   }}>
-                  <Link to="/orders">
+                  <Link to="/orders" onClick={removeSideNav}>
                     <li>Pending Orders</li>
                   </Link>
-                  <Link to="/orders">
+                  <Link to="/orders" onClick={removeSideNav}>
                     <li>Order History</li>
                   </Link>
-                  <Link to="/settings">
+                  <Link to="/settings" onClick={removeSideNav}>
                     <li>Settings</li>
                   </Link>
                   <li onClick={logoutUser}>Logout</li>
@@ -196,7 +200,7 @@ const Header = ({ dashboard }) => {
 
             {!isLoggedIn ? (
               <div className="header__login">
-                <Link to="/login">
+                <Link to="/login" >
                   <span className="header__loginText btn-anim btn btn-dark btn-main">
                     Login
                   </span>
@@ -224,11 +228,11 @@ const Header = ({ dashboard }) => {
             {!isLoggedIn && (
               <div className="header__side-nav-upper-section">
                 <div className="header__side-nav-upper-section-btns">
-                  <Link to="/login">
-                    <button className="header__side-nav-button">Sign in</button>
+                  <Link to="/login" onClick={removeSideNav}>
+                    <button className="header__side-nav-button">Log in</button>
                   </Link>
-                  <Link to="/register">
-                    <button className="header__side-nav-button">Sign up</button>
+                  <Link to="/register" onClick={removeSideNav}>
+                    <button className="header__side-nav-button">Register</button>
                   </Link>
                 </div>
               </div>
@@ -313,6 +317,8 @@ const Header = ({ dashboard }) => {
           </button>
         </div>
       </div>
+      <Outlet />
+
     </>
   );
 };

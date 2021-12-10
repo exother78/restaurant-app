@@ -4,10 +4,10 @@ import axios from "axios";
 import { useStateValue } from "../../../StateProvider";
 import Loading from "../../Screens/Global/Loading";
 
-import { useHistory } from "react-router";
+import { useNavigate } from "react-router-dom";
 
 const CreateProduct = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const { categoriesAPI, productsAPI, userAPI, token } = useStateValue();
   const [isAdmin] = userAPI.isAdmin;
   const [categories] = categoriesAPI.categories;
@@ -87,7 +87,7 @@ const CreateProduct = () => {
       );
       setCallback(!callback);
       setLoading(false);
-      history.push("/dashboard/products");
+      navigate("/dashboard/products");
 
       return res;
     } catch (error) {
@@ -112,7 +112,7 @@ const CreateProduct = () => {
       );
       setCallback(!callback);
       setLoading(false);
-      history.push("/dashboard/products");
+      navigate("/dashboard/products");
 
       return res;
     } catch (error) {

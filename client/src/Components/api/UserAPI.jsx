@@ -5,7 +5,7 @@ const UserAPI = (token) => {
   const [user, setUser] = useState({});
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [postalCode, setPostalCode] = useState(null);
+  const [postalCode, setPostalCode] = useState(localStorage.getItem('pcl') ? localStorage.getItem('pcl') : '');
   const [data, setData] = useState({});
   const [minimumOrder, setMinimumOrder] = useState(null);
   const [building, setBuilding] = useState(null);
@@ -56,33 +56,39 @@ const UserAPI = (token) => {
       await getPostalCode(postal)
         .then((response) => {
           if (response) {
-            if (!postalCode) setPostalCode(postal);
-            if (!response.data.code.active) {
-              localStorage.removeItem("pcl");
-              setData(null);
-              setMinimumOrder(null);
-              return;
-            }
+            // if (!postalCode) setPostalCode(postal);
+
             if (response.data.code.active) {
               setData(response.data.code);
               setMinimumOrder(response.data.code.minOrder);
               localStorage.setItem("pcl", response.data.code.postalCode);
             }
+            else if (!response.data.code.active) {
+              localStorage.removeItem("pcl");
+              setData(null);
+              setMinimumOrder(null);
+              return;
+            }
+
           }
         })
-        .catch((error) =>
+        .catch((error) => {
           console.log("something wrong here: ", error.response)
+          localStorage.removeItem("pcl");
+          setData(null);
+          setMinimumOrder(null);
+        }
+
         );
     },
-    [postalCode]
+    []
   );
 
   const postal = localStorage.getItem("pcl");
   useEffect(() => {
     if (postalCode) {
       runGetCode(postalCode);
-    }
-    if (postal) {
+    } else if (postal) {
       runGetCode(postal);
     }
   }, [postalCode, postal, runGetCode]);

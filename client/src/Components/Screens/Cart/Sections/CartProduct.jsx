@@ -8,7 +8,6 @@ const CartProduct = ({
   description,
   price,
   image,
-  removeID,
   quantity,
 }) => {
   const state = useStateValue();

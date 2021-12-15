@@ -10,6 +10,9 @@ const OrderTotal = () => {
   const state = useStateValue();
   const [basket, setBasket] = state.basket;
   const [error, setError] = useState(null);
+  const { userAPI } = useStateValue();
+  const [data] = userAPI.postalData
+
 
   const emptyBasket = () => {
     setBasket([]);
@@ -26,6 +29,7 @@ const OrderTotal = () => {
       setError(null);
     }, 2000);
   }
+
 
   return (
     <div className="order__right-section">
@@ -45,10 +49,20 @@ const OrderTotal = () => {
             </p>
           </div>
         ))}
+        {/* <div className="order__total-list" >
+          <p className="order__total-title" style={{ fontSize: 'small' }}>Delivery Fee</p>
+          <p className="order__total-price" style={{ justifyContent: 'right', fontSize: 'large' }}>
+            {data?.deliveryPrice}
+          </p>
+        </div> */}
         <h3 className="order__total">
-          <span> total </span>
-          {parseFloat(getBasketTotal(basket)).toFixed(2)}
+          <span> Total </span>
+          {parseFloat(getBasketTotal(basket))}
         </h3>
+        {data?.deliveryPrice ? <h4 style={{ fontSize: 'small' }}>with delivery fee <span style={{ fontSize: 'large', marginLeft: '20px' }}>
+          {(parseFloat(getBasketTotal(basket)) + parseFloat(data?.deliveryPrice)).toFixed(2)}
+        </span>
+        </h4> : <h4>Enter Postal Info</h4>}
       </div>
 
       <div className="order__total-btns">

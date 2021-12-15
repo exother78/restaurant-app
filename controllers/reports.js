@@ -1,5 +1,4 @@
 const Orders = require("../models/Orders");
-const ErrorResponse = require("../utils/errorResponse");
 
 exports.reports = async (req, res, next) => {
   try {
@@ -11,7 +10,7 @@ exports.reports = async (req, res, next) => {
         const arr = i.filter((item, i) => {
           return (
             parseInt(new Date(item.createdAt).getMonth()) + 1 ===
-            parseInt(req.params.month, 10)
+            parseInt(req.params.month)
           );
         });
 
@@ -22,7 +21,7 @@ exports.reports = async (req, res, next) => {
     if (array.length === 0)
       return res
         .status(500)
-        .json({ success: false, error: "no data found please try again" });
+        .json({ success: false, error: "No data found for this month" });
 
     return res.status(200).json({ success: true, array });
   } catch (error) {

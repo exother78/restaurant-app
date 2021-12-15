@@ -54,6 +54,7 @@ app.use("/api", require("./routes/users"));
 app.use("/api", require("./routes/PostalCode"));
 app.use("/api", require("./routes/reports"));
 app.use("/api", require("./routes/print"));
+app.use("/api", require("./routes/findOrder"));
 
 app.use(express.static("client/build"));
 // if (process.env.NODE_ENV === "production") {

@@ -54,6 +54,10 @@ const OrderSchema = new Schema(
       type: Number,
       required: true,
     },
+    deliveryCharges: {
+      type: Number,
+      required: true,
+    },
     time: {
       type: Date,
       required: true,

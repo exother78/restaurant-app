@@ -8,9 +8,10 @@ const ItemProduct = ({ title, description, price, images }) => {
       <div className="item">
         <img
           src={
-            images.url && images.url.endsWith("jpg")
-              ? images.url.replace("jpg", "webp")
-              : images.url
+            // images.url && images.url.endsWith("jpg")
+            //   ? images.url.replace("jpg", "webp")
+            //   : images.url
+            images?.url
           }
           alt=""
           className="item__image"

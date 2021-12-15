@@ -63,7 +63,6 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  line-height: 1.8;
 }
 
 .checkout__form-group {
@@ -111,6 +110,24 @@
 
 .checkout__category-details .checkout__payment-section {
   width: 60%;
+}
+
+.checkout__total-error {
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  display: block;
+}
+
+.checkout__total-error.error {
+  display: none;
+}
+
+.checkout__total-error > p {
+  color: red;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: "Montserrat";
 }
 
 .checkout__payment-section-total {

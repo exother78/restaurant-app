@@ -33,7 +33,7 @@ const RegisteredUsers = () => {
 
   return (
     <div className="registeredUsers">
-      <h1>this is all users</h1>
+      <h1>Registered Users</h1>
 
       {users?.map((user, i) => (
         <div className="registeredUser__box" key={i}>

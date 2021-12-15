@@ -8,6 +8,7 @@ import { useStateValue } from "../StateProvider";
 import Home from "./Screens/Home/Home";
 import ScrollToTop from "./Screens/Global/ScrollToTop";
 
+const OrderSucces = lazy(() => import("./Screens/Checkout/OrderSuccess"));
 const NotFound = lazy(() => import("./Screens/Global/NotFound"));
 const Login = lazy(() => import("./Screens/Auth/Login"));
 const AllProductsHeader = lazy(() =>
@@ -117,6 +118,17 @@ function App() {
                   <ScrollToTop />
                   <Suspense fallback={<Loading />}>
                     <Pay />
+                  </Suspense>
+                </>
+              }
+            />
+            <Route
+              path="checkout/ordersuccess/:orderID"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <OrderSucces />
                   </Suspense>
                 </>
               }

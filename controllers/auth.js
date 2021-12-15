@@ -160,22 +160,22 @@ exports.logout = async (req, res, next) => {
 exports.createOrder = async (req, res, next) => {
   const { orders } = req.body;
   try {
-    const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
-    // console.log("postalCOde : ", postalCode);
+    // const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
+    // // console.log("postalCOde : ", postalCode);
 
-    if (!postalCode) {
-      return res.status(401).json({
-        success: false,
-        error: "Delivery not available at your location",
-      });
-    }
-    if (postalCode.active === false) {
-      return res.status(400).json({
-        success: false,
-        error:
-          "Currently delivery is unavailable at your location. Please try with a different Postal",
-      });
-    }
+    // if (!postalCode) {
+    //   return res.status(401).json({
+    //     success: false,
+    //     error: "Delivery not available at your location",
+    //   });
+    // }
+    // if (postalCode.active === false) {
+    //   return res.status(400).json({
+    //     success: false,
+    //     error:
+    //       "Currently delivery is unavailable at your location. Please try with a different Postal",
+    //   });
+    // }
 
     // const user = await User.findOne({ _id: orders.userID });
     // if (!user) {
@@ -183,7 +183,6 @@ exports.createOrder = async (req, res, next) => {
     // }
 
     const order = await Order.create(orders);
-    console.log("this is the error");
     if (!order) {
       return res.status(500).json({
         success: false,
@@ -192,6 +191,7 @@ exports.createOrder = async (req, res, next) => {
     }
 
     if (order) {
+      console.log("order: ", order);
       beamsClient.publishToInterests(["hello_61753cb9d57ce1442c2d89f2"], {
         web: {
           notification: {
@@ -199,7 +199,9 @@ exports.createOrder = async (req, res, next) => {
             body: "You have a new order. Don't worry I have printed the receipt for you",
             deep_link: "https://shahiristorante.it",
             icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
-            data: order,
+          },
+          data: {
+            msg: order,
           },
         },
       });

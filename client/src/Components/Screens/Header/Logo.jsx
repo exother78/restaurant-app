@@ -1,10 +1,10 @@
 import React from "react";
 
-const Logo = ({ fill }) => {
+const Logo = ({ fill, width }) => {
   return (
     <div className="header__logo-svg">
       <svg
-        width="280"
+        width={width ? width : '280'}
         height="39.67048819740995"
         viewBox="0 0 280 39.67048819740995"
         className="header__logo-svg-exact">

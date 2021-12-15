@@ -20,6 +20,7 @@ const ManageOrders = () => {
       };
 
       const orderr = await axios.get("/api/user/allorders", auth);
+      console.log('orders: ', orderr)
       return orderr;
     } catch (error) {
       setError(error.response.data.error);

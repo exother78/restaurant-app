@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const express = require("express");
 const cors = require("cors");
-const app = express();
+// const app = express();
 
 const {
   deletePostalCode,

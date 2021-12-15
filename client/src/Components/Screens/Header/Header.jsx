@@ -158,7 +158,7 @@ const Header = ({ dashboard }) => {
 
           <Link className="header__logo" to="/">
             <h1>
-              <Logo />
+              <Logo width='240' />
             </h1>
           </Link>
 

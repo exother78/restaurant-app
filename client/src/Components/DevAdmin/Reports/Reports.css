@@ -16,10 +16,17 @@
   margin: 0 10px;
 }
 
+#reports__months {
+  font-family: "Montserrat";
+}
+
+#reports__months > option {
+  font-family: "Montserrat";
+}
+
 #content > table {
   font-family: arial, sans-serif;
   border-collapse: collapse;
-  width: 50%;
   max-width: 550px;
 }
 

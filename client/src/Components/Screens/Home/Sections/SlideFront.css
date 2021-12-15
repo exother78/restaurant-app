@@ -50,12 +50,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .sliderFront__order-btn {
   padding: 6px 15px;
   margin-top: 10px;
-  cursor: pointer;
   font-weight: bold;
   letter-spacing: 1px;
   border: none;
@@ -113,6 +113,7 @@
   justify-content: center;
   align-items: center;
   transition: all 0.1s ease;
+  max-height: 40px;
 }
 
 .sliderPostalCode__find-btn:hover {
@@ -245,7 +246,7 @@
 
 @media only screen and (max-width: 700px) {
   .home__slider-front {
-    background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?format=webp&auto=compress&cs=tinysrgb&h=360&w=700");
+    background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?format=webp&auto=compress&cs=tinysrgb&h=400&w=730");
   }
 
   .sliderPostalCode__field {
@@ -281,9 +282,6 @@
 }
 
 @media only screen and (max-width: 600px) {
-  .home__slider-front {
-    background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?format=webp&auto=compress&cs=tinysrgb&h=300&w=600");
-  }
   .sliderPostalCode__field {
     width: 80%;
   }
@@ -292,17 +290,7 @@
     width: 100%;
   }
 }
-
 @media only screen and (max-width: 430px) {
-  .home__slider-front {
-    background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?format=webp&auto=compress&cs=tinysrgb&h=250&w=500");
-  }}
-
-@media only screen and (max-width: 430px) {
-  .home__slider-front {
-    background-image: url("https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?format=webp&auto=compress&cs=tinysrgb&h=180&w=430");
-  }
-
   .home__location-buttons {
     width: 100%;
     flex-direction: column;

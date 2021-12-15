@@ -16,12 +16,14 @@ const Checkout = () => {
   const [checkEmail, setCheckEmail] = userAPI.checkEmail;
   const [checkName, setCheckName] = userAPI.checkName;
   const [checkPhone, setCheckPhone] = userAPI.checkPhone;
+  const [data] = userAPI.postalData
 
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
 
   const postalCodeChange = (e) => {
     setPostalCode(e.target.value);
+    if (e.target.value.length === 0) localStorage.removeItem('pcl')
   };
 
   if (error) {
@@ -37,7 +39,7 @@ const Checkout = () => {
       !building ||
       !checkName ||
       !checkEmail ||
-      !checkPhone ||
+      !checkPhone || parseFloat(getBasketTotal(basket))?.toFixed(2) < parseFloat(data?.minOrder) ||
       basket.length === 0
     ) {
       setDeferLoading(true);
@@ -49,20 +51,12 @@ const Checkout = () => {
       checkName &&
       checkEmail &&
       checkPhone &&
+      parseFloat(getBasketTotal(basket))?.toFixed(2) >= parseInt(data?.minOrder) &&
       basket.length > 0
     ) {
       setDeferLoading(false);
     }
-  }, [
-    building,
-    postalCode,
-    basket,
-    address,
-    deferLoading,
-    checkName,
-    checkEmail,
-    checkPhone,
-  ]);
+  }, [building, postalCode, basket, address, deferLoading, checkName, checkEmail, checkPhone, data?.minOrder]);
 
   return (
     <div className="checkout">
@@ -235,6 +229,10 @@ const Checkout = () => {
                   {parseFloat(getBasketTotal(basket))?.toFixed(2)} €
                 </h2>
               </div>
+            </div>
+
+            <div className={`checkout__total-error ${parseFloat(getBasketTotal(basket)) >= parseInt(data?.minOrder) ? 'error' : ''}`} >
+              <p>*Order should be minimum of {data?.minOrder}</p>
             </div>
           </div>
 

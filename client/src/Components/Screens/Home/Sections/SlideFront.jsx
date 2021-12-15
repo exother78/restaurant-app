@@ -14,7 +14,7 @@ const SlideFront = () => {
   const [, setMinimumOrder] = userAPI.minOrder;
   const [data, setData] = userAPI.postalData;
   const [loading, setLoading] = useState(false);
-  const [postalCodeChange, setPostalCodeChange] = useState("");
+  const [postalCodeChange, setPostalCodeChange] = useState('');
   const [error, setError] = useState(null);
 
   const getPostalCode = async (postal) => {
@@ -86,7 +86,9 @@ const SlideFront = () => {
         </div>
 
         <Link to="/order" className="sliderFront__sidebox-btn">
-          <div className="sliderFront__order-btn">Order Now!</div>
+          <div className="sliderFront__order-btn">
+            Order Now!
+          </div>
         </Link>
       </div>
 
@@ -105,9 +107,6 @@ const SlideFront = () => {
             onChange={(e) => setPostalCodeChange(e.target.value)}
           />
           <button
-            style={{
-              maxHeight: "40px",
-            }}
             className="sliderPostalCode__find-btn"
             onClick={
               !loading && postalCodeChange.length > 0 ? handlePostalFind : null

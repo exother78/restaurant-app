@@ -1,5 +1,5 @@
 import React, { lazy, Suspense, useEffect } from "react";
-import * as PusherPushNotifications from "@pusher/push-notifications-web";
+// import * as PusherPushNotifications from "@pusher/push-notifications-web";
 import "./App.css";
 import Header from "./Screens/Header/Header";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -48,24 +48,24 @@ const Reports = lazy(() => import("./DevAdmin/Reports/Reports"));
 function App() {
   const { userAPI } = useStateValue();
   const [isAdmin] = userAPI.isAdmin;
-  const { userID } = userAPI;
+  // const { userID } = userAPI;
 
-  useEffect(() => {
-    if (isAdmin) {
-      const beamsClient = new PusherPushNotifications.Client({
-        instanceId: "8f9950c1-3405-4dfd-a3a1-48254faff0a3",
-      });
+  // useEffect(() => {
+  //   if (isAdmin) {
+  //     const beamsClient = new PusherPushNotifications.Client({
+  //       instanceId: "8f9950c1-3405-4dfd-a3a1-48254faff0a3",
+  //     });
 
-      beamsClient
-        .start()
-        .then(() => beamsClient.addDeviceInterest(`hello_${userID && userID}`))
-        .then(() => console.log("Successfully registered and subscribed!"))
-        .catch((err) => {
-          Notification.requestPermission();
-          console.log("error: ", err);
-        });
-    }
-  }, [userID, isAdmin]);
+  //     beamsClient
+  //       .start()
+  //       .then(() => beamsClient.addDeviceInterest(`hello_${userID && userID}`))
+  //       .then(() => console.log("Successfully registered and subscribed!"))
+  //       .catch((err) => {
+  //         Notification.requestPermission();
+  //         console.log("error: ", err);
+  //       });
+  //   }
+  // }, [userID, isAdmin]);
   return (
     <Router>
       <div className="App">

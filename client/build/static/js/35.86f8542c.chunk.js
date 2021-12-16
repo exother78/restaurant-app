@@ -1,2 +1,0 @@
-(this.webpackJsonpclient=this.webpackJsonpclient||[]).push([[35],{115:function(e,t,n){"use strict";n.r(t);n(1);var i=n(0);t.default=function(){return Object(i.jsx)("div",{children:Object(i.jsx)("h1",{style:{margin:"30px",fontSize:"2rem",fontWeight:"600",color:"red"},children:"404 Page Not Found"})})}}}]);
-//# sourceMappingURL=35.86f8542c.chunk.js.map

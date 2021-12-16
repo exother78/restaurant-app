@@ -9,10 +9,11 @@ const Category = ({ images, name }) => {
         loading="lazy"
         src={
           images
-            ? images.url.endsWith("jpg")
-              ? images.url.replace("jpg", "webp")
+            ? images.url.endsWith( "webp" )
+              ? images.url.replace( "webp", "jpg" )
               : images.url
             : avatar
+          // images?.url
         }
         alt=""
       />

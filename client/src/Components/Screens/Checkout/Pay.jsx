@@ -27,9 +27,9 @@ const Pay = () => {
 
 
 
-  const transactionSuccess = async (paymentData, e) => {
+  const transactionSuccess = async ( paymentData ) => {
     // const total = getBasketTotal(basket) + parseFloat(data?.deliveryPrice)
-    e.preventDefault()
+    // e.preventDefault()
     const time = Date.now();
     try {
 
@@ -60,9 +60,9 @@ const Pay = () => {
           }
         )
         .then(() => {
-          // setBasket([]);
-          // navigate(`/checkout/ordersuccess/${time + 1983}`)
-          window.location.href = `/checkout/ordersuccess/${time + 1983}`
+          setBasket( [] );
+          navigate( `/checkout/ordersuccess/${ time + 1983 }` )
+          // window.location.href = `/checkout/ordersuccess/${time + 1983}`
         });
     } catch (error) {
       setError(error.response.data.error);

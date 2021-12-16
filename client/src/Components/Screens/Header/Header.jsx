@@ -268,6 +268,13 @@ const Header = ({ dashboard }) => {
                 <span>Order Now !</span>
               </Link>
 
+              <Link
+                onClick={removeSideNav}
+                to="/findorder"
+                className="header__side-nav-text">
+                <span>Find your Order</span>
+              </Link>
+
               {isLoggedIn && (
                 <Link
                   onClick={removeSideNav}

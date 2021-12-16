@@ -4,6 +4,10 @@
   height: 100%;
 }
 
+.checkout input {
+  border: 1px solid darkgrey;
+}
+
 .errorShowPayment {
   position: relative;
   justify-content: center;
@@ -90,7 +94,7 @@
 .checkout__category-details .checkout__form-group input {
   padding: 10px 10px;
   margin: 0 10px;
-  border: none;
+  border-radius: 7px;
   outline: none;
   font-size: medium;
   font-weight: 600;

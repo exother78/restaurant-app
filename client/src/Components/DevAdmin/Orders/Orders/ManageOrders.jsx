@@ -20,7 +20,10 @@ const ManageOrders = () => {
       };
 
       const orderr = await axios.get("/api/user/allorders", auth);
-      console.log('orders: ', orderr)
+
+
+      setOrders(orderr.data.orders);
+
       return orderr;
     } catch (error) {
       setError(error.response.data.error);
@@ -29,11 +32,23 @@ const ManageOrders = () => {
 
   useEffect(() => {
     if (token[0]) {
-      getOrders().then((response) => {
-        setOrders(response.data.orders);
-      });
+      getOrders()
+
+
     }
   }, [token, getOrders]);
+
+  useEffect(() => {
+    if (orders) {
+
+      // orders.filter((item, i) => {
+      //   return (
+      //     parseInt(new Date(item.createdAt).getMonth()) + 1 ===
+      //     12
+      //   );
+      // });
+    }
+  })
 
   if (error) {
     setTimeout(() => {

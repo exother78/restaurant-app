@@ -90,8 +90,6 @@ const Register = () => {
       } catch (err) {
         setLoading(false);
         setError(err.response.data.error);
-
-        console.log("register function error: ", err);
       }
     };
 

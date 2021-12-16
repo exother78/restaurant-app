@@ -191,7 +191,6 @@ exports.createOrder = async (req, res, next) => {
     }
 
     if (order) {
-      console.log("order: ", order);
       beamsClient.publishToInterests(["hello_61753cb9d57ce1442c2d89f2"], {
         web: {
           notification: {
@@ -212,35 +211,6 @@ exports.createOrder = async (req, res, next) => {
     next(error);
   }
 };
-
-// exports.updateOrders = async (req, res, next) => {
-//   try {
-//     await User.findOneAndUpdate(
-//       { _id: req.params.id },
-//       {},
-//       async function (err, user) {
-//         if (err) {
-//           return err;
-//         }
-//         if (!err) {
-//           const userOrders = user.orders;
-
-//           const { orders } = req.body;
-
-//           user.orders = [...userOrders, orders];
-//           user.save();
-//           return user;
-//         }
-//       }
-//     ).then(() => {
-//       return res
-//         .status(200)
-//         .json({ success: true, message: "Order Successful" });
-//     });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
 
 exports.getOrders = async (req, res, next) => {
   try {

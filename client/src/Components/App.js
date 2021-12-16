@@ -27,6 +27,7 @@ const Settings = lazy(() => import("./Screens/Settings/Settings"));
 const CreateCategory = lazy(() =>
   import("./DevAdmin/Categories/CreateCategory")
 );
+const FindOrder = lazy(() => import("./Screens/FindOrder/FindOrder"));
 
 const MenuScreen = lazy(() => import("./Screens/Menu/MenuScreen"));
 const CreateProduct = lazy(() => import("./DevAdmin/Products/CreateProduct"));
@@ -42,6 +43,7 @@ const ManageOrders = lazy(() =>
 );
 const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
 const Reports = lazy(() => import("./DevAdmin/Reports/Reports"));
+// import FindOrder from "./Screens/FindOrder/FindOrder";
 
 function App() {
   const { userAPI } = useStateValue();
@@ -129,6 +131,18 @@ function App() {
                   <ScrollToTop />
                   <Suspense fallback={<Loading />}>
                     <OrderSucces />
+                  </Suspense>
+                </>
+              }
+            />
+
+            <Route
+              path="findorder"
+              element={
+                <>
+                  <ScrollToTop />
+                  <Suspense fallback={<Loading />}>
+                    <FindOrder />
                   </Suspense>
                 </>
               }

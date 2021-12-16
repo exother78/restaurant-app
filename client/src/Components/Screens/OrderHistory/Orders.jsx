@@ -28,6 +28,8 @@ const Orders = () => {
     }
   }, [userID]);
 
+  console.log('date: ', new Date(Date.now()).getMonth())
+
   useEffect(() => {
     if (orders) {
       orders.forEach((item) => {

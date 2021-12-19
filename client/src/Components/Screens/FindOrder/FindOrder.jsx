@@ -1,32 +1,45 @@
-import React, { useState } from "react";
-import "./FindOrder.css";
+import React, { useState, useEffect } from "react";
 import SearchIcon from "@mui/icons-material/Search";
+import axios from "axios";
+import "./FindOrder.css";
 import Footer from "../Home/Sections/Footer";
-import axios from 'axios';
 
 const FindOrder = () => {
-  const [ orderNumber, setOrderNumber ] = useState( null );
-  const [ orderData, setOrderData ] = useState( {} );
+  const [ orderNumber, setOrderNumber ] = useState( "" );
+  const [ orderData, setOrderData ] = useState( null );
+  const [ error, setError ] = useState( null );
 
-  console.log( "order number : ", orderNumber );
-
-  const findOrder = ( e ) => {
+  const findOrder = async ( e ) => {
     e.preventDefault();
 
     try {
-      console.log( 'axios: ', axios.VERSION )
+      const data = await axios.get( `/api/findorder/${ orderNumber }` );
+      console.log( "data: ", data.data.order );
+      setOrderData( data.data.order );
     } catch ( error ) {
-
+      setError( error.response.data.error );
     }
   };
+
+  if ( error ) {
+    setTimeout( () => {
+      setError( null );
+    }, 2000 );
+  }
 
   return (
     <>
       <div className="findOrder">
+        { error && <div className="error__box">{ error }</div> }
+
         <div className="findOrder__container">
+          <h3 className='findOrder__container-findOrder'>
+            Find Your Order by Order Number
+          </h3>
           <form className="findOrder__search-box" onSubmit={ findOrder }>
             <input
               type="text"
+              name="findOrder__search"
               className="findOrder__searchInput"
               placeholder="Order Number"
               value={ orderNumber }
@@ -34,21 +47,25 @@ const FindOrder = () => {
               required
             />
             <button type="submit" className="findOrder__searchButton">
-              <SearchIcon style={ { fontSize: "2.6rem" } } />
+              <SearchIcon />
             </button>
           </form>
 
-          <div className="findOrder__foundedOrder">
+          <div className="findOrder__foundedOrder" style={ { display: orderData ? 'block' : 'none' } }>
             <a
               href={ `/findorder/${ orderNumber }` }
               className="findOrder__foundedOrder-number">
-              Order found: 5454545345322
+              Order found: { orderNumber }
             </a>
-            <p className="findOrder__foundedOrder-name">Name: Asim Imam</p>
-            <p className="findOrder__foundedOrder-email">
-              Email: asim@gmail.com
+            <p className="findOrder__foundedOrder-name">
+              Name: { orderData?.name + " " + orderData?.lastName }
             </p>
-            <p className="findOrder__foundedOrder-date">Date: 1/12/2021</p>
+            <p className="findOrder__foundedOrder-email">
+              Email: { orderData?.email }
+            </p>
+            <p className="findOrder__foundedOrder-date">
+              Date: { new Date( orderData?.time ).toLocaleDateString() }
+            </p>
           </div>
         </div>
       </div>

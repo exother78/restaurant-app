@@ -17,6 +17,7 @@ const Category = ({ images, name }) => {
         }
         alt=""
       />
+
       <p className="categories__category-name">{name}</p>
     </div>
   );

@@ -1,10 +1,12 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import "./Checkout.css";
 import { useStateValue } from "../../../StateProvider";
 import CartProduct from "../Cart/Sections/CartProduct";
 import { getBasketTotal } from "../../../reducer";
+import CashOnDelivery from '../../Images/icons8-euro-64.png'
+import Paypal from '../../Images/paypal.png'
 
 const Checkout = () => {
   const state = useStateValue();
@@ -18,10 +20,17 @@ const Checkout = () => {
   const [checkPhone, setCheckPhone] = userAPI.checkPhone;
   const [data] = userAPI.postalData;
   const [takeaway, setTakeaway] = userAPI.takeaway;
+  const [homedelivery, setHomedelivery] = userAPI.homedelivery;
+  const [cashOnDelivery, setCashOnDelivery] = userAPI.cashOnDelivery
+  const [paypalDelivery, setPaypalDelivery] = userAPI.paypalDelivery
+  const [paymentOption, setPaymentOption] = userAPI.paymentOption
+  const [deliveryOption, setDeliveryOption] = userAPI.deliveryOption
+
+  // console.log('delivery: ', deliveryOption)
+
 
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
-  const [homedelivery, setHomedelivery] = useState(true);
 
   const postalCodeChange = (e) => {
     setPostalCode(e.target.value);
@@ -33,17 +42,6 @@ const Checkout = () => {
       setError(null);
     }, 2000);
   }
-
-  const setDefaultDelivery = useCallback(() => {
-    setTakeaway(false);
-    setHomedelivery(false);
-  }, [setTakeaway]);
-
-  useEffect(() => {
-    if (takeaway && homedelivery) {
-      setDefaultDelivery();
-    }
-  }, [homedelivery, setDefaultDelivery, takeaway]);
 
   useEffect(() => {
     if (
@@ -71,12 +69,12 @@ const Checkout = () => {
         parseInt(data?.minOrder) &&
         basket.length > 0 &&
         data) ||
-      takeaway
+      (takeaway && checkEmail && checkName && checkPhone)
     ) {
       setDeferLoading(false);
     }
 
-    if (!data || !postalCode) setError("Please Enter right Postal code");
+    if ((!data || !postalCode) && deliveryOption === 'homedelivery') setError("Please Enter right Postal code");
   }, [
     building,
     postalCode,
@@ -88,8 +86,11 @@ const Checkout = () => {
     checkPhone,
     data?.minOrder,
     data,
-    takeaway,
+    takeaway, deliveryOption
   ]);
+
+
+
 
   return (
     <div className="checkout">
@@ -118,6 +119,7 @@ const Checkout = () => {
                   checked={homedelivery}
                   onChange={(e) => {
                     if (e.target.checked) {
+                      setDeliveryOption(e.target.value)
                       setHomedelivery(e.target.checked);
                       setTakeaway(false);
                     }
@@ -280,6 +282,7 @@ const Checkout = () => {
                   value="takeaway"
                   checked={takeaway}
                   onChange={(e) => {
+                    setDeliveryOption(e.target.value)
                     setTakeaway(e.target.value);
                     setHomedelivery(false);
                   }}
@@ -382,6 +385,52 @@ const Checkout = () => {
             </div>
 
             <div className="checkout__category-details">
+
+
+              <label className="checkout__takeaway-btn" style={{ height: '80px' }}>
+                <input
+                  type="radio"
+                  name="paypaldelivery"
+                  id="takeawaycheck"
+                  value="paypaldelivery"
+                  checked={paypalDelivery}
+                  onChange={(e) => {
+                    setPaymentOption(e.target.value)
+                    setPaypalDelivery(e.target.checked)
+                    setCashOnDelivery(false)
+                  }}
+                />
+                <span className="checkout__checkmark"></span>
+                <div className="labelnimage" >
+
+                  <label htmlFor="paypaldelivery">Paypal</label>
+                  <img src={Paypal} alt="" width='50' height='50' />
+                </div>
+              </label>
+
+              <label className="checkout__takeaway-btn withimg" >
+                <input
+                  type="radio"
+                  name="paymentOption"
+                  id="takeawaycheck"
+                  value="cashondelivery"
+                  checked={cashOnDelivery}
+                  onChange={(e) => {
+                    setPaymentOption(e.target.value)
+                    setCashOnDelivery(e.target.checked)
+                    setPaypalDelivery(false)
+                  }}
+                />
+                <span className="checkout__checkmark"></span>
+                <div className="labelnimage">
+
+                  <label htmlFor="cashondelivery">Cash on Delivery</label>
+                  <img src={CashOnDelivery} alt="" width='64' height='64' />
+                </div>
+              </label>
+
+
+
               <div className="checkout__payment-section">
                 <h2>
                   Total
@@ -393,11 +442,11 @@ const Checkout = () => {
 
             <div
               className={`checkout__total-error ${ parseFloat(getBasketTotal(basket)) >=
-                  parseInt(data?.minOrder)
-                  ? "error"
-                  : ""
+                parseInt(deliveryOption === 'takeaway' ? '10' : data?.minOrder)
+                ? "error"
+                : ""
                 }`}>
-              <p>*Order should be minimum of {data?.minOrder}</p>
+              <p>*Order should be minimum of {deliveryOption === 'takeaway' ? '10' : data?.minOrder}</p>
             </div>
           </div>
 
@@ -410,7 +459,7 @@ const Checkout = () => {
               to={
                 !deferLoading &&
                   parseFloat(getBasketTotal(basket))?.toFixed(2) >=
-                  parseInt(data?.minOrder)
+                  parseInt(deliveryOption === 'takeaway' ? '10' : data?.minOrder) && paymentOption
                   ? "/checkout/paymentoptions"
                   : "/checkout"
               }>

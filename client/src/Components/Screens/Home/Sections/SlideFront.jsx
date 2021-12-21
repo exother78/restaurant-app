@@ -19,7 +19,7 @@ const SlideFront = () => {
 
   const getPostalCode = async (postal) => {
     try {
-      return await axios.get(`/api/dashboard/onepostalcode/${postal}`);
+      return await axios.get(`/api/dashboard/onepostalcode/${ postal }`);
     } catch (error) {
       setLoading(false);
       setPostalCode(null);

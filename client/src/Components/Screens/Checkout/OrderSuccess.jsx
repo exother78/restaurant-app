@@ -60,7 +60,7 @@ const OrderSuccess = () => {
                 {order?.total && (
                     <p className="order__success-total-text">
                         Total Amount Received:{" "}
-                        <span> {order?.total + order?.deliveryCharges} €</span>
+                        <span> {order?.deliveryCharges ? order?.total + order?.deliveryCharges : order?.total} €</span>
                     </p>
                 )}
 

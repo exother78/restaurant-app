@@ -6,32 +6,32 @@ import "./FoundOrder.css";
 
 const FoundOrder = () => {
    const { orderNumber } = useParams();
-   const [ error, setError ] = useState( null );
-   const [ order, setOrder ] = useState( {} );
+   const [error, setError] = useState(null);
+   const [order, setOrder] = useState({});
 
-   const getOrder = useCallback( async () => {
+   const getOrder = useCallback(async () => {
       try {
-         const data = await axios.get( `/api/findorder/${ orderNumber }` );
-         setOrder( data.data.order );
-      } catch ( error ) {
-         setError( error.response.data.error );
+         const data = await axios.get(`/api/findorder/${ orderNumber }`);
+         setOrder(data.data.order);
+      } catch (error) {
+         setError(error.response.data.error);
       }
-   }, [ orderNumber ] );
+   }, [orderNumber]);
 
-   useEffect( () => {
+   useEffect(() => {
       getOrder();
-   }, [ getOrder ] );
+   }, [getOrder]);
 
-   if ( error ) {
-      setTimeout( () => {
-         setError( null );
-      }, 2000 );
+   if (error) {
+      setTimeout(() => {
+         setError(null);
+      }, 2000);
    }
 
    return (
       <>
          <div className="order__success">
-            { error && <div className="error__box">{ error }</div> }
+            {error && <div className="error__box">{error}</div>}
             <a href="/" className="order__success-back-link">
                Go back to home page
             </a>
@@ -45,13 +45,13 @@ const FoundOrder = () => {
 
                   <div className="foundOrder__page-customerInfo-text">
                      <p>
-                        <b>Name</b>: { `${ order?.name } ${ order?.lastName }` }
+                        <b>Name</b>: {`${ order?.name } ${ order?.lastName }`}
                      </p>
                      <p>
-                        <b>Address</b>: { order?.address }
+                        <b>Address</b>: {order?.address}
                      </p>
                      <p>
-                        <b>building</b>: { order?.building }
+                        <b>building</b>: {order?.building}
                      </p>
                   </div>
 
@@ -66,25 +66,25 @@ const FoundOrder = () => {
                         </tr>
                      </thead>
                      <tbody>
-                        { order?.basket?.map( ( item, i ) => (
-                           <tr key={ i }>
-                              <td>{ item?.title }</td>
-                              <td>{ item?.quantity }</td>
-                              <td>{ item?.price }</td>
+                        {order?.basket?.map((item, i) => (
+                           <tr key={i}>
+                              <td>{item?.title}</td>
+                              <td>{item?.quantity}</td>
+                              <td>{item?.price}</td>
                            </tr>
-                        ) ) }
+                        ))}
                         <tr className="foundOrder__page-table-total">
-                           <td colSpan={ 2 }>Total</td>
-                           <td>{ order?.total }</td>
+                           <td colSpan={2}>Total</td>
+                           <td>{order?.total}</td>
                         </tr>
                      </tbody>
                   </table>
 
                   <p className="foundOrder__page-delivery">
-                     Delivery Fee: <span>{ order?.deliveryCharges }</span>
+                     Delivery Fee: <span>{order?.deliveryCharges}</span>
                   </p>
                   <h3 className="foundOrder__page-total">
-                     Total: <span>{ order?.total + order?.deliveryCharges }</span>
+                     Total: <span>{order?.deliveryCharges ? (order?.total + order?.deliveryCharges) : order?.total}</span>
                   </h3>
                   <p className="inconvenience-msg">
                      Please call on this number for any kind of inconvenience or

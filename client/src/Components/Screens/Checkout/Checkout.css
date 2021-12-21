@@ -130,11 +130,16 @@
 	color: black;
 	padding: 10px 20px;
 	width: 50%;
-	border: none;
+	border: 2px solid lightgrey;
 	cursor: pointer;
 	transition: all 0.2s linear;
 	margin: 20px auto;
 	height: 50px;
+	border-radius: 15px;
+}
+
+.checkout__takeaway-btn.withimg {
+	height: 80px;
 }
 
 .checkout__takeaway-btn:hover {
@@ -143,6 +148,13 @@
 
 .checkout__takeaway-btn * {
 	font-family: "Montserrat";
+}
+
+.checkout__takeaway-btn .labelnimage {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 /* radio button styling starts here */
@@ -160,7 +172,7 @@
 	left: 0;
 	height: 35px;
 	width: 35px;
-	margin: 0 4px;
+	margin: 0 6px;
 	background-color: #eee;
 	border-radius: 50%;
 	transform: translate(0, -50%);
@@ -194,67 +206,13 @@
 	transform: translate(-50%, -50%);
 }
 
-.checkout__takeaway-btn label {
+.checkout__takeaway-btn label,
+.checkout__takeaway-btn img {
+	width: fit-content;
 	margin-left: 50px;
-}
-
-/* radio button styling ends here */
-
-/* check box styling starts here   */
-
-/* .checkout__takeaway-btn input {
-	position: absolute;
-	opacity: 0;
-	height: 0;
-	width: 0;
-}
-
-.checkout__takeaway-btn:hover input ~ .checkout__checkmark {
-	background: #ddd;
-}
-
-.checkout__takeaway-btn input:checked ~ .checkout__checkmark {
-	background-color: #2196f3;
-}
-
-.checkout__checkmark {
-	position: absolute;
-	top: 0;
-	left: 0;
-	height: 35px;
-	width: 35px;
-	margin: 4px;
-	background-color: #eee;
-}
-
-.checkout__checkmark:after {
-	content: "";
-	position: absolute;
-	display: none;
-}
-
-.checkout__takeaway-btn input:checked ~ .checkout__checkmark:after {
-	display: block;
-}
-.checkout__takeaway-btn .checkout__checkmark::after {
-	left: 50%;
-	top: 50%;
-	width: 11.5px;
-	height: 23px;
-	border: solid white;
-	border-width: 0 5px 5px 0;
-	border-radius: 2px;
-	-webkit-transform: rotate(45deg);
-	-ms-transform: rotate(45deg);
-	transform: translate(-50%, -65%) rotate(45deg);
-}
-
-.checkout__takeaway-btn label {
-	margin-left: 40px;
 	user-select: none;
-} */
-
-/* check box style end */
+}
+/* radio button styling ends here */
 
 .checkout__category-details .checkout__payment-section {
 	width: 60%;

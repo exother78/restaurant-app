@@ -14,23 +14,21 @@ const Pay = () => {
   const { userAPI, token } = useStateValue();
   const { email, lastName, name, phone } = userAPI;
   const { userID } = userAPI;
-  const [basket, setBasket] = state?.basket;
-  const [postalCode] = userAPI?.postalCode;
-  const [address] = userAPI?.address;
-  const [building] = userAPI?.building;
-  const [checkPhone] = userAPI?.checkPhone;
-  const [checkEmail] = userAPI?.checkEmail;
-  const [checkName] = userAPI?.checkName;
-  const [data] = userAPI.postalData
-  const [error, setError] = useState("");
-  const [deferLoading, setDeferLoading] = useState(true);
+  const [ basket, setBasket ] = state?.basket;
+  const [ postalCode ] = userAPI?.postalCode;
+  const [ address ] = userAPI?.address;
+  const [ building ] = userAPI?.building;
+  const [ checkPhone ] = userAPI?.checkPhone;
+  const [ checkEmail ] = userAPI?.checkEmail;
+  const [ checkName ] = userAPI?.checkName;
+  const [ data ] = userAPI.postalData
+  const [ error, setError ] = useState( "" );
+  const [ deferLoading, setDeferLoading ] = useState( true );
 
 
 
   const transactionSuccess = async ( paymentData ) => {
-    // const total = getBasketTotal(basket) + parseFloat(data?.deliveryPrice)
-    // e.preventDefault()
-    const time = Date.now();
+    const time = Date.now() + 1983;
     try {
 
       await axios
@@ -38,7 +36,7 @@ const Pay = () => {
           "/api/user/createorder",
           {
             orders: {
-              orderNumber: time + 1983,
+              orderNumber: time,
               userID,
               postalCode,
               address,
@@ -49,46 +47,46 @@ const Pay = () => {
               email: email ? email : checkEmail,
               lastName,
               phone: phone ? phone : checkPhone,
-              time, total: getBasketTotal(basket),
+              time, total: getBasketTotal( basket ),
               deliveryCharges: data?.deliveryPrice
             },
           },
           {
             headers: {
-              Authorization: `Bearer ${token[0]}`,
+              Authorization: `Bearer ${ token[ 0 ] }`,
             },
           }
         )
-        .then(() => {
+        .then( () => {
           setBasket( [] );
-          navigate( `/checkout/ordersuccess/${ time + 1983 }` )
+          navigate( `/checkout/ordersuccess/${ time }` )
           // window.location.href = `/checkout/ordersuccess/${time + 1983}`
-        });
-    } catch (error) {
-      setError(error.response.data.error);
+        } );
+    } catch ( error ) {
+      setError( error.response.data.error );
     }
   };
 
   const transactionError = async () => {
-    setError("Transaction not successful");
+    setError( "Transaction not successful" );
   };
 
-  const transactionCancel = async (data) => {
-    setError("Cancelled Transaction");
+  const transactionCancel = async ( data ) => {
+    setError( "Cancelled Transaction" );
   };
 
 
-  useEffect(() => {
+  useEffect( () => {
     if (
       !postalCode ||
       !address ||
       !building ||
       !checkName ||
       !checkEmail ||
-      !checkPhone || parseFloat(getBasketTotal(basket))?.toFixed(2) < parseFloat(data?.minOrder) ||
+      !checkPhone || parseFloat( getBasketTotal( basket ) )?.toFixed( 2 ) < parseFloat( data?.minOrder ) ||
       basket.length === 0
     ) {
-      setDeferLoading(true);
+      setDeferLoading( true );
     }
     if (
       postalCode &&
@@ -97,39 +95,39 @@ const Pay = () => {
       checkName &&
       checkEmail &&
       checkPhone &&
-      parseFloat(getBasketTotal(basket))?.toFixed(2) >= parseInt(data?.minOrder) &&
+      parseFloat( getBasketTotal( basket ) )?.toFixed( 2 ) >= parseInt( data?.minOrder ) &&
       basket.length > 0
     ) {
-      setDeferLoading(false);
+      setDeferLoading( false );
     }
-    if (basket?.length === 0) setError("No items in the cart");
-  }, [building, postalCode, basket, address, deferLoading, checkName, checkEmail, checkPhone, data?.minOrder]);
+    if ( basket?.length === 0 ) setError( "No items in the cart" );
+  }, [ building, postalCode, basket, address, deferLoading, checkName, checkEmail, checkPhone, data?.minOrder ] );
 
 
-  if (error) {
-    setTimeout(() => {
-      setError(null);
-    }, 2000);
+  if ( error ) {
+    setTimeout( () => {
+      setError( null );
+    }, 2000 );
   }
   return (
     <>
       <div className="paymentOptions">
-        {error && <div className="error__box">{error}</div>}
+        { error && <div className="error__box">{ error }</div> }
         <OrderTotal />
 
         <div className="paymentOptions-Paypal-btn">
           <button
-            onClick={(e) => transactionSuccess({ orderID: "something now" }, e)}
-            style={{ padding: "10px 15px", margin: "10px" }}>
+            onClick={ ( e ) => transactionSuccess( { orderID: "something now" }, e ) }
+            style={ { padding: "10px 15px", margin: "10px" } }>
             Pay the bill
           </button>
           <Paypal
-            total={(parseFloat(getBasketTotal(basket)) + parseFloat(data?.deliveryPrice))}
-            onSuccess={transactionSuccess}
-            onCancel={transactionCancel}
-            onError={transactionError}
-            setError={setError}
-            loading={deferLoading}
+            total={ ( parseFloat( getBasketTotal( basket ) ) + parseFloat( data?.deliveryPrice ) ) }
+            onSuccess={ transactionSuccess }
+            onCancel={ transactionCancel }
+            onError={ transactionError }
+            setError={ setError }
+            loading={ deferLoading }
           />
         </div>
       </div>

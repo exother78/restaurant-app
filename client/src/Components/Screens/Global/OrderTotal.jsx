@@ -63,22 +63,22 @@ const OrderTotal = () => {
           { ( parseFloat( getBasketTotal( basket ) ) + parseFloat( data?.deliveryPrice ) ).toFixed( 2 ) }
         </span>
         </h4> : <h4>Enter Postal Info</h4> }
+        <div className="order__total-btns">
+          <button className="order__total-empty-button" onClick={ emptyBasket }>
+            Empty Cart
+          </button>
+          <Link
+            to={ basket.length > 0 ? "/checkout" : "/order" }
+            className="order__total-checkout-button-link">
+            <button
+              className="order__total-checkout-button"
+              onClick={ checkoutClick }>
+              Checkout
+            </button>
+          </Link>
+        </div>
       </div>
 
-      <div className="order__total-btns">
-        <button className="order__total-empty-button" onClick={ emptyBasket }>
-          Empty Cart
-        </button>
-        <Link
-          to={ basket.length > 0 ? "/checkout" : "/order" }
-          className="order__total-checkout-button-link">
-          <button
-            className="order__total-checkout-button"
-            onClick={ checkoutClick }>
-            Checkout
-          </button>
-        </Link>
-      </div>
     </div>
   );
 };

@@ -10,15 +10,13 @@ import SlideFront from "./Sections/SlideFront";
 const Menu = lazy(() => import("./Sections/Menu"));
 const ReserveSeat = lazy(() => import("./Sections/ReserveSeat"));
 const Categories = lazy(() => import("./Sections/Categories"));
-// const SlideFront = lazy(() => import("./Sections/SlideFront"));
 const Items = lazy(() => import("./Sections/Items"));
 
 const Home = () => {
     return (
         <>
-            {/* <Header /> */}
             <div className="Home">
-                <SlideFront />
+                <SlideFront async />
 
                 <Suspense fallback={<Loading />}>
                     <Categories />

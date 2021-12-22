@@ -26,8 +26,6 @@ const Checkout = () => {
   const [paymentOption, setPaymentOption] = userAPI.paymentOption
   const [deliveryOption, setDeliveryOption] = userAPI.deliveryOption
 
-  // console.log('delivery: ', deliveryOption)
-
 
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
@@ -275,7 +273,7 @@ const Checkout = () => {
                   checked={takeaway}
                   onChange={(e) => {
                     setDeliveryOption(e.target.value)
-                    setTakeaway(e.target.value);
+                    setTakeaway(e.target.checked);
                     setHomedelivery(false);
                   }}
                 />
@@ -434,7 +432,7 @@ const Checkout = () => {
 
             <div style={{
               display: parseFloat(getBasketTotal(basket)) >=
-                parseInt(deliveryOption === 'takeaway' ? '10' : data?.minOrder) ? 'none' : 'block'
+                parseInt(deliveryOption === 'takeaway' ? '10' : deliveryOption === 'homedelivery' && data?.minOrder ? data?.minOrder : '10') ? 'none' : 'block'
             }}
               className='checkout__total-error'>
               <p>*Order should be minimum of {deliveryOption === 'takeaway' ? '10' : data?.minOrder}</p>
@@ -454,7 +452,7 @@ const Checkout = () => {
                   ? "/checkout/paymentoptions"
                   : "/checkout"
               }>
-              Proceed To Next Step
+              Proceed To Final Step
               <span>
                 <ArrowForwardIosIcon />
               </span>

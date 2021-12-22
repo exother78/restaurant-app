@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState, Fragment } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import Footer from "../Home/Sections/Footer";
@@ -27,7 +27,7 @@ const FoundOrder = () => {
          setError(null);
       }, 2000);
    }
-
+   console.log("order: , ", order);
    return (
       <>
          <div className="order__success">
@@ -48,11 +48,24 @@ const FoundOrder = () => {
                         <b>Name</b>: {`${ order?.name } ${ order?.lastName }`}
                      </p>
                      <p>
-                        <b>Address</b>: {order?.address}
+                        <b>Email</b>: {order?.email}
                      </p>
                      <p>
-                        <b>building</b>: {order?.building}
+                        <b>Phone</b>: {order?.phone}
                      </p>
+                     {order?.deliveryOption === "homedelivery" ? (
+                        <>
+                           <p>
+                              <b>Address</b>: {order?.address}
+                           </p>
+                           <p>
+                              <b>building</b>: {order?.building}
+                           </p>
+                           <p>
+                              <b>Postal Code</b>: {order?.postalCode}
+                           </p>
+                        </>
+                     ) : null}
                   </div>
 
                   <p className="foundOrder__page-order">Your Order</p>
@@ -75,20 +88,51 @@ const FoundOrder = () => {
                         ))}
                         <tr className="foundOrder__page-table-total">
                            <td colSpan={2}>Total</td>
-                           <td>{order?.total}</td>
+                           <td>{order?.total} €
+                           </td>
                         </tr>
                      </tbody>
                   </table>
 
-                  <p className="foundOrder__page-delivery">
-                     Delivery Fee: <span>{order?.deliveryCharges}</span>
-                  </p>
+                  {order?.deliveryOption === "homedelivery" ? (
+                     <p className="foundOrder__page-delivery">
+                        Delivery Fee: <span>{order?.deliveryCharges} €
+                        </span>
+                     </p>
+                  ) : null}
                   <h3 className="foundOrder__page-total">
-                     Total: <span>{order?.deliveryCharges ? (order?.total + order?.deliveryCharges) : order?.total}</span>
+                     Total:{" "}
+                     <span>
+                        {order?.deliveryCharges
+                           ? order?.total + order?.deliveryCharges
+                           : order?.total} €
+
+                     </span>
                   </h3>
-                  <p className="inconvenience-msg">
-                     Please call on this number for any kind of inconvenience or
-                     information:  +39 059 3968633
+
+                  <div style={{ margin: '30px 0' }}>
+                     <p>
+                        Delivery Method: "<b>{order?.deliveryOption}</b>"
+                     </p>
+                     <p>
+                        Payment Method: "
+                        <b>
+                           {order?.paymentOption === "paypaldelivery"
+                              ? "paypal"
+                              : "cashondelivery"}
+                        </b>
+                        "
+                     </p>
+                  </div>
+                  {/* <p className="inconvenience-msg">
+                     <p className="order__success-inconv-text">
+                     For any kind of inconvenience or issue. Please call on this number:{" "}
+                     <b>+39 059 3968633</b>
+                     </p>
+                  </p> */}
+                  <p className='inconvenience-msg' style={{}}>
+                     For any kind of inconvenience or issue. Please call on this number:{" "}
+                     <b>+39 059 3968633</b>
                   </p>
                </div>
             </div>

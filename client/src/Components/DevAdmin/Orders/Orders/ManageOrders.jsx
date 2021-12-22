@@ -16,13 +16,13 @@ const ManageOrders = () => {
   const getOrders = useCallback(async () => {
     try {
       const auth = {
-        headers: { Authorization: `Bearer ${token[0]}` },
+        headers: { Authorization: `Bearer ${ token[0] }` },
       };
 
       const orderr = await axios.get("/api/user/allorders", auth);
 
 
-      setOrders(orderr.data.orders);
+      setOrders(orderr.data.orders.reverse());
 
       return orderr;
     } catch (error) {
@@ -41,12 +41,16 @@ const ManageOrders = () => {
   useEffect(() => {
     if (orders) {
 
-      // orders.filter((item, i) => {
-      //   return (
-      //     parseInt(new Date(item.createdAt).getMonth()) + 1 ===
-      //     12
-      //   );
-      // });
+      console.log('sorted: ', orders.sort())
+
+      const u = orders.filter((item, i) => {
+        return (
+          parseInt(new Date(item.createdAt).getMonth()) + 1 ===
+          12
+        );
+      });
+
+      console.log('u: ', u)
     }
   })
 

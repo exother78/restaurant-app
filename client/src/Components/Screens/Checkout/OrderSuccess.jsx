@@ -30,6 +30,7 @@ const OrderSuccess = () => {
             setError(null);
         }, 2000);
     }
+
     return (
         <div className="order__success">
             {error && <div className="error__box">{error}</div>}
@@ -46,8 +47,11 @@ const OrderSuccess = () => {
                 </div>
 
                 <p className="order__success-success-text">
-                    Your order has been successfully placed. The Items may arrive at
-                    your given destination in 45 minutes{" "}
+                    Your order has been successfully placed.
+                    {order?.deliveryOption === "homedelivery"
+                        ? " The Items may arrive at your given destination in 45 minutes"
+                        : order?.deliveryOption === "takeaway" &&
+                        " Now you can pick up your Meal in 30 minutes or more"}
                 </p>
 
                 <p className="order__success-ordnum-text">
@@ -55,19 +59,48 @@ const OrderSuccess = () => {
                 </p>
 
                 <span className="order__success-warning-text">
-                    (*Please remember this order number)
+                    (*Please remember this order number for tracking)
                 </span>
-                {order?.total && (
+                {order?.paymentOption === "paypaldelivery" ? (
                     <p className="order__success-total-text">
-                        Total Amount Received:{" "}
-                        <span> {order?.deliveryCharges ? order?.total + order?.deliveryCharges : order?.total} €</span>
+                        Total Amount Received:
+                        <span>
+                            {" "}
+                            {order?.deliveryCharges
+                                ? order?.total + order?.deliveryCharges
+                                : order?.total}{" "}
+                            €
+                        </span>
                     </p>
+                ) : (
+                    order?.paymentOption === "cashondelivery" && (
+                        <p className="order__success-total-text">
+                            Total Amount to Pay:
+                            <span>
+                                {" "}
+                                {order?.deliveryCharges
+                                    ? order?.total + order?.deliveryCharges
+                                    : order?.total}{" "}
+                                €
+                            </span>
+                        </p>
+                    )
                 )}
 
+
+
+                <p>Payment Status: "<b>{order?.paymentStatus}</b>"</p>
+
                 <p className="order__success-inconv-text">
-                    Please call on this number for any kind of inconvenience: +39 059
-                    3968633
+                    For any kind of inconvenience or issue. Please call on this number:{" "}
+                    <b>+39 059 3968633</b>
                 </p>
+
+                <a
+                    href={`/findorder/${ order?.orderNumber }`}
+                    className="order__success-order-details-link">
+                    see order details here{" "}
+                </a>
             </div>
         </div>
     );

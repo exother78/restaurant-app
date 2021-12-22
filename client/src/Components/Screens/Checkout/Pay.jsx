@@ -24,12 +24,10 @@ const Pay = () => {
   const [data] = userAPI.postalData;
   const [paymentOption] = userAPI.paymentOption;
   const [deliveryOption] = userAPI.deliveryOption;
+  const [takeaway] = userAPI.takeaway
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
   const [totalWithDelivery, setTotalWithDelivery] = useState(null);
-
-  console.log("delivery option: ", deliveryOption);
-  console.log("payment option: ", paymentOption);
 
   useEffect(() => {
     setTotalWithDelivery(
@@ -162,9 +160,7 @@ const Pay = () => {
     }
   };
 
-
   const orderSubmitTakeaway = async () => {
-
     const time = Date.now() + 1983;
     try {
       await axios
@@ -208,7 +204,6 @@ const Pay = () => {
   const transactionCancel = async (data) => {
     setError("Cancelled Transaction");
   };
-
   useEffect(() => {
     if (
       !postalCode ||
@@ -218,37 +213,71 @@ const Pay = () => {
       !checkEmail ||
       !checkPhone ||
       parseFloat(getBasketTotal(basket))?.toFixed(2) <
-      parseFloat(deliveryOption === "takeaway" ? "10" : data?.minOrder) ||
-      basket.length === 0
+      parseFloat(data?.minOrder) ||
+      basket.length === 0 ||
+      !data
     ) {
       setDeferLoading(true);
     }
     if (
-      postalCode &&
-      address &&
-      building &&
-      checkName &&
-      checkEmail &&
-      checkPhone &&
-      parseFloat(getBasketTotal(basket))?.toFixed(2) >=
-      parseInt(deliveryOption === "takeaway" ? "10" : data?.minOrder) &&
-      basket.length > 0
+      (postalCode &&
+        address &&
+        building &&
+        checkName &&
+        checkEmail &&
+        checkPhone &&
+        parseFloat(getBasketTotal(basket))?.toFixed(2) >=
+        parseInt(data?.minOrder) &&
+        basket.length > 0 &&
+        data) ||
+      (takeaway && checkEmail && checkName && checkPhone)
     ) {
       setDeferLoading(false);
     }
-    if (basket?.length === 0) setError("No items in the cart");
-  }, [
-    building,
-    postalCode,
-    basket,
-    address,
-    deferLoading,
-    checkName,
-    checkEmail,
-    checkPhone,
-    data?.minOrder,
-    deliveryOption,
-  ]);
+
+  }, [building, basket, address, deferLoading, checkName, checkEmail, checkPhone, data?.minOrder, takeaway, postalCode, data]);
+
+
+  // useEffect(() => {
+  //   if (
+  //     !postalCode ||
+  //     !address ||
+  //     !building ||
+  //     !checkName ||
+  //     !checkEmail ||
+  //     !checkPhone ||
+  //     parseFloat(getBasketTotal(basket))?.toFixed(2) <
+  //     parseFloat(deliveryOption === "takeaway" ? "10" : data?.minOrder) ||
+  //     basket.length === 0
+  //   ) {
+  //     setDeferLoading(true);
+  //   }
+  //   if (
+  //     postalCode &&
+  //     address &&
+  //     building &&
+  //     checkName &&
+  //     checkEmail &&
+  //     checkPhone &&
+  //     parseFloat(getBasketTotal(basket))?.toFixed(2) >=
+  //     parseInt(deliveryOption === "takeaway" ? "10" : data?.minOrder) &&
+  //     basket.length > 0
+  //   ) {
+  //     setDeferLoading(false);
+  //   }
+  //   if (basket?.length === 0) setError("No items in the cart");
+  // }, [
+  //   building,
+  //   postalCode,
+  //   basket,
+  //   address,
+  //   deferLoading,
+  //   checkName,
+  //   checkEmail,
+  //   checkPhone,
+  //   data?.minOrder,
+  //   deliveryOption,
+  // ]);
 
   if (error) {
     setTimeout(() => {
@@ -266,7 +295,16 @@ const Pay = () => {
             <>
               <button
                 onClick={(e) =>
-                  transactionSuccess({ orderID: "something now" }, e)
+                  deliveryOption === "homedelivery"
+                    ? transactionSuccess(
+                      { orderID: "something now" },
+                      e
+                    )
+                    : deliveryOption === "takeaway" &&
+                    transactionSuccessTakeaway(
+                      { orderID: "something now" },
+                      e
+                    )
                 }
                 style={{ padding: "10px 15px", margin: "10px" }}>
                 Pay the bill
@@ -280,7 +318,8 @@ const Pay = () => {
                 onSuccess={
                   deliveryOption === "homedelivery"
                     ? transactionSuccess
-                    : transactionSuccessTakeaway
+                    : deliveryOption === "takeaway" &&
+                    transactionSuccessTakeaway
                 }
                 onCancel={transactionCancel}
                 onError={transactionError}
@@ -290,7 +329,15 @@ const Pay = () => {
             </>
           ) : (
             paymentOption === "cashondelivery" && (
-              <button className='paymentOptions-confirmOrder-btn' onClick={deliveryOption === 'homedelivery' ? orderSubmit : orderSubmitTakeaway}>Confirm Order</button>
+              <button
+                className="paymentOptions-confirmOrder-btn"
+                onClick={
+                  deliveryOption === "homedelivery"
+                    ? orderSubmit
+                    : orderSubmitTakeaway
+                }>
+                Confirm Order
+              </button>
             )
           )}
         </div>

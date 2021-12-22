@@ -17,14 +17,18 @@
 	top: 80px;
 }
 .order__success-container {
+	position: relative;
 	width: 80%;
 	max-width: 900px;
 	background: white;
+	height: 100%;
 	min-height: 400px;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
 	padding: 20px 0 10px 0;
+	margin: 10px;
+	border-radius: 10px;
 }
 
 .order__success-container * {
@@ -84,9 +88,10 @@
 }
 
 .inconvenience-msg {
-	font-size: small;
-	text-align: right;
-	margin-right: 10px;
+	position: absolute;
+	right: 10px;
+	bottom: 3px;
+	font-size: 14px;
 }
 
 @media only screen and (max-width: 700px) {

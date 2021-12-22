@@ -36,3 +36,7 @@
 	box-shadow: 5px 7px 10px grey;
 	background: rgb(9, 93, 177);
 }
+
+.paymentOptions-confirmOrder-btn:active {
+	transform: translateY(3px);
+}

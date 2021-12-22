@@ -7,228 +7,235 @@ const ErrorResponse = require("../utils/errorResponse");
 const PostalCode = require("../models/PostalCode");
 
 let beamsClient = new PushNotifications({
-  instanceId: "8f9950c1-3405-4dfd-a3a1-48254faff0a3",
-  secretKey: "7F0291D5E3BBDB90C5F120A937FB3FEC08DDCF080316172C7DE8DA6E03ADBAF7",
+	instanceId: "8f9950c1-3405-4dfd-a3a1-48254faff0a3",
+	secretKey:
+		"7F0291D5E3BBDB90C5F120A937FB3FEC08DDCF080316172C7DE8DA6E03ADBAF7",
 });
 
 exports.register = async (req, res, next) => {
-  const {
-    firstName,
-    lastName,
-    email,
-    password,
-    address,
-    building,
-    postalCode,
-    city,
-    images,
-  } = req.body;
+	const {
+		firstName,
+		lastName,
+		email,
+		password,
+		address,
+		building,
+		postalCode,
+		city,
+		images,
+	} = req.body;
 
-  try {
-    const user = await User.create({
-      firstName,
-      lastName,
-      email,
-      password,
-      address,
-      building,
-      postalCode,
-      city,
-      images,
-    });
-    sendToken(user, 201, res);
-  } catch (error) {
-    next(error);
-  }
+	try {
+		const user = await User.create({
+			firstName,
+			lastName,
+			email,
+			password,
+			address,
+			building,
+			postalCode,
+			city,
+			images,
+		});
+		sendToken(user, 201, res);
+	} catch (error) {
+		next(error);
+	}
 };
 
 exports.login = async (req, res, next) => {
-  const { email, password } = req.body;
+	const { email, password } = req.body;
 
-  if (!email || !password)
-    return next(new ErrorResponse("Please provide an email and password", 400));
+	if (!email || !password)
+		return next(
+			new ErrorResponse("Please provide an email and password", 400)
+		);
 
-  try {
-    const user = await User.findOne({ email }).select("+password");
+	try {
+		const user = await User.findOne({ email }).select("+password");
 
-    if (!user) {
-      return next(new ErrorResponse("Invalid Credentials", 404));
-    }
+		if (!user) {
+			return next(new ErrorResponse("Invalid Credentials", 404));
+		}
 
-    const isMatch = await user.matchPasswords(password);
+		const isMatch = await user.matchPasswords(password);
 
-    if (!isMatch) return next(new ErrorResponse("Wrong Password", 401));
+		if (!isMatch) return next(new ErrorResponse("Wrong Password", 401));
 
-    sendToken(user, 200, res);
-  } catch (error) {
-    res.status(500).json({ error: error });
-  }
+		sendToken(user, 200, res);
+	} catch (error) {
+		res.status(500).json({ error: error });
+	}
 };
 
 exports.forgotPassword = async (req, res, next) => {
-  const { email } = req.body;
+	const { email } = req.body;
 
-  if (!email) return next(new ErrorResponse("Please provide an email"));
+	if (!email) return next(new ErrorResponse("Please provide an email"));
 
-  try {
-    const user = await User.findOne({ email });
+	try {
+		const user = await User.findOne({ email });
 
-    if (!user) return next(new ErrorResponse("no email found", 404));
+		if (!user) return next(new ErrorResponse("no email found", 404));
 
-    const resetToken = await user.getResetPasswordToken();
+		const resetToken = await user.getResetPasswordToken();
 
-    await user.save();
+		await user.save();
 
-    const resetUrl = `/resetpassword/${resetToken}`;
+		const resetUrl = `/resetpassword/${resetToken}`;
 
-    res.status(201).json({ success: true, data: user, resetUrl });
-  } catch (err) {
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
-    await user.save();
+		res.status(201).json({ success: true, data: user, resetUrl });
+	} catch (err) {
+		user.resetPasswordToken = undefined;
+		user.resetPasswordExpire = undefined;
+		await user.save();
 
-    return next(new ErrorResponse("Password Reset Unsuccessful", 500));
-  }
+		return next(new ErrorResponse("Password Reset Unsuccessful", 500));
+	}
 };
 
 exports.resetPassword = async (req, res, next) => {
-  const { password } = req.body;
-  const { resetToken } = req.params;
+	const { password } = req.body;
+	const { resetToken } = req.params;
 
-  if (!password) return next(new ErrorResponse("Please Provide a password"));
+	if (!password) return next(new ErrorResponse("Please Provide a password"));
 
-  try {
-    const resetPasswordToken = crypto
-      .createHash("sha256")
-      .update(resetToken)
-      .digest("hex");
+	try {
+		const resetPasswordToken = crypto
+			.createHash("sha256")
+			.update(resetToken)
+			.digest("hex");
 
-    const user = await User.findOne({
-      resetPasswordToken,
-      resetPasswordExpire: { $gt: Date.now() },
-    });
+		const user = await User.findOne({
+			resetPasswordToken,
+			resetPasswordExpire: { $gt: Date.now() },
+		});
 
-    if (!user)
-      return next(new ErrorResponse("No user found with the given token", 404));
+		if (!user)
+			return next(
+				new ErrorResponse("No user found with the given token", 404)
+			);
 
-    user.password = password;
-    user.resetPasswordToken = undefined;
-    user.resetPasswordExpire = undefined;
+		user.password = password;
+		user.resetPasswordToken = undefined;
+		user.resetPasswordExpire = undefined;
 
-    await user.save();
+		await user.save();
 
-    res.status(200).json({
-      success: true,
-      user,
-      resetToken,
-      message: "successfully password changed",
-    });
-  } catch (err) {
-    next(new ErrorResponse("Reset was Unsuccessful", 400));
-  }
+		res.status(200).json({
+			success: true,
+			user,
+			resetToken,
+			message: "successfully password changed",
+		});
+	} catch (err) {
+		next(new ErrorResponse("Reset was Unsuccessful", 400));
+	}
 };
 
 exports.refreshToken = async (req, res, next) => {
-  const rtfat = req.cookies.rtfat;
+	const rtfat = req.cookies.rtfat;
 
-  try {
-    if (!rtfat)
-      res.status(400).json({ success: true, error: "Not Found Token" });
+	try {
+		if (!rtfat)
+			res.status(400).json({ success: true, error: "Not Found Token" });
 
-    const decode = jwt.verify(rtfat, process.env.refresh_token_secret);
+		const decode = jwt.verify(rtfat, process.env.refresh_token_secret);
 
-    const user = await User.findById(decode.id);
+		const user = await User.findById(decode.id);
 
-    if (!user) next(new ErrorResponse("No user found with this id", 404));
+		if (!user) next(new ErrorResponse("No user found with this id", 404));
 
-    const accessToken = await user.getAccessToken();
-    res.json({ accessToken });
-  } catch (err) {
-    next(err);
-  }
+		const accessToken = await user.getAccessToken();
+		res.json({ accessToken });
+	} catch (err) {
+		next(err);
+	}
 };
 
 exports.logout = async (req, res, next) => {
-  try {
-    res.clearCookie("rtfat", { path: "/api/user/rtfat" });
-    return res.json({ msg: "Logged out" });
-  } catch (err) {
-    next(err);
-  }
+	try {
+		res.clearCookie("rtfat", { path: "/api/user/rtfat" });
+		return res.json({ msg: "Logged out" });
+	} catch (err) {
+		next(err);
+	}
 };
 
 exports.createOrder = async (req, res, next) => {
-  const { orders } = req.body;
-  try {
-    // const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
-    // // console.log("postalCOde : ", postalCode);
+	const { orders } = req.body;
+	try {
+		// const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
+		// // console.log("postalCOde : ", postalCode);
 
-    // if (!postalCode) {
-    //   return res.status(401).json({
-    //     success: false,
-    //     error: "Delivery not available at your location",
-    //   });
-    // }
-    // if (postalCode.active === false) {
-    //   return res.status(400).json({
-    //     success: false,
-    //     error:
-    //       "Currently delivery is unavailable at your location. Please try with a different Postal",
-    //   });
-    // }
+		// if (!postalCode) {
+		//   return res.status(401).json({
+		//     success: false,
+		//     error: "Delivery not available at your location",
+		//   });
+		// }
+		// if (postalCode.active === false) {
+		//   return res.status(400).json({
+		//     success: false,
+		//     error:
+		//       "Currently delivery is unavailable at your location. Please try with a different Postal",
+		//   });
+		// }
 
-    // const user = await User.findOne({ _id: orders.userID });
-    // if (!user) {
-    //   return res.status(401).json({ success: false, error: "user not found" });
-    // }
+		// const user = await User.findOne({ _id: orders.userID });
+		// if (!user) {
+		//   return res.status(401).json({ success: false, error: "user not found" });
+		// }
 
-    const order = await Order.create(orders);
-    if (!order) {
-      return res.status(500).json({
-        success: false,
-        error: "payment received order not generated",
-      });
-    }
+		const order = await Order.create(orders);
+		if (!order) {
+			return res.status(500).json({
+				success: false,
+				error: "payment received order not generated",
+			});
+		}
 
-    if (order) {
-      beamsClient.publishToInterests(["hello_61753cb9d57ce1442c2d89f2"], {
-        web: {
-          notification: {
-            title: "New Order!",
-            body: "You have a new order. Don't worry I have printed the receipt for you",
-            deep_link: "https://shahiristorante.it",
-            icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
-          },
-          data: {
-            msg: order,
-          },
-        },
-      });
-    }
+		if (order) {
+			beamsClient.publishToInterests(["hello_61753cb9d57ce1442c2d89f2"], {
+				web: {
+					notification: {
+						title: "New Order!",
+						body: "You have a new order. Don't worry I have printed the receipt for you",
+						deep_link: "https://shahiristorante.it",
+						icon: "https://cdn-icons-png.flaticon.com/512/1008/1008010.png",
+					},
+					data: {
+						msg: order,
+					},
+				},
+			});
+		}
 
-    return res.status(200).json({ success: true, msg: "Order Successful" });
-  } catch (error) {
-    next(error);
-  }
+		return res.status(200).json({ success: true, msg: "Order Successful" });
+	} catch (error) {
+		next(error);
+	}
 };
 
 exports.getOrders = async (req, res, next) => {
-  try {
-    const orders = await Order.find({ userID: req.params.id });
+	try {
+		const orders = await Order.find({ userID: req.params.id });
 
-    res.status(200).json({ success: true, orders });
-  } catch (error) {
-    next(error);
-  }
+		res.status(200).json({ success: true, orders });
+	} catch (error) {
+		next(error);
+	}
 };
 
 exports.allOrders = async (req, res, next) => {
-  try {
-    const u = await Order.find();
-    return res.status(200).json({ success: true, orders: u });
-  } catch (error) {
-    next(error);
-  }
+	try {
+		const u = await Order.find();
+		// u.sort("-createdAt");
+		// console.log(new Date(u.sort('')[9].time).toLocaleString());
+		return res.status(200).json({ success: true, orders: u });
+	} catch (error) {
+		next(error);
+	}
 };
 
 // if orders are in the users
@@ -243,19 +250,19 @@ exports.allOrders = async (req, res, next) => {
 // };
 
 const sendToken = async (user, statusCode, res) => {
-  const accessToken = await user.getAccessToken();
-  const refreshToken = await user.getRefreshToken();
+	const accessToken = await user.getAccessToken();
+	const refreshToken = await user.getRefreshToken();
 
-  res.cookie("rtfat", refreshToken, {
-    httpOnly: true,
-    path: "/api/user/rtfat",
-    maxAge: 7 * 60 * 60 * 1000, //7d
-  });
+	res.cookie("rtfat", refreshToken, {
+		httpOnly: true,
+		path: "/api/user/rtfat",
+		maxAge: 7 * 60 * 60 * 1000, //7d
+	});
 
-  return res.status(statusCode).json({
-    success: true,
-    postalCode: user.postalCode,
-    accessToken,
-    id: user._id,
-  });
+	return res.status(statusCode).json({
+		success: true,
+		postalCode: user.postalCode,
+		accessToken,
+		id: user._id,
+	});
 };

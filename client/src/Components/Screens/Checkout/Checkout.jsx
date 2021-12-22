@@ -74,20 +74,12 @@ const Checkout = () => {
       setDeferLoading(false);
     }
 
+  }, [building, basket, address, deferLoading, checkName, checkEmail, checkPhone, data?.minOrder, takeaway, postalCode, data]);
+
+  useEffect(() => {
     if ((!data || !postalCode) && deliveryOption === 'homedelivery') setError("Please Enter right Postal code");
-  }, [
-    building,
-    postalCode,
-    basket,
-    address,
-    deferLoading,
-    checkName,
-    checkEmail,
-    checkPhone,
-    data?.minOrder,
-    data,
-    takeaway, deliveryOption
-  ]);
+
+  }, [data, deliveryOption, postalCode])
 
 
 
@@ -440,12 +432,11 @@ const Checkout = () => {
               </div>
             </div>
 
-            <div
-              className={`checkout__total-error ${ parseFloat(getBasketTotal(basket)) >=
-                parseInt(deliveryOption === 'takeaway' ? '10' : data?.minOrder)
-                ? "error"
-                : ""
-                }`}>
+            <div style={{
+              display: parseFloat(getBasketTotal(basket)) >=
+                parseInt(deliveryOption === 'takeaway' ? '10' : data?.minOrder) ? 'none' : 'block'
+            }}
+              className='checkout__total-error'>
               <p>*Order should be minimum of {deliveryOption === 'takeaway' ? '10' : data?.minOrder}</p>
             </div>
           </div>
@@ -463,7 +454,7 @@ const Checkout = () => {
                   ? "/checkout/paymentoptions"
                   : "/checkout"
               }>
-              Proceed To Payment Options
+              Proceed To Next Step
               <span>
                 <ArrowForwardIosIcon />
               </span>

@@ -115,7 +115,8 @@ const UserAPI = (token) => {
     homedelivery: [homedelivery, setHomedelivery],
     cashOnDelivery: [cashOnDelivery, setCashOnDelivery],
     paypalDelivery: [paypalDelivery, setPaypalDelivery],
-    paymentOption: [paymentOption, setPaymentOption], deliveryOption: [deliveryOption, setDeliveryOption]
+    paymentOption: [paymentOption, setPaymentOption],
+    deliveryOption: [deliveryOption, setDeliveryOption],
   };
 };
 

@@ -24,7 +24,7 @@ const Pay = () => {
   const [data] = userAPI.postalData;
   const [paymentOption] = userAPI.paymentOption;
   const [deliveryOption] = userAPI.deliveryOption;
-  const [takeaway] = userAPI.takeaway
+  const [takeaway] = userAPI.takeaway;
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);
   const [totalWithDelivery, setTotalWithDelivery] = useState(null);
@@ -234,50 +234,19 @@ const Pay = () => {
     ) {
       setDeferLoading(false);
     }
-
-  }, [building, basket, address, deferLoading, checkName, checkEmail, checkPhone, data?.minOrder, takeaway, postalCode, data]);
-
-
-  // useEffect(() => {
-  //   if (
-  //     !postalCode ||
-  //     !address ||
-  //     !building ||
-  //     !checkName ||
-  //     !checkEmail ||
-  //     !checkPhone ||
-  //     parseFloat(getBasketTotal(basket))?.toFixed(2) <
-  //     parseFloat(deliveryOption === "takeaway" ? "10" : data?.minOrder) ||
-  //     basket.length === 0
-  //   ) {
-  //     setDeferLoading(true);
-  //   }
-  //   if (
-  //     postalCode &&
-  //     address &&
-  //     building &&
-  //     checkName &&
-  //     checkEmail &&
-  //     checkPhone &&
-  //     parseFloat(getBasketTotal(basket))?.toFixed(2) >=
-  //     parseInt(deliveryOption === "takeaway" ? "10" : data?.minOrder) &&
-  //     basket.length > 0
-  //   ) {
-  //     setDeferLoading(false);
-  //   }
-  //   if (basket?.length === 0) setError("No items in the cart");
-  // }, [
-  //   building,
-  //   postalCode,
-  //   basket,
-  //   address,
-  //   deferLoading,
-  //   checkName,
-  //   checkEmail,
-  //   checkPhone,
-  //   data?.minOrder,
-  //   deliveryOption,
-  // ]);
+  }, [
+    building,
+    basket,
+    address,
+    deferLoading,
+    checkName,
+    checkEmail,
+    checkPhone,
+    data?.minOrder,
+    takeaway,
+    postalCode,
+    data,
+  ]);
 
   if (error) {
     setTimeout(() => {
@@ -293,7 +262,7 @@ const Pay = () => {
         <div className="paymentOptions-Paypal-btn">
           {paymentOption === "paypaldelivery" ? (
             <>
-              <button
+              {/* <button
                 onClick={(e) =>
                   deliveryOption === "homedelivery"
                     ? transactionSuccess(
@@ -308,7 +277,7 @@ const Pay = () => {
                 }
                 style={{ padding: "10px 15px", margin: "10px" }}>
                 Pay the bill
-              </button>
+              </button> */}
               <Paypal
                 total={
                   deliveryOption === "takeaway"

@@ -8,6 +8,7 @@ import FacebookIcon from "../../Images/facebookicon.png";
 import InstagramIcon from "../../Images/instagramicon.png";
 import TripAdvisorIcon from "../../Images/tripadvisor.png";
 import EmailRoundedIcon from "@mui/icons-material/EmailRounded";
+import logo from '../Header/newlogoblack.png'
 
 const About = () => {
   return (
@@ -40,9 +41,9 @@ const About = () => {
           <div className="about__logo-name">
             <img
               className="about__details-logoImg"
-              src="https://lirp.cdn-website.com/cba7dffb/dms3rep/multi/opt/logo-1920w.jpg"
+              src={logo}
               alt=""
-              width="200"
+              width="280"
             />
             <div className="about__details-field">
               <h3>Pakistani Indian Shahì Restaurant</h3>

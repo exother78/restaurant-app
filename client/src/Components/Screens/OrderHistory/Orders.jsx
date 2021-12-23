@@ -1,8 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import axios from "axios";
 import { useStateValue } from "../../../StateProvider";
 import Box from "./Box/Box";
 import "./Orders.css";
+import Footer from './../Home/Sections/Footer';
+
+
 
 const Orders = () => {
   const { userAPI } = useStateValue();
@@ -11,13 +14,14 @@ const Orders = () => {
   const [orders, setOrders] = useState(null);
   const [error, setError] = useState("");
   const [pendingOrders, setPendingOrders] = useState([]);
-  const [completedOrders, setCompletedOrders] = useState([]);
+  const [deliveredOrders, setDeliveredOrders] = useState([]);
+
   useEffect(() => {
     if (userID) {
       const func = async () => {
         try {
-          await axios.get(`/api/user/getorders/${userID}`).then((response) => {
-            setOrders(response?.data?.orders);
+          await axios.get(`/api/user/getorders/${ userID }`).then((response) => {
+            setOrders(response?.data?.orders?.reverse());
           });
         } catch (error) {
           setError(error.response.data.error);
@@ -28,66 +32,75 @@ const Orders = () => {
     }
   }, [userID]);
 
-  console.log('date: ', new Date(Date.now()).getMonth())
+  const pendingOrdersSetting = useCallback(() => {
 
+    setPendingOrders(orders?.filter((item) => {
+      const orderTime = new Date(item?.time).getTime();
+      const nowTime = new Date().getTime() - 60 * 60 * 1000;
+
+      return orderTime > nowTime;
+    }))
+
+    setDeliveredOrders(orders?.filter((item) => {
+      const orderTime = new Date(item?.time).getTime();
+      const nowTime = new Date().getTime() - 60 * 60 * 1000;
+
+      return orderTime < nowTime;
+    }))
+  }, [orders])
   useEffect(() => {
-    if (orders) {
-      orders.forEach((item) => {
-        const orderDate = new Date(item.time).valueOf() + 45 * 60 * 1000;
-        if (new Date(orderDate) > new Date(Date.now())) {
-          setPendingOrders((data) => [...data, item]);
-          return;
-        }
+    pendingOrdersSetting()
 
-        if (new Date(Date.now()) > new Date(orderDate)) {
-          setCompletedOrders((data) => [...data, item]);
-          return;
-        }
-      });
-    }
-  }, [orders]);
+  }, [pendingOrdersSetting])
+
 
   return (
-    <div className="order__history">
-      {error && <div className="error__box">{error}</div>}
+    <>
+      <div className="order__history">
+        {error && <div className="error__box">{error}</div>}
 
-      <div className="ordersHistory__front-boxes">
-        <div className="orders__box">
-          <p className="orders__box-text">
-            <span className="orders__box-text-subText1">Pending Orders</span>
-            <span className="orders__box-text-subText">
-              {pendingOrders?.length > 0 ? pendingOrders?.length : "0"}
-            </span>
-          </p>
+        <div className="ordersHistory__front-boxes">
+          <div className="orders__box">
+            <p className="orders__box-text">
+              <span className="orders__box-text-subText1">Pending Orders</span>
+              <span className="orders__box-text-subText">
+                {pendingOrders?.length > 0 ? pendingOrders?.length : "0"}
+              </span>
+            </p>
+          </div>
+
+          <div className="orders__box" style={{ background: "#8de02c" }}>
+            <p className="orders__box-text">
+              <span className="orders__box-text-subText1">Completed Orders</span>
+
+              <span className="orders__box-text-subText">
+                {deliveredOrders?.length > 0 ? deliveredOrders?.length : "0"}
+              </span>
+            </p>
+          </div>
+
+          <div className="orders__box" style={{ background: "red" }}>
+            <p className="orders__box-text">
+              <span className="orders__box-text-subText1">Cancelled Orders</span>
+
+              <span className="orders__box-text-subText">1</span>
+            </p>
+          </div>
         </div>
 
-        <div className="orders__box" style={{ background: "#15ff00" }}>
-          <p className="orders__box-text">
-            <span className="orders__box-text-subText1">Completed Orders</span>
+        <div className="order__history-container">
 
-            <span className="orders__box-text-subText">
-              {completedOrders?.length > 0 ? completedOrders?.length : "0"}
-            </span>
-          </p>
-        </div>
-
-        <div className="orders__box" style={{ background: "red" }}>
-          <p className="orders__box-text">
-            <span className="orders__box-text-subText1">Cancelled Orders</span>
-
-            <span className="orders__box-text-subText">1</span>
-          </p>
+          {orders?.length > 0 ? (
+            orders?.map((order, i) => <Box {...order} key={i} />)
+          ) : (
+            <h1 className='order__history-notFound' >
+              You don't have any Orders yet!
+            </h1>
+          )}
         </div>
       </div>
-
-      {orders?.length > 0 ? (
-        orders?.map((order, i) => <Box {...order} key={i} />)
-      ) : (
-        <h1 style={{ color: "red", margin: "30px", letterSpacing: "1.2px" }}>
-          You don't have any Orders yet!
-        </h1>
-      )}
-    </div>
+      <Footer />
+    </>
   );
 };
 

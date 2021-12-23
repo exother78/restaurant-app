@@ -38,9 +38,9 @@ app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
 app.use(
-  fileUpload({
-    useTempFiles: true,
-  })
+	fileUpload({
+		useTempFiles: true,
+	})
 );
 app.use(compression());
 
@@ -53,13 +53,12 @@ app.use("/api", require("./routes/Reservoir"));
 app.use("/api", require("./routes/users"));
 app.use("/api", require("./routes/PostalCode"));
 app.use("/api", require("./routes/reports"));
-app.use("/api", require("./routes/print"));
 app.use("/api", require("./routes/findOrder"));
 
 app.use(express.static("client/build"));
 // if (process.env.NODE_ENV === "production") {
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
+	res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 // }
 app.use(errorHandler);

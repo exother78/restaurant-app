@@ -7,6 +7,46 @@
 	font-family: "Montserrat";
 }
 
+.manageOrders__header-boxes {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 90%;
+	margin: 0 auto 70px auto;
+	flex-wrap: wrap;
+}
+
+.manageOrders__header-boxes-box {
+	flex: 1 1 22%;
+	min-width: 230px;
+	min-height: 50px;
+	background: #fff;
+	margin: 10px 5px;
+	box-shadow: 4px 4px 10px 5px #ddd;
+	border-radius: 20px;
+	padding: 12px;
+}
+
+.manageOrders__header-box-title {
+	text-align: center;
+	font-size: 1.4rem;
+	padding: 5px;
+}
+
+.manageOrders__header-box-desc {
+	text-align: center;
+	font-size: 1.7rem;
+	font-weight: bold;
+	padding: 5px;
+}
+
+.manageOrders__title {
+	width: 90%;
+	margin: 10px auto 15px auto;
+	text-align: start;
+	padding-left: 30px;
+}
+
 .manageOrders__container {
 	margin: 0 auto;
 	overflow-x: auto;

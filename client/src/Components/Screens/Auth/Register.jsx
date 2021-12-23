@@ -268,7 +268,7 @@ const Register = () => {
                 <option value="City" disabled>
                   Select City
                 </option>
-                <option value="Berlin">Berlin</option>
+                <option value="Carpi">Carpi</option>
               </select>
             </div>
 
@@ -278,7 +278,7 @@ const Register = () => {
                 name="country"
                 placeholder="Country"
                 className="register__input"
-                value="Germany"
+                value="Italy"
                 onChange={handleInputChange}
               />
             </div>

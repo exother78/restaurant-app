@@ -38,21 +38,21 @@ const ManageOrders = () => {
     }
   }, [token, getOrders]);
 
-  useEffect(() => {
-    if (orders) {
+  // useEffect(() => {
+  //   if (orders) {
 
-      console.log('sorted: ', orders.sort())
+  // console.log('sorted: ', orders.sort())
 
-      const u = orders.filter((item, i) => {
-        return (
-          parseInt(new Date(item.createdAt).getMonth()) + 1 ===
-          12
-        );
-      });
+  // const u = orders.filter((item, i) => {
+  //   return (
+  //     parseInt(new Date(item.createdAt).getMonth()) + 1 ===
+  //     12
+  //   );
+  // });
 
-      console.log('u: ', u)
-    }
-  })
+  // console.log('u: ', u)
+  //   }
+  // })
 
   if (error) {
     setTimeout(() => {
@@ -68,6 +68,19 @@ const ManageOrders = () => {
     <div className="manageOrders">
       {error && <div className="error__box">{error}</div>}
       <div className="manageOrders__container">
+        {/* <table
+          className="manageOrders__box-first-table">
+          <thead>
+            <tr>
+              <th>name</th>
+              <th>Amount</th>
+              <th>Payment</th>
+              <th>Status</th>
+              <th>date</th>
+              <th></th>
+            </tr>
+          </thead>
+        </table> */}
         {orders?.map((order, i) => (
           <React.Fragment key={i}>
             {order?.basket?.length > 0 && (
@@ -78,7 +91,8 @@ const ManageOrders = () => {
           </React.Fragment>
         ))}
       </div>
-    </div>
+
+    </div >
   );
 };
 

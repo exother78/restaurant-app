@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import "./Box.css";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
+import { Link } from 'react-router-dom';
 
-const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
+const Box = ({ basket, name, lastName, time, total, deliveryCharges, paymentOption, deliveryOption }) => {
   const [date, setDate] = useState(null);
   const [openBox, setOpenBox] = useState(false);
   const [pending, setPending] = useState(false);
@@ -28,35 +29,35 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
       <div className="manageOrders__box" onClick={handleClick}>
         <table
           className="manageOrders__box-first-table"
-          style={{ background: openBox ? "#ddd" : "#eee" }}>
+          style={{ background: openBox ? "#eee" : "#fff" }}>
           <thead>
             <tr>
-              <td>name</td>
-              <td>email</td>
-              <td>address</td>
-              <td>Postal Code</td>
-              <td>date</td>
-              <td></td>
+              <th>name</th>
+              <th>Amount</th>
+              <th>Payment</th>
+              <th>date</th>
+              <th>Status</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <th>{name + " " + lastName} </th>
-              <th style={{ textTransform: "lowercase" }}>{email}</th>
-              <th>{address} </th>
-              <th>{postalCode}</th>
-              <th style={{ fontSize: "12px", letterSpacing: ".2px" }}>
+              <td>{lastName ? name + " " + lastName : name} </td>
+              <td>{deliveryOption === 'homedelivery' ? total + deliveryCharges : total} € </td>
+              <td>{paymentOption === 'paypaldelivery' ? 'Paid' : 'Due'}</td>
+              < td style={{ fontSize: "12px", letterSpacing: ".2px" }}>
                 {time ? date : ""}
-              </th>
+              </td>
+              <td style={{ textTransform: "lowercase" }}>{pending ? <span className="manageOrders__box-status-txt-pending" >pending</span> : <span className="manageOrders__box-status-txt-delivered">delivered</span>}</td>
 
-              <th>
+              <td>
                 <ArrowForwardIosRoundedIcon
                   style={{
                     transform: openBox ? "rotate(90deg)" : "none",
                     transition: "transform .3s ease",
                   }}
                 />
-              </th>
+              </td>
             </tr>
           </tbody>
         </table>
@@ -67,21 +68,21 @@ const Box = ({ basket, postalCode, address, email, name, lastName, time }) => {
           <table className="manageOrders__box-second-table">
             <thead>
               <tr>
-                <td>Items</td>
-                <td>Price</td>
-                <td>instructions</td>
-                <td>Quantity</td>
-                <td></td>
+                <th>Items</th>
+                <th>Price</th>
+                <th>instructions</th>
+                <th>Quantity</th>
+                <th><Link to='/dashboard' style={{ color: 'blue' }}>Details</Link></th>
               </tr>
             </thead>
             <tbody>
               {basket?.map((item, i) => (
                 <tr key={i}>
-                  <th>{item.title}</th>
-                  <th>{item.price}</th>
-                  <th>{item.description}</th>
-                  <th>{item.quantity}</th>
-                  <th>{pending ? "Pending" : "Delivered"}</th>
+                  <td>{item.title}</td>
+                  <td>{item.price}</td>
+                  <td>{item.description}</td>
+                  <td>{item.quantity}</td>
+                  <td>{pending ? "Pending" : "Delivered"}</td>
                 </tr>
               ))}
             </tbody>

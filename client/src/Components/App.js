@@ -88,6 +88,7 @@ function App() {
 								</>
 							}
 						/>
+
 						<Route
 							path="menu"
 							element={
@@ -235,6 +236,14 @@ function App() {
 							element={
 								<Suspense fallback={<Loading />}>
 									<Settings />
+								</Suspense>
+							}
+						/>
+						<Route
+							path="*"
+							element={
+								<Suspense fallback={<Loading />}>
+									<NotFound />
 								</Suspense>
 							}
 						/>

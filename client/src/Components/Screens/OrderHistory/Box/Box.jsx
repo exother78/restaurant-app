@@ -73,7 +73,7 @@ const Box = ({ basket, name, lastName, time, total, deliveryCharges, paymentOpti
                 <th>Price</th>
                 <th>instructions</th>
                 <th>Quantity</th>
-                <th><Link to={`/findorder${ orderNumber }`} style={{ color: 'blue' }}>Details</Link></th>
+                <th><Link to={`/findorder/${ orderNumber }`} style={{ color: 'blue' }}>Details</Link></th>
               </tr>
             </thead>
             <tbody>

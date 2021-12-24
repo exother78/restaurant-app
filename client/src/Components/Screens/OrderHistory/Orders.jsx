@@ -83,11 +83,15 @@ const Orders = () => {
             <p className="orders__box-text">
               <span className="orders__box-text-subText1">Cancelled Orders</span>
 
-              <span className="orders__box-text-subText">1</span>
+              <span className="orders__box-text-subText">0</span>
             </p>
           </div>
         </div>
 
+
+        <h2 className="order__history-order-title">
+          Your Orders
+        </h2>
         <div className="order__history-container">
 
           {orders?.length > 0 ? (

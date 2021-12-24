@@ -14,7 +14,7 @@
 	width: 100%;
 	min-height: 400px;
 	flex-wrap: wrap;
-	margin-top: 30px;
+	margin: 40px 0 50px 0;
 }
 
 .orders__box {
@@ -56,9 +56,13 @@
 	align-items: center;
 } */
 
+.order__history-order-title {
+	margin: 40px 0;
+}
+
 /* next section started  */
 .order__history-container {
-	margin: 0 auto;
+	margin: 0 auto 50px auto;
 	overflow-x: auto;
 	background: white;
 	width: 90%;

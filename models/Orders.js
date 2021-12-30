@@ -14,7 +14,10 @@ const OrderSchema = new Schema(
 		},
 		paymentID: {
 			type: String,
-			// required: true,
+		},
+
+		paymentDetails: {
+			type: Object,
 		},
 
 		email: {

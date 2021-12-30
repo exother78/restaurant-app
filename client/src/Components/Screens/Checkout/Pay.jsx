@@ -36,7 +36,6 @@ const Pay = () => {
   }, [basket, data?.deliveryPrice]);
 
   const transactionSuccess = async (paymentData) => {
-    console.log("payment data: ", paymentData);
 
     const time = Date.now() + 1983;
     try {
@@ -50,6 +49,7 @@ const Pay = () => {
               postalCode,
               address,
               paymentID: paymentData.orderID,
+              paymentDetails: paymentData,
               building,
               basket,
               name: name ? name : checkName,
@@ -80,7 +80,6 @@ const Pay = () => {
   };
 
   const transactionSuccessTakeaway = async (paymentData) => {
-    console.log("payment data: ", paymentData);
 
     const time = Date.now() + 1983;
     try {
@@ -92,6 +91,7 @@ const Pay = () => {
               orderNumber: time,
               userID,
               paymentID: paymentData.orderID,
+              paymentDetails: paymentData,
               basket,
               name: name ? name : checkName,
               email: email ? email : checkEmail,
@@ -248,6 +248,7 @@ const Pay = () => {
     data,
   ]);
 
+
   if (error) {
     setTimeout(() => {
       setError(null);
@@ -262,22 +263,20 @@ const Pay = () => {
         <div className="paymentOptions-Paypal-btn">
           {paymentOption === "paypaldelivery" ? (
             <>
-              {/* <button
+              <button
                 onClick={(e) =>
                   deliveryOption === "homedelivery"
                     ? transactionSuccess(
-                      { orderID: "something now" },
-                      e
+                      { orderID: "something now" }
                     )
                     : deliveryOption === "takeaway" &&
                     transactionSuccessTakeaway(
-                      { orderID: "something now" },
-                      e
+                      { orderID: "something now" }
                     )
                 }
                 style={{ padding: "10px 15px", margin: "10px" }}>
                 Pay the bill
-              </button> */}
+              </button>
               <Paypal
                 total={
                   deliveryOption === "takeaway"

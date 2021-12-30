@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
 import "./Box.css";
 import ArrowForwardIosRoundedIcon from "@mui/icons-material/ArrowForwardIosRounded";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-const Box = ({ basket, name, lastName, time, total, deliveryCharges, paymentOption, deliveryOption }) => {
+const Box = ({
+  basket,
+  name,
+  lastName,
+  time,
+  total,
+  deliveryCharges,
+  paymentOption,
+  deliveryOption,
+}) => {
   const [date, setDate] = useState(null);
   const [openBox, setOpenBox] = useState(false);
   const [pending, setPending] = useState(false);
@@ -26,6 +35,7 @@ const Box = ({ basket, name, lastName, time, total, deliveryCharges, paymentOpti
 
   return (
     <>
+
       <div className="manageOrders__box" onClick={handleClick}>
         <table
           className="manageOrders__box-first-table"
@@ -43,12 +53,20 @@ const Box = ({ basket, name, lastName, time, total, deliveryCharges, paymentOpti
           <tbody>
             <tr>
               <td>{lastName ? name + " " + lastName : name} </td>
-              <td>{deliveryOption === 'homedelivery' ? total + deliveryCharges : total} € </td>
-              <td>{paymentOption === 'paypaldelivery' ? 'Paid' : 'Due'}</td>
-              < td style={{ fontSize: "12px", letterSpacing: ".2px" }}>
+              <td>
+                {deliveryOption === "homedelivery"
+                  ? total + deliveryCharges
+                  : total}{" "}
+                €{" "}
+              </td>
+              <td>
+                {paymentOption === "paypaldelivery" ? "Paid" : "Due"}
+              </td>
+              <td style={{ fontSize: "12px", letterSpacing: ".2px" }}>
                 {time ? date : ""}
               </td>
               <td style={{ textTransform: "lowercase" }}>{pending ? <span className="manageOrders__box-status-txt-pending" >pending</span> : <span className="manageOrders__box-status-txt-delivered">delivered</span>}</td>
+              {/* <td><select name="deliveryStatus" id="" onClick={e => e.stopPropagation()} value={pending ? 'pending' : 'delivered'} ><option value="delivered">delivered</option><option value="pending">pending</option></select></td> */}
 
               <td>
                 <ArrowForwardIosRoundedIcon
@@ -72,7 +90,11 @@ const Box = ({ basket, name, lastName, time, total, deliveryCharges, paymentOpti
                 <th>Price</th>
                 <th>instructions</th>
                 <th>Quantity</th>
-                <th><Link to='/dashboard' style={{ color: 'blue' }}>Details</Link></th>
+                <th>
+                  <Link to="/dashboard" style={{ color: "blue" }}>
+                    Details
+                  </Link>
+                </th>
               </tr>
             </thead>
             <tbody>

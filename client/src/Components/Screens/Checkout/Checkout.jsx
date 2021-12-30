@@ -26,6 +26,7 @@ const Checkout = () => {
   const [paymentOption, setPaymentOption] = userAPI.paymentOption
   const [deliveryOption, setDeliveryOption] = userAPI.deliveryOption
 
+  console.log('delivery option checkout: ', deliveryOption)
 
   const [error, setError] = useState("");
   const [deferLoading, setDeferLoading] = useState(true);

@@ -1,53 +1,47 @@
 .dashboard__reports {
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
+}
+
+.dashboard__reports * {
+	font-family: "Montserrat";
 }
 
 .dashboard__reports-buttons {
-  display: flex;
-  justify-content: center;
-  margin-top: 70px;
+	display: flex;
+	justify-content: center;
+	margin-top: 70px;
 }
 
 .dashboard__reports-buttons button {
-  padding: 10px 20px;
-  font-family: "Montserrat";
-  font-size: small;
-  margin: 0 10px;
-}
-
-#reports__months {
-  font-family: "Montserrat";
-}
-
-#reports__months > option {
-  font-family: "Montserrat";
+	padding: 10px 20px;
+	font-size: small;
+	margin: 0 10px;
 }
 
 #content > table {
-  font-family: arial, sans-serif;
-  border-collapse: collapse;
-  max-width: 550px;
+	border-collapse: collapse;
+	max-width: 550px;
 }
 
 #content th {
-  font-size: large;
-  font-weight: 800;
-  letter-spacing: 0.5px;
-  text-transform: capitalize;
+	font-size: large;
+	font-weight: 800;
+	letter-spacing: 0.5px;
+	text-transform: capitalize;
 }
 
 #content td {
-  font-size: medium;
-  font-weight: 600;
+	font-size: medium;
+	font-weight: 600;
 }
 
 #content td,
 #content th {
-  border: 2px solid #ccc;
-  text-align: left;
-  padding: 8px;
+	border: 2px solid #ccc;
+	text-align: left;
+	padding: 8px;
 }
 tr:nth-child(even) {
-  background-color: #dddddd;
+	background-color: #dddddd;
 }

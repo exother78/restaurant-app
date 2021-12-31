@@ -1,6 +1,6 @@
 import React from "react";
 
-const Logo = ({ fill, width }) => {
+const Logo = ({ fill }) => {
   return (
     <div className="header__logo-svg">
       <svg

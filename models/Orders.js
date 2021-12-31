@@ -76,6 +76,12 @@ const OrderSchema = new Schema(
 
 		paymentStatus: {
 			type: String,
+			required: true,
+		},
+
+		orderStatus: {
+			type: String,
+			required: true,
 		},
 	},
 	{

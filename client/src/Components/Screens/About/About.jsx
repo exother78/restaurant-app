@@ -17,7 +17,6 @@ const About = () => {
         <div className="about__frontImg">
           <div className="about__frontImg-text">
             <h1>Get your favourite extra delicious food or Book table now!</h1>
-            {/* <h1>We’ve got something for everyone</h1> */}
           </div>
         </div>
         <div className="about__content">

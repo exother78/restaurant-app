@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import Product from "./Sections/Product";
 import "./Order.css";
 
@@ -11,6 +12,20 @@ const Order = () => {
   const { productsAPI, categoriesAPI } = useStateValue();
   const [categories] = categoriesAPI.categories;
   const [products] = productsAPI.products;
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const scrollToElement = (name) => {
+    window.scrollTo({
+      top: document.getElementById(name)?.offsetTop - 140,
+      left: 0,
+      behavior: "smooth",
+    });
+  };
+
+  useEffect(() => {
+    if (params.categoryName) scrollToElement(params?.categoryName);
+  }, [params?.categoryName]);
 
   document.addEventListener("scroll", (e) => {
     const banner = document.querySelector(".order__banner");
@@ -40,12 +55,7 @@ const Order = () => {
               <p
                 className="order__category"
                 key={i}
-                onClick={() => {
-                  document.getElementById(category.name).scrollIntoView({
-                    behavior: "smooth",
-                    block: "start",
-                  });
-                }}>
+                onClick={() => navigate(`/order/${ category?.name }`)}>
                 {category.name}
               </p>
             ))}
@@ -55,10 +65,17 @@ const Order = () => {
           {categories?.map((item, i) => (
             <div key={i} className="order__container-category">
               <div className="order__container-category-data">
-                <h2 className="order__container-category-text" id={item?.name}>
+                <h2
+                  className="order__container-category-text"
+                  id={item?.name}>
                   {item?.name}
                 </h2>
-                <img src={item?.images?.url} width="100%" height="150" alt="" />
+                <img
+                  src={item?.images?.url}
+                  width="100%"
+                  height="150"
+                  alt=""
+                />
               </div>
 
               <div className="order__container">

@@ -3,7 +3,7 @@ import "./Select.css";
 
 const PersonSelect = ({ changed }) => {
   return (
-    <select name="persons" onChange={changed} required defaultValue="0">
+    <select name="persons" onChange={changed} required defaultValue="0" className="reserveSeat__select-main">
       <option value="0" disabled>
         How many people?
       </option>

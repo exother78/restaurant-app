@@ -49,15 +49,9 @@
 /* about content section */
 
 .about__content {
-	background: #eee;
-	width: 100%;
 	min-height: 50vh;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
 	align-items: center;
-	line-height: 1.2;
-	margin: 5px auto;
+	margin: 10px auto;
 	width: 65vw;
 	color: rgb(54, 52, 52);
 }
@@ -173,6 +167,18 @@
 
 .about__details-flex .about__details-flex-field.socialIcons {
 	justify-content: center;
+}
+
+@media only screen and (max-width: 800px) {
+	.about__content {
+		width: 85vw;
+	}
+}
+
+@media only screen and (max-width: 580px) {
+	.about__content {
+		width: 99vw;
+	}
 }
 
 @media only screen and (max-width: 420px) {

@@ -66,7 +66,9 @@ const Footer = () => {
 
           <div className="footer__column">
             <h3 className="footer__column-title">More</h3>
-            <span className="footer__column-subText">Our Android App</span>
+            <span className="footer__column-subText">
+              Our Android App
+            </span>
             <span className="footer__column-subText">Our IOS App</span>
           </div>
 

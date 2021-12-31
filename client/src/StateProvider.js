@@ -10,41 +10,41 @@ export const StateContext = createContext();
 
 // Wrap our app and provide the Data layer
 export const StateProvider = ({ children }) => {
-  const [token, setToken] = useState(false);
-  const [basket, setBasket] = useState([]);
+	const [token, setToken] = useState(false);
+	const [basket, setBasket] = useState([]);
 
-  useEffect(() => {
-    const firstLogin = localStorage.getItem("login");
-    if (firstLogin) {
-      const refreshToken = async () => {
-        try {
-          const res = await axios.get("/api/user/rtfat");
-          setToken(res.data.accessToken);
+	useEffect(() => {
+		const firstLogin = localStorage.getItem("login");
+		if (firstLogin) {
+			const refreshToken = async () => {
+				try {
+					const res = await axios.get("/api/user/rtfat");
+					setToken(res.data.accessToken);
 
-          setTimeout(() => {
-            refreshToken();
-          }, 30 * 1000);
-        } catch (err) {
-          alert("Please Login or regitser");
-          localStorage.removeItem("login");
-        }
-      };
-      refreshToken().catch(() => console.log("error"));
-    }
-  }, []);
+					setTimeout(() => {
+						refreshToken();
+					}, 10 * 60 * 1000);
+				} catch (err) {
+					alert("Please Login again");
+					localStorage.removeItem("login");
+				}
+			};
+			refreshToken();
+		}
+	}, []);
 
-  const state = {
-    token: [token, setToken],
-    basket: [basket, setBasket],
-    userAPI: UserAPI(token),
-    productsAPI: ProductsAPI(),
-    categoriesAPI: CategoriesAPI(),
-    menuAPI: MenuAPI(),
-  };
+	const state = {
+		token: [token, setToken],
+		basket: [basket, setBasket],
+		userAPI: UserAPI(token),
+		productsAPI: ProductsAPI(),
+		categoriesAPI: CategoriesAPI(),
+		menuAPI: MenuAPI(),
+	};
 
-  return (
-    <StateContext.Provider value={state}>{children}</StateContext.Provider>
-  );
+	return (
+		<StateContext.Provider value={state}>{children}</StateContext.Provider>
+	);
 };
 
 // Pull information from the data layer

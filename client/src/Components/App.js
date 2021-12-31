@@ -7,8 +7,8 @@ import Loading from "./Screens/Global/Loading";
 import { useStateValue } from "../StateProvider";
 import Home from "./Screens/Home/Home";
 import ScrollToTop from "./Screens/Global/ScrollToTop";
-import FoundOrder from "./Screens/FindOrder/FoundOrder";
 
+const FoundOrder = lazy(() => import("./Screens/FindOrder/FoundOrder"));
 const OrderSucces = lazy(() => import("./Screens/Checkout/OrderSuccess"));
 const NotFound = lazy(() => import("./Screens/Global/NotFound"));
 const Login = lazy(() => import("./Screens/Auth/Login"));
@@ -44,6 +44,7 @@ const ManageOrders = lazy(() =>
 );
 const DashboardHome = lazy(() => import("./DevAdmin/Dashboard/Home/Home"));
 const Reports = lazy(() => import("./DevAdmin/Reports/Reports"));
+const OrderInfo = lazy(() => import("./DevAdmin/Orders/OrderInfo/OrderInfo"));
 
 function App() {
 	const { userAPI } = useStateValue();
@@ -100,6 +101,7 @@ function App() {
 								</>
 							}
 						/>
+
 						<Route
 							path="order"
 							element={
@@ -111,6 +113,19 @@ function App() {
 								</>
 							}
 						/>
+
+						<Route
+							path="order/:categoryName"
+							element={
+								<>
+									<ScrollToTop />
+									<Suspense fallback={<Loading />}>
+										<Order />
+									</Suspense>
+								</>
+							}
+						/>
+
 						<Route
 							path="checkout"
 							element={
@@ -150,9 +165,9 @@ function App() {
 							element={
 								<>
 									<ScrollToTop />
-									{/* <Suspense fallback={<Loading />}> */}
-									<FoundOrder />
-									{/* </Suspense> */}
+									<Suspense fallback={<Loading />}>
+										<FoundOrder />
+									</Suspense>
 								</>
 							}
 						/>
@@ -274,6 +289,14 @@ function App() {
 								}
 							/>
 							<Route
+								path="all_orders/:orderNumber"
+								element={
+									<Suspense fallback={<Loading />}>
+										<OrderInfo />
+									</Suspense>
+								}
+							/>
+							<Route
 								path="all_orders"
 								element={
 									<Suspense fallback={<Loading />}>
@@ -281,6 +304,7 @@ function App() {
 									</Suspense>
 								}
 							/>
+
 							<Route
 								path="all_users"
 								element={

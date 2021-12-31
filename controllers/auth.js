@@ -165,28 +165,6 @@ exports.logout = async (req, res, next) => {
 exports.createOrder = async (req, res, next) => {
 	const { orders } = req.body;
 	try {
-		// const postalCode = await PostalCode.find({ postalCode: orders.postalCode });
-		// // console.log("postalCOde : ", postalCode);
-
-		// if (!postalCode) {
-		//   return res.status(401).json({
-		//     success: false,
-		//     error: "Delivery not available at your location",
-		//   });
-		// }
-		// if (postalCode.active === false) {
-		//   return res.status(400).json({
-		//     success: false,
-		//     error:
-		//       "Currently delivery is unavailable at your location. Please try with a different Postal",
-		//   });
-		// }
-
-		// const user = await User.findOne({ _id: orders.userID });
-		// if (!user) {
-		//   return res.status(401).json({ success: false, error: "user not found" });
-		// }
-
 		const order = await Order.create(orders);
 		if (!order) {
 			return res.status(500).json({
@@ -238,16 +216,22 @@ exports.allOrders = async (req, res, next) => {
 	}
 };
 
-// if orders are in the users
-// exports.allOrders = async (req, res, next) => {
-//   try {
-//     const u = await User.find({}, { _id: 0, orders: 1 });
+exports.updateOrder = async (req, res, next) => {
+	try {
+		const { orderStatus } = req.body;
+		const { orderNumber } = req.params;
 
-//     res.status(200).json({ success: true, orders: u });
-//   } catch (error) {
-//     next(error);
-//   }
-// };
+		const order = await Order.findOneAndUpdate(
+			{ orderNumber },
+			{ orderStatus: req.body.orderStatus },
+			{ new: true }
+		);
+
+		return res.status(200).json({ success: "true", data: order });
+	} catch (error) {
+		next(error);
+	}
+};
 
 const sendToken = async (user, statusCode, res) => {
 	const accessToken = await user.getAccessToken();

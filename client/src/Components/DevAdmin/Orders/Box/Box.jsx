@@ -12,7 +12,9 @@ const Box = ({
   deliveryCharges,
   paymentOption,
   deliveryOption,
+  orderNumber
 }) => {
+
   const [date, setDate] = useState(null);
   const [openBox, setOpenBox] = useState(false);
   const [pending, setPending] = useState(false);
@@ -91,7 +93,7 @@ const Box = ({
                 <th>instructions</th>
                 <th>Quantity</th>
                 <th>
-                  <Link to="/dashboard" style={{ color: "blue" }}>
+                  <Link to={`/dashboard/all_orders/${ orderNumber }`} style={{ color: "blue" }}>
                     Details
                   </Link>
                 </th>

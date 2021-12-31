@@ -94,6 +94,10 @@
 	padding: 5px 10px 0 10px;
 }
 
+.Header .header__logo-svg > svg {
+	width: 260px;
+}
+
 .Header .header__logo h1 {
 	position: relative;
 }
@@ -347,12 +351,11 @@ nav {
 	margin-right: 20px;
 }
 
-@media only screen and (max-width: 760px) {
+@media only screen and (max-width: 860px) {
 	.header__login {
 		display: none;
 	}
 }
-
 @media only screen and (max-width: 650px) {
 	.header__mobile__cart-btn {
 		display: block;
@@ -405,5 +408,23 @@ nav {
 		margin: 0;
 		max-width: 50px;
 		min-width: 50px;
+	}
+}
+
+@media only screen and (max-width: 440px) {
+	.Header .header__logo-svg > svg {
+		width: 230px;
+	}
+}
+
+@media only screen and (max-width: 400px) {
+	.Header .header__logo-svg > svg {
+		width: 200px;
+	}
+}
+
+@media only screen and (max-width: 370px) {
+	.Header .header__logo-svg > svg {
+		width: 170px;
 	}
 }

@@ -45,7 +45,7 @@ const UserAPI = (token) => {
           }
           data.data.user.role === 1 ? setIsAdmin(true) : setIsAdmin(false);
         } catch (err) {
-          alert(err?.response?.data.error);
+          alert(err?.response?.data?.error);
         }
       };
       getUser();

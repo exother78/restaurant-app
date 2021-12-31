@@ -39,6 +39,14 @@
 	width: 100%;
 }
 
+/* .foundOrder__page-customerInfo-text {
+	flex-wrap: wrap;
+	line-height: 1.4;
+}
+.foundOrder__page-customerInfo-text > p {
+	flex: 1 1 45%;
+} */
+
 .foundOrder__page-order {
 	margin-top: 10px;
 	font-weight: 600;
@@ -92,6 +100,15 @@
 	right: 10px;
 	bottom: 3px;
 	font-size: 14px;
+}
+
+.order__info-select {
+	color: white;
+	border: none;
+	padding: 5px 8px;
+	border-radius: 8px;
+	margin-left: 12px;
+	font-size: medium;
 }
 
 @media only screen and (max-width: 700px) {

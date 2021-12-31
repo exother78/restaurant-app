@@ -62,6 +62,7 @@ const Pay = () => {
               deliveryOption,
               paymentOption,
               paymentStatus: "received",
+              orderStatus: 'pending'
             },
           },
           {
@@ -102,6 +103,7 @@ const Pay = () => {
               deliveryOption,
               paymentOption,
               paymentStatus: "received",
+              orderStatus: 'pending'
             },
           },
           {
@@ -143,6 +145,7 @@ const Pay = () => {
               deliveryOption,
               paymentOption,
               paymentStatus: "pending",
+              orderStatus: 'pending'
             },
           },
           {
@@ -161,7 +164,8 @@ const Pay = () => {
   };
 
   const orderSubmitTakeaway = async () => {
-    const time = Date.now() + 1983;
+    const time = await Date.now() + 1983;
+
     try {
       await axios
         .post(
@@ -180,6 +184,7 @@ const Pay = () => {
               deliveryOption,
               paymentOption,
               paymentStatus: "pending",
+              orderStatus: 'pending'
             },
           },
           {

@@ -40,7 +40,7 @@ const MenuScreen = () => {
             <span
               onClick={() => (window.location.href = "/order")}
               className="menu-to-menuscreen-arrow"
-              style={{ background: "darkgrey" }}>
+            >
               <ArrowForwardRoundedIcon />
             </span>
           </div>

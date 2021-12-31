@@ -6,7 +6,7 @@ import AirlineSeatReclineNormalRoundedIcon from "@mui/icons-material/AirlineSeat
 import EuroRoundedIcon from "@mui/icons-material/EuroRounded";
 import axios from "axios";
 import { useStateValue } from "./../../../../StateProvider";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const SlideFront = () => {
   const { userAPI } = useStateValue();
@@ -16,6 +16,7 @@ const SlideFront = () => {
   const [loading, setLoading] = useState(false);
   const [postalCodeChange, setPostalCodeChange] = useState('');
   const [error, setError] = useState(null);
+  const navigate = useNavigate()
 
   const getPostalCode = async (postal) => {
     try {
@@ -69,7 +70,7 @@ const SlideFront = () => {
 
       <div
         className="sliderFront__sidebox"
-        style={{ display: postalCode ? "block" : "none" }}>
+        style={{ display: postalCode ? "flex" : "none", flexDirection: 'column' }}>
         <div className="sliderFront__sidebox-line">
           <EuroRoundedIcon /> <span>Delivery Price: {data?.deliveryPrice}</span>
         </div>
@@ -85,11 +86,11 @@ const SlideFront = () => {
           <span>Takeaway: 30 minutes</span>
         </div>
 
-        <Link to="/order" className="sliderFront__sidebox-btn">
-          <div className="sliderFront__order-btn">
-            Order Now!
-          </div>
-        </Link>
+        {/* <Link to="/order" className="sliderFront__sidebox-btn"> */}
+        <button className="sliderFront__order-btn" onClick={e => navigate('/order')} >
+          Order Now!
+        </button>
+        {/* </Link> */}
       </div>
 
       <div

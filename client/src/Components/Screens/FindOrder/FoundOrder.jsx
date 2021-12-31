@@ -27,7 +27,6 @@ const FoundOrder = () => {
          setError(null);
       }, 2000);
    }
-   console.log("order: , ", order);
    return (
       <>
          <div className="order__success">
@@ -45,7 +44,7 @@ const FoundOrder = () => {
 
                   <div className="foundOrder__page-customerInfo-text">
                      <p>
-                        <b>Name</b>: {`${ order?.name } ${ order?.lastName }`}
+                        <b>Name</b>: {`${ order?.name ? order?.name : '' } ${ order?.lastName ? order?.lastName : '' }`}
                      </p>
                      <p>
                         <b>Email</b>: {order?.email}

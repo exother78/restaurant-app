@@ -4,7 +4,7 @@
   "description": "Restaurant App backend",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon app.js",
     "server": "nodemon app.js",
     "client": "cd client && npm run start",
     "server-install": "npm install",
